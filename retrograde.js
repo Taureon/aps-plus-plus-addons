@@ -851,7 +851,7 @@ module.exports = ({ Class }) => {
     Class.smasher.UPGRADES_TIER_3.push("bonker");
 
     // Dev Tanks
-    exports.diepTanks = {
+    Class.diepTanks = {
         PARENT: ["testbedBase"],
         LABEL: "Diep Tanks",
     };
@@ -861,5 +861,4 @@ module.exports = ({ Class }) => {
     };
     Class.diep2Tanks.UPGRADES_TIER_0 = ["blaster", "gatlingGun", "machineFlank", "retrogradeRifle", "buttbuttin", "blower", "quadTwin", "tornado", "subverter", "battery", "deathStar", "bonker", "protector", "doubleTrapGuard"];
     Class.diepTanks.UPGRADES_TIER_0.push("diep2Tanks");
-    exports.retrograde.UPGRADES_TIER_0.push("diepTanks");
 };
