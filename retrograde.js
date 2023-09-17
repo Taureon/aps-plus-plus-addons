@@ -100,7 +100,7 @@ module.exports = ({ Class }) => {
     // Class.sniper.UPGRADES_TIER_2 = ["assassin", "hunter", "minigun", "retrogradeRifle"];
 
     // ASSASSIN UPGRADES
-    Class.buttbuttin = addBackGunner(Class.assassin, "Buttbuttin");
+    Class.buttbuttin = addBackGunner(assassin, "Buttbuttin");
     Class.assassin.UPGRADES_TIER_3.push("buttbuttin");
 
     // RIFLE UPGRADES
@@ -765,7 +765,7 @@ module.exports = ({ Class }) => {
     Class.hexaTank.UPGRADES_TIER_3.push("tornado", "deathStar");
 
     // DESTROYER UPGRADES
-    Class.blower = addBackGunner(Class.destroyer, "Blower");
+    Class.blower = addBackGunner(destroyer, "Blower");
     Class.destroyer.UPGRADES_TIER_3.push("blower");
 
     // TRAP GUARD UPGRADES
@@ -851,14 +851,10 @@ module.exports = ({ Class }) => {
     Class.smasher.UPGRADES_TIER_3.push("bonker");
 
     // Dev Tanks
-    Class.diepTanks = {
-        PARENT: ["testbedBase"],
-        LABEL: "Diep Tanks",
+    Class.retrograde = {
+        PARENT: ["menu"],
+        LABEL: "Retrograde",
     };
-    Class.diep2Tanks = {
-        PARENT: ["testbedBase"],
-        LABEL: "Diep2 Tanks",
-    };
-    Class.diep2Tanks.UPGRADES_TIER_0 = ["blaster", "gatlingGun", "machineFlank", "retrogradeRifle", "buttbuttin", "blower", "quadTwin", "tornado", "subverter", "battery", "deathStar", "bonker", "protector", "doubleTrapGuard"];
-    Class.diepTanks.UPGRADES_TIER_0.push("diep2Tanks");
+    Class.retrograde.UPGRADES_TIER_0 = ["blaster", "gatlingGun", "machineFlank", "retrogradeRifle", "buttbuttin", "blower", "quadTwin", "tornado", "subverter", "battery", "deathStar", "bonker", "protector", "doubleTrapGuard"];
+    Class.developer.UPGRADES_TIER_0.push("diep2Tanks");
 };
