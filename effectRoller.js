@@ -26,6 +26,14 @@
 // Vanish:
 //     Makes you invisible.
 //     Lasts 20 seconds.
+//
+// Ant:
+//     Makes you 75% smaller.
+//     Lasts 15 seconds.
+//
+// Carrot:
+//     Increase your FOV by 100%
+//     Lasts 20 seconds.
 
 // Growth Annihilator:
 //     Spawns a Stronger LVL 250 Growth Annihilator, which shoots you once from 10-20 players of distance away and then despawns.
@@ -47,52 +55,37 @@
 //
 // Time Bomb:
 //     Makes you explode in 10 seconds, killing you and damaging nearby entities.
+//
+// Balloon:
+//     Makes you 300% larger.
+//     Lasts 15 seconds.
+//
+// Blind:
+//     Decreases your fov by 80%.
+//     lasts 10 seconds.
 
 let { mach: gMach } = require('../gunvals.js'),
-effectStrings = [
-    ['Stronger',           'You feel very strong...'],
-    ['Sidewinder',         'Press Alt-Fire to launch a Snake.'],
-    ['Hedgehog',           'Gotta go fast!'],
-    ['Focus',              'Concentrated fire is very powerful.'],
-    ['Machine Gun',        'SPAM SPAM SPAM!'],
-    ['Damage Sponge',      'Hehe, that bullet tickles!'],
-    ['Growth Annihilator', 'WATCH OUT!!'],
-    ['No Health',          'Oh..'],
-    ['Slippery',           'Why is the floor suddenly out of ice?'],
-    ['Vulnerable',         "Don't even get breathed on!"],
-    ['Black Hole',         'GROUP HUG!!!'],
-    ['Time Bomb',          'I must sacrifice myself suddenly...'],
-],
-IDs = {
-    Stronger: 0,
-    Sidewinder: 1,
-    Hedgehog: 2,
-    Focus: 3,
-    MachineGun: 4,
-    DamageSponge: 5,
-    GrowthAnnihilator: 6,
-    NoHealth: 7,
-    Slippery: 8,
-    Vulnerable: 9,
-    BlackHole: 10,
-    TimeBomb: 11
-},
-durations = {
-    [IDs.Stronger]: 20,
-    [IDs.Sidewinder]: 20,
-    [IDs.Hedgehog]: 20,
-    [IDs.Focus]: 10,
-    [IDs.MachineGun]: 20,
-    [IDs.DamageSponge]: 10,
-    [IDs.GrowthAnnihilator]: 0,
-    [IDs.NoHealth]: 0,
-    [IDs.Slippery]: 20,
-    [IDs.Vulnerable]: 10,
-    [IDs.BlackHole]: 15,
-    [IDs.TimeBomb]: 10
-},
-StatusEffects = {
-    [IDs.Stronger]: new StatusEffect(durations[IDs.Hedgehog] * 30, undefined, body => {
+
+effects = [{
+    name: 'Stronger',
+    splash: 'I feel very strong...',
+    duration: 20,
+    run: body => {
+        let colorOld = body.color,
+            rawOld = body.skill.raw.map(x=>x),
+            capsOld = body.skill.caps.map(x=>x),
+            stronk = Array(10).fill(15);
+        body.skill.setCaps(stronk);
+        body.skill.set(stronk);
+        body.color = 36;
+
+        setTimeout(()=>{
+            body.skill.setCaps(capsOld);
+            body.skill.set(rawOld);
+            body.color = colorOld;
+        }, 20 * 1000);
+    },
+    statusEffect: new StatusEffect(20 * 30, undefined, body => {
         let e = new Entity(body),
             ang = Math.random() * Math.PI * 2;
         e.define('genericEntity');
@@ -102,93 +95,196 @@ StatusEffects = {
         e.coreSize = body.coreSize;
         e.alpha = 0.5;
         setTimeout(() => e.kill(), 100);
-    }),
-    [IDs.Sidewinder]: undefined,
-    [IDs.Hedgehog]: new StatusEffect(durations[IDs.Hedgehog] * 30, { acceleration: 5, topSpeed: 5 }),
-    [IDs.Focus]: undefined,
-    [IDs.MachineGun]: undefined,
-    [IDs.DamageSponge]: new StatusEffect(durations[IDs.DamageSponge] * 30, { health: 5, shield: 5 }),
-    [IDs.GrowthAnnihilator]: undefined,
-    [IDs.NoHealth]: undefined,
-    [IDs.Slippery]: new StatusEffect(durations[IDs.Slippery] * 30, { acceleration: 1 / 3, topSpeed: 1.5 }),
-    [IDs.Vulnerable]: new StatusEffect(durations[IDs.Vulnerable] * 30, { health: 0.2, shield: 0.2 }),
-    [IDs.BlackHole]: undefined,
-    [IDs.TimeBomb]: undefined
+    })
 },
-endNotification = (socket, name, duration) => setTimeout(()=> socket.talk('m', name + ' is about to end in 5 seconds!'), duration * 1000 - 5000);
+
+{
+    name: 'Sidewinder',         
+    splash: 'Press Alt-Fire to launch a Snake.',
+    duration: 20
+    //TODO: add invisible sidewinder barrel
+},
+
+{
+    name: 'Hedgehog',           
+    splash: 'Gotta go fast!',
+    duration: 20
+    statusEffect: new StatusEffect(20 * 30, { acceleration: 5, topSpeed: 5 })
+},
+
+{
+    name: 'Focus',              
+    splash: 'I CAN AIM.',
+    duration: 10,
+    run: body => {
+        //TODO: undo it after effect ends
+        for (let gun of body.guns) {
+            let gun;
+            for (let stat in gMach) {
+                gun.settings[stat].angle = 0;
+                gun.settings[stat].spray *= 0.5;
+            }
+        }
+    }
+},
+
+{
+    name: 'Machine Gun',        
+    splash: 'I CANNOT AIM!',
+    duration: 20,
+    run: body => {
+        //TODO: undo it after effect ends
+        for (let gun of body.guns) {
+            let gun;
+            for (let stat in gMach) {
+                gun.settings[stat] *= gMach[stat];
+            }
+            gun.trueRecoil = gMach.recoil;
+        }
+    }
+},
+{
+    name: 'Damage Sponge',      
+    splash: 'Hehe, that bullet tickles!',
+    duration: 10,
+    statusEffect: new StatusEffect(10 * 30, { health: 5, shield: 5 })
+},
+
+{
+    name: 'Ant',                
+    splash: 'Time to be annoying >:3',
+    duration: 15,
+    statusEffect: new StatusEffect(15 * 30, { size: 0.25, fov: 2 })
+},
+
+{
+    name: 'Carrot',             
+    splash: 'Ranger²',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { fov: 2 })
+},
+
+{
+    name: 'Growth Annihilator', 
+    splash: 'WATCH OUT!!',
+    endNotification: false,
+    run: body => {
+        let angle = Math.random() * 2 * Math.PI,
+        anni = new Entity({
+            x: body.x - Math.sin(angle) * 100,
+            y: body.y - Math.cos(angle) * 100
+        })
+        anni.define('plugin_effectRoller_strongerGrowthAnnihilator');
+        anni.facing = angle;
+        setTimeout(() => {
+            for (let i = 0; i < this.guns.length; i++) {
+                this.guns.autofire = true;
+            }
+        }, 2000);
+        setTimeout(() => anni.kill(), 3000);
+    }
+},
+
+{
+    name: 'No Health',          
+    splash: 'Oh..',
+    endNotification: false,
+    run: body => {
+        body.shield.amount = 0;
+        body.health.amount = body.health.max / 100;
+    }
+},
+
+{
+    name: 'Slippery',           
+    splash: 'Why is the floor suddenly out of ice?',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { acceleration: 1 / 3, topSpeed: 1.5 })
+},
+
+{
+    name: 'Vulnerable',         
+    splash: "Don't even get breathed on!",
+    duration: 10,
+    statusEffect: new StatusEffect(10 * 30, { health: 0.2, shield: 0.2 })
+},
+
+{
+    name: 'Black Hole',         
+    splash: 'GROUP HUG!!!',
+    duration: 15,
+    statusEffect: new StatusEffect(15 * 30, undefined, body => {
+        for (let i = 0; i < entities.length; i++) {
+            let entity = entities[i];
+            if (entity.id == body.id || !entity.PUSHABILITY) continue;
+            let angle = Math.atan2(entity.y - body.y, entity.x - body.x),
+                force = entity.PUSHABILITY * 100 / ((entity.y - body.y) ** 2 + (entity.x - body.x) ** 2);
+            entity.accel.x += force * Math.sin(angle);
+            entity.accel.y += force * Math.cos(angle);
+        }
+    })
+},
+
+{
+    name: 'Time Bomb',          
+    splash: 'I must sacrifice myself suddenly...',
+    endNotification: false,
+    run: body => {
+        // TODO: put bomb on player
+        socket.talk('m', name + ' is about to detonate in ' + 10 + ' seconds!');
+        setTimeout(()=> body.kill(), 10 * 1000);
+    }
+},
+
+{
+    name: 'Balloon',            
+    splash: "I shouldn't have ordered fast food before this..",
+    duration: 15,
+    statusEffect: new StatusEffect(15 * 30, { size: 2, fov: Math.SQRT1_2 })
+},
+
+{
+    name: 'Blind',              
+    splash: "Short sightedness, a common eye condition.",
+    duration: 10,
+    statusEffect: new StatusEffect(10 * 30, { fov: 0.2 })
+}];
 
 module.exports = ({ Class, Config, Events }) => {
+
+    Class.plugin_effectRoller_strongerGrowthAnnihilator = {
+        PARENT: ["annihilator"],
+        DANGER: 10,
+        SKILL_CAP: Array(10).fill(15),
+        SKILL: Array(10).fill(15),
+        LEVEL_MAX: 250,
+        LEVEL: 250
+    };
+
     Events.on('chatMessage', ({message, socket}) => {
-        if (!/[!/$]roll/.test(message)) return;
+        if (!/[!\/$]roll/.test(message)) return;
 
         let body = socket.player.body,
-            effectId = Math.floor(Math.random() * 12),
-            [name, splash] = effectStrings[effectId];
-        socket.talk('m', splash);
-        socket.talk('m', name);
+            effect = effect[Math.floor(Math.random() * effects.length)];
 
-        if (StatusEffects[effectId]) {
-            body.addStatusEffect(StatusEffects[effectId]);
+        if (effect.splash) {
+            socket.talk('m', effect.splash);
         }
 
-        switch (effectId) {
-            case IDs.Stronger:
-                let colorOld = body.color,
-                    rawOld = body.skill.raw.map(x=>x),
-                    capsOld = body.skill.caps.map(x=>x),
-                    stronk = Array(10).fill(15);
-                body.skill.setCaps(stronk);
-                body.skill.set(stronk);
-                body.color = 36;
+        socket.talk('m', effect.name);
 
-                endNotification(socket, name, durations[IDs.Stronger]);
-                setTimeout(()=>{
-                    body.skill.setCaps(capsOld);
-                    body.skill.set(rawOld);
-                    body.color = colorOld;
-                }, 20_000);
-                break;
+        if (effect.statusEffect) {
+            body.addStatusEffect(effect.statusEffect);
+        }
 
-            case IDs.Sidewinder:
-                endNotification(socket, name, durations[IDs.Sidewinder]);
-            case IDs.Hedgehog:
-                endNotification(socket, name, durations[IDs.Hedgehog]);
-                break;
+        if (effect.run) {
+            effect.run(body);
+        }
 
-            case IDs.Focus:
-                endNotification(socket, name, durations[IDs.Focus]);
-            case IDs.MachineGun:
-                for (let gun of body.guns) {
-                    let gun;
-                    for (let stat in gMach) {
-                        gun.settings[stat] *= gMach[stat];
-                    }
-                    gun.trueRecoil = gMach.recoil;
-                }
-                endNotification(socket, name, durations[IDs.MachineGun]);
-            case IDs.DamageSponge:
-                endNotification(socket, name, durations[IDs.DamageSponge]);
-                break;
-
-            case IDs.GrowthAnnihilator:
-            case IDs.NoHealth:
-                body.health.amount = body.health.max / 100;
-                body.shield.amount = 0;
-                break;
-
-            case IDs.Slippery:
-                endNotification(socket, name, durations[IDs.Slippery]);
-                break;
-
-            case IDs.Vulnerable:
-                endNotification(socket, name, durations[IDs.Vulnerable]);
-                break;
-
-            case IDs.BlackHole:
-                endNotification(socket, name, durations[IDs.Hedgehog]);
-                break;
-            case IDs.TimeBomb:
-                socket.talk('m', name + ' is about to detonate in ' + durations[IDs.TimeBomb] + ' seconds!')
+        if (effect.endNotification) {
+            setTimeout(() => {
+                socket.talk('m', effect.name + ' is about to end in 5 seconds!');
+            }, effect.duration * 1000 - 5000);
         }
     });
 };
