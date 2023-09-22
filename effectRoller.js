@@ -257,7 +257,7 @@ module.exports = ({ Class, Config, Events }) => {
         DANGER: 10,
         SKILL_CAP: Array(10).fill(15),
         SKILL: Array(10).fill(15),
-        LEVEL_MAX: 250,
+        LEVEL_CAP: 250,
         LEVEL: 250
     };
 
