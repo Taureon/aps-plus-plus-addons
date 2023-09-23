@@ -763,6 +763,7 @@ module.exports = ({ Class }) => {
         ],
     };
     Class.hexaTank.UPGRADES_TIER_3.push("tornado", "deathStar");
+    // Class.hexaTank.UPGRADES_TIER_3 = ["octoTank", "tornado", "hexaTrapper", "deathStar"];
 
     // DESTROYER UPGRADES
     Class.blower = addBackGunner(Class.destroyer, "Blower");
