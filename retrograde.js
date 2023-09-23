@@ -97,7 +97,7 @@ module.exports = ({ Class }) => {
         ],
     };
     Class.retrogradeRifle.UPGRADES_TIER_3 = ["sniperRifle", "rifleGuard", "spreadRifle"];
-    // Class.sniper.UPGRADES_TIER_2 = ["assassin", "hunter", "minigun", "retrogradeRifle"];
+    // Class.sniper.UPGRADES_TIER_2.push("retrogradeRifle");
 
     // ASSASSIN UPGRADES
     Class.buttbuttin = addBackGunner(Class.assassin, "Buttbuttin");
@@ -763,7 +763,7 @@ module.exports = ({ Class }) => {
         ],
     };
     Class.hexaTank.UPGRADES_TIER_3.push("tornado", "deathStar");
-    // Class.hexaTank.UPGRADES_TIER_3 = ["octoTank", "tornado", "hexaTrapper", "deathStar"];
+    // Class.hexaTank.UPGRADES_TIER_3.push("deathStar");
 
     // DESTROYER UPGRADES
     Class.blower = addBackGunner(Class.destroyer, "Blower");
