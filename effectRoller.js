@@ -1,4 +1,6 @@
 // You can do '!roll [id]' in chat to roll an effect.
+// Prefix can also be '$'' or '/'.
+// 'id' parameter lets you pick the effect if defined.
 // 'id' parameter requires 'chooseRoll' permission.
 // Cooldown of 30 seconds after rolling.
 // Cooldown bypass requires 'infiniteRolls' permission.
