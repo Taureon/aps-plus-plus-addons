@@ -329,7 +329,7 @@ module.exports = ({ Class, Config, Events }) => {
 
         if (!(perms && perms.infiniteRolls)) {
             if (recent[body.id]) {
-                socket.talk('m', `You need to wait for ${Math.ceil((recent[body.id] - Date.now()) / 1000)} seconds to roll again!`);
+                socket.talk('m', `§3§[Effect Roller]§reset§ You need to wait §12§${Math.ceil((recent[body.id] - Date.now()) / 1000)}§reset§ seconds to roll again!`);
                 return;
             }
             
@@ -348,7 +348,7 @@ module.exports = ({ Class, Config, Events }) => {
         }
 
         util.log(`${body.name} [${body.id}] rolled effect: ${effect.name} [${effectId}]`);
-        socket.talk('m', 'Rolled: ' + effect.name);
+        socket.talk('m', '§3§[Effect Roller]§reset§ Rolled: §2§' + effect.name);
 
         if (effect.statusEffect) {
             body.addStatusEffect(effect.statusEffect);
@@ -360,7 +360,7 @@ module.exports = ({ Class, Config, Events }) => {
 
         if (!effect.noEndNotification) {
             setTimeout(() => {
-                socket.talk('m', effect.name + ' is about to end in 5 seconds!');
+                socket.talk('m', '§3§[Effect Roller] §2§' + effect.name + '§reset§ is about to end in §12§5§reset§ seconds!');
             }, effect.duration * 1000 - 5000);
         }
     });

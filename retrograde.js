@@ -3,7 +3,7 @@
 // Addons that are dependant on other addons should be named something like
 // "[PARENT ADDON NAME]-[EXTENSION NAME].js", to make sure that it would run after that addon ran.
 
-const { combineStats } = require('../facilitators.js');
+const { combineStats, addBackGunner } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
@@ -97,10 +97,10 @@ module.exports = ({ Class }) => {
         ],
     };
     Class.retrogradeRifle.UPGRADES_TIER_3 = ["sniperRifle", "rifleGuard", "spreadRifle"];
-    // Class.sniper.UPGRADES_TIER_2 = ["assassin", "hunter", "minigun", "retrogradeRifle"];
+    Class.sniper.UPGRADES_TIER_2.push("retrogradeRifle");
 
     // ASSASSIN UPGRADES
-    Class.buttbuttin = addBackGunner(assassin, "Buttbuttin");
+    Class.buttbuttin = addBackGunner(Class.assassin, "Buttbuttin");
     Class.assassin.UPGRADES_TIER_3.push("buttbuttin");
 
     // RIFLE UPGRADES
@@ -420,7 +420,7 @@ module.exports = ({ Class }) => {
             },
         ],
     };
-    Class.gunner.UPGRADES_TIER_2.push("battery");
+    Class.gunner.UPGRADES_TIER_3.push("battery");
 
     // BLASTER UPGRADES
     Class.triBlaster = {
@@ -765,7 +765,7 @@ module.exports = ({ Class }) => {
     Class.hexaTank.UPGRADES_TIER_3.push("tornado", "deathStar");
 
     // DESTROYER UPGRADES
-    Class.blower = addBackGunner(destroyer, "Blower");
+    Class.blower = addBackGunner(Class.destroyer, "Blower");
     Class.destroyer.UPGRADES_TIER_3.push("blower");
 
     // TRAP GUARD UPGRADES
@@ -856,5 +856,5 @@ module.exports = ({ Class }) => {
         LABEL: "Retrograde",
     };
     Class.retrograde.UPGRADES_TIER_0 = ["blaster", "gatlingGun", "machineFlank", "retrogradeRifle", "buttbuttin", "blower", "quadTwin", "tornado", "subverter", "battery", "deathStar", "bonker", "protector", "doubleTrapGuard"];
-    Class.developer.UPGRADES_TIER_0.push("diep2Tanks");
+    Class.developer.UPGRADES_TIER_0.push("retrograde");
 };
