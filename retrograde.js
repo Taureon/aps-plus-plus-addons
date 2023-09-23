@@ -97,7 +97,7 @@ module.exports = ({ Class }) => {
         ],
     };
     Class.retrogradeRifle.UPGRADES_TIER_3 = ["sniperRifle", "rifleGuard", "spreadRifle"];
-    Class.sniper.UPGRADES_TIER_2.push("retrogradeRifle");
+    // Class.sniper.UPGRADES_TIER_2 = ["assassin", "hunter", "minigun", "retrogradeRifle"];
 
     // ASSASSIN UPGRADES
     Class.buttbuttin = addBackGunner(Class.assassin, "Buttbuttin");
