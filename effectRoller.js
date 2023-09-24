@@ -67,6 +67,35 @@
 //     Decreases your fov by 80%.
 //     lasts 10 seconds.
 
+// Effects I considered but did not add because of the weirdness of the process of adding them:
+// - Invisibility: Makes you COMPLETELY invisible for 15 seconds.
+// - Sidewinder: Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire. Was originally going to be an Annihilator bullet. Was replaced with Boulder.
+// - Time Bomb: Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
+
+// Effect ideas I thought of.
+// - WRATH: Every bullet you shoot is an Annihilator (incl. strenght and size) bullet. Does not affect your tank's fire rate.
+// - Magnetic Projectiles: Shot bullets, traps, and drones get pulled to the nearest enemy.
+// - Summon Sanctuary: Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
+// - Summon Dominator: Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
+// - Noclip: Disables all entity collisions with your main body, does not do anything to your projectiles.
+// - Thorns: Makes you immune against enemy knockback and increases body damage by 300%.
+// - Tornado: Makes your body spawn 5 ai-guided swarmers per second.
+//
+// - Random Projectiles: Gives you the projectiles of some other tank.
+// - Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
+// - Mom-doer: Makes your bullets spawn 500 units further away.
+// - On The Move: Forces your velocity to be your top speed.
+// - Increased Recoil: Multiplies your recoil received by 2.
+// - Get Trolled: Does NOTHING..
+//
+// - Earthquake: Every game tick, changes your velocity by a maximum value of 5 in a random direction..
+// - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
+// - Gamer Neck: Applies `CONTROLLER: [['io_zoom', { distance: 500, dynamic: true, permanent: true }]]` for 20 seconds.
+// - Frozen Camera: Applies `CONTROLLER: [['io_zoom', { distance: 0, permanent: true }]]` for 20 seconds.
+// - Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
+// - Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
+// - Random Barrel Positions: Randomises each of your barrels' angle and direction.
+
 let { combineStats } = require('../facilitators.js'),
     g = require('../gunvals.js'),
 
@@ -109,7 +138,7 @@ effects = [{
     name: 'Boulder',         
     splash: 'I am become wall',
     duration: 20,
-    statusEffect: new StatusEffect(20 * 30, { pushability: 0.1 })
+    statusEffect: new StatusEffect(20 * 30, { pushability: 0.1, recoilReceived: 0.1 })
 },
 
 {
@@ -247,9 +276,12 @@ effects = [{
             if (entity.pushability) {
                 let diffX = entity.x - body.x,
                     diffY = entity.y - body.y,
-                    force = 2500 * entity.pushability / Math.max(1, diffX ** 2 + diffY ** 2);
-                entity.velocity.x -= diffX * force;
-                entity.velocity.y -= diffY * force;
+                    dist2 = diffX ** 2 + diffY ** 2;
+                if (dist2 < 250000) {
+                    let force = 1000 * entity.pushability / Math.max(1, dist2);
+                    entity.velocity.x -= diffX * force;
+                    entity.velocity.y -= diffY * force;
+                }
             }
         }
     })
