@@ -340,7 +340,7 @@ module.exports = ({ Class, Config, Events }) => {
             POSITION: {
                 LENGTH: 20.5,
                 WIDTH: 19.5,
-                DELAY: 1
+                DELAY: 0.75
             },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.anni]),
