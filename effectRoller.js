@@ -167,8 +167,10 @@ effects = [{
         }
         setTimeout(() => {
             for (let gun of body.guns) {
-                gun.angle = remember[gun.id].angle;
-                gun.direction = remember[gun.id].direction;
+                if (remember[gun.id]) {
+                    gun.angle = remember[gun.id].angle;
+                    gun.direction = remember[gun.id].direction;
+                }
                 if (gun.settings) {
                     gun.settings.spray /= 0.5;
                 }
