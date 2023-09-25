@@ -86,6 +86,7 @@
 // - Mom-doer: Makes your bullets spawn 500 units further away.
 // - On The Move: Forces your velocity to be your top speed.
 // - Increased Recoil: Multiplies your recoil received by 2.
+// - Blast: Blasts away nearby entities once, with a lot of force.
 // - Get Trolled: Does NOTHING..
 //
 // - Earthquake: Every game tick, changes your velocity by a maximum value of 5 in a random direction..
