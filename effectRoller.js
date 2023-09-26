@@ -127,22 +127,43 @@ effects = [
     splash 'The power of eradication...',
     duration: 15,
     run: body => {
-        let anniGuns = [];
+        let anniStats = combineStats([g.basic, g.pound, g.destroy, g.anni]),
+            remember = {};
+
+        delete anniStats.reload;
+        delete anniStats.recoil;
+        delete anniStats.shudder;
+        delete anniStats.speed;
+        delete anniStats.maxSpeed;
+        delete anniStats.range;
+        delete anniStats.spray;
+
+        size,
+        health,
+        damage,
+        pen,
+        density,
+        resist,
+
         for (let gun of body.guns) {
+            remember[gun.id] = {
+                angle: gun.angle,
+                direction: gun.direction
+            }
+            gun.angle = 0;
+            gun.direction = 0;
             if (gun.settings) {
-                for (let stat in g.mach) {
-                    gun.settings[stat] *= g.mach[stat];
-                }
-                gun.trueRecoil *= g.mach.recoil;
+                gun.settings.spray *= 0.5;
             }
         }
         setTimeout(() => {
             for (let gun of body.guns) {
+                if (remember[gun.id]) {
+                    gun.angle = remember[gun.id].angle;
+                    gun.direction = remember[gun.id].direction;
+                }
                 if (gun.settings) {
-                    for (let stat in g.mach) {
-                        gun.settings[stat] /= g.mach[stat];
-                    }
-                    gun.trueRecoil /= g.mach.recoil;
+                    gun.settings.spray /= 0.5;
                 }
             }
         }, 15 * 1000);
