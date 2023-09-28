@@ -73,37 +73,40 @@
 // - Time Bomb: Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
 // Effect ideas I thought of.
-// - WRATH: Every bullet you shoot is an Annihilator bullet (incl. strenght and size, but not its speed). Does not affect your tank's fire rate.
+// -#WRATH: Every bullet you shoot is an Annihilator bullet (incl. strenght and size, but not its speed). Does not affect your tank's fire rate.
 // - Magnetic Projectiles: Shot bullets, traps, and drones get pulled to the nearest enemy.
 // - Summon Sanctuary: Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
 // - Summon Dominator: Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
-// - Noclip: Disables all entity collisions with your main body, does not do anything to your projectiles.
-// - Thorns: Makes you immune against enemy knockback and increases body damage by 300%.
-// - Tornado: Makes your body spawn 5 ai-guided swarmers per second.
-// - Guided Projectiles: Applies io_mapTargetToGoal to fired projectiles.
+// -#Noclip: Disables all entity collisions with your main body, does not do anything to your projectiles.
+// -#Thorns: Makes you immune against enemy knockback and increases body damage by 300%.
+// -#Tornado: Makes your body spawn 5 ai-guided swarmers per second.
+// - Guided Projectiles: Makes your projectiles go to your mouse.
 // - Exploding Projectiles: Applies SHOOT_ON_DEATH guns to fired projectiles.
 //
 // - Random Projectiles: Gives you the projectiles of some other tank.
-// - Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
+// -#Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
 // - Mom-doer: Makes your bullets spawn 500 units further away.
-// - On The Move: Forces your velocity to be your top speed.
+// -#On The Move: Forces your velocity to be your top speed.
 // - Increased Recoil: Multiplies your recoil received by 2.
 // - Blast: Blasts away nearby entities once, with a lot of force.
-// - Get Trolled: Does NOTHING..
+// -#Get Trolled: Does NOTHING..
 // - Turtle: Makes you 5x as healthy, but also makes your max speed 80% slower.
 // - Orb: Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
+// - Gamer Neck: Applies `CONTROLLER: [['io_zoom', { distance: 500, dynamic: true, permanent: true }]]` for 20 seconds.
 //
 // - Alcoholic: Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
-// - Earthquake: Every game tick, changes your velocity by a maximum value of 5 in a random direction..
+// -#Earthquake: Every game tick, changes your position by a maximum value of 5 in a random direction..
 // - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
-// - Gamer Neck: Applies `CONTROLLER: [['io_zoom', { distance: 500, dynamic: true, permanent: true }]]` for 20 seconds.
 // - Frozen Camera: Applies `CONTROLLER: [['io_zoom', { distance: 0, permanent: true }]]` for 20 seconds.
 // - Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
 // - Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
-// - Random Barrel Positions: Randomises each of your barrels' angle and direction.
+// -#Random Barrel Positions: Randomises each of your barrels' angle and direction.
 // - Antisocial Projectiles: Projectiles get slightly repelled by enemy entities.
+// -#Backpetal: Inverts movement directions.
+// -#Impotence: Same as WRATH, but it's Machine Gunner bullets instead.
 
 let { combineStats } = require('../facilitators.js'),
+    { gunCalcNames } = require('../constants.js'),
     g = require('../gunvals.js'),
 
 effects = [
@@ -121,13 +124,13 @@ effects = [
 
 /// Positive Effects
 
-/*
-{
+/*{
     name: 'WRATH',
-    splash 'The power of eradication...',
+    splash "You are all about to have a really bad day...",
     duration: 15,
     run: body => {
-        let anniStats = combineStats([g.basic, g.pound, g.destroy, g.anni]),
+        let anniGunWidth = 19.5 / 10,
+            anniStats = combineStats([g.basic, g.pound, g.destroy, g.anni]),
             remember = {};
 
         delete anniStats.reload;
@@ -137,39 +140,179 @@ effects = [
         delete anniStats.maxSpeed;
         delete anniStats.range;
         delete anniStats.spray;
-
-        size,
-        health,
-        damage,
-        pen,
-        density,
-        resist,
+        //leftover: size, health, damage, pen, density, resist
 
         for (let gun of body.guns) {
-            remember[gun.id] = {
-                angle: gun.angle,
-                direction: gun.direction
-            }
-            gun.angle = 0;
-            gun.direction = 0;
             if (gun.settings) {
-                gun.settings.spray *= 0.5;
+                remember[gun.id] = { size: gun.settings.size };
+                gun.settings.size = anniStats.size * anniGunWidth / gun.width;
+                for (let key in anniStats) {
+                    if (key !== "size") {
+                        remember[gun.id][key] = gun.settings[key];
+                        gun.settings[key] = anniStats[key];
+                    }
+                }
             }
         }
         setTimeout(() => {
             for (let gun of body.guns) {
                 if (remember[gun.id]) {
-                    gun.angle = remember[gun.id].angle;
-                    gun.direction = remember[gun.id].direction;
-                }
-                if (gun.settings) {
-                    gun.settings.spray /= 0.5;
+                    for (let key in remember[gun.id]) {
+                        gun.settings[key] = remember[gun.id][key];
+                    }
                 }
             }
         }, 15 * 1000);
     }
 },
-*/
+
+{
+    name: 'Tornado',
+    splash 'The Storm of Hell.',
+    duration: 15,
+    run: body => {
+        let gun = new Gun(body, {
+            POSITION: { LENGTH: 1, WIDTH: 7.5 },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.swarm, { spray: 9999, reload: 0.25}]),
+                STAT_CALCULATOR: gunCalcNames.swarm,
+                LABEL: "Effect Roller",
+                TYPE: "autoswarm"
+            },
+        });
+        body.guns.push(gun);
+        setTimeout(() => body.guns = body.guns.filter(g => g !== gun), 15 * 1000);
+    }
+},
+
+{
+    name: 'Noclip',
+    splash '',
+    duration: 15,
+    run: body => {
+        body.removeFromGrid();
+        setTimeout(() => body.addToGrid(), 15 * 1000);
+    }
+},
+
+{
+    name: 'Thorns',
+    splash: "Don't touch me!",
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { damage: 4, pushability: 0 }),
+},
+
+{
+    name: 'On The Move',
+    splash 'Doing the Cardio for the whole team!',
+    duration: 20, // how many seconds it lasts
+    statusEffect: new StatusEffect(20 * 30, undefined, body => {
+        let factor = (body.topSpeed ** 2) / (body.velocity.x ** 2 + body.velocity.y ** 2);
+        body.velocity.x *= factor;
+        body.velocity.y *= factor;
+    }),
+},
+
+{
+    name: 'No Effect',
+    splash 'Get Trolled',
+    noEndNotification: true
+},
+
+{
+    name: 'Drugged',
+    splash "Ohhh... that's the stuff!",
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, {}, (body, effect) => {
+        effect.fov = 1 + Math.sin(Math.PI * effect.duration / 15) / 2
+        body.refreshBodyAttributes();
+    })
+},
+
+{
+    name: 'Earthquake',
+    splash 'Welcome to Chile.',
+    duration: 15,
+    statusEffect: new StatusEffect(15 * 30, undefined, body => {
+        let angle = Math.PI * 2 * Math.random(),
+            x = Math.cos(angle) * Math.random() * 5,
+            y = Math.sin(angle) * Math.random() * 5;
+        body.x += x;
+        body.y += y;
+        body.velocity.x += x;
+        body.velocity.y += y;
+    })
+},
+
+{
+    name: 'Backpetal',
+    splash 'Muscle memory be damned.',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { acceleration: -1 })
+},
+
+{
+    name: 'Random Barrel Positions',
+    splash 'In which direction do I aim?',
+    duration: 20,
+    run: body => {
+        let remember = {};
+
+        for (let gun of body.guns) {
+            remember[gun.id] = gun.angle;
+            gun.angle = Math.PI * 2 * Math.random();
+        }
+        setTimeout(() => {
+            for (let gun of body.guns) {
+                if (remember[gun.id] != null) {
+                    gun.angle = remember[gun.id];
+                }
+            }
+        }, 15 * 1000);
+    }
+},
+
+{
+    name: 'Impotence',
+    splash "Your gun is weak! Haha!",
+    duration: 15,
+    run: body => {
+        let mgGunWidth = 3 / 10,
+            mgStats = combineStats([g.basic, g.twin, g.puregunner, g.machgun]),
+            remember = {};
+
+        delete mgStats.reload;
+        delete mgStats.recoil;
+        delete mgStats.shudder;
+        delete mgStats.speed;
+        delete mgStats.maxSpeed;
+        delete mgStats.range;
+        delete mgStats.spray;
+        //leftover: size, health, damage, pen, density, resist
+
+        for (let gun of body.guns) {
+            if (gun.settings) {
+                remember[gun.id] = { size: gun.settings.size };
+                gun.settings.size = mgStats.size * mgGunWidth / gun.width;
+                for (let key in mgStats) {
+                    if (key !== "size") {
+                        remember[gun.id][key] = gun.settings[key];
+                        gun.settings[key] = mgStats[key];
+                    }
+                }
+            }
+        }
+        setTimeout(() => {
+            for (let gun of body.guns) {
+                if (remember[gun.id]) {
+                    for (let key in remember[gun.id]) {
+                        gun.settings[key] = remember[gun.id][key];
+                    }
+                }
+            }
+        }, 15 * 1000);
+    }
+},*/
 
 // Stronger
 {
