@@ -1,5 +1,5 @@
 module.exports = ({ Class, Events }) => {
-    return console.log('\u001b[31mADDON 4th_of_july.js IS STILL IN BETA, DO NOT USE IN PRODUCTION\u001b[0m');
+    //return console.log('\u001b[31mADDON 4th_of_july.js IS STILL IN BETA, DO NOT USE IN PRODUCTION\u001b[0m');
 
     let explosions = [];
     for (let COLOR of ['purple', 'lavender', 'gold', 'black', 'gray', 'white', 'animatedBlueRed', 'animatedRedBlue', 'red', 'blue']) {
@@ -29,11 +29,18 @@ module.exports = ({ Class, Events }) => {
             if (!["bullet", "drone", "minion", "swarm", "trap"].includes(projectile.type)) return;
 
             projectile.on('dead', () => {
-                let count = Math.floor(Math.random() * 20);
+                let count = Math.floor(Math.random() * 10);
+                let fireworkTypesCount = Math.max(1, Math.floor(Math.random() * 4));
+                let fireworkTypes = []
+                for (let i = 0; i < fireworkTypesCount; i++) {
+                    fireworkTypes.push(ran.choose(explosions))
+                }
                 for (let i = 0; i < count; i++) {
+                    let ticker = 0
                     let angle = (i * (Math.PI * 2)) / count,
                     o = new Entity(projectile);
-                    o.define(ran.choose(explosions), false);
+                    o.define(fireworkTypes[ticker], false);
+                    ticker >= fireworkTypes.length ? ticker = 0 : ticker++
                     o.define({ BODY: { DAMAGE: projectile.DAMAGE * 2, HEALTH: projectile.HEALTH * 2 } }, false);
                     o.velocity.x = 10 * Math.sin(angle);
                     o.velocity.y = 10 * Math.cos(angle);
