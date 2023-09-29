@@ -32,7 +32,7 @@ module.exports = ({ Class, Events }) => {
 
             projectile.on('dead', () => {
                 let ticker = true,
-                    count = Math.ceil(Math.random() * 31),
+                    count = Math.ceil(Math.random() * 32),
                     fragsToUse = explosions[Math.floor(Math.random() * explosions.length)],
                     first = fragsToUse[Math.floor(Math.random() * fragsToUse.length)],
                     second = fragsToUse[Math.floor(Math.random() * fragsToUse.length)],
