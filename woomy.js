@@ -9,7 +9,7 @@ const g = require('../gunvals.js');
 
 module.exports = ({ Class }) => {
 
-// Polygons
+// POLYGONS
 Class.woomyAlphaPentagon = {
   PARENT: ["alphaPentagon"],
   SHAPE: -5,
@@ -128,3 +128,14 @@ Class.icosagon = {
   DRAW_HEALTH: true,
   GIVE_KILL_MESSAGE: true,
 };
+
+// BASIC UPGRADES
+  Class.autoBasic = makeAuto(Class.basic);
+  Class.basebrid = makeHybrid(Class.basic, "Basebrid");
+
+// BASEBRID UPGRADES
+  Class.twinbrid = makeHybrid(Class.twin, "Twinbrid");
+  Class.snipebrid = makeHybrid(Class.sniper, "Snipebrid");
+  Class.poundbrid = makeHybrid(Class.pounder, "Poundbrid");
+  Class.trapbrid = makeHybrid(Class.trapper, "Trapbrid");
+  Class.autoBasebrid = makeAuto(Class.basebrid);
