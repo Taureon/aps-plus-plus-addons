@@ -143,6 +143,21 @@ Class.icosagon = {
   Class.autoBasebrid = makeAuto(Class.basebrid);
   Class.basiception = makeCeption(Class.basic, "Basiception");
 
+// AUTO-TWIN UPGRADES
+  Class.bentAuto = makeAuto(Class.tripleShot, "Bent Auto");
+
+// AUTO-DOUBLE UPGRADES
+  Class.autoTriple = makeAuto(Class.tripleTwin, "Auto-Triple");
+
+// AUTO-FLANK UPGRADES
+  Class.autoHexa = makeAuto(Class.hexaTank, "Auto-Hexa");
+  Class.autoAuto3 = makeAuto(Class.auto3);
+
+// AUTO-TRAPPER UPGRADES
+  // yes ik the auto trapper defs don't exist yet i'm just sorting this here for now
+  Class.autoTriTrapper = makeAuto(Class.triTrapper);
+  Class.autoTrapGuard = makeAuto(Class.trapGuard);
+
 // BASEBRID UPGRADES
   Class.twinbrid = makeHybrid(Class.twin, "Twinbrid");
   Class.snipebrid = makeHybrid(Class.sniper, "Snipebrid");
@@ -150,6 +165,16 @@ Class.icosagon = {
   Class.trapbrid = makeHybrid(Class.trapper, "Trapbrid");
 
   Class.basic.UPGRADES_TIER_1.push("autoBasic", "basebrid");
+  
       Class.autoBasic.UPGRADES_TIER_2 = ["autoTwin", "autoSniper", "autoMachine", "autoFlank", "chairman", "scratcher", "autoBasebrid" "basiception"];
+          Class.autoTwin.UPGRADES_TIER_3 = ["bentAuto", "autoDouble", "autoCruiser", "autoGunner", "autoHexa"];
+              Class.autoDouble.UPGRADES_TIER_4 = ["autoTriple"];
+          Class.autoSniper.UPGRADES_TIER_3 = ["autoAssassin"];
+          Class.autoMachine.UPGRADES_TIER_3 = ["autoGunner"];
+          Class.autoFlank.UPGRADES_TIER_3 = ["autoTriAngle", "autoHexa", "autoTriTrapper", "autoAuto3", "autoTrapGuard"];
+              Class.autoFlank.UPGRADES_TIER_4 = ["autoTriple"];
+          Class.chairman.UPGRADES_TIER_3 = ["autoOverseer", "autoCruiser", "autoSpawner"];
+          Class.scratcher.UPGRADES_TIER_3 = ["autoBuilder"];
+  
       Class.basebrid.UPGRADES_TIER_2 = ["twinbrid", "snipebrid", "poundbrid", "trapbrid", "autoBasebrid"];
 };
