@@ -133,9 +133,17 @@ Class.icosagon = {
   Class.autoBasic = makeAuto(Class.basic);
   Class.basebrid = makeHybrid(Class.basic, "Basebrid");
 
+// AUTO-BASIC UPGRADES
+  Class.autoTwin = makeAuto(Class.twin);
+  Class.autoSniper = makeAuto(Class.sniper);
+  Class.autoMachine = makeAuto(Class.machineGun, "Auto-Machine");
+  Class.autoFlank = makeAuto(Class.flankGuard, "Auto-Flank");
+  Class.chairman = makeAuto(Class.director, "Chairman");
+  Class.scratcher = makeAuto(Class.pounder, "Scratcher");
+  Class.autoBasebrid = makeAuto(Class.basebrid);
+
 // BASEBRID UPGRADES
   Class.twinbrid = makeHybrid(Class.twin, "Twinbrid");
   Class.snipebrid = makeHybrid(Class.sniper, "Snipebrid");
   Class.poundbrid = makeHybrid(Class.pounder, "Poundbrid");
   Class.trapbrid = makeHybrid(Class.trapper, "Trapbrid");
-  Class.autoBasebrid = makeAuto(Class.basebrid);
