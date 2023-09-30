@@ -141,6 +141,7 @@ Class.icosagon = {
   Class.chairman = makeAuto(Class.director, "Chairman");
   Class.scratcher = makeAuto(Class.pounder, "Scratcher");
   Class.autoBasebrid = makeAuto(Class.basebrid);
+  Class.basiception = makeCeption(Class.basic, "Basiception");
 
 // BASEBRID UPGRADES
   Class.twinbrid = makeHybrid(Class.twin, "Twinbrid");
