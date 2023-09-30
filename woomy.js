@@ -152,3 +152,4 @@ Class.icosagon = {
   Class.basic.UPGRADES_TIER_1.push("autoBasic", "basebrid");
       Class.autoBasic.UPGRADES_TIER_2 = ["autoTwin", "autoSniper", "autoMachine", "autoFlank", "chairman", "scratcher", "autoBasebrid" "basiception"];
       Class.basebrid.UPGRADES_TIER_2 = ["twinbrid", "snipebrid", "poundbrid", "trapbrid", "autoBasebrid"];
+};
