@@ -148,3 +148,7 @@ Class.icosagon = {
   Class.snipebrid = makeHybrid(Class.sniper, "Snipebrid");
   Class.poundbrid = makeHybrid(Class.pounder, "Poundbrid");
   Class.trapbrid = makeHybrid(Class.trapper, "Trapbrid");
+
+  Class.basic.UPGRADES_TIER_1.push("autoBasic", "basebrid");
+      Class.autoBasic.UPGRADES_TIER_2 = ["autoTwin", "autoSniper", "autoMachine", "autoFlank", "chairman", "scratcher", "autoBasebrid" "basiception"];
+      Class.basebrid.UPGRADES_TIER_2 = ["twinbrid", "snipebrid", "poundbrid", "trapbrid", "autoBasebrid"];
