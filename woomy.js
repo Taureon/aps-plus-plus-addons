@@ -4,7 +4,7 @@
 // "[PARENT ADDON NAME]-[EXTENSION NAME].js", to make sure that it would run after that addon ran.
 
 const { combineStats, makeAuto, makeCeption, makeHybrid } = require('../facilitators.js');
-const { base, gunCalcNames, statnames } = require('../constants.js');
+const { base, gunCalcNames, statnames, basePolygonDamage } = require('../constants.js');
 const g = require('../gunvals.js');
 g.lance = {
   reload: 3,
