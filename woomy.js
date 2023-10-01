@@ -177,7 +177,7 @@ Class.icosagon = {
 
   Class.basic.UPGRADES_TIER_1.push("autoBasic", "basebrid");
   
-      Class.autoBasic.UPGRADES_TIER_2 = ["autoTwin", "autoSniper", "autoMachine", "autoFlank", "chairman", "scratcher", "autoBasebrid" "basiception"];
+      Class.autoBasic.UPGRADES_TIER_2 = ["autoTwin", "autoSniper", "autoMachine", "autoFlank", "chairman", "scratcher", "autoBasebrid", "basiception"];
           Class.autoTwin.UPGRADES_TIER_3 = ["bentAuto", "autoDouble", "autoCruiser", "autoGunner", "autoHexa"];
               Class.autoDouble.UPGRADES_TIER_4 = ["autoTriple"];
           Class.autoSniper.UPGRADES_TIER_3 = ["autoAssassin"];
