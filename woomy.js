@@ -3,7 +3,7 @@
 // Addons that are dependant on other addons should be named something like
 // "[PARENT ADDON NAME]-[EXTENSION NAME].js", to make sure that it would run after that addon ran.
 
-const { combineStats, addBackGunner } = require('../facilitators.js');
+const { combineStats, makeAuto, makeHybrid } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
