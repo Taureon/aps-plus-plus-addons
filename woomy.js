@@ -6,6 +6,17 @@
 const { combineStats, makeAuto, makeCeption, makeHybrid } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
+g.lance = {
+  reload: 3,
+  recoil: 0,
+  shudder: 0.1,
+  health: 0.125,
+  damage: 4.5,
+  pen: 1.6,
+  speed: 0.4,
+  range: 0.05,
+  spray: 180
+}
 
 module.exports = ({ Class }) => {
 
