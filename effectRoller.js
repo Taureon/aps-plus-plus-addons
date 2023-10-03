@@ -99,7 +99,7 @@
 // - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
 // -#Frozen Camera: Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
 // - Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
-// - Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
+// -#Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
 // -#Random Barrel Positions: Randomises each of your barrels' angle and direction.
 // - Antisocial Projectiles: Projectiles get slightly repelled by enemy entities.
 // -#Backpetal: Inverts movement directions.
@@ -361,6 +361,13 @@ effects = [
         body.addController(controller);
         setTimeout(() => body.controllers = body.controllers.filter(c => c !== controller), 20 * 1000);
     }
+},
+
+{
+    name: 'Statue',
+    splash 'Arras, Become Turret',
+    duration: 10,
+    statusEffect: new StatusEffect(10 * 30, { acceleration: 0, topSpeed: 0 })
 },
 
 {
