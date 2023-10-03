@@ -88,22 +88,26 @@
 // -#Mom-doer: Makes your bullets spawn 500 units further away.
 // -#On The Move: Forces your velocity to be your top speed.
 // -#Increased Recoil: Multiplies your recoil received by 2.
-// - Blast: Blasts away nearby entities once, with a lot of force.
+// -#Blast: Blasts away nearby entities once, with a lot of force.
 // -#Get Trolled: Does NOTHING..
 // -#Turtle: Makes you 5x as healthy, but also makes your max speed 80% slower.
 // - Orb: Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
 // -#Gamer Neck: Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
 //
-// - Alcoholic: Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
+// -#Alcoholic: Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
 // -#Earthquake: Every game tick, changes your position by a maximum value of 5 in a random direction..
 // - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
 // -#Frozen Camera: Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
-// - Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
+// -+Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
 // -#Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
 // -#Random Barrel Positions: Randomises each of your barrels' angle and direction.
 // - Antisocial Projectiles: Projectiles get slightly repelled by enemy entities.
 // -#Backpetal: Inverts movement directions.
 // -#Impotence: Same as WRATH, but it's Machine Gunner bullets instead.
+
+//#=added
+//+=unfinished
+// =not added
 
 let { combineStats } = require('../facilitators.js'),
     { gunCalcNames } = require('../constants.js'),
@@ -310,6 +314,30 @@ effects = [
 },
 
 {
+    name: 'Alcoholic',
+    splash "I can't walk straight...",
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, undefined, body => {
+        let angle = body.velocity.direction + Math.sin(body.id + Date.now() / 750),
+            length = body.velocity.length;
+        body.velocity.x = Math.cos(angle) * length;
+        body.velocity.y = Math.sin(angle) * length;
+    })
+},
+
+{
+    name: 'Forced spin',
+    splash "Can't.. stop.. teaming...",
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, undefined, body => {
+        let selfTime = Date.now() + body.id;
+        if (selfTime % 2000 > 1500) return;
+        body.facing = Math.cos(selfTime / 420) * 2 + Math.sin(selfTime / 666);
+        //TODO: prevent the entity from controlling themselves
+    })
+},
+
+{
     name: 'Earthquake',
     splash 'Welcome to Chile.',
     duration: 15,
@@ -368,6 +396,27 @@ effects = [
     splash 'Arras, Become Turret',
     duration: 10,
     statusEffect: new StatusEffect(10 * 30, { acceleration: 0, topSpeed: 0 })
+},
+
+{
+    name: 'Blast',
+    splash: 'Look how many close friends I have!',
+    noEndNotification: true;
+    run: body => {
+        for (let i = 0; i < entities.length; i++) {
+            let entity = entities[i];
+            if (entity.pushability) {
+                let diffX = entity.x - body.x,
+                    diffY = entity.y - body.y,
+                    dist2 = diffX ** 2 + diffY ** 2;
+                if (dist2 < 250000) {
+                    let force = 25000 * entity.pushability / Math.max(1, dist2);
+                    entity.velocity.x += diffX * force;
+                    entity.velocity.y += diffY * force;
+                }
+            }
+        }
+    }
 },
 
 {
