@@ -69,7 +69,7 @@
 
 // Effects I considered but did not add because of the weirdness of the process of adding them:
 // - Vanish: Makes you COMPLETELY invisible for 15 seconds.
-// - Sidewinder: Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire. Was originally going to be an Annihilator bullet. Was replaced with Boulder.
+// -#Sidewinder: Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire. Was originally going to be an Annihilator bullet. Was replaced with Boulder.
 // - Time Bomb: Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
 // Effect ideas I thought of.
@@ -85,19 +85,19 @@
 //
 // - Random Projectiles: Gives you the projectiles of some other tank.
 // -#Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
-// - Mom-doer: Makes your bullets spawn 500 units further away.
+// -#Mom-doer: Makes your bullets spawn 500 units further away.
 // -#On The Move: Forces your velocity to be your top speed.
-// - Increased Recoil: Multiplies your recoil received by 2.
+// -#Increased Recoil: Multiplies your recoil received by 2.
 // - Blast: Blasts away nearby entities once, with a lot of force.
 // -#Get Trolled: Does NOTHING..
-// - Turtle: Makes you 5x as healthy, but also makes your max speed 80% slower.
+// -#Turtle: Makes you 5x as healthy, but also makes your max speed 80% slower.
 // - Orb: Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
-// - Gamer Neck: Applies `CONTROLLER: [['io_zoom', { distance: 500, dynamic: true, permanent: true }]]` for 20 seconds.
+// -#Gamer Neck: Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
 //
 // - Alcoholic: Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
 // -#Earthquake: Every game tick, changes your position by a maximum value of 5 in a random direction..
 // - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
-// - Frozen Camera: Applies `CONTROLLER: [['io_zoom', { distance: 0, permanent: true }]]` for 20 seconds.
+// -#Frozen Camera: Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
 // - Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
 // - Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
 // -#Random Barrel Positions: Randomises each of your barrels' angle and direction.
@@ -177,7 +177,27 @@ effects = [
                 SHOOT_SETTINGS: combineStats([g.swarm, { spray: 9999, reload: 0.25}]),
                 STAT_CALCULATOR: gunCalcNames.swarm,
                 LABEL: "Effect Roller",
-                TYPE: "autoswarm"
+                TYPE: "autoswarm",
+                AUTOFIRE: true
+            },
+        });
+        body.guns.push(gun);
+        setTimeout(() => body.guns = body.guns.filter(g => g !== gun), 15 * 1000);
+    }
+},
+
+{
+    name: 'Sidewinder',
+    splash 'Press Alt-Fire to fire a Sidewinder Snake.',
+    duration: 15,
+    run: body => {
+        let gun = new Gun(body, {
+            POSITION: [15, 12, -1.1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.sidewind]),
+                STAT_CALCULATOR: gunCalcNames.sustained,
+                TYPE: "snake",
+                ALT_FIRE: true
             },
         });
         body.guns.push(gun);
@@ -214,6 +234,48 @@ effects = [
 },
 
 {
+    name: 'Mom-doer',
+    splash '',
+    duration: 20,
+    run: body => {
+        let remember = {};
+        for (let gun of body.guns) {
+            remember[gun.id] = true;
+            gun.length += 50;
+        }
+        setTimeout(() => {
+            for (let gun of body.guns) {
+                if (remember[gun.id]) {
+                    gun.length -= 50;
+                }
+            }
+        }, 20 * 1000);
+    }
+},
+
+{
+    name: 'Increased Recoil',
+    splash '',
+    duration: 15,
+    run: body => {
+        let remember = {};
+        for (let gun of body.guns) {
+            if (gun.settings) {
+                remember[gun.id] = true;
+                gun.settings.recoil *= 2;
+            }
+        }
+        setTimeout(() => {
+            for (let gun of body.guns) {
+                if (remember[gun.id]) {
+                    gun.settings.recoil /= 2;
+                }
+            }
+        }, 20 * 1000);
+    }
+},
+
+{
     name: 'No Effect',
     splash 'Get Trolled',
     noEndNotification: true
@@ -227,6 +289,24 @@ effects = [
         effect.fov = 1 + Math.sin(Math.PI * effect.duration / 15) / 2
         body.refreshBodyAttributes();
     })
+},
+
+{
+    name: 'Turtle',
+    splash 'Are you rammer or not?',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { acceleration: 0.2, topSpeed: 0.2, health: 5, shield: 5 })
+},
+
+{
+    name: 'Gamer Neck',
+    splash 'Maybe you should stand up more..',
+    duration: 20,
+    run: body => {
+        let controller = new ioTypes.zoom(body, { distance: 750, dynamic: true, permanent: true });
+        body.addController(controller);
+        setTimeout(() => body.controllers = body.controllers.filter(c => c !== controller), 20 * 1000);
+    }
 },
 
 {
@@ -269,6 +349,17 @@ effects = [
                 }
             }
         }, 15 * 1000);
+    }
+},
+
+{
+    name: 'Frozen Camera',
+    splash 'This area looks pretty nice.',
+    duration: 20,
+    run: body => {
+        let controller = new ioTypes.zoom(body, { distance: 0, permanent: true });
+        body.addController(controller);
+        setTimeout(() => body.controllers = body.controllers.filter(c => c !== controller), 20 * 1000);
     }
 },
 
@@ -372,12 +463,12 @@ effects = [
     splash: 'I CAN AIM.',
     duration: 20,
     run: body => {
-        let remember = {}
+        let remember = {};
         for (let gun of body.guns) {
             remember[gun.id] = {
                 angle: gun.angle,
                 direction: gun.direction
-            }
+            };
             gun.angle = 0;
             gun.direction = 0;
             if (gun.settings) {
