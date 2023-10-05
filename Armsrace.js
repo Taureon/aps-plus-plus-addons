@@ -6,7 +6,7 @@ module.exports = ({ Class }) => {
     Class.quadtwin = {
         PARENT: 'genericTank',
         LABEL: 'Quad Twin',
-        GUNS: [ {
+        GUNS: [{
             POSITION: [ 20, 8, 1, 0, -5.5, 0, 0, ],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' },
         }, {
