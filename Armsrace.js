@@ -44,4 +44,4 @@ exports.quadtwin = {
          }, }, 
      ],
 };
-
+exports.autotripletwin = makeAuto (exports.tripletwin)
