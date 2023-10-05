@@ -1,4 +1,4 @@
-exports.quadtwin = {
+class.quadtwin = {
    PARENT: [exports.genericTank],
    LABEL: 'Quad Twin',
    GUNS: [ {
@@ -44,4 +44,4 @@ exports.quadtwin = {
          }, }, 
      ],
 };
-exports.autotripletwin = makeAuto (exports.tripletwin)
+class.autotripletwin = makeAuto (class.tripletwin)
