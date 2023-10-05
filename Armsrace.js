@@ -1,3 +1,9 @@
+// add required imports here
+
+module.exports = ({ Class }) => {
+    Class.someTank = { /* code here */ }
+    //moretanks
+};
 class.quadtwin = {
    PARENT: [exports.genericTank],
    LABEL: 'Quad Twin',
