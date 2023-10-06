@@ -503,7 +503,112 @@ module.exports = ({ Class }) => {
         },
     ],
 };
+    Class.skewndouble = {
+    PARENT: ["genericTank"],
+    LABEL: "Skewn Double",
+    DANGER: 7,
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, -5.5, -205, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [19, 8, 1, 0, 5.5, 215, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, -5.5, -215, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+};
     //upgrades
     Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
-    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft"];
+    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble"];
 };
