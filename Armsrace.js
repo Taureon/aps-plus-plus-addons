@@ -505,5 +505,5 @@ module.exports = ({ Class }) => {
 };
     //upgrades
     Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
-    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble"];
+    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft"];
 };
