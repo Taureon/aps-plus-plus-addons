@@ -121,12 +121,7 @@ module.exports = ({ Class }) => {
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([
-                    g.basic,
-                    g.twin,
-                    g.twin,
-                    g.double,
-                    g.hewn,
-                    g.morerecoil,
+                    g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil,
                 ]),
                 TYPE: "bullet",
             },
@@ -135,12 +130,7 @@ module.exports = ({ Class }) => {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([
-                    g.basic,
-                    g.twin,
-                    g.twin,
-                    g.double,
-                    g.hewn,
-                    g.morerecoil,
+                    g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil,
                 ]),
                 TYPE: "bullet",
             },
