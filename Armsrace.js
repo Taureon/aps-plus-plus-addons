@@ -111,7 +111,7 @@ module.exports = ({ Class }) => {
         },
     ],
 };
-    exports.hewntripleTwin = {
+    Class.hewntripleTwin = {
     PARENT: ["genericTank"],
     LABEL: "Triple Twin",
     DANGER: 7,
