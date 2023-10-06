@@ -189,5 +189,5 @@ module.exports = ({ Class }) => {
         },
     ],
 };
-    Class.tripletwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple"];
+    Class.tripletwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin"];
 };
