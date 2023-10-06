@@ -2,7 +2,7 @@ const { combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
-//tripletwin
+//tripletwin upgrades
 
 module.exports = ({ Class }) => {
     Class.quadtwin = {
@@ -35,5 +35,81 @@ module.exports = ({ Class }) => {
         }]
     };
     Class.autotripletwin = makeAuto(Class.tripletwin);
-    Class.tripletwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin"];
+    Class.benttriple = {
+    PARENT: ["genericTank"],
+    LABEL: "Bent Triple",
+    DANGER: 6,
+    BODY: {
+        SPEED: base.SPEED * 0.9,
+    },
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [19, 8, 1, 0, -2, -17.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, 2, 17.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [22, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [19, 8, 1, 0, -2, -137.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, 2, 137.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [22, 8, 1, 0, 0, 120, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [19, 8, 1, 0, -2, -257.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, 2, 257.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [22, 8, 1, 0, 0, 240, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+};
+    Class.tripletwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple"];
 };
