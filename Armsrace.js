@@ -758,7 +758,7 @@ module.exports = ({ Class }) => {
     ],
        TURRETS: [
         {
-            POSITION: [10, 0, 0, 0, 180, 0],
+            POSITION: [10, 0, 0, 0, 180, 1],
             TYPE: "megaautoturret",
         },
     ],
