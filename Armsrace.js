@@ -350,5 +350,85 @@ module.exports = ({ Class }) => {
         },
     ],
 };
-    Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner"];
+   Class.warkwarkwark = {
+    PARENT: ["genericTank"],
+    LABEL: "Warkwarkwark",
+    STAT_NAMES: statnames.generic,
+    DANGER: 7,
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [13, 8, 1, 0, 5.5, 185, 0],
+        },
+        {
+            POSITION: [3, 9, 1.5, 13, 5.5, 185, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [13, 8, 1, 0, -5.5, 175, 0],
+        },
+        {
+            POSITION: [3, 9, 1.5, 13, -5.5, 175, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [13, 8, 1, 0, 5.5, 305, 0],
+        },
+        {
+            POSITION: [3, 9, 1.5, 13, 5.5, 305, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [13, 8, 1, 0, -5.5, 295, 0],
+        },
+        {
+            POSITION: [3, 9, 1.5, 13, -5.5, 295, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [13, 8, 1, 0, 5.5, 65, 0],
+        },
+        {
+            POSITION: [3, 9, 1.5, 13, 5.5, 65, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [13, 8, 1, 0, -5.5, 55, 0],
+        },
+        {
+            POSITION: [3, 9, 1.5, 13, -5.5, 55, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+    ],
+}; 
+    Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
 };
