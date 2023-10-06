@@ -4,6 +4,28 @@ const { combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
+//needed turrets
+
+Class.megaautoturret = {
+    PARENT: ["genericTank"],
+    LABEL: "",
+    BODY: {
+        FOV: 2,
+        SPEED: 0.9,
+    },
+    CONTROLLERS: ["canRepel", "onlyAcceptInArc", "mapAltToFire", "nearestDifferentMaster"],
+    COLOR: 16,
+    GUNS: [
+        {
+            POSITION: [22, 14, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+};
+
 //tripletwin upgrades
 
 module.exports = ({ Class }) => {
@@ -698,6 +720,50 @@ module.exports = ({ Class }) => {
             },
     ],
 };
+    //auto-double upgrades
+
+   Class.megaautodoubletwin = {
+    PARENT: ["genericTank"],
+    LABEL: "Mega Auto-Double Twin",
+    DANGER: 6,
+    GUNS: [
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+       TURRETS: [
+        {
+            POSITION: [10, 0, 0, 0, 180, 0],
+            TYPE: "megaautoturret",
+        },
+    ],
+};
+    
     //upgrades
     Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
     Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble", "hewnflankdouble", "hewngunner", "warkwawarkrk"];
