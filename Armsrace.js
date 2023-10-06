@@ -259,5 +259,96 @@ module.exports = ({ Class }) => {
         },
     ],
 };
-    Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin"];
+    Class.triplegunner = {
+    PARENT: ["genericTank"],
+    LABEL: "Triple Gunner",
+    DANGER: 6,
+    GUNS: [
+        {
+            POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, 127.25, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -127.25, 0, 0.75],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, 123.75, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, -123.75, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+                {
+            POSITION: [12, 3.5, 1, 0, 247.25, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -247.25, 0, 0.75],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, 243.75, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, -243.75, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+};
+    Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner"];
 };
