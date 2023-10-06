@@ -1,6 +1,8 @@
-const { combineStats, makeAuto } = require('../facilitators.js');
+const { combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
+
+//tripletwin
 
 module.exports = ({ Class }) => {
     Class.quadtwin = {
