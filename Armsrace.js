@@ -111,5 +111,83 @@ module.exports = ({ Class }) => {
         },
     ],
 };
+    exports.hewntripleTwin = {
+    PARENT: ["genericTank"],
+    LABEL: "Triple Twin",
+    DANGER: 7,
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, -5.5, -205, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.twin,
+                    g.twin,
+                    g.double,
+                    g.hewn,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 120, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 120, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 240, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 240, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+};
     Class.tripletwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple"];
 };
