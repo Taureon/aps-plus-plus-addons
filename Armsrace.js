@@ -638,7 +638,67 @@ module.exports = ({ Class }) => {
         },
     ],
 };
+    Class.warkwawarkrk = {
+    PARENT: ["genericTank"],
+    LABEL: "Warkwawarkrk",
+    DANGER: 7,
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
+        },
+        {
+            POSITION: [19, 8, 1.5, 13, 5.5, 205, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, -5.5, -205, 0],
+        },
+        {
+            POSITION: [19, 8, 1.5, 13, -5.5, -205, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
+        },
+        {
+            POSITION: [20, 8, 1.5, 13, 5.5, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
+        },
+        {
+            POSITION: [20, 8, 1.5, 13, -5.5, 180, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+        },
+        {
+            POSITION: [20, 8, 1.5, 13, 5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
+        },
+        {
+            POSITION: [20, 8, 1.5, 13, -5.5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+            },
+    ],
+};
     //upgrades
     Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
-    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble", "hewnflankdouble"];
+    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble", "hewnflankdouble", "hewngunner", "warkwawarkrk"];
 };
