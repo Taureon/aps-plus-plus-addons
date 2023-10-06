@@ -1,3 +1,5 @@
+//twilight :)
+
 const { combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
