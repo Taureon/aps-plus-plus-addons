@@ -335,7 +335,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [3, 9, 1.5, 13, 5.5, 185, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -345,7 +345,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [3, 9, 1.5, 13, -5.5, 175, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -355,7 +355,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [3, 9, 1.5, 13, 5.5, 305, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -365,7 +365,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [3, 9, 1.5, 13, -5.5, 295, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -375,7 +375,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [3, 9, 1.5, 13, 5.5, 65, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -385,7 +385,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [3, 9, 1.5, 13, -5.5, 55, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
     ],
@@ -672,7 +672,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [19, 8, 1.5, 13, 5.5, 205, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -681,7 +681,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [19, 8, 1.5, 13, -5.5, -205, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -690,7 +690,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [20, 8, 1.5, 13, 5.5, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -699,7 +699,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [20, 8, 1.5, 13, -5.5, 180, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
         },
         {
@@ -708,16 +708,18 @@ module.exports = ({ Class }) => {
         {
             POSITION: [20, 8, 1.5, 13, 5.5, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
+        },
         {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
         },
         {
             POSITION: [20, 8, 1.5, 13, -5.5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap"]), STAT_CALCULATOR: gunCalcNames.trap,
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap,
             },
+        },
     ],
 };
     //auto-double upgrades
@@ -764,6 +766,10 @@ module.exports = ({ Class }) => {
     ],
 };
     
+    // note from trplnr: please dont use glitch or github's text editor
+    // use https://github.dev/Taureon/aps-plus-plus-addons/blob/main/Armsrace.js if you dont plan on getting a code editor
+    // im telling u this bcuz syntax errors
+
     //upgrades
     //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
     Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
