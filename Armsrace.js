@@ -21,7 +21,7 @@ const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 module.exports = ({ Class }) => {
     //needed turrets
-    Class.megaautoturret = {
+    Class.megaAutoTurret = {
         PARENT: "genericTank",
         LABEL: "",
         BODY: {
@@ -37,7 +37,7 @@ module.exports = ({ Class }) => {
         }]
     };
     //tripletwin upgrades
-    Class.quadtwin = {
+    Class.quadTwin = {
         PARENT: 'genericTank',
         LABEL: 'Quad Twin',
         GUNS: [{
@@ -66,8 +66,8 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }]
     };
-    Class.autotripletwin = makeAuto(Class.tripleTwin);
-    Class.benttriple = {
+    Class.autoTripleTwin = makeAuto(Class.tripleTwin);
+    Class.bentTriple = {
         PARENT: ["genericTank"],
         LABEL: "Bent Triple",
         DANGER: 6,
@@ -103,7 +103,7 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }]
     };
-    Class.hewntripletwin = {
+    Class.hewnTripleTwin = {
         PARENT: ["genericTank"],
         LABEL: "Hewn Triple",
         DANGER: 7,
@@ -133,7 +133,7 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
     };
-    Class.tripleflanktwin = {
+    Class.tripleFlankTwin = {
         PARENT: ["genericTank"],
         LABEL: "Triple Flank Twin",
         DANGER: 7,
@@ -166,7 +166,7 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
     };
-    Class.triplegunner = {
+    Class.tripleGunner = {
         PARENT: ["genericTank"],
         LABEL: "Triple Gunner",
         DANGER: 6,
@@ -210,7 +210,7 @@ module.exports = ({ Class }) => {
     };
     Class.warkwarkwark = {
         PARENT: ["genericTank"],
-        LABEL: "Warkwarkwark",
+        LABEL: "warkwarkwark",
         STAT_NAMES: statnames.generic,
         DANGER: 7,
         GUNS: [{
@@ -246,7 +246,7 @@ module.exports = ({ Class }) => {
         }]
     };
     //hewn double upgrades
-    Class.autohewndouble = makeAuto(hewnDouble)
+    Class.autoHewnDouble = makeAuto(hewnDouble)
     Class.cleft = {
         PARENT: ["genericTank"],
         LABEL: "Cleft",
@@ -277,7 +277,7 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }]
     };
-    Class.skewndouble = {
+    Class.skewnDouble = {
         PARENT: ["genericTank"],
         LABEL: "Skewn Double",
         DANGER: 7,
@@ -307,7 +307,7 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }]
     };
-    Class.hewnflankdouble = {
+    Class.hewnFlankDouble = {
         PARENT: ["genericTank"],
         LABEL: "Hewn Flank Double",
         DANGER: 7,
@@ -337,7 +337,7 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }]
     };
-    Class.hewngunner = {
+    Class.hewnGunner = {
         PARENT: ["genericTank"],
         LABEL: "Gunner",
         DANGER: 6,
@@ -410,7 +410,7 @@ module.exports = ({ Class }) => {
         }]
     };
     //auto-double upgrades
-    Class.megaautodoubletwin = {
+    Class.megaAutoDoubleTwin= {
         PARENT: ["genericTank"],
         LABEL: "Mega Auto-Double Twin",
         DANGER: 6,
@@ -428,13 +428,13 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }],
         TURRETS: [{
-            POSITION: [10, 0, 0, 0, 180, 1], TYPE: "megaautoturret"
+            POSITION: [10, 0, 0, 0, 180, 1], TYPE: "megaAutoTurret"
         }]
     };
 
     //upgrades
     //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
-    Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
-    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble", "hewnflankdouble", "hewngunner", "warkwawarkrk"];
-    Class.autoDouble.UPGRADES_TIER_4 = ["megaautodouble"];
+    Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkwarkwark"];
+    Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkwawarkrk"];
+    Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin"];
 };
