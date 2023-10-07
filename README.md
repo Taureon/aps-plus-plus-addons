@@ -1,2 +1,2 @@
 # aps-plus-plus-addons
-Some Addons for OSA/APS++
+Official Addon Database for Open Source Arras
