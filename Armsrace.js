@@ -19,6 +19,7 @@ module.exports = ({ Class }) => {
         CONTROLLERS: ["canRepel", "onlyAcceptInArc", "mapAltToFire", "nearestDifferentMaster"],
         COLOR: 16,
         GUNS: [{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [22, 14, 1, 0, 0, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]), TYPE: "bullet" }
         }]
@@ -28,28 +29,28 @@ module.exports = ({ Class }) => {
         PARENT: 'genericTank',
         LABEL: 'Quad Twin',
         GUNS: [{
-            POSITION: [20, 8, 1, 0, -5.5, 0, 0, ],
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
-            POSITION: [20, 8, 1, 0, -5.5, -90, 0, ],
+            POSITION: [20, 8, 1, 0, -5.5, -90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
-            POSITION: [20, 8, 1, 0, -5.5, 180, 0, ],
+            POSITION: [20, 8, 1, 0, -5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
-            POSITION: [20, 8, 1, 0, -5.5, 90, 0, ],
+            POSITION: [20, 8, 1, 0, -5.5, 90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
-            POSITION: [20, 8, 1, 0, 5.5, 0, 0, ],
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
-            POSITION: [20, 8, 1, 0, 5.5, 90, 0, ],
+            POSITION: [20, 8, 1, 0, 5.5, 90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
-            POSITION: [20, 8, 1, 0, 5.5, 180, 0, ],
+            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
-            POSITION: [20, 8, 1, 0, 5.5, -90, 0, ],
+            POSITION: [20, 8, 1, 0, 5.5, -90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }]
     };
@@ -62,7 +63,6 @@ module.exports = ({ Class }) => {
             SPEED: base.SPEED * 0.9
         },
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, -2, -17.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
@@ -72,7 +72,6 @@ module.exports = ({ Class }) => {
             POSITION: [22, 8, 1, 0, 0, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, -2, -137.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
@@ -82,7 +81,6 @@ module.exports = ({ Class }) => {
             POSITION: [22, 8, 1, 0, 0, 120, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, -2, -257.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
@@ -98,7 +96,6 @@ module.exports = ({ Class }) => {
         LABEL: "Hewn Triple",
         DANGER: 7,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
@@ -205,37 +202,31 @@ module.exports = ({ Class }) => {
         STAT_NAMES: statnames.generic,
         DANGER: 7,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, 5.5, 185, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, 5.5, 185, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
-            /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, -5.5, 175, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, -5.5, 175, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, 5.5, 305, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, 5.5, 305, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
-            /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, -5.5, 295, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, -5.5, 295, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, 5.5, 65, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, 5.5, 65, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
-            /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, -5.5, 55, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, -5.5, 55, 0.5],
@@ -249,7 +240,6 @@ module.exports = ({ Class }) => {
         LABEL: "Cleft",
         DANGER: 7,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
@@ -262,7 +252,6 @@ module.exports = ({ Class }) => {
             POSITION: [20, 8, 1, 0, -5.5, -180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 25, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
@@ -281,14 +270,12 @@ module.exports = ({ Class }) => {
         LABEL: "Skewn Double",
         DANGER: 7,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 215, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
@@ -313,7 +300,6 @@ module.exports = ({ Class }) => {
         LABEL: "Hewn Flank Double",
         DANGER: 7,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
@@ -344,7 +330,6 @@ module.exports = ({ Class }) => {
         LABEL: "Gunner",
         DANGER: 6,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
@@ -381,7 +366,6 @@ module.exports = ({ Class }) => {
         LABEL: "Warkwawarkrk",
         DANGER: 7,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5]
         }, {
             POSITION: [19, 8, 1.5, 13, 5.5, 205, 0.5],
