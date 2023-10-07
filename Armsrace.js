@@ -765,6 +765,7 @@ module.exports = ({ Class }) => {
 };
     
     //upgrades
+    //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
     Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
     Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble", "hewnflankdouble", "hewngunner", "warkwawarkrk"];
     Class.autoDouble.UPGRADES_TIER_4 = ["megaautodouble"];
