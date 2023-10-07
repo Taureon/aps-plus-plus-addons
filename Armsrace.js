@@ -4,6 +4,18 @@
 // use https://github.dev/Taureon/aps-plus-plus-addons/blob/main/Armsrace.js if you dont plan on getting a code editor
 // im telling u this bcuz syntax errors
 
+// note from trplnr 2: PLEASE READ
+// see that sidebar over there, in github.dev?
+// see that git icon (the 3 circles connected)
+// click that, you can see the big vibrant green button that says commit and push
+// i advise you to make your life easier and get a code editor
+// https://code.visualstudio.com/learn/get-started/basics (you can use others)
+// and set up aps++, get github desktop while youre there, will save you time
+// also when setting up aps++ READ THE FAQ at #faq
+// please use camelCase - zenphia
+// if you want to still keep using the github text editor
+// might as well use notepad for offline support
+
 const { combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
