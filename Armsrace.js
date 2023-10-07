@@ -20,9 +20,7 @@ module.exports = ({ Class }) => {
         COLOR: 16,
         GUNS: [{
             POSITION: [22, 14, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]), TYPE: "bullet" }
         }]
     };
     //tripletwin upgrades
@@ -31,44 +29,28 @@ module.exports = ({ Class }) => {
         LABEL: 'Quad Twin',
         GUNS: [{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, -90, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 180, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 90, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 90, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 180, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, -90, 0, ],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet'
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }]
     };
     Class.autotripletwin = makeAuto(Class.tripleTwin);
@@ -82,51 +64,33 @@ module.exports = ({ Class }) => {
         GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, -2, -17.5, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, 2, 17.5, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             POSITION: [22, 8, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, -2, -137.5, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, 2, 137.5, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             POSITION: [22, 8, 1, 0, 0, 120, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, -2, -257.5, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, 2, 257.5, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }, {
             POSITION: [22, 8, 1, 0, 0, 240, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }]
     };
     Class.hewntripletwin = {
@@ -136,44 +100,28 @@ module.exports = ({ Class }) => {
         GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 120, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 120, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 240, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 240, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
     };
     Class.tripleflanktwin = {
@@ -182,49 +130,31 @@ module.exports = ({ Class }) => {
         DANGER: 7,
         GUNS: [{
             POSITION: [18, 8, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet" }
         }, {
             POSITION: [18, 8, 1, 0, 0, 120, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet" }
         }, {
             POSITION: [18, 8, 1, 0, 0, 240, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 120, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 120, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 240, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 240, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
     };
     Class.triplegunner = {
@@ -233,64 +163,40 @@ module.exports = ({ Class }) => {
         DANGER: 6,
         GUNS: [{
             POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, 127.25, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, -127.25, 0, 0.75],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, 123.75, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, -123.75, 0, 0.25],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, 247.25, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, -247.25, 0, 0.75],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, 243.75, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, -243.75, 0, 0.25],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }]
     };
     Class.warkwarkwark = {
@@ -303,49 +209,37 @@ module.exports = ({ Class }) => {
             POSITION: [13, 8, 1, 0, 5.5, 185, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, 5.5, 185, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, -5.5, 175, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, -5.5, 175, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, 5.5, 305, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, 5.5, 305, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, -5.5, 295, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, -5.5, 295, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, 5.5, 65, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, 5.5, 65, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             /* LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [13, 8, 1, 0, -5.5, 55, 0]
         }, {
             POSITION: [3, 9, 1.5, 13, -5.5, 55, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }]
     };
     //hewn double upgrades
@@ -357,45 +251,29 @@ module.exports = ({ Class }) => {
         GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, -180, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 25, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -25, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }]
     };
     Class.skewndouble = {
@@ -405,45 +283,29 @@ module.exports = ({ Class }) => {
         GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 215, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -215, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }]
     };
     Class.hewnflankdouble = {
@@ -453,44 +315,28 @@ module.exports = ({ Class }) => {
         GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 0, 135, 1],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 0, 270, 1],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }]
     };
     Class.hewngunner = {
@@ -500,54 +346,34 @@ module.exports = ({ Class }) => {
         GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, 7.25, 180, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [12, 3.5, 1, 0, -7.25, 180, 0.75],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, 3.75, 180, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }, {
             POSITION: [16, 3.5, 1, 0, -3.75, 180, 0.25],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }]
     };
     Class.warkwawarkrk = {
@@ -559,44 +385,32 @@ module.exports = ({ Class }) => {
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5]
         }, {
             POSITION: [19, 8, 1.5, 13, 5.5, 205, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             POSITION: [19, 8, 1, 0, -5.5, -205, 0]
         }, {
             POSITION: [19, 8, 1.5, 13, -5.5, -205, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 180, 0]
         }, {
             POSITION: [20, 8, 1.5, 13, 5.5, 180, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5]
         }, {
             POSITION: [20, 8, 1.5, 13, -5.5, 180, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0]
         }, {
             POSITION: [20, 8, 1.5, 13, 5.5, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5]
         }, {
             POSITION: [20, 8, 1.5, 13, -5.5, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }]
     };
     //auto-double upgrades
@@ -606,24 +420,16 @@ module.exports = ({ Class }) => {
         DANGER: 6,
         GUNS: [{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }, {
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet"
-            }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }],
         TURRETS: [{
             POSITION: [10, 0, 0, 0, 180, 1], TYPE: "megaautoturret"
