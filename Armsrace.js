@@ -1,6 +1,6 @@
 //twilight :)
 
-// note from trplnr: please dont use glitch or github's text editor
+// note from trplnr: please dont use glitch or github.com's text editor
 // use https://github.dev/Taureon/aps-plus-plus-addons/blob/main/Armsrace.js if you dont plan on getting a code editor
 // im telling u this bcuz syntax errors
 
