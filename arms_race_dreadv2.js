@@ -61,14 +61,17 @@ module.exports = ({ Class }) => {
 	//return console.log('--- Arms Race Dreadnoughts v2 addon [arms_race_dreadv2.js] is disabled. See lines 60-61 to enable it. ---');
 	console.log('--- Arms Race Dreadnoughts v2 addon [arms_race_dreadv2.js] is meant to replace the Dreadnoughts v2 addon [dreadv2.js]. ' + 
 				'Ensure that the Dreadnoughts v2 addon has been disabled.---');
+
 	// Set the below variable to true to enable hex dreadnought building (WARNING: increases load time by approximately 10x)
 	const buildHexnoughts = false;
+
+	// Comment out lines from the arrays below to disable that branch of the tree from being generated.
 	const buildEggWeaponBranches = [
 		"sword_APSofficialdreadv2",
-		// "pacifier_APSofficialdreadv2",
-		// "peacekeeper_APSofficialdreadv2",
-		// "invader_APSofficialdreadv2",
-		// "centaur_APSofficialdreadv2",
+		"pacifier_APSofficialdreadv2",
+		"peacekeeper_APSofficialdreadv2",
+		"invader_APSofficialdreadv2",
+		"centaur_APSofficialdreadv2",
 	];
 	const buildEggBodyBranches = [
 		"byte_APSofficialdreadv2",
@@ -79,7 +82,6 @@ module.exports = ({ Class }) => {
 		"dropper_APSofficialdreadv2",
 		"spotter_APSofficialdreadv2",
 	];
-	//["byte_APSofficialdreadv2", "atmosphere_APSofficialdreadv2", "juggernaut_APSofficialdreadv2"]
 
 	// Misc
 	Class.genericEggnought = {
