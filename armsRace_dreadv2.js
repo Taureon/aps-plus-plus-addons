@@ -58,9 +58,9 @@ const hexnoughtBody = {
 
 module.exports = ({ Class }) => {
 	// Comment out the line below to enable this addon, uncomment it to disable this addon (WARNING: Increases load time by approximately 3x).
-	//return console.log('--- Arms Race Dreadnoughts v2 addon [arms_race_dreadv2.js] is disabled. See lines 60-61 to enable it. ---');
-	console.log('--- Arms Race Dreadnoughts v2 addon [arms_race_dreadv2.js] is meant to replace the Dreadnoughts v2 addon [dreadv2.js]. ' + 
-				'Ensure that the Dreadnoughts v2 addon has been disabled.---');
+	//return console.log('--- Arms Race Dreadnoughts v2 addon [armsRace_dreadv2.js] is disabled. See lines 60-61 to enable it. ---');
+	console.log('--- The Arms Race Dreadnoughts v2 addon [armsRace_dreadv2.js] cannot coexist with the regular Dreadnoughts v2 addon [dreadv2.js]. ' + 
+				'Please make sure that the Dreadnoughts v2 addon has been disabled or does not exist.---');
 
 	// Set the below variable to true to enable hex dreadnought building (WARNING: increases load time by approximately 10x)
 	const buildHexnoughts = false;
