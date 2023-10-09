@@ -8,75 +8,11 @@ const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
 module.exports = ({ Class }) => {
-    // TRIPLE TWIN UPGRADES
-    Class.quadTwin = {
-        PARENT: ["genericTank"],
-        LABEL: "Quad Twin",
-        DANGER: 7,
-        GUNS: [
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, -5.5, 90, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, -5.5, 270, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, 5.5, 90, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, 5.5, 180, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, 5.5, 270, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
-                    TYPE: Class.bullet,
-                },
-            },
-        ],
-    };
-    Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin"];
+// This addon has been repurposed to hold removed/scrapped arras.io tanks.
+// Anything that was added to Arms Race (like the Quad Twin and Blower) has been removed.
 
     // SNIPER UPGRADES
-    Class.retrogradeRifle = {
+    Class.rifle_retrograde = {
         PARENT: ["genericTank"],
         LABEL: "Rifle",
         BODY: {
@@ -96,12 +32,6 @@ module.exports = ({ Class }) => {
             },
         ],
     };
-    Class.retrogradeRifle.UPGRADES_TIER_3 = ["sniperRifle", "rifleGuard", "spreadRifle"];
-    // Class.sniper.UPGRADES_TIER_2.push("retrogradeRifle");
-
-    // ASSASSIN UPGRADES
-    Class.buttbuttin = addBackGunner(Class.assassin, "Buttbuttin");
-    Class.assassin.UPGRADES_TIER_3.push("buttbuttin");
 
     // RIFLE UPGRADES
     Class.sniperRifle = {
@@ -254,6 +184,7 @@ module.exports = ({ Class }) => {
             },
         ],
     };
+    Class.rifle_retrograde.UPGRADES_TIER_3 = ["sniperRifle", "rifleGuard", "spreadRifle"];
 
     // MACHINE GUN UPGRADES
     Class.blaster = {
@@ -311,116 +242,6 @@ module.exports = ({ Class }) => {
         ],
     };
     Class.machineGun.UPGRADES_TIER_2.push("blaster", "gatlingGun", "machineFlank");
-
-    // MINIGUN UPGRADES
-    Class.subverter = {
-        PARENT: ["genericTank"],
-        LABEL: "Subverter",
-        DANGER: 7,
-        BODY: {
-            FOV: base.FOV * 1.2,
-        },
-        GUNS: [
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [21, 14, 1, 0, 0, 0, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.mini]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [19, 14, 1, 0, 0, 0, 0.333],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.mini]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [17, 14, 1, 0, 0, 0, 0.667],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.mini]),
-                    TYPE: Class.bullet,
-                },
-            },
-        ],
-    };
-    Class.protector = {
-        PARENT: ["genericTank"],
-        LABEL: "Protector",
-        DANGER: 7,
-        GUNS: [
-            /***** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */ {
-                POSITION: [11, 12, 1, 6, 0, 0, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
-                    HAS_NO_RECOIL: true,
-                },
-            },
-            {
-                POSITION: [10, 14, 1, 6, 0, 0, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.trap]),
-                    TYPE: Class.trap,
-                    STAT_CALCULATOR: gunCalcNames.trap,
-                },
-            },
-            {
-                POSITION: [8, 14, -1.3, 4, 0, 0, 0],
-            },
-        ],
-    };
-    Class.minigun.UPGRADES_TIER_3.push("subverter");
-    Class.pounder.UPGRADES_TIER_3.push("subverter", "protector");
-
-    // GUNNER UPGRADES
-    Class.battery = {
-        PARENT: ["genericTank"],
-        LABEL: "Battery",
-        DANGER: 7,
-        GUNS: [
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.8],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.6],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 3.5, 1, 0, 3.75, 0, 0.4],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.2],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [20, 3.5, 1, 0, 0, 0, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]),
-                    TYPE: Class.bullet,
-                },
-            },
-        ],
-    };
-    Class.gunner.UPGRADES_TIER_3.push("battery");
 
     // BLASTER UPGRADES
     Class.triBlaster = {
@@ -480,7 +301,7 @@ module.exports = ({ Class }) => {
             },
         ],
     };
-    Class.flamethrower = { // yeah ik this one isn't in retrograde but i'm including it anyway lol
+    Class.flamethrower = {
         PARENT: ["genericTank"],
         LABEL: "Flamethrower",
         DANGER: 7,
@@ -504,7 +325,7 @@ module.exports = ({ Class }) => {
             },
         ],
     };
-    Class.blaster.UPGRADES_TIER_3 = ["triBlaster", "splasher"/*, "flamethrower"*/];
+    Class.blaster.UPGRADES_TIER_3 = ["triBlaster", "splasher", "flamethrower"];
 
     // GATLING GUN UPGRADES
     Class.retrogradeSprayer = {
@@ -614,160 +435,34 @@ module.exports = ({ Class }) => {
     };
     Class.machineFlank.UPGRADES_TIER_3 = ["machineTriple", "halfNHalf"];
 
-    // HEXA TANK UPGRADES
-    Class.tornado = {
+    // POUNDER UPGRADES
+    Class.protector = {
         PARENT: ["genericTank"],
-        LABEL: "Tornado",
+        LABEL: "Protector",
         DANGER: 7,
         GUNS: [
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [16, 6, 1, 0, 0, 0, 0],
+            /***** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */ {
+                POSITION: [11, 12, 1, 6, 0, 0, 0.5],
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
                     TYPE: Class.bullet,
+                    HAS_NO_RECOIL: true,
                 },
             },
             {
-                POSITION: [16, 6, 1, 0, 0, 30, 0.5],
+                POSITION: [10, 14, 1, 6, 0, 0, 0],
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
+                    SHOOT_SETTINGS: combineStats([g.trap]),
+                    TYPE: Class.trap,
+                    STAT_CALCULATOR: gunCalcNames.trap,
                 },
             },
             {
-                POSITION: [16, 6, 1, 0, 0, 60, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 90, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 120, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 150, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 180, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 210, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 240, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 270, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 300, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                POSITION: [16, 6, 1, 0, 0, 330, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
-                    TYPE: Class.bullet,
-                },
+                POSITION: [8, 14, -1.3, 4, 0, 0, 0],
             },
         ],
     };
-    Class.deathStar = {
-        PARENT: ["genericTank"],
-        LABEL: "Death Star",
-        DANGER: 7,
-        GUNS: [
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [20.5, 12, 1, 0, 0, 0, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [20.5, 12, 1, 0, 0, 120, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [20.5, 12, 1, 0, 0, 240, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [20.5, 12, 1, 0, 0, 60, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [20.5, 12, 1, 0, 0, 180, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
-                },
-            },
-            {
-                /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-                POSITION: [20.5, 12, 1, 0, 0, 300, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
-                },
-            },
-        ],
-    };
-    Class.hexaTank.UPGRADES_TIER_3.push("tornado", "deathStar");
-    // Class.hexaTank.UPGRADES_TIER_3.push("deathStar");
-
-    // DESTROYER UPGRADES
-    Class.blower = addBackGunner(Class.destroyer, "Blower");
-    Class.destroyer.UPGRADES_TIER_3.push("blower");
+    Class.pounder.UPGRADES_TIER_3.push("protector");
 
     // TRAP GUARD UPGRADES
     Class.doubleTrapGuard = {
@@ -821,41 +516,12 @@ module.exports = ({ Class }) => {
             },
         ],
     };
-    /*
-    Class.twin.UPGRADES_TIER_3 = ["dual", "musket"];
-    Class.doubleTwin.UPGRADES_TIER_3.push("doubleTrapGuard");
-    Class.trapGuard.UPGRADES_TIER_3 = ["bushwhacker", "gunnerTrapper", "bomber", "conqueror", "doubleTrapGuard"];
-    */
-
-    // SMASHER UPGRADES
-    Class.bonker = {
-        PARENT: ["genericTank"],
-        LABEL: "Bonker",
-        SIZE: Class.genericTank.SIZE * 0.6,
-        BODY: {
-            SPEED: 1.4 * base.SPEED,
-            DAMAGE: 1.1 * base.DAMAGE,
-            FOV: 1.1 * base.FOV,
-            DENSITY: 1.4 * base.DENSITY,
-        },
-        TURRETS: [
-            {
-                /** SIZE     X       Y     ANGLE    ARC */
-                POSITION: [21.5, 0, 0, 0, 360, 0],
-                TYPE: Class.smasherBody,
-            },
-        ],
-        IS_SMASHER: true,
-        SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
-        STAT_NAMES: statnames.smasher,
-    };
-    Class.smasher.UPGRADES_TIER_3.push("bonker");
 
     // Dev Tanks
     Class.retrograde = {
         PARENT: ["menu"],
         LABEL: "Retrograde",
     };
-    Class.retrograde.UPGRADES_TIER_0 = ["blaster", "gatlingGun", "machineFlank", "retrogradeRifle", "buttbuttin", "blower", "quadTwin", "tornado", "subverter", "battery", "deathStar", "bonker", "protector", "doubleTrapGuard"];
+    Class.retrograde.UPGRADES_TIER_0 = ["rifle_retrograde", "blaster", "gatlingGun", "machineFlank", "protector", "doubleTrapGuard"];
     Class.developer.UPGRADES_TIER_0.push("retrograde");
 };
