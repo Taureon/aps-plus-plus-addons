@@ -1,10 +1,4 @@
-// An addon is guaranteed to run only after all groups are loaded.
-// This is helpful, if your group relies on all other definitions already being loaded.
-// Addons that are dependant on other addons should be named something like
-// "[PARENT ADDON NAME]-[EXTENSION NAME].js", to make sure that it would run after that addon ran.
-
-const { combineStats, makeAuto, makeCeption, makeHybrid } = require('../facilitators.js');
-const { base, gunCalcNames, statnames, basePolygonDamage, basePolygonHealth } = require('../constants.js');
+const { combineStats, makeAuto, makeCeption, makeHybrid } = require('../facilitators.js');const { base, gunCalcNames, statnames, basePolygonDamage, basePolygonHealth } = require('../constants.js');
 const g = require('../gunvals.js');
 g.lance = {
   reload: 3,
