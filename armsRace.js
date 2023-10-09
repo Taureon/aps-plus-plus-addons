@@ -20,7 +20,7 @@ const { combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 module.exports = ({ Class }) => {
-    //needed turrets
+    // TURRETS
     Class.megaAutoTurret = {
         PARENT: "genericTank",
         LABEL: "",
@@ -36,7 +36,8 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]), TYPE: "bullet" }
         }]
     };
-    //tripletwin upgrades
+
+    // TRIPLE TWIN UPGRADES
     Class.quadTwin = {
         PARENT: 'genericTank',
         LABEL: 'Quad Twin',
@@ -245,7 +246,8 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }]
     };
-    //hewn double upgrades
+
+    // HEWN DOUBLE UPGRADES
     Class.autoHewnDouble = makeAuto(hewnDouble)
     Class.cleft = {
         PARENT: ["genericTank"],
@@ -409,8 +411,9 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }]
     };
-    //auto-double upgrades
-    Class.megaAutoDoubleTwin= {
+    
+    // AUTO-DOUBLE UPGRADES
+    Class.megaAutoDoubleTwin = {
         PARENT: ["genericTank"],
         LABEL: "Mega Auto-Double Twin",
         DANGER: 6,
