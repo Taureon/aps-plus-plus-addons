@@ -441,72 +441,42 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }],
         TURRETS: [{
-            /*********  SIZE     X       Y     ANGLE    ARC */
             POSITION: [6, 3, 5, 0, 360, 1],
-            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }],
-          },
-          {
-            /*********  SIZE     X       Y     ANGLE    ARC */
+            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+        }, {
             POSITION: [6, 3, -5, 0, 360, 1],
-            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }],
-          },
-          {
-            /*********  SIZE     X       Y     ANGLE    ARC */
+            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+        }, {
             POSITION: [6, -5, 0, 0, 360, 1],
-            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }],
-          },]
+            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+        }]
     };
     exports.doubleflanktwin = {
         PARENT: ["genericTank"],
         LABEL: "Double Flank Twin",
         DANGER: 6,
-        GUNS: [
-            {
-                POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
-                    TYPE: "bullet",
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
-                    TYPE: "bullet",
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, 5.5, 180, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
-                    TYPE: "bullet",
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
-                    TYPE: "bullet",
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, o, 135, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
-                    TYPE: "bullet",
-                },
-            },
-            {
-                POSITION: [20, 8, 1, 0, o, 270, 0.5],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
-                    TYPE: "bullet",
-                },
-            },
-        ],
+        GUNS: [{
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
+        }, {
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
+        }, {
+            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
+        }, {
+            POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
+        }, {
+            POSITION: [20, 8, 1, 0, 0, 135, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
+        }, {
+            POSITION: [20, 8, 1, 0, 0, 270, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
+        }]
     };
-Class.autobentdouble = makeAuto (bentDouble)
-Class.autodoubleflanktwin = makeAuto (doubleflanktwin)
+    Class.autobentdouble = makeAuto(bentDouble);
+    Class.autodoubleflanktwin = makeAuto(doubleflanktwin);
     //upgrades
     //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
 
