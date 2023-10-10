@@ -510,12 +510,9 @@ Class.autodoubleflanktwin = makeAuto (doubleflanktwin)
     //upgrades
     //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
 
-    //tier 3
     Class.doubleTwin.UPGRADES_TIER_3 = ["doubleflanktwin"];
-    //tier 4
-
-    Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
-    Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble", "hewnflankdouble", "hewngunner", "warkwawarkrk"];
-    Class.autoDouble.UPGRADES_TIER_4 = ["megaautodoubletwin", "tripleautodoubletwin", "autotripletwin", "autohewndouble", "autobentdouble", "autodoubleflanktwin"];
-    Class.doubleflanktwin.UPGRADES_TIER_4 = ["autodoubleflanktwin"];
+        Class.tripleTwin.UPGRADES_TIER_4 = ["quadtwin", "autotripletwin", "benttriple", "hewntripletwin", "tripleflanktwin", "triplegunner", "warkwarkwark"];
+        Class.hewnDouble.UPGRADES_TIER_4 = ["hewntriple", "autohewndouble", "cleft", "skewndouble", "hewnflankdouble", "hewngunner", "warkwawarkrk"];
+        Class.autoDouble.UPGRADES_TIER_4 = ["megaautodoubletwin", "tripleautodoubletwin", "autotripletwin", "autohewndouble", "autobentdouble", "autodoubleflanktwin"];
+        Class.doubleflanktwin.UPGRADES_TIER_4 = ["autodoubleflanktwin"];
 };
