@@ -4,6 +4,10 @@
 // use https://github.dev/Taureon/aps-plus-plus-addons/blob/main/Armsrace.js if you dont plan on getting a code editor
 // im telling u this bcuz syntax errors
 
+// use camelCase - zenphia
+// use camelCase - zenphia
+// use camelCase - zenphia
+
 const { combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
