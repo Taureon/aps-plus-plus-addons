@@ -240,7 +240,7 @@ module.exports = ({ Class }) => {
         }]
     };
     //hewn double upgrades
-    Class.autoHewnDouble = makeAuto(hewnDouble)
+    Class.autoHewnDouble = makeAuto(Class.hewnDouble)
     Class.cleft = {
         PARENT: ["genericTank"],
         LABEL: "Cleft",
