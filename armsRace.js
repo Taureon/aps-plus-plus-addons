@@ -477,8 +477,8 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }]
     };
-    Class.autoBentDouble = makeAuto(bentDouble);
-    Class.autoDoubleFlankTwin = makeAuto(doubleFlankTwin);
+    Class.autoBentDouble = makeAuto(Class.bentDouble);
+    Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
     //upgrades
     //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
 
