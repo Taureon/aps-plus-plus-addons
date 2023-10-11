@@ -21,7 +21,7 @@ module.exports = ({ Class }) => {
             SPEED: 0.9
         },
         CONTROLLERS: ["canRepel", "onlyAcceptInArc", "mapAltToFire", "nearestDifferentMaster"],
-        COLOR: 16
+        COLOR: 16,
         GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [22, 14, 1, 0, 0, 0, 0],
