@@ -517,6 +517,6 @@ module.exports = ({ Class }) => {
         PARENT: ["menu"],
         LABEL: "Removed Tanks",
     };
-    Class.retrograde.UPGRADES_TIER_0 = ["rifle_retrograde", "blaster", "gatlingGun", "machineFlank", "protector", "doubleTrapGuard"];
+    Class.removed.UPGRADES_TIER_0 = ["rifle_retrograde", "blaster", "gatlingGun", "machineFlank", "protector", "doubleTrapGuard"];
     Class.developer.UPGRADES_TIER_0.push("removed");
 };
