@@ -591,7 +591,7 @@ module.exports = ({ Class }) => {
         },
     ],
 };
-    exports.coordinator = {
+    Class.coordinator = {
     PARENT: ["genericTank"],
     LABEL: "Coordinator",
     STAT_NAMES: statnames.drone,
@@ -616,6 +616,23 @@ module.exports = ({ Class }) => {
          }, 
     ],
 };
+    Class.bruiser = {
+    PARENT: ["genericTank"],
+    LABEL: "Bruiser",
+    DANGER: 6,
+    GUNS: [
+        {
+            POSITION: [21, 14, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.single]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [5.5, 14, -1.8, 6.5, 0, 0, 0],
+        },
+    ],
+};
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
     //upgrades
@@ -626,5 +643,5 @@ module.exports = ({ Class }) => {
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
-        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator"]
+        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser"]
 };
