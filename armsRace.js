@@ -477,6 +477,28 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }]
     };
+
+    //Single upgrades
+
+   Cless.duo = {
+   PARENT: [exports.genericTank],
+   LABEL: 'Duo',
+   GUNS: [ {
+         POSITION: [ 20, 8, 1, 0, -5, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
+            TYPE: exports.bullet,
+         }, }, {
+         POSITION: [ 20, 8, 1, 0, 5, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
+            TYPE: exports.bullet,
+         }, }, {
+         POSITION: [ 13, 17, 1, 0, 0, 0, 0, ],
+         }, 
+     ],
+};
+
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
     //upgrades
@@ -487,4 +509,5 @@ module.exports = ({ Class }) => {
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
+        Class.single.UPGRADES_TIER_4 = ["duo"]
 };
