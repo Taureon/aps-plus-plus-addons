@@ -502,7 +502,7 @@ module.exports = ({ Class }) => {
     //Single upgrades
 
    Class.duo = {
-   PARENT: [exports.genericTank],
+   PARENT: ["genericTank"],
    LABEL: 'Duo',
    GUNS: [ {
          POSITION: [ 20, 8, 1, 0, -5, 0, 0, ],
@@ -655,7 +655,7 @@ module.exports = ({ Class }) => {
     ],
 };
    Class.mono = {
-   PARENT: [exports.genericTank],
+   PARENT: ["genericTank"],
    LABEL: 'Mono',
    GUNS: [ {
          POSITION: [ 23, 8, 1, 0, 0, 0, 0, ],
