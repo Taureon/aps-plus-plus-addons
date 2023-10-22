@@ -633,6 +633,27 @@ module.exports = ({ Class }) => {
         },
     ],
 };
+    exports.tricker = {
+    PARENT: ["genericTank"],
+    LABEL: "Tricker",
+    STAT_NAMES: statnames.trap,
+    GUNS: [
+        {
+            POSITION: [15, 7, 1, 0, 0, 0, 0],
+        },
+        {
+            POSITION: [3, 7, 1.7, 15, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.single]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [5.5, 7, -1.8, 6.5, 0, 0, 0],
+        },
+    ],
+};
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
     //upgrades
@@ -643,5 +664,5 @@ module.exports = ({ Class }) => {
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
-        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser"]
+        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker"]
 };
