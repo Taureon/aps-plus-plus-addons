@@ -591,6 +591,31 @@ module.exports = ({ Class }) => {
         },
     ],
 };
+    exports.coordinator = {
+    PARENT: ["genericTank"],
+    LABEL: "Coordinator",
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        FOV: base.FOV * 1.1,
+    },
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [6, 11, 1.8, 15, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, g.single]),
+                TYPE: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: gunCalcNames.drone,
+                MAX_CHILDREN: 6,
+            },
+        },
+        {
+         POSITION: [ 12, 9, -2.05, 5, 0, 0, 0, ],
+         }, 
+    ],
+};
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
     //upgrades
@@ -601,5 +626,5 @@ module.exports = ({ Class }) => {
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
-        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion"]
+        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator"]
 };
