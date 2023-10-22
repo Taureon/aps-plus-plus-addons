@@ -531,9 +531,9 @@ module.exports = ({ Class }) => {
         },
     ],
 };
-    Class.turnion = {
+    Class.ternion = {
     PARENT: ["genericTank"],
-    LABEL: "Turnion",
+    LABEL: "Ternion",
     BODY: {
         SPEED: 1.12 * base.SPEED,
     },
@@ -580,5 +580,5 @@ module.exports = ({ Class }) => {
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
-        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "turnion"]
+        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion"]
 };
