@@ -480,7 +480,7 @@ module.exports = ({ Class }) => {
 
     //Single upgrades
 
-   Cless.duo = {
+   Class.duo = {
    PARENT: [exports.genericTank],
    LABEL: 'Duo',
    GUNS: [ {
