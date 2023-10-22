@@ -486,5 +486,5 @@ module.exports = ({ Class }) => {
         Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
-        Class.doubleflanktwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
+        Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
 };
