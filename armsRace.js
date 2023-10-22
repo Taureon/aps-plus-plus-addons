@@ -8,7 +8,7 @@
 // use camelCase - zenphia
 // use camelCase - zenphia
 
-const { dereference, combineStats, addBackGunner, makeAuto } = require('../facilitators.js');
+const { dereference, combineStats, addBackGunner, makeAuto, makeHybrid } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
@@ -670,6 +670,7 @@ module.exports = ({ Class }) => {
      ],
 };
     Class.avian = makeBird (Class.single, "Avian");
+    Class.assistant = makeHybrid (Class.single, "Assistant");
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
     //upgrades
@@ -680,5 +681,5 @@ module.exports = ({ Class }) => {
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
-        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "Avian"]
+        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "Avian", "assistant"]
 };
