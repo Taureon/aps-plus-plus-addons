@@ -669,6 +669,122 @@ module.exports = ({ Class }) => {
          }, 
      ],
 };
+
+    //dev bosses
+
+    //fixing later
+    Class.twilightbossmainbody = {
+   PARENT: [exports.genericTank],
+   LABEL: 'The Boss of Bosses',
+   SHAPE: 13,
+   SIZE: 59,
+   COLOR: 4,
+   BODY: {
+      ACCELERATION: base.ACCEL * 0.6,
+      SPEED: base.SPEED * 0.5,
+      HEALTH: base.HEALTH * 265,
+      DAMAGE: base.DAMAGE * 6.6,
+      PENETRATION: base.PENETRATION * 7,
+      SHIELD: base.SHIELD * 100.5,
+      REGEN: base.REGEN * 2,
+      FOV: base.FOV * 2.2,
+      DENSITY: base.DENSITY * 40,
+   },
+   GUNS: [ {
+         POSITION: [ 15, 4.8, 1, 0, 0, -15, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, -42, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, -69.5, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, -96.5, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, -125, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, -153.5, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, 179.5, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, 151.5, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, 123.5, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, 97, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, 69, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, 41.5, 0, ],
+         }, {
+         POSITION: [ 15, 4.8, 1, 0, 0, 13.5, 0, ],
+         }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, -15, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, -42, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, -70, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, -96.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, -125, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, -153, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, -179.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, 151, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, 123, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, 96.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, 68, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, 40.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, {
+         POSITION: [ 3, 7, 1.5, 15, 0, 13.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.power]),
+            TYPE: exports.trap,
+         }, }, 
+     ],
+};
+    //fixing later
     Class.avian = makeBird (Class.single, "Avian");
     Class.assistant = makeHybrid (Class.single, "Assistant");
     Class.autoSingle = makeAuto (Class.single);
