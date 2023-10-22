@@ -531,6 +531,45 @@ module.exports = ({ Class }) => {
         },
     ],
 };
+    Class.turnion = {
+    PARENT: ["genericTank"],
+    LABEL: "Turnion",
+    BODY: {
+        SPEED: 1.12 * base.SPEED,
+    },
+    GUNS: [
+        {
+            POSITION: [18, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [18, 8, 1, 0, 0, 120, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [18, 8, 1, 0, 0, 240, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0],
+        },
+        {
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 120, 0],
+        },
+        {
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 240, 0],
+        },
+    ],
+};
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
     //upgrades
@@ -541,5 +580,5 @@ module.exports = ({ Class }) => {
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
-        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun"]
+        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "turnion"]
 };
