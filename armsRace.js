@@ -793,37 +793,37 @@ module.exports = ({ Class }) => {
          POSITION: [ 12, 4, 2.25, 0, 0, -25.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turreteddrone",
+            TYPE: "turretedDrone",
          }, }, {
          POSITION: [ 12, 4, 2.25, 0, 0, -77, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turreteddrone",
+            TYPE: "turretedDrone",
          }, }, {
          POSITION: [ 12, 4, 2.25, 0, 0, -128.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turreteddrone",
+            TYPE: "turretedDrone",
          }, }, {
          POSITION: [ 12, 4, 2.25, 0, 0, -179.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turreteddrone",
+            TYPE: "turretedDrone",
          }, }, {
          POSITION: [ 12, 4, 2.25, 0, 0, 129, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turreteddrone",
+            TYPE: "turretedDrone",
          }, }, {
          POSITION: [ 12, 4, 2.25, 0, 0, 78, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turreteddrone",
+            TYPE: "turretedDrone",
          }, }, {
          POSITION: [ 12, 4, 2.25, 0, 0, 26.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turreteddrone",
+            TYPE: "turretedDrone",
          }, }, 
      ],
 };
