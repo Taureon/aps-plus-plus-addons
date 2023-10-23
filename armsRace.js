@@ -743,6 +743,53 @@ module.exports = ({ Class }) => {
          }, }, 
      ],
 };
+   Class.twilightBossLayer4 = {
+   PARENT: ["genericTank"],
+   LABEL: '',
+   SHAPE: 7,
+   SIZE: 45,
+   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
+   COLOR: '#dab3ff',    
+   MAX_CHILDREN: 21,
+   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9], 
+   GUNS: [ {
+         POSITION: [ 12, 4, 2.25, 0, 0, -25.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.overdrive]),
+            TYPE: "turreteddrone",
+         }, }, {
+         POSITION: [ 12, 4, 2.25, 0, 0, -77, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.overdrive]),
+            TYPE: "turreteddrone",
+         }, }, {
+         POSITION: [ 12, 4, 2.25, 0, 0, -128.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.overdrive]),
+            TYPE: "turreteddrone",
+         }, }, {
+         POSITION: [ 12, 4, 2.25, 0, 0, -179.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.overdrive]),
+            TYPE: "turreteddrone",
+         }, }, {
+         POSITION: [ 12, 4, 2.25, 0, 0, 129, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.overdrive]),
+            TYPE: "turreteddrone",
+         }, }, {
+         POSITION: [ 12, 4, 2.25, 0, 0, 78, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.overdrive]),
+            TYPE: "turreteddrone",
+         }, }, {
+         POSITION: [ 12, 4, 2.25, 0, 0, 26.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.overdrive]),
+            TYPE: "turreteddrone",
+         }, }, 
+     ],
+};
    Class.twilightBossLayer3 = {
    PARENT: ["genericTank"],
    LABEL: '',
