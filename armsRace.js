@@ -1084,7 +1084,7 @@ module.exports = ({ Class }) => {
          }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -15, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -42, 0, ],
