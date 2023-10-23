@@ -1,4 +1,3 @@
-//twilight :)
 
 // note from trplnr: please dont use glitch or github.com's text editor
 // use https://github.dev/Taureon/aps-plus-plus-addons/blob/main/armsRace.js if you dont plan on getting a code editor
@@ -465,13 +464,13 @@ module.exports = ({ Class }) => {
         }],
         TURRETS: [{
             POSITION: [6, 3, 5, 0, 360, 1],
-            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+            TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
         }, {
             POSITION: [6, 3, -5, 0, 360, 1],
-            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+            TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
         }, {
             POSITION: [6, -5, 0, 0, 360, 1],
-            TYPE: [exports.autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+            TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
         }]
     };
     Class.DoubleFlankTwin = {
@@ -508,12 +507,12 @@ module.exports = ({ Class }) => {
          POSITION: [ 20, 8, 1, 0, -5, 0, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: exports.bullet,
+            TYPE: bullet,
          }, }, {
          POSITION: [ 20, 8, 1, 0, 5, 0, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: exports.bullet,
+            TYPE: bullet,
          }, }, {
          POSITION: [ 13, 17, 1, 0, 0, 0, 0, ],
          }, 
@@ -661,7 +660,7 @@ module.exports = ({ Class }) => {
          POSITION: [ 23, 8, 1, 0, 0, 0, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.single, g.single]),
-            TYPE: exports.bullet,
+            TYPE: "bullet",
          }, }, {
          POSITION: [ 5, 8, -1.5, 15, 0, 0, 0, ],
          }, {
@@ -674,10 +673,10 @@ module.exports = ({ Class }) => {
 
     //fixing later
     Class.twilightbossmainbody = {
-   PARENT: [exports.genericTank],
+   PARENT: ["genericTank"],
    LABEL: 'The Boss of Bosses',
    SHAPE: 13,
-   SIZE: 59,
+   SIZE: 80,
    COLOR: 4,
    BODY: {
       ACCELERATION: base.ACCEL * 0.6,
@@ -720,67 +719,67 @@ module.exports = ({ Class }) => {
          POSITION: [ 3, 7, 1.5, 15, 0, -15, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -42, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -70, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -96.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -125, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -153, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -179.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 151, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 123, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 96.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 68, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 40.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 13.5, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power]),
-            TYPE: exports.trap,
+            TYPE: "trap",
          }, }, 
      ],
 };
