@@ -706,12 +706,52 @@ module.exports = ({ Class }) => {
          }, }, 
      ],
 };
+   Class.twilightBossTwinMinion = {
+   PARENT: ["minion"],
+   LABEL: '',
+   TYPE: 'minion',
+   SHAPE: 0,
+   DAMAGE_CLASS: 2,
+   DANGER: 5,
+   MOTION_TYPE: 'motor',
+   FACING_TYPE: 'toTarget',
+   SIZE: 12,
+   MAX_CHILDREN: 0,
+   DAMAGE_EFFECTS: false,
+   BODY: {
+      ACCELERATION: base.ACCEL * 0.9,
+      SPEED: base.SPEED * 1.4,
+      HEALTH: base.HEALTH * 0.875,
+      DAMAGE: base.DAMAGE,
+      PENETRATION: base.PENETRATION * 1.8,
+      SHIELD: base.SHIELD * 0,
+      REGEN: base.REGEN * 0,
+      DENSITY: base.DENSITY * 0.7,
+   },
+   GUNS: [ {
+         POSITION: [ 18, 8, 1, 0, 5.5, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.minion]),
+            TYPE: "bullet",
+            LABEL: 'Twin Minion',
+         }, }, {
+         POSITION: [ 18, 8, 1, 0, -5.5, 0, 0.5, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.minion]),
+            TYPE: "bullet",
+            LABEL: 'Twin Minion',
+         }, }, 
+     ],
+};
+
    Class.twilightBossLayer2 = {
    PARENT: ["genericTank"],
    LABEL: '',
+   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
    SHAPE: 11,
    COLOR: '#dab3ff',
    SIZE: 50,
+   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],    
    GUNS: [ {
          POSITION: [ 14, 5, 1.25, 0, 0, -15, 0, ],
          PROPERTIES: {
@@ -815,9 +855,11 @@ module.exports = ({ Class }) => {
      ],
 };
 
-    Class.twilightBoss = {
+   Class.twilightBoss = {
    PARENT: ["eternal"],
    LABEL: 'The Overseer of Bosses',
+   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],      
+   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
    SHAPE: 13,
    SIZE: 80,
    COLOR: '#dab3ff',
