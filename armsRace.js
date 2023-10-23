@@ -743,6 +743,100 @@ module.exports = ({ Class }) => {
          }, }, 
      ],
 };
+   Class.twilightBossLayer3 = {
+   PARENT: ["genericTank"],
+   LABEL: '',
+   SHAPE: 9,
+   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
+   COLOR: '#dab3ff',    
+   SIZE: 45,
+   MAX_CHILDREN: 18,
+   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9], 
+   GUNS: [ {
+         POSITION: [ 12, 7, 1, 0, 0, -19, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, -60, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, -100, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, -139.5, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, 180, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, 140.5, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, 99.5, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, 60.5, 0, ],
+         }, {
+         POSITION: [ 12, 7, 1, 0, 0, 20, 0, ],
+         }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, -18.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, -59.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, -100, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, -138.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, -180, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, 142, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, 99.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, 61, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 2, 7, 1, 15.5, 0, 20, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
+            TYPE: "twilightBossTwinMinion",
+         }, }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, -18.5, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, -59.5, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, -100, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, -138.5, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, 180, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, 142, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, 99.5, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, 61, 0, ],
+         }, {
+         POSITION: [ 5, 7, 1, 10.5, 0, 19.5, 0, ],
+         }, 
+     ],
+};
+
 
    Class.twilightBossLayer2 = {
    PARENT: ["genericTank"],
