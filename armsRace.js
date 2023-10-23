@@ -673,7 +673,8 @@ module.exports = ({ Class }) => {
 
     //fixing later
    Class.twilightBossBooster = {
-   PARENT: ["genericTank"],
+   PARENT: ["bullet"],
+   TYPE: "bullet",  
    BODY: {
       ACCELERATION: base.ACCEL * 3,
       SPEED: base.SPEED * 2,
@@ -705,9 +706,117 @@ module.exports = ({ Class }) => {
          }, }, 
      ],
 };
+   Class.twilightBossLayer2 = {
+   PARENT: ["genericTank"],
+   LABEL: '',
+   SHAPE: 11,
+   COLOR: '#dab3ff',
+   SIZE: 50,
+   GUNS: [ {
+         POSITION: [ 14, 5, 1.25, 0, 0, -15, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, -49, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, -81.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, -115.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, -148.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, 179.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, 146.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, 115, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, 81.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, 49, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 14, 5, 1.25, 0, 0, 17, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "twilightBossBooster",
+         }, }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, -15, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, -49, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, -81.5, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, -115, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, -148, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, 180, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, 146.5, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, 115, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, 81, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, 48.5, 0, ],
+         }, {
+         POSITION: [ 1, 5, 1.25, 13, 0, 17, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, -15, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, -48.5, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, -81.5, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, -115.5, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, -148.5, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, 179.5, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, 146.5, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, 115, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, 81, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, 49, 0, ],
+         }, {
+         POSITION: [ 2, 2, 1, 10.5, 0, 17, 0, ],
+         }, 
+     ],
+};
 
     Class.twilightBoss = {
-   PARENT: ["genericTank"],
+   PARENT: ["eternal"],
    LABEL: 'The Overseer of Bosses',
    SHAPE: 13,
    SIZE: 80,
@@ -761,6 +870,7 @@ module.exports = ({ Class }) => {
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
+            AUTOFIRE: true, 
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -70, 0, ],
          PROPERTIES: {
