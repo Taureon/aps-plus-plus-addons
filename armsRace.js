@@ -743,6 +743,43 @@ module.exports = ({ Class }) => {
          }, }, 
      ],
 };
+   Class.twilightBossLayer5 = {
+   PARENT: ["genericTank"],
+   LABEL: '',
+   SHAPE: 5,
+   SIZE: 45,
+   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
+   COLOR: '#dab3ff',    
+   MAX_CHILDREN: 50,
+   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],     
+   GUNS: [ {
+         POSITION: [ 12, 7, -2, 0, 0, -35, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
+            TYPE: "autoswarm",
+         }, }, {
+         POSITION: [ 12, 7, -2, 0, 0, -107.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
+            TYPE: "autoswarm",
+         }, }, {
+         POSITION: [ 12, 7, -2, 0, 0, -179.5, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
+            TYPE: "autoswarm",
+         }, }, {
+         POSITION: [ 12, 7, -2, 0, 0, 108, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
+            TYPE: "autoswarm",
+         }, }, {
+         POSITION: [ 12, 7, -2, 0, 0, 36, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
+            TYPE: "autoswarm",
+         }, }, 
+     ],
+};
    Class.twilightBossLayer4 = {
    PARENT: ["genericTank"],
    LABEL: '',
@@ -794,7 +831,7 @@ module.exports = ({ Class }) => {
    PARENT: ["genericTank"],
    LABEL: '',
    SHAPE: 9,
-   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
+   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
    COLOR: '#dab3ff',    
    SIZE: 45,
    MAX_CHILDREN: 18,
@@ -888,7 +925,7 @@ module.exports = ({ Class }) => {
    Class.twilightBossLayer2 = {
    PARENT: ["genericTank"],
    LABEL: '',
-   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
+   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
    SHAPE: 11,
    COLOR: '#dab3ff',
    SIZE: 50,
@@ -1000,7 +1037,7 @@ module.exports = ({ Class }) => {
    PARENT: ["eternal"],
    LABEL: 'The Overseer of Bosses',
    SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],      
-   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
+   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
    SHAPE: 13,
    SIZE: 80,
    COLOR: '#dab3ff',
@@ -1127,4 +1164,5 @@ module.exports = ({ Class }) => {
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
         Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "Avian", "assistant", "autoSingle"]
+        Class.devBosses.UPGRADES_TIER_0 = ["twilightBoss"];
 };
