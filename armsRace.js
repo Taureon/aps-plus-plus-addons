@@ -672,12 +672,48 @@ module.exports = ({ Class }) => {
     //dev bosses
 
     //fixing later
-    Class.twilightbossmainbody = {
+   Class.twilightBossBooster = {
    PARENT: ["genericTank"],
-   LABEL: 'The Boss of Bosses',
+   BODY: {
+      ACCELERATION: base.ACCEL * 3,
+      SPEED: base.SPEED * 2,
+      HEALTH: base.HEALTH * 1.1,
+      DAMAGE: base.DAMAGE * 1.3,
+      PENETRATION: base.PENETRATION * 4,
+      SHIELD: base.SHIELD * 0,
+      REGEN: base.REGEN * 0,
+      DENSITY: base.DENSITY * 0.3,
+   },
+   GUNS: [ {
+         POSITION: [ 18, 8, 1, 0, 0, -150, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+            TYPE: "bullet",
+            LABEL: 'gunClacNames.thruster',
+         }, }, {
+         POSITION: [ 18, 8, 1, 0, 0, 150, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+            TYPE: "bullet",
+            LABEL: 'gunClacNames.thruster',
+         }, }, {
+         POSITION: [ 20, 8, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront, g.tonsmorrecol]),
+            TYPE: "bullet",
+            LABEL: 'Front',
+         }, }, 
+     ],
+};
+
+    Class.twilightBoss = {
+   PARENT: ["genericTank"],
+   LABEL: 'The Overseer of Bosses',
    SHAPE: 13,
    SIZE: 80,
-   COLOR: 4,
+   COLOR: '#dab3ff',
+   FACING_TYPE: "smoothToTarget",
+   VALUE: 16e6,
    BODY: {
       ACCELERATION: base.ACCEL * 0.6,
       SPEED: base.SPEED * 0.5,
@@ -723,67 +759,67 @@ module.exports = ({ Class }) => {
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -42, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -70, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -96.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -125, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -153, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, -179.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 151, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 123, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 96.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 68, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 40.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, {
          POSITION: [ 3, 7, 1.5, 15, 0, 13.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power]),
+            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
             TYPE: "trap",
          }, }, 
      ],
 };
-    //fixing later
+
     Class.avian = makeBird (Class.single, "Avian");
     Class.assistant = makeHybrid (Class.single, "Assistant");
     Class.autoSingle = makeAuto (Class.single);
