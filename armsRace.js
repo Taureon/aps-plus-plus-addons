@@ -1148,6 +1148,24 @@ module.exports = ({ Class }) => {
             TYPE: "trap",
          }, }, 
      ],
+       TURRETS: [
+        {
+            POSITION: [20, 0, 0, 0, 360, 1],
+            TYPE: ["twilightBossLayer2"],
+        },
+        {
+            POSITION: [15.5, 0, 0, 0, 360, 1],
+            TYPE: ["twilightBossLayer3"],
+        },
+        {
+            POSITION: [11, 0, 0, 0, 360, 1],
+            TYPE: ["twilightBossLayer4"],
+        },
+       {
+            POSITION: [6.5, 0, 0, 0, 360, 1],
+            TYPE: ["twilightBossLayer5"],
+        },
+    ],
 };
 
     Class.avian = makeBird (Class.single, "Avian");
