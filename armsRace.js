@@ -1043,6 +1043,7 @@ module.exports = ({ Class }) => {
    COLOR: '#dab3ff',
    FACING_TYPE: "smoothToTarget",
    VALUE: 16e6,
+   MAX_CHILDREN: 39,
    BODY: {
       ACCELERATION: base.ACCEL * 0.6,
       SPEED: base.SPEED * 0.5,
