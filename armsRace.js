@@ -1,4 +1,3 @@
-
 // note from trplnr: please dont use glitch or github.com's text editor
 // use https://github.dev/Taureon/aps-plus-plus-addons/blob/main/armsRace.js if you dont plan on getting a code editor
 // im telling u this bcuz syntax errors
@@ -7,22 +6,26 @@
 // use camelCase - zenphia
 // use camelCase - zenphia
 
+// KEEP THE STYLE CONSISTENT
+// IF YOU COPY-PASTED CODE WITH DIFFERENT FORMATTING, CHANGE IT TO MAKE IT ABIDE BY THE FORMATTING
+// THIS IS IMPORTANT TO KEEP THE CODE SMALL
+
 const { dereference, combineStats, addBackGunner, makeAuto, makeHybrid } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
 let makeBird = (type, name = -1, color) => {
     let output = dereference(type),
-    shootyBois = [{
-        POSITION: [16, 8, 1, 0, 0, 150, 0.1],
-        PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
-    },{
-        POSITION: [16, 8, 1, 0, 0, 210, 0.1],
-        PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
-    },{
-        POSITION: [18, 8, 1, 0, 0, 180, 0.6],
-        PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
-    }];
+        shootyBois = [{
+            POSITION: [16, 8, 1, 0, 0, 150, 0.1],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
+        },{
+            POSITION: [16, 8, 1, 0, 0, 210, 0.1],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
+        },{
+            POSITION: [18, 8, 1, 0, 0, 180, 0.6],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
+        }];
     if (color) for (let i = 0; i < 3; i++) shootyBois[i].PROPERTIES.TYPE = [shootyBois[i].PROPERTIES.TYPE, { COLOR: color, KEEP_OWN_COLOR: true }];
     for (let i in output.GUNS) if (output.GUNS[i].PROPERTIES) output.GUNS[i].PROPERTIES.ALT_FIRE = true;
     if (output.FACING_TYPE == "locksFacing") output.FACING_TYPE = "toTarget";
@@ -36,20 +39,16 @@ module.exports = ({ Class }) => {
     Class.megaAutoTurret = {
         PARENT: "genericTank",
         LABEL: "",
-        BODY: {
-            FOV: 2,
-            SPEED: 0.9
-        },
+        BODY: { FOV: 2, SPEED: 0.9 },
         CONTROLLERS: ["canRepel", "onlyAcceptInArc", "mapAltToFire", "nearestDifferentMaster"],
         COLOR: 16,
         GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [22, 14, 1, 0, 0, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]), TYPE: "bullet" }
         }]
     };
     //bullets 
-    
+
     //tripletwin upgrades
     Class.quadTwin = {
         PARENT: 'genericTank',
@@ -57,25 +56,25 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, -90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, -90, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
         }]
@@ -85,34 +84,32 @@ module.exports = ({ Class }) => {
         PARENT: ["genericTank"],
         LABEL: "Bent Triple",
         DANGER: 6,
-        BODY: {
-            SPEED: base.SPEED * 0.9
-        },
+        BODY: { SPEED: base.SPEED * 0.9 },
         GUNS: [{
             POSITION: [19, 8, 1, 0, -2, -17.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, 2, 17.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [22, 8, 1, 0, 0, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -2, -137.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, 2, 137.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [22, 8, 1, 0, 0, 120, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -2, -257.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, 2, 257.5, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [22, 8, 1, 0, 0, 240, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
         }]
@@ -124,25 +121,25 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 120, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 120, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 240, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 240, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
@@ -154,28 +151,28 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [18, 8, 1, 0, 0, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [18, 8, 1, 0, 0, 120, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [18, 8, 1, 0, 0, 240, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 120, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 120, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 240, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 240, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
@@ -187,37 +184,37 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, 127.25, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, -127.25, 0, 0.75],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, 123.75, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, -123.75, 0, 0.25],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, 247.25, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, -247.25, 0, 0.75],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, 243.75, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, -243.75, 0, 0.25],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }]
@@ -229,38 +226,38 @@ module.exports = ({ Class }) => {
         DANGER: 7,
         GUNS: [{
             POSITION: [13, 8, 1, 0, 5.5, 185, 0]
-        }, {
+        },{
             POSITION: [3, 9, 1.5, 13, 5.5, 185, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [13, 8, 1, 0, -5.5, 175, 0]
-        }, {
+        },{
             POSITION: [3, 9, 1.5, 13, -5.5, 175, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [13, 8, 1, 0, 5.5, 305, 0]
-        }, {
+        },{
             POSITION: [3, 9, 1.5, 13, 5.5, 305, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [13, 8, 1, 0, -5.5, 295, 0]
-        }, {
+        },{
             POSITION: [3, 9, 1.5, 13, -5.5, 295, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [13, 8, 1, 0, 5.5, 65, 0]
-        }, {
+        },{
             POSITION: [3, 9, 1.5, 13, 5.5, 65, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [13, 8, 1, 0, -5.5, 55, 0]
-        }, {
+        },{
             POSITION: [3, 9, 1.5, 13, -5.5, 55, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }]
     };
     //hewn double upgrades
-    Class.autoHewnDouble = makeAuto(Class.hewnDouble)
+    Class.autoHewnDouble = makeAuto(Class.hewnDouble);
     Class.cleft = {
         PARENT: ["genericTank"],
         LABEL: "Cleft",
@@ -268,25 +265,25 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, -180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, 5.5, 25, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -25, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
         }]
@@ -298,25 +295,25 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, 5.5, 215, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -215, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }]
@@ -328,25 +325,25 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 0, 135, 1],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 0, 270, 1],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double, g.hewn]), TYPE: "bullet" }
         }]
@@ -358,31 +355,31 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -205, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.double, g.hewn, g.morerecoil]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, 7.25, 180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [12, 3.5, 1, 0, -7.25, 180, 0.75],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, 3.75, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [16, 3.5, 1, 0, -3.75, 180, 0.25],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
         }]
@@ -393,32 +390,32 @@ module.exports = ({ Class }) => {
         DANGER: 7,
         GUNS: [{
             POSITION: [19, 8, 1, 0, 5.5, 205, 0.5]
-        }, {
+        },{
             POSITION: [19, 8, 1.5, 13, 5.5, 205, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [19, 8, 1, 0, -5.5, -205, 0]
-        }, {
+        },{
             POSITION: [19, 8, 1.5, 13, -5.5, -205, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0]
-        }, {
+        },{
             POSITION: [20, 8, 1.5, 13, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5]
-        }, {
+        },{
             POSITION: [20, 8, 1.5, 13, -5.5, 180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0]
-        }, {
+        },{
             POSITION: [20, 8, 1.5, 13, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5]
-        }, {
+        },{
             POSITION: [20, 8, 1.5, 13, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.twin]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
         }]
@@ -431,13 +428,13 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }],
@@ -452,23 +449,23 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }],
         TURRETS: [{
             POSITION: [6, 3, 5, 0, 360, 1],
             TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
-        }, {
+        },{
             POSITION: [6, 3, -5, 0, 360, 1],
             TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
-        }, {
+        },{
             POSITION: [6, -5, 0, 0, 360, 1],
             TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
         }]
@@ -480,19 +477,19 @@ module.exports = ({ Class }) => {
         GUNS: [{
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 0, 135, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
-        }, {
+        },{
             POSITION: [20, 8, 1, 0, 0, 270, 0.5],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]), TYPE: "bullet" }
         }]
@@ -500,689 +497,505 @@ module.exports = ({ Class }) => {
 
     //Single upgrades
 
-   Class.duo = {
-   PARENT: ["genericTank"],
-   LABEL: 'Duo',
-   GUNS: [ {
-         POSITION: [ 20, 8, 1, 0, -5, 0, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: bullet,
-         }, }, {
-         POSITION: [ 20, 8, 1, 0, 5, 0, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: bullet,
-         }, }, {
-         POSITION: [ 13, 17, 1, 0, 0, 0, 0, ],
-         }, 
-     ],
-};
+    Class.duo = {
+        PARENT: ["genericTank"],
+        LABEL: 'Duo',
+        GUNS: [{
+            POSITION: [20, 8, 1, 0, -5, 0, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: bullet }
+        },{
+            POSITION: [20, 8, 1, 0, 5, 0, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: bullet }
+        },{
+            POSITION: [13, 17, 1, 0, 0, 0, 0 ]
+        }]
+    };
 
     Class.sharpshooter = {
-    PARENT: ["genericTank"],
-    LABEL: "Sharpshooter",
-    GUNS: [
-        {
+        PARENT: ["genericTank"],
+        LABEL: "Sharpshooter",
+        GUNS: [{
             POSITION: [26, 8, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.single, g.assass]),
-                TYPE: "bullet",
-            },
-        },
-        {
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0],
-        },
-    ],
-};
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single, g.assass]), TYPE: "bullet" }
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0]
+        }]
+    };
     Class.gadgetGun = {
-    PARENT: ["genericTank"],
-    LABEL: "Gadget Gun",
-    GUNS: [
-        {
+        PARENT: ["genericTank"],
+        LABEL: "Gadget Gun",
+        GUNS: [{
             POSITION: [19, 8, 1.4, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-                TYPE: "bullet",
-            },
-        },
-        {
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0],
-        },
-    ],
-};
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "bullet" }
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0]
+        }]
+    };
     Class.ternion = {
-    PARENT: ["genericTank"],
-    LABEL: "Ternion",
-    BODY: {
-        SPEED: 1.12 * base.SPEED,
-    },
-    GUNS: [
-        {
+        PARENT: ["genericTank"],
+        LABEL: "Ternion",
+        BODY: { SPEED: 1.12 * base.SPEED },
+        GUNS: [{
             POSITION: [18, 8, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]),
-                TYPE: "bullet",
-            },
-        },
-        {
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
+        },{
             POSITION: [18, 8, 1, 0, 0, 120, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]),
-                TYPE: "bullet",
-            },
-        },
-        {
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
+        },{
             POSITION: [18, 8, 1, 0, 0, 240, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]),
-                TYPE: "bullet",
-            },
-        },
-        {
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0],
-        },
-        {
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 120, 0],
-        },
-        {
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 240, 0],
-        },
-    ],
-};
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0]
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 120, 0]
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 240, 0]
+        }]
+    };
     Class.coordinator = {
-    PARENT: ["genericTank"],
-    LABEL: "Coordinator",
-    STAT_NAMES: statnames.drone,
-    BODY: {
-        FOV: base.FOV * 1.1,
-    },
-    GUNS: [
-        {
+        PARENT: ["genericTank"],
+        LABEL: "Coordinator",
+        STAT_NAMES: statnames.drone,
+        BODY: { FOV: base.FOV * 1.1 },
+        GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [6, 11, 1.8, 15, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.single]),
-                TYPE: "drone",
-                AUTOFIRE: true,
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.drone, g.single]), TYPE: "drone", AUTOFIRE: true,
                 SYNCS_SKILLS: true,
                 STAT_CALCULATOR: gunCalcNames.drone,
-                MAX_CHILDREN: 6,
-            },
-        },
-        {
-         POSITION: [ 12, 9, -2.05, 5, 0, 0, 0, ],
-         }, 
-    ],
-};
+                MAX_CHILDREN: 6
+            }
+        },{
+            POSITION: [12, 9, -2.05, 5, 0, 0, 0 ]
+        }]
+    };
     Class.bruiser = {
-    PARENT: ["genericTank"],
-    LABEL: "Bruiser",
-    DANGER: 6,
-    GUNS: [
-        {
+        PARENT: ["genericTank"],
+        LABEL: "Bruiser",
+        DANGER: 6,
+        GUNS: [{
             POSITION: [21, 14, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.single]),
-                TYPE: "bullet",
-            },
-        },
-        {
-            POSITION: [5.5, 14, -1.8, 6.5, 0, 0, 0],
-        },
-    ],
-};
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.single]), TYPE: "bullet" }
+        },{
+            POSITION: [5.5, 14, -1.8, 6.5, 0, 0, 0]
+        }]
+    };
     Class.tricker = {
-    PARENT: ["genericTank"],
-    LABEL: "Tricker",
-    STAT_NAMES: statnames.trap,
-    GUNS: [
-        {
-            POSITION: [15, 7, 1, 0, 0, 0, 0],
-        },
-        {
+        PARENT: ["genericTank"],
+        LABEL: "Tricker",
+        STAT_NAMES: statnames.trap,
+        GUNS: [{
+            POSITION: [15, 7, 1, 0, 0, 0, 0]
+        },{
             POSITION: [3, 7, 1.7, 15, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.single]),
-                TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
-            },
-        },
-        {
-            POSITION: [5.5, 7, -1.8, 6.5, 0, 0, 0],
-        },
-    ],
-};
-   Class.mono = {
-   PARENT: ["genericTank"],
-   LABEL: 'Mono',
-   GUNS: [ {
-         POSITION: [ 23, 8, 1, 0, 0, 0, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single, g.single]),
-            TYPE: "bullet",
-         }, }, {
-         POSITION: [ 5, 8, -1.5, 15, 0, 0, 0, ],
-         }, {
-         POSITION: [ 5, 8, 1.5, 10, 0, 0, 0, ],
-         }, 
-     ],
-};
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.trap, g.single]), TYPE: "trap", STAT_CALCULATOR: gunCalcNames.trap }
+        },{
+            POSITION: [5.5, 7, -1.8, 6.5, 0, 0, 0]
+        }]
+    };
+    Class.mono = {
+        PARENT: ["genericTank"],
+        LABEL: 'Mono',
+        GUNS: [{
+            POSITION: [23, 8, 1, 0, 0, 0, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single, g.single]), TYPE: "bullet" }
+        },{
+            POSITION: [5, 8, -1.5, 15, 0, 0, 0 ]
+        },{
+            POSITION: [5, 8, 1.5, 10, 0, 0, 0 ]
+        }]
+    };
 
     //dev bosses
 
     //fixing later
-   Class.twilightBossBooster = {
-   PARENT: ["bullet"],
-   TYPE: "bullet",  
-   BODY: {
-      ACCELERATION: base.ACCEL * 3,
-      SPEED: base.SPEED * 2,
-      HEALTH: base.HEALTH * 1.1,
-      DAMAGE: base.DAMAGE * 1.3,
-      PENETRATION: base.PENETRATION * 4,
-      SHIELD: base.SHIELD * 0,
-      REGEN: base.REGEN * 0,
-      DENSITY: base.DENSITY * 0.3,
-   },
-   GUNS: [ {
-         POSITION: [ 18, 8, 1, 0, 0, -150, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
-            TYPE: "bullet",
-            LABEL: 'gunClacNames.thruster',
-         }, }, {
-         POSITION: [ 18, 8, 1, 0, 0, 150, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
-            TYPE: "bullet",
-            LABEL: 'gunClacNames.thruster',
-         }, }, {
-         POSITION: [ 20, 8, 1, 0, 0, 0, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront]),
-            TYPE: "bullet",
-            LABEL: 'Front',
-         }, }, 
-     ],
-};
-   Class.twilightBossTwinMinion = {
-   PARENT: ["minion"],
-   LABEL: '',
-   TYPE: 'minion',
-   SHAPE: 0,
-   DAMAGE_CLASS: 2,
-   DANGER: 5,
-   MOTION_TYPE: 'motor',
-   FACING_TYPE: 'toTarget',
-   SIZE: 12,
-   MAX_CHILDREN: 0,
-   DAMAGE_EFFECTS: false,
-   BODY: {
-      ACCELERATION: base.ACCEL * 0.9,
-      SPEED: base.SPEED * 1.4,
-      HEALTH: base.HEALTH * 0.875,
-      DAMAGE: base.DAMAGE,
-      PENETRATION: base.PENETRATION * 1.8,
-      SHIELD: base.SHIELD * 0,
-      REGEN: base.REGEN * 0,
-      DENSITY: base.DENSITY * 0.7,
-   },
-   GUNS: [ {
-         POSITION: [ 18, 8, 1, 0, 5.5, 0, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.minion]),
-            TYPE: "bullet",
-            LABEL: 'Twin Minion',
-         }, }, {
-         POSITION: [ 18, 8, 1, 0, -5.5, 0, 0.5, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.minion]),
-            TYPE: "bullet",
-            LABEL: 'Twin Minion',
-         }, }, 
-     ],
-};
+    Class.twilightBossBooster = {
+        PARENT: ["bullet"],
+        TYPE: "bullet",
+        BODY: {
+            ACCELERATION: base.ACCEL * 3,
+            SPEED: base.SPEED * 2,
+            HEALTH: base.HEALTH * 1.1,
+            DAMAGE: base.DAMAGE * 1.3,
+            PENETRATION: base.PENETRATION * 4,
+            SHIELD: base.SHIELD * 0,
+            REGEN: base.REGEN * 0,
+            DENSITY: base.DENSITY * 0.3
+        },
+        GUNS: [{
+            POSITION: [18, 8, 1, 0, 0, -150, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]), TYPE: "bullet", STAT_CALCULATOR: gunClacNames.thruster }
+        },{
+            POSITION: [18, 8, 1, 0, 0, 150, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]), TYPE: "bullet", STAT_CALCULATOR: gunClacNames.thruster }
+        },{
+            POSITION: [20, 8, 1, 0, 0, 0, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront]), TYPE: "bullet", LABEL: 'Front' }
+        }]
+    };
+    Class.twilightBossTwinMinion = {
+        PARENT: ["minion"],
+        LABEL: '',
+        TYPE: 'minion',
+        SHAPE: 0,
+        DAMAGE_CLASS: 2,
+        DANGER: 5,
+        MOTION_TYPE: 'motor',
+        FACING_TYPE: 'toTarget',
+        SIZE: 12,
+        MAX_CHILDREN: 0,
+        DAMAGE_EFFECTS: false,
+        BODY: {
+            ACCELERATION: base.ACCEL * 0.9,
+            SPEED: base.SPEED * 1.4,
+            HEALTH: base.HEALTH * 0.875,
+            DAMAGE: base.DAMAGE,
+            PENETRATION: base.PENETRATION * 1.8,
+            SHIELD: base.SHIELD * 0,
+            REGEN: base.REGEN * 0,
+            DENSITY: base.DENSITY * 0.7
+        },
+        GUNS: [{
+            POSITION: [18, 8, 1, 0, 5.5, 0, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.minion]), TYPE: "bullet", LABEL: 'Twin Minion' }
+        },{
+            POSITION: [18, 8, 1, 0, -5.5, 0, 0.5 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.minion]), TYPE: "bullet", LABEL: 'Twin Minion' }
+        }]
+    };
     Class.twilightBossLayer5 = {
-   PARENT: ["genericTank"],
-   LABEL: '',
-   SHAPE: 5,
-   SIZE: 45,
-   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
-   COLOR: '#dab3ff',    
-   MAX_CHILDREN: 50,
-   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],     
-   GUNS: [ {
-         POSITION: [ 12, 7, -2, 0, 0, -35, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
-            TYPE: "autoswarm",
-         }, }, {
-         POSITION: [ 12, 7, -2, 0, 0, -107.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
-            TYPE: "autoswarm",
-         }, }, {
-         POSITION: [ 12, 7, -2, 0, 0, -179.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
-            TYPE: "autoswarm",
-         }, }, {
-         POSITION: [ 12, 7, -2, 0, 0, 108, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
-            TYPE: "autoswarm",
-         }, }, {
-         POSITION: [ 12, 7, -2, 0, 0, 36, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.battle, g.power]),
-            TYPE: "autoswarm",
-         }, }, 
-     ],
-};
-   
-   Class.twilightBossLayer4 = {
-   PARENT: ["genericTank"],
-   LABEL: '4',
-   SHAPE: 7,
-   SIZE: 45,
-   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
-   COLOR: '#dab3ff',    
-   MAX_CHILDREN: 21,
-   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9], 
-   GUNS: [ {
-         POSITION: [ 12, 4, 2.25, 0, 0, -25.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turretedDrone",
-         }, }, {
-         POSITION: [ 12, 4, 2.25, 0, 0, -77, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turretedDrone",
-         }, }, {
-         POSITION: [ 12, 4, 2.25, 0, 0, -128.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turretedDrone",
-         }, }, {
-         POSITION: [ 12, 4, 2.25, 0, 0, -179.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turretedDrone",
-         }, }, {
-         POSITION: [ 12, 4, 2.25, 0, 0, 129, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turretedDrone",
-         }, }, {
-         POSITION: [ 12, 4, 2.25, 0, 0, 78, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turretedDrone",
-         }, }, {
-         POSITION: [ 12, 4, 2.25, 0, 0, 26.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.overdrive]),
-            TYPE: "turretedDrone",
-         }, }, 
-     ],
-};
-   Class.twilightBossLayer3 = {
-   PARENT: ["genericTank"],
-   LABEL: '3',
-   SHAPE: 9,
-   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
-   COLOR: '#dab3ff',    
-   SIZE: 45,
-   MAX_CHILDREN: 18,
-   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9], 
-   GUNS: [ {
-         POSITION: [ 12, 7, 1, 0, 0, -19, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, -60, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, -100, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, -139.5, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, 180, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, 140.5, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, 99.5, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, 60.5, 0, ],
-         }, {
-         POSITION: [ 12, 7, 1, 0, 0, 20, 0, ],
-         }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, -18.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, -59.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, -100, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, -138.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, -180, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, 142, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, 99.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, 61, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 2, 7, 1, 15.5, 0, 20, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.factory, g.power]),
-            TYPE: "twilightBossTwinMinion",
-         }, }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, -18.5, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, -59.5, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, -100, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, -138.5, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, 180, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, 142, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, 99.5, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, 61, 0, ],
-         }, {
-         POSITION: [ 5, 7, 1, 10.5, 0, 19.5, 0, ],
-         }, 
-     ],
-};
+        PARENT: ["genericTank"],
+        LABEL: '',
+        SHAPE: 5,
+        SIZE: 45,
+        CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],
+        COLOR: '#dab3ff',
+        MAX_CHILDREN: 50,
+        SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
+        GUNS: [{
+            POSITION: [12, 7, -2, 0, 0, -35, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.battle, g.power]), TYPE: "autoswarm" }
+        },{
+            POSITION: [12, 7, -2, 0, 0, -107.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.battle, g.power]), TYPE: "autoswarm" }
+        },{
+            POSITION: [12, 7, -2, 0, 0, -179.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.battle, g.power]), TYPE: "autoswarm" }
+        },{
+            POSITION: [12, 7, -2, 0, 0, 108, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.battle, g.power]), TYPE: "autoswarm" }
+        },{
+            POSITION: [12, 7, -2, 0, 0, 36, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.battle, g.power]), TYPE: "autoswarm" }
+        }]
+    };
+
+    Class.twilightBossLayer4 = {
+        PARENT: ["genericTank"],
+        LABEL: '4',
+        SHAPE: 7,
+        SIZE: 45,
+        CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],
+        COLOR: '#dab3ff',
+        MAX_CHILDREN: 21,
+        SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
+        GUNS: [{
+            POSITION: [12, 4, 2.25, 0, 0, -25.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.overdrive]), TYPE: "turretedDrone" }
+        },{
+            POSITION: [12, 4, 2.25, 0, 0, -77, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.overdrive]), TYPE: "turretedDrone" }
+        },{
+            POSITION: [12, 4, 2.25, 0, 0, -128.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.overdrive]), TYPE: "turretedDrone" }
+        },{
+            POSITION: [12, 4, 2.25, 0, 0, -179.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.overdrive]), TYPE: "turretedDrone" }
+        },{
+            POSITION: [12, 4, 2.25, 0, 0, 129, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.overdrive]), TYPE: "turretedDrone" }
+        },{
+            POSITION: [12, 4, 2.25, 0, 0, 78, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.overdrive]), TYPE: "turretedDrone" }
+        },{
+            POSITION: [12, 4, 2.25, 0, 0, 26.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.overdrive]), TYPE: "turretedDrone" }
+        }]
+    };
+    Class.twilightBossLayer3 = {
+        PARENT: ["genericTank"],
+        LABEL: '3',
+        SHAPE: 9,
+        CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],
+        COLOR: '#dab3ff',
+        SIZE: 45,
+        MAX_CHILDREN: 18,
+        SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
+        GUNS: [{
+            POSITION: [12, 7, 1, 0, 0, -19, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, -60, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, -100, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, -139.5, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, 180, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, 140.5, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, 99.5, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, 60.5, 0 ]
+        },{
+            POSITION: [12, 7, 1, 0, 0, 20, 0 ]
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, -18.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, -59.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, -100, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, -138.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, -180, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, 142, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, 99.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, 61, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [2, 7, 1, 15.5, 0, 20, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.factory, g.power]), TYPE: "twilightBossTwinMinion" }
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, -18.5, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, -59.5, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, -100, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, -138.5, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, 180, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, 142, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, 99.5, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, 61, 0 ]
+        },{
+            POSITION: [5, 7, 1, 10.5, 0, 19.5, 0 ]
+        }]
+    };
 
 
-   Class.twilightBossLayer2 = {
-   PARENT: ["genericTank"],
-   LABEL: '2',
-   CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
-   SHAPE: 11,
-   COLOR: '#dab3ff',
-   SIZE: 50,
-   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],    
-   GUNS: [ {
-         POSITION: [ 14, 5, 1.25, 0, 0, -15, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, -49, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, -81.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, -115.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, -148.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, 179.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, 146.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, 115, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, 81.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, 49, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 14, 5, 1.25, 0, 0, 17, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
-            TYPE: "twilightBossBooster",
-         }, }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, -15, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, -49, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, -81.5, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, -115, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, -148, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, 180, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, 146.5, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, 115, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, 81, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, 48.5, 0, ],
-         }, {
-         POSITION: [ 1, 5, 1.25, 13, 0, 17, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, -15, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, -48.5, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, -81.5, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, -115.5, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, -148.5, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, 179.5, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, 146.5, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, 115, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, 81, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, 49, 0, ],
-         }, {
-         POSITION: [ 2, 2, 1, 10.5, 0, 17, 0, ],
-         }, 
-     ],
-};
-   Class.twilightBoss = {
-   PARENT: ["eternal"],
-   LABEL: 'The Overseer of Bosses',
-   SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],      
-   CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
-   SHAPE: 13,
-   SIZE: 150,
-   COLOR: '#dab3ff',
-   FACING_TYPE: "smoothToTarget",
-   VALUE: 16e6,
-   MAX_CHILDREN: 39,
-   BODY: {
-      ACCELERATION: base.ACCEL * 0.6,
-      SPEED: base.SPEED * 0.5,
-      HEALTH: 5400,
-      DAMAGE: base.DAMAGE * 6.6,
-      PENETRATION: base.PENETRATION * 7,
-      SHIELD: base.SHIELD * 100.5,
-      REGEN: base.REGEN * 2,
-      FOV: base.FOV * 2.2,
-      DENSITY: base.DENSITY * 40,
-   },
-   GUNS: [ {
-         POSITION: [ 15, 4.8, 1, 0, 0, -15, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, -42, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, -69.5, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, -96.5, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, -125, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, -153.5, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, 179.5, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, 151.5, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, 123.5, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, 97, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, 69, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, 41.5, 0, ],
-         }, {
-         POSITION: [ 15, 4.8, 1, 0, 0, 13.5, 0, ],
-         }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, -15, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, -42, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-            AUTOFIRE: true, 
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, -70, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, -96.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, -125, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, -153, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, -179.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, 151, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, 123, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, 96.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, 68, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, 40.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, {
-         POSITION: [ 3, 7, 1.5, 15, 0, 13.5, 0, ],
-         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]),
-            TYPE: "trap",
-         }, }, 
-     ],
-       TURRETS: [
-        {
-            POSITION: [15.5, 0, 0, 0, 360, 1],
-            TYPE: ["twilightBossLayer2"],
+    Class.twilightBossLayer2 = {
+        PARENT: ["genericTank"],
+        LABEL: '2',
+        CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],
+        SHAPE: 11,
+        COLOR: '#dab3ff',
+        SIZE: 50,
+        SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
+        GUNS: [{
+            POSITION: [14, 5, 1.25, 0, 0, -15, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, -49, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, -81.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, -115.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, -148.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, 179.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, 146.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, 115, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, 81.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, 49, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [14, 5, 1.25, 0, 0, 17, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "twilightBossBooster" }
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, -15, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, -49, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, -81.5, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, -115, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, -148, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, 180, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, 146.5, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, 115, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, 81, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, 48.5, 0 ]
+        },{
+            POSITION: [1, 5, 1.25, 13, 0, 17, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, -15, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, -48.5, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, -81.5, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, -115.5, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, -148.5, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, 179.5, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, 146.5, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, 115, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, 81, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, 49, 0 ]
+        },{
+            POSITION: [2, 2, 1, 10.5, 0, 17, 0 ]
+        }]
+    };
+    Class.twilightBoss = {
+        PARENT: ["eternal"],
+        LABEL: 'The Overseer of Bosses',
+        SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
+        CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],
+        SHAPE: 13,
+        SIZE: 150,
+        COLOR: '#dab3ff',
+        FACING_TYPE: "smoothToTarget",
+        VALUE: 16e6,
+        MAX_CHILDREN: 39,
+        BODY: {
+            ACCELERATION: base.ACCEL * 0.6,
+            SPEED: base.SPEED * 0.5,
+            HEALTH: 5400,
+            DAMAGE: base.DAMAGE * 6.6,
+            PENETRATION: base.PENETRATION * 7,
+            SHIELD: base.SHIELD * 100.5,
+            REGEN: base.REGEN * 2,
+            FOV: base.FOV * 2.2,
+            DENSITY: base.DENSITY * 40
         },
-        {
-            POSITION: [11, 0, 0, 0, 360, 1],
-            TYPE: ["twilightBossLayer3"],
-        },
-        {
-            POSITION: [6.5, 0, 0, 0, 360, 1],
-            TYPE: ["twilightBossLayer4"],
-        },
-       {
-            POSITION: [2, 0, 0, 0, 360, 1],
-            TYPE: ["twilightBossLayer5"],
-        },
-    ],
-};
+        GUNS: [{
+            POSITION: [15, 4.8, 1, 0, 0, -15, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, -42, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, -69.5, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, -96.5, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, -125, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, -153.5, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, 179.5, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, 151.5, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, 123.5, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, 97, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, 69, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, 41.5, 0 ]
+        },{
+            POSITION: [15, 4.8, 1, 0, 0, 13.5, 0 ]
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, -15, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, -42, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap", AUTOFIRE: true }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, -70, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, -96.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, -125, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, -153, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, -179.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, 151, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, 123, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, 96.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, 68, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, 40.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        },{
+            POSITION: [3, 7, 1.5, 15, 0, 13.5, 0 ],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.power, g.trap, g.single]), TYPE: "trap" }
+        }],
+        TURRETS: [{
+            POSITION: [15.5, 0, 0, 0, 360, 1], TYPE: ["twilightBossLayer2"]
+        },{
+            POSITION: [11, 0, 0, 0, 360, 1], TYPE: ["twilightBossLayer3"]
+        },{
+            POSITION: [6.5, 0, 0, 0, 360, 1], TYPE: ["twilightBossLayer4"]
+        },{
+            POSITION: [2, 0, 0, 0, 360, 1], TYPE: ["twilightBossLayer5"]
+        }]
+    };
 
-    Class.avian = makeBird (Class.single, "Avian");
-    Class.assistant = makeHybrid (Class.single, "Assistant");
-    Class.autoSingle = makeAuto (Class.single);
+    Class.avian = makeBird(Class.single, "Avian");
+    Class.assistant = makeHybrid(Class.single, "Assistant");
+    Class.autoSingle = makeAuto(Class.single);
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
-    //upgrades
-    //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
-
-    Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-        Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
-        Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
-        Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
-        Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
-        Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"]
 
     Class.devBosses.UPGRADES_TIER_0.push("twilightBoss");
+
+                Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
+                    Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
+                    Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
+                    Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
+                    Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
+                    Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
 };
