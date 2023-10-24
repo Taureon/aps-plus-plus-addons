@@ -47,6 +47,13 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]), TYPE: "bullet" }
         }]
     };
+    exports.drifterBody = {
+    LABEL: "",
+    CONTROLLERS: [["spin", { independent: true }]],
+    COLOR: 9,
+    SHAPE: 4,
+    INDEPENDENT: true,
+};
     //bullets 
 
     //tripletwin upgrades
@@ -694,8 +701,32 @@ module.exports = ({ Class }) => {
             TYPE: "smasherBody",},],
     IS_SMASHER: true,
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
-    STAT_NAMES: statnames.smasher,
-};
+    STAT_NAMES: statnames.smasher,};
+    
+    Class.drifter = {
+    PARENT: ["genericTank"],
+    LABEL: "Drifter",
+    DANGER: 8,
+    BODY: {FOV: 1.05 * base.FOV, DENSITY: 2 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [19.5, 0, 0, 0, 360, 0],
+            TYPE: "drifterBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,};
+    
+    Class.megaDrifter = {
+    PARENT: ["genericTank"],
+    LABEL: "Mega-Drifter",
+    DANGER: 8,
+    BODY: {FOV: 1.1 * base.FOV, DENSITY: 3 * base.DENSITY, SPEED: 1.1 * base.SPEED},
+    TURRETS: [{
+            POSITION: [24, 0, 0, 0, 360, 0],
+            TYPE: "drifterBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,};
+    
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1087,12 +1118,13 @@ module.exports = ({ Class }) => {
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-                Class.smasher.UPGRADES_TIER_3.push("bonker");
+                Class.smasher.UPGRADES_TIER_3.push("bonker", "drifter);
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
                     Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
                     Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
                     Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
-                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker"]
+                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", //"megabanger", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
+                    Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
 };
