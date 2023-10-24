@@ -743,7 +743,7 @@ module.exports = ({ Class }) => {
          }, }, 
      ],
 };
-   Class.twilightBossLayer5 = {
+    Class.twilightBossLayer5 = {
    PARENT: ["genericTank"],
    LABEL: '',
    SHAPE: 5,
@@ -780,9 +780,10 @@ module.exports = ({ Class }) => {
          }, }, 
      ],
 };
+   
    Class.twilightBossLayer4 = {
    PARENT: ["genericTank"],
-   LABEL: '',
+   LABEL: '4',
    SHAPE: 7,
    SIZE: 45,
    CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
@@ -829,7 +830,7 @@ module.exports = ({ Class }) => {
 };
    Class.twilightBossLayer3 = {
    PARENT: ["genericTank"],
-   LABEL: '',
+   LABEL: '3',
    SHAPE: 9,
    CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
    COLOR: '#dab3ff',    
@@ -924,7 +925,7 @@ module.exports = ({ Class }) => {
 
    Class.twilightBossLayer2 = {
    PARENT: ["genericTank"],
-   LABEL: '',
+   LABEL: '2',
    CONTROLLERS: [["spin", { independent: true, speed: 0.005 }]],    
    SHAPE: 11,
    COLOR: '#dab3ff',
@@ -933,57 +934,57 @@ module.exports = ({ Class }) => {
    GUNS: [ {
          POSITION: [ 14, 5, 1.25, 0, 0, -15, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, -49, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, -81.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, -115.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, -148.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, 179.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, 146.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, 115, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, 81.5, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, 49, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 14, 5, 1.25, 0, 0, 17, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.single]),
             TYPE: "twilightBossBooster",
          }, }, {
          POSITION: [ 1, 5, 1.25, 13, 0, -15, 0, ],
@@ -1032,14 +1033,13 @@ module.exports = ({ Class }) => {
          }, 
      ],
 };
-
    Class.twilightBoss = {
    PARENT: ["eternal"],
    LABEL: 'The Overseer of Bosses',
    SKILL: [9, 9, 9, 9, 9, 9, 9, 9, 9, 9],      
    CONTROLLERS: [["spin", { independent: true, speed: -0.005 }]],    
    SHAPE: 13,
-   SIZE: 80,
+   SIZE: 150,
    COLOR: '#dab3ff',
    FACING_TYPE: "smoothToTarget",
    VALUE: 16e6,
@@ -1047,7 +1047,7 @@ module.exports = ({ Class }) => {
    BODY: {
       ACCELERATION: base.ACCEL * 0.6,
       SPEED: base.SPEED * 0.5,
-      HEALTH: base.HEALTH * 265,
+      HEALTH: 5400,
       DAMAGE: base.DAMAGE * 6.6,
       PENETRATION: base.PENETRATION * 7,
       SHIELD: base.SHIELD * 100.5,
@@ -1151,19 +1151,19 @@ module.exports = ({ Class }) => {
      ],
        TURRETS: [
         {
-            POSITION: [20, 0, 0, 0, 360, 1],
+            POSITION: [15.5, 0, 0, 0, 360, 1],
             TYPE: ["twilightBossLayer2"],
         },
         {
-            POSITION: [15.5, 0, 0, 0, 360, 1],
+            POSITION: [11, 0, 0, 0, 360, 1],
             TYPE: ["twilightBossLayer3"],
         },
         {
-            POSITION: [11, 0, 0, 0, 360, 1],
+            POSITION: [6.5, 0, 0, 0, 360, 1],
             TYPE: ["twilightBossLayer4"],
         },
        {
-            POSITION: [6.5, 0, 0, 0, 360, 1],
+            POSITION: [2, 0, 0, 0, 360, 1],
             TYPE: ["twilightBossLayer5"],
         },
     ],
@@ -1183,5 +1183,5 @@ module.exports = ({ Class }) => {
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
         Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "Avian", "assistant", "autoSingle"]
-        Class.devBosses.UPGRADES_TIER_0 = ["twilightBoss"];
+        Class.devBosses.UPGRADES_TIER_0 = ["twilightBoss", "taureonBoss", tgsBoss];
 };
