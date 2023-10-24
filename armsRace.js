@@ -700,7 +700,7 @@ module.exports = ({ Class }) => {
          }, }, {
          POSITION: [ 20, 8, 1, 0, 0, 0, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront, g.tonsmorrecol]),
+            SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront]),
             TYPE: "bullet",
             LABEL: 'Front',
          }, }, 
