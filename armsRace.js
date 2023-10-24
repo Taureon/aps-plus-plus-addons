@@ -1177,11 +1177,12 @@ module.exports = ({ Class }) => {
     //upgrades
     //NOTE: Once you do more than just tier 4, don't forget to indent like in tanks.js to give this tree representation some structure.
 
-    Class.doubleTwin.UPGRADES_TIER_3 = ["doubleFlankTwin"];
+    Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
         Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
         Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
         Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
         Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
         Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"]
-        Class.devBosses.UPGRADES_TIER_0 = ["twilightBoss", "taureonBoss", tgsBoss];
+
+    Class.devBosses.UPGRADES_TIER_0.push("twilightBoss");
 };
