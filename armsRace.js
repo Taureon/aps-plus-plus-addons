@@ -610,7 +610,7 @@ module.exports = ({ Class }) => {
     Class.ultraSmasher = {
     PARENT: ["genericTank"],
     LABEL: "Ultra-Smasher",
-    DANGER: 12,
+    DANGER: 8,
     BODY: {
         SPEED: 1.05 * base.SPEED, FOV: 1.245 * base.FOV, DENSITY: 6 * base.DENSITY,
     },
@@ -620,9 +620,57 @@ module.exports = ({ Class }) => {
     TURRETS: [{
             POSITION: [35, 0, 0, 0, 360, 0],
             TYPE: "smasherBody", },],};
-    //dev bosses
+    
+    Class.megaSpike = {
+    PARENT: ["genericTank"],
+    LABEL: "Mega-Spike",
+    DANGER: 8,
+    BODY: {SPEED: base.SPEED * 1, DAMAGE: base.DAMAGE * 1.15, FOV: base.FOV * 1.1, DENSITY: base.DENSITY * 3,},
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    TURRETS: [
+        {
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [22.5, 0, 0, 0, 360, 0],
+            TYPE: "spikeBody",
+        },
+        {
+            POSITION: [22.5, 0, 0, 90, 360, 0],
+            TYPE: "spikeBody",
+        },
+        {
+            POSITION: [22.5, 0, 0, 180, 360, 0],
+            TYPE: "spikeBody",
+        },
+        {
+            POSITION: [22.5, 0, 0, 270, 360, 0],
+            TYPE: "spikeBody",},],};
 
-    //fixing later
+    Class.megaLandmine = {
+    PARENT: ["genericTank"],
+    LABEL: "Mega-Landmine",
+    INVISIBLE: [0.06, 0.01],
+    TOOLTIP: "Stay still to turn invisible.",
+    DANGER: 7,
+    BODY: {SPEED: 1.2 * base.SPEED, FOV: 1.1 * base.FOV, DENSITY: 3 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [25.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",},{
+            POSITION: [25.5, 0, 0, 30, 360, 0],
+            TYPE: "landmineBody",},
+    ],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,};
+
+    Class.autoMegaSmasher = makeAuto(exports.megaSmasher, "Auto-Mega-Smasher", {
+    type: "autoSmasherTurret",
+    size: 11,
+    });
+    Class.autoMegaSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
+    
+    //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
         TYPE: "bullet",
@@ -1018,4 +1066,5 @@ module.exports = ({ Class }) => {
                     Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
                     Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
                     Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
+                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher"]
 };
