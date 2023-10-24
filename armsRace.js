@@ -605,7 +605,21 @@ module.exports = ({ Class }) => {
             POSITION: [5, 8, 1.5, 10, 0, 0, 0 ]
         }]
     };
+    //smasher upgrades
 
+    Class.ultraSmasher = {
+    PARENT: ["genericTank"],
+    LABEL: "Ultra-Smasher",
+    DANGER: 12,
+    BODY: {
+        SPEED: 1.05 * base.SPEED, FOV: 1.245 * base.FOV, DENSITY: 6 * base.DENSITY,
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    TURRETS: [{
+            POSITION: [35, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody", },],};
     //dev bosses
 
     //fixing later
@@ -991,7 +1005,13 @@ module.exports = ({ Class }) => {
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
 
     Class.devBosses.UPGRADES_TIER_0.push("twilightBoss");
-
+            Class.twin.UPGRADES_TIER_2.push ("duo")
+            Class.sniper.UPGRADES_TIER_2.push ("sharpshooter")
+            Class.machineGun.UPGRADES_TIER_2.push ("gadgetGun")
+            Class.flankGuard.UPGRADES_TIER_2.push ("ternion")
+            Class.director.UPGRADES_TIER_2.push ("coordinator")
+            Class.pounder.UPGRADES_TIER_2.push ("bruiser")
+            Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
