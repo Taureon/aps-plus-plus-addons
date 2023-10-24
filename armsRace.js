@@ -18,13 +18,13 @@ let makeBird = (type, name = -1, color) => {
     let output = dereference(type),
         shootyBois = [{
             POSITION: [16, 8, 1, 0, 0, 150, 0.1],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: "bullet", LABEL: gunCalcNames.thruster }
         },{
             POSITION: [16, 8, 1, 0, 0, 210, 0.1],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: "bullet", LABEL: gunCalcNames.thruster }
         },{
             POSITION: [18, 8, 1, 0, 0, 180, 0.6],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: bullet, LABEL: gunCalcNames.thruster }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster, g.halfrecoil]), TYPE: "bullet", LABEL: gunCalcNames.thruster }
         }];
     if (color) for (let i = 0; i < 3; i++) shootyBois[i].PROPERTIES.TYPE = [shootyBois[i].PROPERTIES.TYPE, { COLOR: color, KEEP_OWN_COLOR: true }];
     for (let i in output.GUNS) if (output.GUNS[i].PROPERTIES) output.GUNS[i].PROPERTIES.ALT_FIRE = true;
@@ -461,13 +461,13 @@ module.exports = ({ Class }) => {
         }],
         TURRETS: [{
             POSITION: [6, 3, 5, 0, 360, 1],
-            TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+            TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]
         },{
             POSITION: [6, 3, -5, 0, 360, 1],
-            TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+            TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]
         },{
             POSITION: [6, -5, 0, 0, 360, 1],
-            TYPE: [autoTurret, { INDEPENDENT: true, COLOR: 16 }]
+            TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]
         }]
     };
     Class.DoubleFlankTwin = {
@@ -502,10 +502,10 @@ module.exports = ({ Class }) => {
         LABEL: 'Duo',
         GUNS: [{
             POSITION: [20, 8, 1, 0, -5, 0, 0 ],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: bullet }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "bullet" }
         },{
             POSITION: [20, 8, 1, 0, 5, 0, 0 ],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: bullet }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.single]), TYPE: "bullet" }
         },{
             POSITION: [13, 17, 1, 0, 0, 0, 0 ]
         }]
@@ -624,10 +624,10 @@ module.exports = ({ Class }) => {
         },
         GUNS: [{
             POSITION: [18, 8, 1, 0, 0, -150, 0 ],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]), TYPE: "bullet", STAT_CALCULATOR: gunClacNames.thruster }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]), TYPE: "bullet", STAT_CALCULATOR: gunCalcNames.thruster }
         },{
             POSITION: [18, 8, 1, 0, 0, 150, 0 ],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]), TYPE: "bullet", STAT_CALCULATOR: gunClacNames.thruster }
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]), TYPE: "bullet", STAT_CALCULATOR: gunCalcNames.thruster }
         },{
             POSITION: [20, 8, 1, 0, 0, 0, 0 ],
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront]), TYPE: "bullet", LABEL: 'Front' }
