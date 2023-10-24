@@ -618,7 +618,7 @@ module.exports = ({ Class }) => {
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
     TURRETS: [{
-            POSITION: [35, 0, 0, 0, 360, 0],
+            POSITION: [29.5, 0, 0, 0, 360, 0],
             TYPE: "smasherBody", },],};
     
     Class.megaSpike = {
@@ -673,11 +673,24 @@ module.exports = ({ Class }) => {
     Class.bonker = {
     PARENT: ["genericTank"],
     LABEL: "Bonker",
-    DANGER: 6,
+    DANGER: 8,
     SIZE: 10,    
     BODY: { FOV: 0.9 * base.FOV, DENSITY: 1.3 * base.DENSITY, SPEED: 1.2 * base.SPEED },
     TURRETS: [{
             POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher, };
+    
+    Class.megaBonker = {
+    PARENT: ["genericTank"],
+    LABEL: "Mega-Bonker",
+    DANGER: 8,
+    SIZE: 10,    
+    BODY: { FOV: 1.05 * base.FOV, DENSITY: 1.5 * base.DENSITY, SPEED: 1.25 * base.SPEED },
+    TURRETS: [{
+            POSITION: [25, 0, 0, 0, 360, 0],
             TYPE: "smasherBody",},],
     IS_SMASHER: true,
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
@@ -1080,5 +1093,6 @@ module.exports = ({ Class }) => {
                     Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
                     Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
                     Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
-                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher"]
+                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker"]
+                    Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
 };
