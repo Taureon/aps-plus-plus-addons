@@ -670,6 +670,19 @@ module.exports = ({ Class }) => {
     });
     Class.autoMegaSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
     
+    Class.bonker = {
+    PARENT: ["genericTank"],
+    LABEL: "Bonker",
+    DANGER: 6,
+    SIZE: 10,    
+    BODY: { FOV: 0.9 * base.FOV, DENSITY: 1.3 * base.DENSITY, SPEED: 1.2 * base.SPEED },
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1061,6 +1074,7 @@ module.exports = ({ Class }) => {
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
+                Class.smasher.UPGRADES_TIER_3.push("bonker");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
                     Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
