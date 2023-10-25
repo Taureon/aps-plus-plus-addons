@@ -788,6 +788,12 @@ module.exports = ({ Class }) => {
             POSITION: [16, 0, 0, 270, 360, 0],
             TYPE: "spikeBody",},],
 };
+
+    Class.autoSpike = makeAuto(Class.spike, "Auto-Spike", {
+    type: "autoSmasherTurret",
+    size: 11,
+});
+Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1188,5 +1194,5 @@ module.exports = ({ Class }) => {
                     Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", //"megabanger", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
-                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore"];
+                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike"];
 };
