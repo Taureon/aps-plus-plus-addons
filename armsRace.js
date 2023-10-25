@@ -818,6 +818,20 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
             POSITION: [18.5, 0, 0, 270, 360, 0],
             TYPE: "spikeBody",},],
 };
+    Class.cauldron = {
+    PARENT: ["genericTank"],
+    LABEL: "Cauldron",
+    DANGER: 8,
+    BODY: {FOV: 1.1 * base.FOV, DENSITY: 2.15 * base.DENSITY, DAMAGE: base.DAMAGE * 1.1,},
+    TURRETS: [{
+            POSITION: [19.5, 0, 0, 0, 360, 0],
+            TYPE: "drifterBody",},
+             {
+            POSITION: [19.5, 0, 0, 0, 180, 0],
+            TYPE: "drifterBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1218,5 +1232,5 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
                     Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
-                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear"];
+                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
 };
