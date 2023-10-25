@@ -54,6 +54,29 @@ module.exports = ({ Class }) => {
     SHAPE: 4,
     INDEPENDENT: true,
 };
+    exports.megaAutoSmasherTurret = {
+    PARENT: ["genericTank"],
+    LABEL: "Turret",
+    COLOR: 16,
+    GUNS: [
+        {
+            POSITION: [20, 9, 1, 0, 5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.morerecoil, g.morerecoil g.turret, g.fast, g.fast, g.mach, g.pound, g.pound, g.morereload, g.morereload]),
+                TYPE: "bullet",
+                STAT_CALCULATOR: gunCalcNames.fixedReload,
+            },
+        },
+        {
+            POSITION: [20, 9, 1, 0, -5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.morerecoil, g.morerecoil g.turret, g.fast, g.fast, g.mach, g.pound, g.pound, g.morereload, g.morereload]),
+                TYPE: "bullet",
+                STAT_CALCULATOR: gunCalcNames.fixedReload,
+            },
+        },
+    ],
+};
     //bullets 
 
     //tripletwin upgrades
