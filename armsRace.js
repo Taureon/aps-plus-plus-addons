@@ -794,6 +794,30 @@ module.exports = ({ Class }) => {
     size: 11,
 });
 Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
+
+    Class.spear = {
+    PARENT: ["genericTank"],
+    LABEL: "Spear",
+    DANGER: 8,
+    BODY: {
+        SPEED: base.SPEED * 0.75,
+        DAMAGE: base.DAMAGE * 1.15,
+        FOV: base.FOV * 1.1,
+        DENSITY: base.DENSITY * 2.3,
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    TURRETS: [{/** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [18.5, 0, 0, 0, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [18.5, 0, 0, 90, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [18.5, 0, 0, 180, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [18.5, 0, 0, 270, 360, 0],
+            TYPE: "spikeBody",},],
+};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1191,8 +1215,8 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
                     Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
                     Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
                     Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
-                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", //"megabanger", "megaDrifter"]
+                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
-                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike"];
+                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear"];
 };
