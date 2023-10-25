@@ -870,6 +870,25 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
+    exports.tripleAutoSmasher = {
+    PARENT: ["genericTank"],
+    LABEL: "Smasher",
+    DANGER: 6,
+    BODY: {FOV: 1.15 * base.FOV, DENSITY: 2 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",},{
+            POSITION: [6, 3, 5, 0, 360, 1],
+            TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]},{
+            POSITION: [6, 3, -5, 0, 360, 1],
+            TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]},{
+            POSITION: [6, -5, 0, 0, 360, 1],
+            TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]},
+    ],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1271,5 +1290,5 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
-                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher"]
+                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher"]
 };
