@@ -727,6 +727,67 @@ module.exports = ({ Class }) => {
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
     
+    Class.thorn = {
+    PARENT: ["genericTank"],
+    LABEL: "Thorn",
+    DANGER: 8,
+    BODY: {
+        SPEED: base.SPEED * 0.8,
+        DAMAGE: base.DAMAGE * 1.2,
+        FOV: base.FOV * 1.075,
+        DENSITY: base.DENSITY * 2.25,
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [20, 0, 0, 0, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [18.5, 0, 0, 90, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [20, 0, 0, 180, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [18.5, 0, 0, 270, 360, 0],
+            TYPE: "spikeBody",},{           
+            POSITION: [20, 0, 0, 45, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [18.5, 0, 0, 135, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [20, 0, 0, 215, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [18.5, 0, 0, 305, 360, 0],
+            TYPE: "spikeBody",},
+    ],
+};
+
+    Class.claymore = {
+    PARENT: ["genericTank"],
+    LABEL: "Claymore",
+    DANGER: 8,
+    BODY: {SPEED: base.SPEED, DAMAGE: base.DAMAGE * 1.125, FOV: base.FOV * 1.08, DENSITY: base.DENSITY * 1.9,},
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [16, 0, 0, 0, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [16, 0, 0, 90, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [16, 0, 0, 180, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [16, 0, 0, 270, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [16, 0, 0, 0, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [16, 0, 0, 90, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [16, 0, 0, 180, 360, 0],
+            TYPE: "spikeBody",},{
+            POSITION: [16, 0, 0, 270, 360, 0],
+            TYPE: "spikeBody",},],
+};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1127,4 +1188,5 @@ module.exports = ({ Class }) => {
                     Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", //"megabanger", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
+                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore"];
 };
