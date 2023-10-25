@@ -784,11 +784,11 @@ module.exports = ({ Class }) => {
     ],
 };
 
-    let bangerBodyShape = [],
-        someNeededConstantForBangerBodyShape = (Math.PI / 180) * (360 / 128);
+    let bangerBodyShape = [];
+    Math.TAU = Math.PI * 2;
     for (let i = 0; i < 128; i++) {
-        let angle = i * someNeededConstantForBangerBodyShape,
-            length = 1 - Math.abs(Math.sin(4 * angle)) / (Math.PI * 2);
+        let angle = i * Math.TAU / 128,
+            length = 1 - Math.abs(Math.sin(4 * angle)) / Math.TAU;
         bangerBodyShape.push([
             Math.sin(angle) * length,
             Math.cos(angle) * length
