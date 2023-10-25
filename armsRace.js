@@ -1301,7 +1301,7 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-                Class.smasher.UPGRADES_TIER_3.push("bonker", "drifter);
+                Class.smasher.UPGRADES_TIER_3.push("bonker", "drifter");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
                     Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
