@@ -889,6 +889,11 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
+    Class.doubleAutoSmasher = makeAuto(exports.autoSmasher, "Double Auto-Smasher", {
+    type: "autoSmasherTurret",
+    size: 11,
+});
+Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1290,5 +1295,5 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
-                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher"]
+                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher"]
 };
