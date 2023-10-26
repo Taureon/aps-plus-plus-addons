@@ -885,7 +885,7 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
 };
     exports.tripleAutoSmasher = {
     PARENT: ["genericTank"],
-    LABEL: "Smasher",
+    LABEL: "Triple Auto-Smasher",
     DANGER: 6,
     BODY: {FOV: 1.15 * base.FOV, DENSITY: 2 * base.DENSITY,},
     TURRETS: [{
@@ -920,7 +920,40 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
             TYPE: ["triplet", { INDEPENDENT: true, COLOR: 16, CONTROLLERS: "nearestDifferentMaster", AUTOFIRE: true}]},
     ],
     IS_SMASHER: true,
+    SKILL_CAP: [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
+
+    Class.banger = {
+    PARENT: ["genericTank"],
+    LABEL: "Banger",
+    DANGER: 8,
+    SIZE: 15,
+    BODY: {FOV: 1.15 * base.FOV, DENSITY: 3 * base.DENSITY, DAMAGE: base.DAMAGE * 1.05},
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "bangerBody",},],
+    IS_SMASHER: true,
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
+    Class.hexaAutoSmasher = {
+    PARENT: ["genericTank"],
+    LABEL: "Hexa Auto-Smasher",
+    DANGER: 6,
+    BODY: {FOV: 1.05 * base.FOV, DENSITY: 2 * base.DENSITY,},
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",
+        },
+        {
+            POSITION: [11, 0, 0, 0, 360, 0],
+            TYPE: ["hexaTank", { INDEPENDENT: true, COLOR: 16, CONTROLLERS: "nearestDifferentMaster", AUTOFIRE: true}]
+        },
+    ],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     //dev bosses
@@ -1314,7 +1347,7 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-                Class.smasher.UPGRADES_TIER_3.push("bonker", "drifter");
+                Class.smasher.UPGRADES_TIER_3.push("bonker", "banger", "drifter");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
                     Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
@@ -1324,5 +1357,5 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
-                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher"]
+                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher"]
 };
