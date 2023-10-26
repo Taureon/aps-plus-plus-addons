@@ -47,14 +47,14 @@ module.exports = ({ Class }) => {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.auto]), TYPE: "bullet" }
         }]
     };
-    exports.drifterBody = {
+    Class.drifterBody = {
     LABEL: "",
     CONTROLLERS: [["spin", { independent: true }]],
     COLOR: 9,
     SHAPE: 4,
     INDEPENDENT: true,
 };
-    exports.megaAutoSmasherTurret = {
+    Class.megaAutoSmasherTurret = {
     PARENT: ["genericTank"],
     LABEL: "Turret",
     COLOR: 16,
@@ -694,7 +694,7 @@ module.exports = ({ Class }) => {
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
 
-    Class.autoMegaSmasher = makeAuto(exports.megaSmasher, "Auto-Mega-Smasher", {
+    Class.autoMegaSmasher = makeAuto(Class.megaSmasher, "Auto-Mega-Smasher", {
     type: "autoSmasherTurret",
     size: 11,
     });
@@ -883,7 +883,7 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
-    exports.tripleAutoSmasher = {
+    Class.tripleAutoSmasher = {
     PARENT: ["genericTank"],
     LABEL: "Triple Auto-Smasher",
     DANGER: 6,
@@ -902,13 +902,13 @@ Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshsk
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
-    Class.doubleAutoSmasher = makeAuto(exports.autoSmasher, "Double Auto-Smasher", {
+    Class.doubleAutoSmasher = makeAuto(Class.autoSmasher, "Double Auto-Smasher", {
     type: "autoSmasherTurret",
     size: 11,
 });
 Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
 
-    exports.tripletAutoSmasher = {
+    Class.tripletAutoSmasher = {
     PARENT: ["genericTank"],
     LABEL: "Triple Auto-Smasher",
     DANGER: 6,
@@ -956,6 +956,29 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
     SKILL_CAP: [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
+    Class.autoLandmine = makeAuto(Class.landmine, "Auto-Landmine", {
+    type: "autoSmasherTurret",
+    size: 11,
+});
+Class.autoLandmine.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
+    
+    Class.autoBonker = makeAuto(Class.bonker, "Auto-Bonker", {
+    type: "autoSmasherTurret",
+    size: 11,
+});
+Class.autoBonker.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
+
+    Class.autoBanger = makeAuto(Class.banger, "Auto-Banger", {
+    type: "autoSmasherTurret",
+    size: 11,
+});
+Class.autoBanger.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
+
+    Class.autoDrifter = makeAuto(Class.drifter, "Auto-Drifter", {
+    type: "autoSmasherTurret",
+    size: 11,
+});
+Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1357,5 +1380,6 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
-                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher"]
+                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
+                                                       "autoBonker", "autoBanger", "autoDrifter"]
 };
