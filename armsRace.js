@@ -817,6 +817,19 @@ module.exports = ({ Class }) => {
 
     Class.prickBody = { SHAPE: prickBodyShape };
 
+    let sharperBodyShape = [];
+    Math.TAU = Math.PI * 2;
+    for (let i = 0; i < 128; i++) {
+        let angle = i * Math.TAU / 128,
+            length = 1 - Math.abs(Math.sin(2 * angle)) / Math.TAU;
+        sharperBodyShape.push([
+            Math.sin(angle) * length,
+            Math.cos(angle) * length
+        ]);
+    }
+
+    Class.sharperBody = { SHAPE: sharperBodyShape };
+
     Class.claymore = {
     PARENT: ["genericTank"],
     LABEL: "Claymore",
@@ -955,6 +968,22 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
     TURRETS: [{
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "bangerBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
+    Class.sharper = {
+    PARENT: ["genericTank"],
+    LABEL: "Sharper",
+    DANGER: 8,
+    SIZE: 15,
+    BODY: {FOV: 1.1 * base.FOV, DENSITY: 2.2 * base.DENSITY, DAMAGE: base.DAMAGE * 1.125},
+    TURRETS: [{
+            POSITION: [19, 0, 0, 0, 360, 0],
+            TYPE: "drifterBody",},
+             {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "sharperBody",},],
     IS_SMASHER: true,
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
@@ -1555,6 +1584,6 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
                                                        "autoBonker", "autoBanger", "autoDrifter"]
                     Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
-                    Class.banger.UPGRADES_TIER_4 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker"]
+                    Class.banger.UPGRADES_TIER_4 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"]
                                                       
 };
