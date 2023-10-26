@@ -54,6 +54,13 @@ module.exports = ({ Class }) => {
     SHAPE: 4,
     INDEPENDENT: true,
 };
+    Class.limpetBody = {
+    LABEL: "",
+    CONTROLLERS: [["spin", { independent: true }]],
+    COLOR: 9,
+    SHAPE: 5,
+    INDEPENDENT: true,
+};
     Class.megaAutoSmasherTurret = {
     PARENT: ["genericTank"],
     LABEL: "Turret",
@@ -979,6 +986,23 @@ Class.autoBanger.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshs
     size: 11,
 });
 Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
+
+    Class.limpet = {
+    PARENT: ["genericTank"],
+    LABEL: "Limpet",
+    TOOLTIP: "You are always invisible!",
+    DANGER: 8,
+    ALPHA: 0.25,
+    BODY: {SPEED: 1.1 * base.SPEED,FOV: 1.1 * base.FOV,DENSITY: 2 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "limpetBody",},{
+            POSITION: [21.5, 0, 0, 30, 360, 0],
+            TYPE: "limpetBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1380,6 +1404,7 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.bonker.UPGRADES_TIER_4 = ["megaBonker"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
-                    Class.autoSmasher.UPGRADES_TIER_4= ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
+                    Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
                                                        "autoBonker", "autoBanger", "autoDrifter"]
+                    Class.landmine.UPGRADES_TIER_4 = ["limpet"]
 };
