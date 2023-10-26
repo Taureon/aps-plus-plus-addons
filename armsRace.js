@@ -804,6 +804,19 @@ module.exports = ({ Class }) => {
 
     Class.bangerBody = { SHAPE: bangerBodyShape };
 
+     let prickBodyShape = [];
+    Math.TAU = Math.PI * 2;
+    for (let i = 0; i < 128; i++) {
+        let angle = i * Math.TAU / 128,
+            length = 1 - Math.abs(Math.sin(6 * angle)) / Math.TAU;
+        prickBodyShape.push([
+            Math.sin(angle) * length,
+            Math.cos(angle) * length
+        ]);
+    }
+
+    Class.prickBody = { SHAPE: prickBodyShape };
+
     Class.claymore = {
     PARENT: ["genericTank"],
     LABEL: "Claymore",
@@ -939,6 +952,19 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
     DANGER: 8,
     SIZE: 15,
     BODY: {FOV: 1.15 * base.FOV, DENSITY: 3 * base.DENSITY, DAMAGE: base.DAMAGE * 1.05},
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "bangerBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
+    Class.slammer = {
+    PARENT: ["genericTank"],
+    LABEL: "Slammer",
+    DANGER: 8,
+    SIZE: 18,
+    BODY: {FOV: 1.2 * base.FOV, DENSITY: 4 * base.DENSITY, DAMAGE: base.DAMAGE * 1.1, SPEED: 0.7 * base.SPEED},
     TURRETS: [{
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "bangerBody",},],
@@ -1098,6 +1124,20 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
     IS_SMASHER: true,
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
+    
+    Class.prick = {
+    PARENT: ["genericTank"],
+    LABEL: "Prick",
+    DANGER: 8,
+    SIZE: 15,
+    BODY: {FOV: 1.15 * base.FOV, DENSITY: 3 * base.DENSITY, DAMAGE: base.DAMAGE * 1.1, HEALTH: 1.15 * base.HEALTH },
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "prickBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1502,5 +1542,6 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
                                                        "autoBonker", "autoBanger", "autoDrifter"]
                     Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
+                    Class.banger.UPGRADES_TIER_4 = ["slammer", "autoBanger", "prick"]
                                                       
 };
