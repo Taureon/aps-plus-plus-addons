@@ -1005,8 +1005,62 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
-    
-    
+    Class.decoy = {
+    PARENT: ["genericTank"],
+    LABEL: "Decoy",
+    TOOLTIP: "Stay Still to turn invisible.",
+    DANGER: 8,
+    SIZE: 10,
+    INVISIBLE: 0.01, 0.06,
+    BODY: {SPEED: 1.2 * base.SPEED,FOV: 1.025 * base.FOV,DENSITY: 1.5 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",},{
+            POSITION: [21.5, 0, 0, 30, 360, 0],
+            TYPE: "landmineBody",},{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",},{
+            POSITION: [21.5, 0, 0, 30, 360, 0],
+            TYPE: "landmineBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
+
+    Class.tripwire = {
+    PARENT: ["genericTank"],
+    LABEL: "Tripwire",
+    TOOLTIP: "Stay Still to turn invisible.",
+    INVISIBLE: 0.01, 0.06,
+    SIZE: 15,
+    DANGER: 8,
+    BODY: {SPEED: 0.99 * base.SPEED,FOV: 1.2 * base.FOV,DENSITY: 2.5 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "bangerBody",},{
+            POSITION: [21.5, 0, 0, 30, 360, 0],
+            TYPE: "bangerBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
+    Class.vessel = {
+    PARENT: ["genericTank"],
+    LABEL: "Vessel",
+    TOOLTIP: "Stay Still to turn invisible.",
+    INVISIBLE: 0.01, 0.06,
+    SIZE: 15,
+    DANGER: 8,
+    BODY: {SPEED: 0.99 * base.SPEED,FOV: 1.2 * base.FOV,DENSITY: 2.5 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "drifterBody",},{
+            POSITION: [21.5, 0, 0, 30, 360, 0],
+            TYPE: "drifterBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1410,5 +1464,6 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
                     Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
                                                        "autoBonker", "autoBanger", "autoDrifter"]
-                    Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine"]
+                    Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
+                                                      
 };
