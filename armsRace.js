@@ -807,6 +807,8 @@ module.exports = ({ Class }) => {
     Class.claymore = {
     PARENT: ["genericTank"],
     LABEL: "Claymore",
+    INVISIBLE: [0.06, 0.01],
+    TOOLTIP: "Stay still to turn invisible.",
     DANGER: 8,
     BODY: {SPEED: base.SPEED, DAMAGE: base.DAMAGE * 1.125, FOV: base.FOV * 1.08, DENSITY: base.DENSITY * 1.9,},
     IS_SMASHER: true,
@@ -1003,6 +1005,8 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
+    
+    
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1406,5 +1410,5 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
                     Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
                                                        "autoBonker", "autoBanger", "autoDrifter"]
-                    Class.landmine.UPGRADES_TIER_4 = ["limpet"]
+                    Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine"]
 };
