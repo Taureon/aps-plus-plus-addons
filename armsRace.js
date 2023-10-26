@@ -959,6 +959,19 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
+    Class.megaBanger = {
+    PARENT: ["genericTank"],
+    LABEL: "Mega-Banger",
+    DANGER: 8,
+    SIZE: 15,
+    BODY: {FOV: 1.15 * base.FOV, DENSITY: 4 * base.DENSITY, DAMAGE: base.DAMAGE * 1.05},
+    TURRETS: [{
+            POSITION: [25, 0, 0, 0, 360, 0],
+            TYPE: "bangerBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
     Class.slammer = {
     PARENT: ["genericTank"],
     LABEL: "Slammer",
@@ -1542,6 +1555,6 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
                                                        "autoBonker", "autoBanger", "autoDrifter"]
                     Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
-                    Class.banger.UPGRADES_TIER_4 = ["slammer", "autoBanger", "prick"]
+                    Class.banger.UPGRADES_TIER_4 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker"]
                                                       
 };
