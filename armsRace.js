@@ -1061,6 +1061,43 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
+    Class.basher = {
+    PARENT: ["genericTank"],
+    LABEL: "Basher",
+    DANGER: 8,
+    SIZE: 7,    
+    BODY: { FOV: 0.8 * base.FOV, DENSITY: 1.15 * base.DENSITY, SPEED: 1.4 * base.SPEED },
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher, };
+
+    Class.thwacker = {
+    PARENT: ["genericTank"],
+    LABEL: "Thwacker",
+    DANGER: 8,
+    BODY: {FOV: 1.1 * base.FOV, DENSITY: 2.5 * base.DENSITY, DAMAGE: base.DAMAGE * 1.1, SPEED: 1.025 * base.SPEED },
+    TURRETS: [{
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "bangerBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+};
+    Class.bundler = {
+    PARENT: ["genericTank"],
+    LABEL: "Bundler",
+    DANGER: 8,
+    SIZE: 10,
+    BODY: {FOV: 1.05 * base.FOV, DENSITY: 1.5 * base.DENSITY,SPEED: 1.15 * base.SPEED},
+    TURRETS: [{
+            POSITION: [19.5, 0, 0, 0, 360, 0],
+            TYPE: "drifterBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,};
     //dev bosses
     Class.twilightBossBooster = {
         PARENT: ["bullet"],
@@ -1459,7 +1496,7 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.doubleFlankTwin.UPGRADES_TIER_4 = ["autoDoubleFlankTwin"];
                     Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
                     Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
-                    Class.bonker.UPGRADES_TIER_4 = ["decoy", "spear", "autoBonker","megaBonker"];
+                    Class.bonker.UPGRADES_TIER_4 = ["decoy", "spear", "autoBonker","megaBonker", "basher", "thwacker", "bundler"];
                     Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
                     Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
