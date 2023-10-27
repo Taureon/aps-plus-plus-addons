@@ -744,6 +744,18 @@ module.exports = ({ Class }) => {
     IS_SMASHER: true,
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
+
+    Class.buncher = {
+    PARENT: ["genericTank"],
+    LABEL: "Buncher",
+    DANGER: 8,
+    BODY: {FOV: 1.05 * base.FOV, DENSITY: 3 * base.DENSITY,},
+    TURRETS: [{
+            POSITION: [30, 0, 0, 0, 360, 0],
+            TYPE: "spikeBody",},],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,};
     
     Class.megaDrifter = {
     PARENT: ["genericTank"],
@@ -1579,7 +1591,7 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
                     Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
                     Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_4 = ["decoy", "spear", "autoBonker","megaBonker", "basher", "thwacker", "bundler"];
-                    Class.drifter.UPGRADES_TIER_4 = ["megaDrifter"];
+                    Class.drifter.UPGRADES_TIER_4 = ["buncher", "megaDrifter", "autoDrifter", "vessel", "cauldron", "sharper", "bundler"];
                     Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
                     Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine"
                                                        "autoBonker", "autoBanger", "autoDrifter"]
