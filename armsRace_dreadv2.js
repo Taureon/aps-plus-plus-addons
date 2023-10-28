@@ -331,10 +331,46 @@ module.exports = ({ Class }) => {
 			},
 		],
 	}
+	Class.showerTurretARDreadV2 = {
+		PARENT: "genericTank",
+		LABEL: "",
+		BODY: {
+		  FOV: 1.5,
+		},
+		INDEPENDENT: false,
+		COLOR: 16,
+		MAX_CHILDREN: 4,
+		GUNS: [
+			{
+				POSITION: [6, 12, 1.2, 8, 0, 0, 0],
+				PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.drone, g.over, {size: 1.2}]),
+				TYPE: "drone",
+				AUTOFIRE: true,
+				SYNCS_SKILLS: true,
+				STAT_CALCULATOR: gunCalcNames.drone,
+				WAIT_TO_CYCLE: true,
+				},
+			},
+		],
+	}
 	Class.showerARDreadV2 = { // Drones
 	    PARENT: ["genericEggnought"],
 	    LABEL: "Shower",
-	    TURRETS: [],
+	    BODY: {
+			SPEED: 0.93,
+			FOV: 1.1,
+		},
+		TURRETS: [
+			{
+				POSITION: [15, 0, 0, 0, 0, 1],
+				TYPE: 'egg',
+			},
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "showerTurretARDreadV2",
+			},
+		],
 	}
 	Class.atmosphereAuraARDreadV2 = addAura();
 	Class.atmosphereARDreadV2 = {
@@ -373,18 +409,97 @@ module.exports = ({ Class }) => {
 	}
 	Class.stomperARDreadV2 = { // Size increase
 	    PARENT: ["genericEggnought"],
-	    LABEL: "Stomper",
-	    TURRETS: [],
+		LABEL: "Stomper",
+		SIZE: 1.15,
+		BODY: {
+			SPEED: 0.9,
+			HEALTH: 1.15,
+		},
+		GUNS: [],
+		TURRETS: [
+			{
+				POSITION: [10, 0, 0, 0, 0, 1],
+				TYPE: 'egg',
+			},
+		],
+	}
+	for(let i = 0; i < 2; i++) {
+		Class.stomperARDreadV2.GUNS.push(
+			{
+				POSITION: [10, 10, 0, 0, 0, 180*i+90, 0],
+				PROPERTIES: {COLOR: 9, DRAW_ABOVE: true},
+			},
+		)
+	}
+	Class.dropperTurretARDreadV2 = {
+		PARENT: 'genericTank',
+		CONTROLLERS: [["spin", {speed: -0.035}]],
+		INDEPENDENT: true,
+		LABEL: "",
+		COLOR: 16,
+		GUNS: [
+			{ 
+				POSITION: [8, 32, 1, -4, 0, 0, 0],
+			},
+		],
 	}
     Class.dropperARDreadV2 = { // Minelayer
 	    PARENT: ["genericEggnought"],
 	    LABEL: "Dropper",
-	    TURRETS: [],
+		GUNS: [
+			{
+				POSITION: [0, 7, 1, 3, 0, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.trap, {maxSpeed: 1e-3, speed: 1e-3}]),
+					TYPE: 'trap',
+					STAT_CALCULATOR: gunCalcNames.trap,
+				},
+			}
+		],
+		TURRETS: [
+			{
+				POSITION: [14, 0, 0, 0, 0, 1],
+				TYPE: 'egg',
+			},
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: 'dropperTurretARDreadV2',
+			}
+		],
 	}
+	Class.spotterRadarARDreadV2 = {
+		PARENT: 'genericTank',
+		CONTROLLERS: [['spin', {speed: 0.02}]],
+		INDEPENDENT: true,
+		SHAPE: [[0.225, 1], [0.225, -1], [-0.225, -1], [-0.225, 1]],
+		COLOR: 17,
+		GUNS: [
+		  {
+			POSITION: [4.5, 26, 1, -2.25, 0, 0, 0],
+			PROPERTIES: {COLOR: -1}
+		  }
+		]
+	};
     Class.spotterARDreadV2 = { // FOV
 	    PARENT: ["genericEggnought"],
 	    LABEL: "Spotter",
-	    TURRETS: [],
+		BODY: {
+			FOV: 1.1,
+		},
+	    TURRETS: [
+			{
+				POSITION: [15, 0, 0, 0, 0, 1],
+				TYPE: 'egg',
+			},
+			{
+				POSITION: [9, 0, 0, 0, 0, 1],
+				TYPE: 'egg',
+			},
+			{
+				POSITION: [13, 0, 0, 0, 360, 1],
+				TYPE: 'spotterRadarARDreadV2',
+			},
+		],
 	}
 
 	// T2 Weapons
