@@ -63,31 +63,16 @@ module.exports = ({ Class }) => {
 				'Please make sure that the Dreadnoughts v2 addon has been disabled or does not exist.---');
 
 	// Set the below variable to true to enable hex dreadnought building (WARNING: increases load time by approximately 10x)
-	const buildHexnoughts = false;
-
-	// Comment out lines from the arrays below to disable that branch of the tree from being generated.
-	const eggnoughtWeapons = [
-		"swordARDreadV2",
-		"pacifierARDreadV2",
-		"peacekeeperARDreadV2",
-		"invaderARDreadV2",
-		"centaurARDreadV2",
-	];
-	const eggnoughtBodies = [
-		"byteARDreadV2",
-		"showerARDreadV2",
-		"atmosphereARDreadV2",
-		"juggernautARDreadV2",
-		"stomperARDreadV2",
-		"dropperARDreadV2",
-		"spotterARDreadV2",
-	];
+	const buildHexnoughts = true;
+	
+	// For hexnought merging
+	const hexnoughtScaleFactor = 0.9;
 
 	// Misc
 	Class.genericDreadnoughtARDreadV2 = {
 		PARENT: ["genericTank"],
 		SKILL_CAP: Array(10).fill(smshskl),
-		REROOT_UPGRADE_TREE: "dreadARDreadV2",
+		REROOT_UPGRADE_TREE: ["dreadWeaponARDreadV2", "dreadBodyARDreadV2"],
 	}
 	Class.genericEggnought = {
 		PARENT: ["genericDreadnoughtARDreadV2"],
@@ -196,6 +181,16 @@ module.exports = ({ Class }) => {
 		LEVEL: 90,
 		EXTRA_SKILL: 18,
 	}
+	Class.dreadWeaponARDreadV2 = {
+		LABEL: "",
+		COLOR: 6,
+		REROOT_UPGRADE_TREE: "dreadWeaponARDreadV2",
+	}
+	Class.dreadBodyARDreadV2 = {
+		LABEL: "",
+		COLOR: 6,
+		REROOT_UPGRADE_TREE: "dreadBodyARDreadV2",
+	}
 
 	// T1 Weapons
 	Class.swordARDreadV2 = {
@@ -214,6 +209,10 @@ module.exports = ({ Class }) => {
 			},
 		)
 	}
+	Class.sword2ARDreadV2 = {
+		PARENT: "swordARDreadV2",
+		BATCH_UPGRADES: true,
+	}
 	Class.pacifierARDreadV2 = {
 	    PARENT: ["genericEggnought"],
 	    LABEL: "Pacifier",
@@ -230,6 +229,10 @@ module.exports = ({ Class }) => {
 			},
 		)
 	}
+	Class.pacifier2ARDreadV2 = {
+		PARENT: "pacifierARDreadV2",
+		BATCH_UPGRADES: true,
+	}
 	Class.peacekeeperARDreadV2 = {
 	    PARENT: ["genericEggnought"],
 	    LABEL: "Peacekeeper",
@@ -245,6 +248,10 @@ module.exports = ({ Class }) => {
 				},
 			},
 		)
+	}
+	Class.peacekeeper2ARDreadV2 = {
+		PARENT: "peacekeeperARDreadV2",
+		BATCH_UPGRADES: true,
 	}
 	Class.invaderARDreadV2 = {
 	    PARENT: ["genericEggnought"],
@@ -267,6 +274,10 @@ module.exports = ({ Class }) => {
 			},
 		)
 	}
+	Class.invader2ARDreadV2 = {
+		PARENT: "invaderARDreadV2",
+		BATCH_UPGRADES: true,
+	}
 	Class.centaurARDreadV2 = {
 	    PARENT: ["genericEggnought"],
 	    LABEL: "Centaur",
@@ -286,6 +297,10 @@ module.exports = ({ Class }) => {
 				},
 			},
 		)
+	}
+	Class.centaur2ARDreadV2 = {
+		PARENT: "centaurARDreadV2",
+		BATCH_UPGRADES: true,
 	}
 
 	// T1 Bodies
@@ -383,7 +398,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [24, 7, 1, 0, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.assass, {reload: 0.85}]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.assass, {reload: 0.85, density: 1/2}]),
 					TYPE: "bullet",
 				},
 			},
@@ -804,6 +819,26 @@ module.exports = ({ Class }) => {
 			},
 		)
 	}
+	Class.colossalBottomARDreadV2 = {
+	    PARENT: ["genericSquarenought"],
+	    GUNS: [],
+	}
+	for (let i = 0; i < 4; i++) {
+		Class.colossalTopARDreadV2.GUNS.push(
+			{
+				POSITION: [3.5, 17.5, 0.001, 9, 0, 90*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
+	}
+	for (let i = 0; i < 4; i++) {
+		Class.colossalBottomARDreadV2.GUNS.push(
+			{
+				POSITION: [4, 17.5, 0.001, 9, 0, 90*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
+	}
 	Class.colossalARDreadV2 = {
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Colossal",
@@ -817,15 +852,11 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 0, 0, 1],
 				TYPE: ['colossalTopARDreadV2', {MIRROR_MASTER_ANGLE: true}]
 			},
-		],
-	}
-	for (let i = 0; i < 4; i++) {
-		Class.colossalARDreadV2.GUNS.push(
 			{
-				POSITION: [4, 17.5, 0.001, 9, 0, 90*i, 0],
-				PROPERTIES: {COLOR: 9},
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ['colossalBottomARDreadV2', {MIRROR_MASTER_ANGLE: true}]
 			},
-		)
+		],
 	}
 	Class.cottonARDreadV2 = { // Drifter
 	    PARENT: ["genericSquarenought"],
@@ -871,7 +902,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [28, 7, 1, 0, 0, 120*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.assass, g.assass, {reload: 0.8}]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.assass, g.assass, {reload: 0.8, density: 2/5}]),
 					TYPE: "bullet",
 				},
 			},
@@ -1554,16 +1585,12 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [11, 0, 0, 0, 0, 1],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
-			}
-		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.titanARDreadV2.GUNS.push(
-			{
-				POSITION: [5, 26, 0.001, 8, 0, 120*i, 0],
-				PROPERTIES: {COLOR: 9},
 			},
-		)
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
+		],
 	}
 	Class.sirenARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -1577,16 +1604,14 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
-			}
+			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
 		],
 	}
 	for (let i = 0; i < 3; i++) {
-		Class.sirenARDreadV2.GUNS.push(
-			{
-				POSITION: [5, 26, 0.001, 8, 0, 120*i, 0],
-				PROPERTIES: {COLOR: 9},
-			},
-		)
 		Class.sirenARDreadV2.TURRETS.push(
 			{
 				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
@@ -1606,16 +1631,14 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
-			}
+			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
 		],
 	}
 	for (let i = 0; i < 3; i++) {
-		Class.harpyARDreadV2.GUNS.push(
-			{
-				POSITION: [5, 26, 0.001, 8, 0, 120*i, 0],
-				PROPERTIES: {COLOR: 9},
-			},
-		)
 		Class.harpyARDreadV2.TURRETS.push(
 			{
 				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
@@ -1707,7 +1730,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [28, 7, 1, 0, 0, 72*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.assass, g.assass, g.assass, {reload: 0.8}]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.assass, g.assass, g.assass, {reload: 0.8, density: 2/9}]),
 					TYPE: "bullet",
 				},
 			},
@@ -2459,15 +2482,33 @@ module.exports = ({ Class }) => {
 		MIRROR_MASTER_ANGLE: true,
 	    GUNS: [],
 	}
+	Class.pentagonLeviathanBottomARDreadV2 = {
+	    PARENT: ["genericPentanought"],
+	    LABEL: "Leviathan",
+		MIRROR_MASTER_ANGLE: true,
+	    GUNS: [],
+	}
 	for (let i = 0; i < 5; i++) {
 		Class.pentagonLeviathanTopARDreadV2.GUNS.push(
 			{
 				POSITION: [6, 13.5, 0.001, 9, 0, 72*i, 0],
 				PROPERTIES: {COLOR: 9},
 			},
-		)
+		);
+		Class.pentagonLeviathanBottomARDreadV2.GUNS.push(
+			{
+				POSITION: [7, 17, 0.001, 9, 0, 72*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		);
 	}
 	Class.hexagonLeviathanTopARDreadV2 = {
+	    PARENT: ["genericHexnought"],
+	    LABEL: "Leviathan",
+		MIRROR_MASTER_ANGLE: true,
+	    GUNS: [],
+	}
+	Class.hexagonLeviathanBottomARDreadV2 = {
 	    PARENT: ["genericHexnought"],
 	    LABEL: "Leviathan",
 		MIRROR_MASTER_ANGLE: true,
@@ -2480,44 +2521,52 @@ module.exports = ({ Class }) => {
 				PROPERTIES: {COLOR: 9},
 			},
 		)
+		Class.hexagonLeviathanBottomARDreadV2.GUNS.push(
+			{
+				POSITION: [7, 13.5, 0.001, 9.5, 0, 60*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
 	}
 	Class.leviathanARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Leviathan",
 		GUNS: [],
+		BODY: {
+			SPEED: 2.35,
+			HEALTH: 0.35,
+		},
 	    TURRETS: [
 			{
 				POSITION: [12, 0, 0, 0, 0, 1],
 				TYPE: ["pentagonLeviathanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
-			}
-		],
-	}
-	for (let i = 0; i < 5; i++) {
-		Class.leviathanARDreadV2.GUNS.push(
-			{
-				POSITION: [7, 17, 0.001, 9, 0, 72*i, 0],
-				PROPERTIES: {COLOR: 9},
 			},
-		)
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
+		],
 	}
 	Class.valrayvnARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Valrayvn",
 		GUNS: [],
+		BODY: {
+			SPEED: 2.15,
+			HEALTH: 0.5,
+		},
 	    TURRETS: [
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
 		],
 	}
 	for (let i = 0; i < 5; i++) {
-		Class.valrayvnARDreadV2.GUNS.push(
-			{
-				POSITION: [7, 17, 0.001, 9, 0, 72*i, 0],
-				PROPERTIES: {COLOR: 9},
-			},
-		)
 		Class.valrayvnARDreadV2.TURRETS.push(
 			{
 				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
@@ -2529,20 +2578,22 @@ module.exports = ({ Class }) => {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Pegasus",
 		GUNS: [],
+		BODY: {
+			SPEED: 2.15,
+			HEALTH: 0.5,
+		},
 	    TURRETS: [
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
 		],
 	}
 	for (let i = 0; i < 5; i++) {
-		Class.pegasusARDreadV2.GUNS.push(
-			{
-				POSITION: [7, 17, 0.001, 9, 0, 72*i, 0],
-				PROPERTIES: {COLOR: 9},
-			},
-		)
 		Class.pegasusARDreadV2.TURRETS.push(
 			{
 				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
@@ -2623,126 +2674,189 @@ module.exports = ({ Class }) => {
 	    TURRETS: [],
 	}
 
-	Class.tanks.UPGRADES_TIER_0.push("dreadARDreadV2");
-		Class.dreadARDreadV2.UPGRADES_TIER_1 = ["swordARDreadV2", "pacifierARDreadV2", "peacekeeperARDreadV2", "invaderARDreadV2", "centaurARDreadV2"];
+	Class.addons.UPGRADES_TIER_0.push("dreadARDreadV2");
+		Class.dreadARDreadV2.UPGRADES_TIER_0 = [
+			["sword2ARDreadV2", "dreadBodyARDreadV2",],
+			["pacifier2ARDreadV2", "dreadBodyARDreadV2"],
+			["peacekeeper2ARDreadV2", "dreadBodyARDreadV2"],
+			["invader2ARDreadV2", "dreadBodyARDreadV2"],
+			["centaur2ARDreadV2", "dreadBodyARDreadV2"],
+		];
 
-			// Weapons
+		Class.sword2ARDreadV2.UPGRADES_TIER_0 = ["swordARDreadV2"];
+		Class.pacifier2ARDreadV2.UPGRADES_TIER_0 = ["pacifierARDreadV2"];
+		Class.peacekeeper2ARDreadV2.UPGRADES_TIER_0 = ["peacekeeperARDreadV2"];
+		Class.invader2ARDreadV2.UPGRADES_TIER_0 = ["invaderARDreadV2"];
+		Class.centaur2ARDreadV2.UPGRADES_TIER_0 = ["centaurARDreadV2"];
+
+		Class.dreadWeaponARDreadV2.UPGRADES_TIER_0 = ["swordARDreadV2", "pacifierARDreadV2", "peacekeeperARDreadV2", "invaderARDreadV2", "centaurARDreadV2"];
+
 			Class.swordARDreadV2.UPGRADES_TIER_M1 = ["gladiusARDreadV2", "sabreARDreadV2", "slingARDreadV2", "catapultARDreadV2", "dartARDreadV2"];
-				Class.gladiusARDreadV2.UPGRADES_TIER_M1 = ["bladeARDreadV2"];
-					Class.bladeARDreadV2.UPGRADES_TIER_M1 = ["rapierARDreadV2"];
-				Class.sabreARDreadV2.UPGRADES_TIER_M1 = ["bayonetARDreadV2"];
-					Class.bayonetARDreadV2.UPGRADES_TIER_M1 = ["javelinARDreadV2"];
+				Class.gladiusARDreadV2.UPGRADES_TIER_0 = ["bladeARDreadV2"];
+					Class.bladeARDreadV2.UPGRADES_TIER_0 = ["rapierARDreadV2"];
+						Class.rapierARDreadV2.UPGRADES_TIER_0 = [];
+				Class.sabreARDreadV2.UPGRADES_TIER_0 = ["bayonetARDreadV2"];
+					Class.bayonetARDreadV2.UPGRADES_TIER_0 = ["javelinARDreadV2"];
+						Class.javelinARDreadV2.UPGRADES_TIER_0 = [];
 				Class.slingARDreadV2.UPGRADES_TIER_M1 = ["atlatlARDreadV2"];
 					Class.atlatlARDreadV2.UPGRADES_TIER_M1 = ["woomeraARDreadV2"];
+						Class.woomeraARDreadV2.UPGRADES_TIER_0 = [];
 				Class.catapultARDreadV2.UPGRADES_TIER_M1 = ["ballistaARDreadV2"];
 					Class.ballistaARDreadV2.UPGRADES_TIER_M1 = ["trebuchetARDreadV2"];
+						Class.trebuchetARDreadV2.UPGRADES_TIER_0 = [];
 				Class.dartARDreadV2.UPGRADES_TIER_M1 = ["barbARDreadV2"];
 					Class.barbARDreadV2.UPGRADES_TIER_M1 = ["boltARDreadV2"];
+						Class.boltARDreadV2.UPGRADES_TIER_0 = [];
 
 			Class.pacifierARDreadV2.UPGRADES_TIER_M1 = ["mediatorARDreadV2", "negotiatorARDreadV2", "melderARDreadV2", "crackerARDreadV2", "grabberARDreadV2"];
-				Class.mediatorARDreadV2.UPGRADES_TIER_M1 = ["mitigatorARDreadV2"];
-					Class.mitigatorARDreadV2.UPGRADES_TIER_M1 = ["diplomatARDreadV2"];
-				Class.negotiatorARDreadV2.UPGRADES_TIER_M1 = ["appeaserARDreadV2"];
-					Class.appeaserARDreadV2.UPGRADES_TIER_M1 = ["arbitratorARDreadV2"];
+				Class.mediatorARDreadV2.UPGRADES_TIER_0 = ["mitigatorARDreadV2"];
+					Class.mitigatorARDreadV2.UPGRADES_TIER_0 = ["diplomatARDreadV2"];
+						Class.diplomatARDreadV2.UPGRADES_TIER_0 = [];
+				Class.negotiatorARDreadV2.UPGRADES_TIER_0 = ["appeaserARDreadV2"];
+					Class.appeaserARDreadV2.UPGRADES_TIER_0 = ["arbitratorARDreadV2"];
+						Class.arbitratorARDreadV2.UPGRADES_TIER_0 = [];
 				Class.melderARDreadV2.UPGRADES_TIER_M1 = ["amalgamARDreadV2"];
 					Class.amalgamARDreadV2.UPGRADES_TIER_M1 = ["dissolverARDreadV2"];
+						Class.dissolverARDreadV2.UPGRADES_TIER_0 = [];
 				Class.crackerARDreadV2.UPGRADES_TIER_M1 = ["breakerARDreadV2"];
 					Class.breakerARDreadV2.UPGRADES_TIER_M1 = ["eroderARDreadV2"];
+						Class.eroderARDreadV2.UPGRADES_TIER_0 = [];
 				Class.grabberARDreadV2.UPGRADES_TIER_M1 = ["clasperARDreadV2"];
 					Class.clasperARDreadV2.UPGRADES_TIER_M1 = ["gripperARDreadV2"];
+						Class.gripperARDreadV2.UPGRADES_TIER_0 = [];
 
 			Class.peacekeeperARDreadV2.UPGRADES_TIER_M1 = ["enforcerARDreadV2", "executorARDreadV2", "doserARDreadV2", "swirlARDreadV2", "pelterARDreadV2"];
-				Class.enforcerARDreadV2.UPGRADES_TIER_M1 = ["suppressorARDreadV2"];
-					Class.suppressorARDreadV2.UPGRADES_TIER_M1 = ["retardantARDreadV2"];
-				Class.executorARDreadV2.UPGRADES_TIER_M1 = ["inhibitorARDreadV2"];
-					Class.inhibitorARDreadV2.UPGRADES_TIER_M1 = ["tyrantARDreadV2"];
+				Class.enforcerARDreadV2.UPGRADES_TIER_0 = ["suppressorARDreadV2"];
+					Class.suppressorARDreadV2.UPGRADES_TIER_0 = ["retardantARDreadV2"];
+						Class.retardantARDreadV2.UPGRADES_TIER_0 = [];
+				Class.executorARDreadV2.UPGRADES_TIER_0 = ["inhibitorARDreadV2"];
+					Class.inhibitorARDreadV2.UPGRADES_TIER_0 = ["tyrantARDreadV2"];
+						Class.tyrantARDreadV2.UPGRADES_TIER_0 = [];
 				Class.doserARDreadV2.UPGRADES_TIER_M1 = ["tranquilizerARDreadV2"];
 					Class.tranquilizerARDreadV2.UPGRADES_TIER_M1 = ["anesthesiologistARDreadV2"];
+						Class.anesthesiologistARDreadV2.UPGRADES_TIER_0 = [];
 				Class.swirlARDreadV2.UPGRADES_TIER_M1 = ["spiralARDreadV2"];
 					Class.spiralARDreadV2.UPGRADES_TIER_M1 = ["helixARDreadV2"];
+						Class.helixARDreadV2.UPGRADES_TIER_0 = [];
 				Class.pelterARDreadV2.UPGRADES_TIER_M1 = ["shellerARDreadV2"];
 					Class.shellerARDreadV2.UPGRADES_TIER_M1 = ["bombardmentARDreadV2"];
+						Class.bombardmentARDreadV2.UPGRADES_TIER_0 = [];
 
 			Class.invaderARDreadV2.UPGRADES_TIER_M1 = ["inquisitorARDreadV2", "assailantARDreadV2", "radiationARDreadV2", "boxerARDreadV2", "disablerARDreadV2"];
-				Class.inquisitorARDreadV2.UPGRADES_TIER_M1 = ["infiltratorARDreadV2"];
-					Class.infiltratorARDreadV2.UPGRADES_TIER_M1 = ["raiderARDreadV2"];
-				Class.assailantARDreadV2.UPGRADES_TIER_M1 = ["aggressorARDreadV2"];
-					Class.aggressorARDreadV2.UPGRADES_TIER_M1 = ["gladiatorARDreadV2"];
+				Class.inquisitorARDreadV2.UPGRADES_TIER_0 = ["infiltratorARDreadV2"];
+					Class.infiltratorARDreadV2.UPGRADES_TIER_0 = ["raiderARDreadV2"];
+						Class.raiderARDreadV2.UPGRADES_TIER_0 = [];
+				Class.assailantARDreadV2.UPGRADES_TIER_0 = ["aggressorARDreadV2"];
+					Class.aggressorARDreadV2.UPGRADES_TIER_0 = ["gladiatorARDreadV2"];
+						Class.gladiatorARDreadV2.UPGRADES_TIER_0 = [];
 				Class.radiationARDreadV2.UPGRADES_TIER_M1 = ["haloARDreadV2"];
 					Class.haloARDreadV2.UPGRADES_TIER_M1 = ["starlightARDreadV2"];
+						Class.starlightARDreadV2.UPGRADES_TIER_0 = [];
 				Class.boxerARDreadV2.UPGRADES_TIER_M1 = ["sluggerARDreadV2"];
 					Class.sluggerARDreadV2.UPGRADES_TIER_M1 = ["bruiserARDreadV2"];
+						Class.bruiserARDreadV2.UPGRADES_TIER_0 = [];
 				Class.disablerARDreadV2.UPGRADES_TIER_M1 = ["debilitatorARDreadV2"];
 					Class.debilitatorARDreadV2.UPGRADES_TIER_M1 = ["incapacitatorARDreadV2"];
+						Class.incapacitatorARDreadV2.UPGRADES_TIER_0 = [];
 
 			Class.centaurARDreadV2.UPGRADES_TIER_M1 = ["daemonARDreadV2", "minotaurARDreadV2", "cleanerARDreadV2", "shadeARDreadV2", "screwdriverARDreadV2"];
-				Class.daemonARDreadV2.UPGRADES_TIER_M1 = ["hydraARDreadV2"];
-					Class.hydraARDreadV2.UPGRADES_TIER_M1 = ["cerberusARDreadV2"];
-				Class.minotaurARDreadV2.UPGRADES_TIER_M1 = ["beelzebubARDreadV2"];
-					Class.beelzebubARDreadV2.UPGRADES_TIER_M1 = ["luciferARDreadV2"];
+				Class.daemonARDreadV2.UPGRADES_TIER_0 = ["hydraARDreadV2"];
+					Class.hydraARDreadV2.UPGRADES_TIER_0 = ["cerberusARDreadV2"];
+						Class.cerberusARDreadV2.UPGRADES_TIER_0 = [];
+				Class.minotaurARDreadV2.UPGRADES_TIER_0 = ["beelzebubARDreadV2"];
+					Class.beelzebubARDreadV2.UPGRADES_TIER_0 = ["luciferARDreadV2"];
+						Class.luciferARDreadV2.UPGRADES_TIER_0 = [];
 				Class.cleanerARDreadV2.UPGRADES_TIER_M1 = ["sweeperARDreadV2"];
 					Class.sweeperARDreadV2.UPGRADES_TIER_M1 = ["sterilizerARDreadV2"];
+						Class.sterilizerARDreadV2.UPGRADES_TIER_0 = [];
 				Class.shadeARDreadV2.UPGRADES_TIER_M1 = ["aegisARDreadV2"];
 					Class.aegisARDreadV2.UPGRADES_TIER_M1 = ["hielamanARDreadV2"];
+						Class.hielamanARDreadV2.UPGRADES_TIER_0 = [];
 				Class.screwdriverARDreadV2.UPGRADES_TIER_M1 = ["drillARDreadV2"];
 					Class.drillARDreadV2.UPGRADES_TIER_M1 = ["jackhammerARDreadV2"];
+						Class.jackhammerARDreadV2.UPGRADES_TIER_0 = [];
 
-			// Bodies
+		Class.dreadBodyARDreadV2.UPGRADES_TIER_0 = ["byteARDreadV2", "showerARDreadV2", "atmosphereARDreadV2", "juggernautARDreadV2", "stomperARDreadV2", "dropperARDreadV2", "spotterARDreadV2"];
+
 			Class.byteARDreadV2.UPGRADES_TIER_M1 = ["automationARDreadV2", "kilobyteARDreadV2", "lighterARDreadV2"];
 
 				Class.automationARDreadV2.UPGRADES_TIER_M1 = ["mechanismARDreadV2", "fusionARDreadV2", "binaryARDreadV2", "exosphereARDreadV2", "burgARDreadV2", "batonARDreadV2"];
-					Class.mechanismARDreadV2.UPGRADES_TIER_M1 = ["skynetARDreadV2"];
-					Class.fusionARDreadV2.UPGRADES_TIER_M1 = ["supernovaARDreadV2"];
-					Class.binaryARDreadV2.UPGRADES_TIER_M1 = ["cipherARDreadV2"];
-					Class.exosphereARDreadV2.UPGRADES_TIER_M1 = ["interstellarARDreadV2"];
+					Class.mechanismARDreadV2.UPGRADES_TIER_0 = ["skynetARDreadV2"];
+						Class.skynetARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("skynetARDreadV2")];
+					Class.fusionARDreadV2.UPGRADES_TIER_0 = ["supernovaARDreadV2"];
+						Class.supernovaARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("supernovaARDreadV2")];
+					Class.binaryARDreadV2.UPGRADES_TIER_0 = ["cipherARDreadV2"];
+						Class.cipherARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("cipherARDreadV2")];
+					Class.exosphereARDreadV2.UPGRADES_TIER_0 = ["interstellarARDreadV2"];
+						Class.interstellarARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("interstellarARDreadV2")];
 					Class.burgARDreadV2.UPGRADES_TIER_M1 = ["bunkerARDreadV2"];
+						Class.bunkerARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("bunkerARDreadV2")];
 					Class.batonARDreadV2.UPGRADES_TIER_M1 = ["maceARDreadV2"];
+						Class.maceARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("maceARDreadV2")];
 
 				Class.kilobyteARDreadV2.UPGRADES_TIER_M1 = ["megabyteARDreadV2", "binaryARDreadV2", "trojanARDreadV2", "hardwareARDreadV2", "siloARDreadV2", "fireworkARDreadV2"];
-					Class.megabyteARDreadV2.UPGRADES_TIER_M1 = ["gigabyteARDreadV2"];
-					// Class.binaryARDreadV2.UPGRADES_TIER_M1 = ["cipherARDreadV2"];
-					Class.trojanARDreadV2.UPGRADES_TIER_M1 = ["malwareARDreadV2"];
-					Class.hardwareARDreadV2.UPGRADES_TIER_M1 = ["softwareARDreadV2"];
+					Class.megabyteARDreadV2.UPGRADES_TIER_0 = ["gigabyteARDreadV2"];
+						Class.gigabyteARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("gigabyteARDreadV2")];
+					// Class.binaryARDreadV2.UPGRADES_TIER_0 = ["cipherARDreadV2"];
+					Class.trojanARDreadV2.UPGRADES_TIER_0 = ["malwareARDreadV2"];
+						Class.malwareARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("malwareARDreadV2")];
+					Class.hardwareARDreadV2.UPGRADES_TIER_0 = ["softwareARDreadV2"];
+						Class.softwareARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("softwareARDreadV2")];
 					Class.siloARDreadV2.UPGRADES_TIER_M1 = ["arsenalARDreadV2"];
+						Class.arsenalARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("arsenalARDreadV2")];
 					Class.fireworkARDreadV2.UPGRADES_TIER_M1 = ["missileARDreadV2"];
-
+						Class.missileARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("missileARDreadV2")];
+					
 				Class.lighterARDreadV2.UPGRADES_TIER_M1 = ["burnerARDreadV2"];
 					Class.burnerARDreadV2.UPGRADES_TIER_M1 = ["roasterARDreadV2"];
+						Class.roasterARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("roasterARDreadV2")];
 
 			Class.showerARDreadV2.UPGRADES_TIER_M1 = ["stormARDreadV2"];
 				Class.stormARDreadV2.UPGRADES_TIER_M1 = ["tempestARDreadV2"];
 					Class.tempestARDreadV2.UPGRADES_TIER_M1 = ["monsoonARDreadV2"];
+						Class.monsoonARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("monsoonARDreadV2")];
 
-			Class.atmosphereARDreadV2.UPGRADES_TIER_M1 = ["coronaARDreadV2", "thermosphereARDreadV2"];
+			Class.atmosphereARDreadV2.UPGRADES_TIER_0 = ["coronaARDreadV2", "thermosphereARDreadV2"];
 
 				Class.coronaARDreadV2.UPGRADES_TIER_M1 = ["chromosphereARDreadV2", "fusionARDreadV2", "trojanARDreadV2", "planetARDreadV2", "sirenARDreadV2", "towerARDreadV2"];
-					Class.chromosphereARDreadV2.UPGRADES_TIER_M1 = ["photosphereARDreadV2"];
-					// Class.fusionARDreadV2.UPGRADES_TIER_M1 = ["supernovaARDreadV2"];
-					// Class.trojanARDreadV2.UPGRADES_TIER_M1 = ["malwareARDreadV2"];
-					Class.planetARDreadV2.UPGRADES_TIER_M1 = ["astronomicARDreadV2"];
+					Class.chromosphereARDreadV2.UPGRADES_TIER_0 = ["photosphereARDreadV2"];
+						Class.photosphereARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("photosphereARDreadV2")];
+					// Class.fusionARDreadV2.UPGRADES_TIER_0 = ["supernovaARDreadV2"];
+					// Class.trojanARDreadV2.UPGRADES_TIER_0 = ["malwareARDreadV2"];
+					Class.planetARDreadV2.UPGRADES_TIER_0 = ["astronomicARDreadV2"];
+						Class.astronomicARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("astronomicARDreadV2")];
 					Class.sirenARDreadV2.UPGRADES_TIER_M1 = ["valrayvnARDreadV2"];
+						Class.valrayvnARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("valrayvnARDreadV2")];
 					Class.towerARDreadV2.UPGRADES_TIER_M1 = ["mountainARDreadV2"];
+						Class.mountainARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("mountainARDreadV2")];
 
 				Class.thermosphereARDreadV2.UPGRADES_TIER_M1 = ["mesosphereARDreadV2", "exosphereARDreadV2", "hardwareARDreadV2", "moonARDreadV2", "harpyARDreadV2", "creatureARDreadV2"];
-					Class.mesosphereARDreadV2.UPGRADES_TIER_M1 = ["stratosphereARDreadV2"];
-					// Class.exosphereARDreadV2.UPGRADES_TIER_M1 = ["interstellarARDreadV2"];
-					// Class.hardwareARDreadV2.UPGRADES_TIER_M1 = ["softwareARDreadV2"];
-					Class.moonARDreadV2.UPGRADES_TIER_M1 = ["grandioseARDreadV2"];
+					Class.mesosphereARDreadV2.UPGRADES_TIER_0 = ["stratosphereARDreadV2"];
+						Class.stratosphereARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("stratosphereARDreadV2")];
+					// Class.exosphereARDreadV2.UPGRADES_TIER_0 = ["interstellarARDreadV2"];
+					// Class.hardwareARDreadV2.UPGRADES_TIER_0 = ["softwareARDreadV2"];
+					Class.moonARDreadV2.UPGRADES_TIER_0 = ["grandioseARDreadV2"];
+						Class.grandioseARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("grandioseARDreadV2")];
 					Class.harpyARDreadV2.UPGRADES_TIER_M1 = ["pegasusARDreadV2"];
+						Class.pegasusARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("pegasusARDreadV2")];
 					Class.creatureARDreadV2.UPGRADES_TIER_M1 = ["beastARDreadV2"];
+						Class.beastARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("beastARDreadV2")];
 
 			Class.juggernautARDreadV2.UPGRADES_TIER_M1 = ["jumboARDreadV2", "colossalARDreadV2", "cottonARDreadV2", "ironARDreadV2"];
 
 				Class.jumboARDreadV2.UPGRADES_TIER_M1 = ["goliathARDreadV2", "planetARDreadV2", "moonARDreadV2", "burgARDreadV2", "siloARDreadV2", "armadaARDreadV2"];
-					Class.goliathARDreadV2.UPGRADES_TIER_M1 = ["behemothARDreadV2"];
+					Class.goliathARDreadV2.UPGRADES_TIER_0 = ["behemothARDreadV2"];
+						Class.behemothARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("behemothARDreadV2")];
 					// Class.planetARDreadV2.UPGRADES_TIER_M1 = ["astronomicARDreadV2"];
 					// Class.moonARDreadV2.UPGRADES_TIER_M1 = ["grandioseARDreadV2"];
 					// Class.burgARDreadV2.UPGRADES_TIER_M1 = ["bunkerARDreadV2"];
 					// Class.siloARDreadV2.UPGRADES_TIER_M1 = ["arsenalARDreadV2"];
 					Class.armadaARDreadV2.UPGRADES_TIER_M1 = ["battalionARDreadV2"];
+						Class.battalionARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("battalionARDreadV2")];
 
 				Class.colossalARDreadV2.UPGRADES_TIER_M1 = ["titanARDreadV2", "sirenARDreadV2", "harpyARDreadV2", "batonARDreadV2", "fireworkARDreadV2", "armadaARDreadV2"];
-					Class.titanARDreadV2.UPGRADES_TIER_M1 = ["leviathanARDreadV2"];
+					Class.titanARDreadV2.UPGRADES_TIER_0 = ["leviathanARDreadV2"];
+						Class.leviathanARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("leviathanARDreadV2")];
 					// Class.sirenARDreadV2.UPGRADES_TIER_M1 = ["valrayvnARDreadV2"];
 					// Class.harpyARDreadV2.UPGRADES_TIER_M1 = ["pegasusARDreadV2"];
 					// Class.batonARDreadV2.UPGRADES_TIER_M1 = ["maceARDreadV2"];
@@ -2751,30 +2865,39 @@ module.exports = ({ Class }) => {
 
 				Class.cottonARDreadV2.UPGRADES_TIER_M1 = ["featherARDreadV2"];
 					Class.featherARDreadV2.UPGRADES_TIER_M1 = ["wispARDreadV2"];
+						Class.wispARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("wispARDreadV2")];
 
 				Class.ironARDreadV2.UPGRADES_TIER_M1 = ["steelARDreadV2"];
 					Class.steelARDreadV2.UPGRADES_TIER_M1 = ["titaniumARDreadV2"];
+						Class.titaniumARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("titaniumARDreadV2")];
 			
 			Class.stomperARDreadV2.UPGRADES_TIER_M1 = ["rollerARDreadV2", "owlARDreadV2"];
 
 				Class.rollerARDreadV2.UPGRADES_TIER_M1 = ["flattenerARDreadV2", "towerARDreadV2", "creatureARDreadV2", "spotlightARDreadV2", "furnaceARDreadV2", "asteroidARDreadV2"];
 					Class.flattenerARDreadV2.UPGRADES_TIER_M1 = ["crusherARDreadV2"];
+						Class.crusherARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("crusherARDreadV2")];
 					// Class.towerARDreadV2.UPGRADES_TIER_M1 = ["mountainARDreadV2"];
 					// Class.creatureARDreadV2.UPGRADES_TIER_M1 = ["beastARDreadV2"];
 					Class.spotlightARDreadV2.UPGRADES_TIER_M1 = ["luminanceARDreadV2"];
+						Class.luminanceARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("luminanceARDreadV2")];
 					Class.furnaceARDreadV2.UPGRADES_TIER_M1 = ["foundryARDreadV2"];
+						Class.foundryARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("foundryARDreadV2")];
 					Class.asteroidARDreadV2.UPGRADES_TIER_M1 = ["planetoidARDreadV2"];
+						Class.planetoidARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("planetoidARDreadV2")];
 
 				Class.owlARDreadV2.UPGRADES_TIER_M1 = ["cardinalARDreadV2"];
 					Class.cardinalARDreadV2.UPGRADES_TIER_M1 = ["finchARDreadV2"];
+						Class.finchARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("finchARDreadV2")];
 
 			Class.dropperARDreadV2.UPGRADES_TIER_M1 = ["baiterARDreadV2"];
 				Class.baiterARDreadV2.UPGRADES_TIER_M1 = ["cagerARDreadV2"];
 					Class.cagerARDreadV2.UPGRADES_TIER_M1 = ["hoarderARDreadV2"];
+						Class.hoarderARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("hoarderARDreadV2")];
 
 			Class.spotterARDreadV2.UPGRADES_TIER_M1 = ["spyARDreadV2"];
 				Class.spyARDreadV2.UPGRADES_TIER_M1 = ["monitorARDreadV2"];
 					Class.monitorARDreadV2.UPGRADES_TIER_M1 = ["trackerARDreadV2"];
+						Class.trackerARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("trackerARDreadV2")];
 
 	const hexDreadNames = {
 		Javelin: {
@@ -2854,23 +2977,20 @@ module.exports = ({ Class }) => {
 		},
 	};
 
-	const hexnoughtScaleFactor = 0.9;
-	function mergeHexnoughtV2(weapon1, weapon2, body) {
+	function mergeHexnoughtWeaponV2(weapon1, weapon2) {
 		weapon1 = ensureIsClass(Class, weapon1);
 		weapon2 = ensureIsClass(Class, weapon2);
-		body = ensureIsClass(Class, body);
 
 		let PARENT = Class.genericHexnought,
 			BODY = JSON.parse(JSON.stringify(PARENT.BODY)),
 			GUNS = [],
 			gunsOnOneSide = [],
 			weapon2GunsOnOneSide = [],
-			TURRETS = [],
-			bodyLabel = body.LABEL;
+			TURRETS = [];
 
 		// Label
-		let name1 = hexDreadNames[weapon1.LABEL][weapon2.LABEL],
-			name2 = hexDreadNames[weapon2.LABEL][weapon1.LABEL],
+		let name1 = "", // hexDreadNames[weapon1.LABEL][weapon2.LABEL],
+			name2 = "", // hexDreadNames[weapon2.LABEL][weapon1.LABEL],
 			weaponName = "",
 			orientationId = 0;
 		if(name1) {
@@ -2879,15 +2999,10 @@ module.exports = ({ Class }) => {
 			weaponName = name2,
 			orientationId = 1;
 		}
-		let LABEL = weaponName + "-" + bodyLabel,
-			className = weaponName.toLowerCase() + orientationId + bodyLabel.toLowerCase() + "ARDreadV2";
+		let LABEL = weaponName,
+			className = weaponName.toLowerCase() + orientationId + "ARDreadV2";
 		
 		// Guns ----------------------
-		if (body.GUNS) gunsOnOneSide.push(...JSON.parse(JSON.stringify(body.GUNS.slice(0, body.GUNS.length / 5 * 2))));
-		for (let g in gunsOnOneSide) {
-			gunsOnOneSide[g].POSITION[5] *= 5 / 6;
-			gunsOnOneSide[g].POSITION[1] *= hexnoughtScaleFactor;
-		}
 		if (weapon1.GUNS) gunsOnOneSide.push(...JSON.parse(JSON.stringify(weapon1.GUNS.slice(0, weapon1.GUNS.length / 5))));
 		if (weapon2.GUNS) weapon2GunsOnOneSide = JSON.parse(JSON.stringify(weapon2.GUNS.slice(0, weapon2.GUNS.length / 5)));
 
@@ -2936,6 +3051,47 @@ module.exports = ({ Class }) => {
 			}
 		}
 		
+		// Body stat modification
+		if (weapon1.BODY) for (let m in weapon1.BODY) BODY[m] *= weapon1.BODY[m];
+		if (weapon2.BODY) for (let m in weapon2.BODY) BODY[m] *= weapon2.BODY[m];
+
+		// Smash it together
+		Class[className] = {
+			PARENT, BODY, LABEL, GUNS, TURRETS,
+		};
+		return className;
+	}
+	function makeHexnoughtBodyV2(body) {
+		if (!buildHexnoughts) return;
+		
+		body = ensureIsClass(Class, body);
+
+		let PARENT = Class.genericHexnought,
+			BODY = {},
+			GUNS = [],
+			gunsOnOneSide = [],
+			TURRETS = [],
+			LABEL = body.LABEL;
+
+		// Label
+		let className = LABEL.toLowerCase() + "HexARDreadV2";
+		
+		// Guns ----------------------
+		if (body.GUNS) gunsOnOneSide.push(...JSON.parse(JSON.stringify(body.GUNS.slice(0, body.GUNS.length / 5 * 2))));
+		for (let g in gunsOnOneSide) {
+			gunsOnOneSide[g].POSITION[5] *= 5 / 6;
+			gunsOnOneSide[g].POSITION[1] *= hexnoughtScaleFactor ** 3;
+			gunsOnOneSide[g].POSITION[4] *= hexnoughtScaleFactor ** 2;
+		}
+
+		for (let i = 0; i < 3; i++) {
+			for (let g in gunsOnOneSide) {
+				let gun = JSON.parse(JSON.stringify(gunsOnOneSide[g]));
+				gun.POSITION[5] += 120 * i;
+				GUNS.push(gun);
+			}
+		};
+		
 		// Turrets --------------------
 		let turretRingLoopLength = Math.floor(body.TURRETS.length / 5);
   
@@ -2973,9 +3129,7 @@ module.exports = ({ Class }) => {
 		}
 		
 		// Body stat modification
-		if (weapon1.BODY) for (let m in weapon1.BODY) BODY[m] *= weapon1.BODY[m];
-		if (weapon2.BODY) for (let m in weapon2.BODY) BODY[m] *= weapon2.BODY[m];
-		if (body.BODY) for (let m in body.BODY) BODY[m] *= body.BODY[m];
+		if (body.BODY) for (let m in body.BODY) BODY[m] = body.BODY[m];
 
 		// Smash it together
 		Class[className] = {
@@ -2984,68 +3138,19 @@ module.exports = ({ Class }) => {
 		return className;
 	}
 
-	// Merge function
-	let mergedDreads = [];
-	const pentanoughtWeapons = ["rapierARDreadV2", "javelinARDreadV2", "diplomatARDreadV2", "arbitratorARDreadV2", "retardantARDreadV2", "tyrantARDreadV2", "raiderARDreadV2", "gladiatorARDreadV2", "cerberusARDreadV2", "luciferARDreadV2"];
-
-	function mergeDreadv2(weapon, body) {
-		let className = weapon.split("_")[0] + body;
-
-		weapon = ensureIsClass(Class, weapon);
-		body = ensureIsClass(Class, body);
-
-		let PARENT = ensureIsClass(Class, weapon.PARENT[0]),
-			BODY = JSON.parse(JSON.stringify(PARENT.BODY)),
-			GUNS = [],
-			TURRETS = [],
-			LABEL = weapon.LABEL + "-" + body.LABEL,
-			UPGRADES_TIER_0 = [];
-		
-		// Guns
-		if (body.GUNS) GUNS.push(...body.GUNS);
-		if (weapon.GUNS) GUNS.push(...weapon.GUNS);
-		
-		// Turrets
-		TURRETS.push(...body.TURRETS);
-		
-		// Body stat modification
-		if (weapon.BODY) for (let m in weapon.BODY) BODY[m] *= weapon.BODY[m];
-		if (body.BODY) for (let m in body.BODY) BODY[m] *= body.BODY[m];
-
-		// Upgrades
-		for (let w in weapon.UPGRADES_TIER_M1) {
-			for (let b in body.UPGRADES_TIER_M1) {
-				let weaponName = weapon.UPGRADES_TIER_M1[w],
-					bodyName = body.UPGRADES_TIER_M1[b];
-
-				if (!mergedDreads.includes(weaponName + bodyName))
-					mergeDreadv2(weaponName, bodyName);
-				
-				UPGRADES_TIER_0.push(weaponName.split("_")[0] + bodyName);
+	// Merge hexdreads
+	const pentanoughtWeapons = [
+								"rapierARDreadV2", "javelinARDreadV2", "woomeraARDreadV2", "trebuchetARDreadV2", "boltARDreadV2",
+								"diplomatARDreadV2", "arbitratorARDreadV2", "dissolverARDreadV2", "eroderARDreadV2", "gripperARDreadV2",
+								"retardantARDreadV2", "tyrantARDreadV2", "anesthesiologistARDreadV2", "helixARDreadV2", "bombardmentARDreadV2",
+								"raiderARDreadV2", "gladiatorARDreadV2", "starlightARDreadV2", "bruiserARDreadV2", "incapacitatorARDreadV2",
+								"cerberusARDreadV2", "luciferARDreadV2", "sterilizerARDreadV2", "hielamanARDreadV2", "jackhammerARDreadV2",
+								];
+	if(buildHexnoughts) {
+		for (let i of pentanoughtWeapons) {
+			for (let j of pentanoughtWeapons) {
+				Class[i].UPGRADES_TIER_0.push(mergeHexnoughtWeaponV2(i, j));
 			}
-		}
-
-		// Hexnought building
-		if (weapon.PARENT[0] == "genericPentanought" && buildHexnoughts) {
-			for (let i in pentanoughtWeapons) {
-				UPGRADES_TIER_0.push(mergeHexnoughtV2(weapon, ensureIsClass(Class, pentanoughtWeapons[i]), body));
-			}
-		}
-
-		// Can he build it? Yes he can!
-		Class[className] = {
-			PARENT, BODY, LABEL, GUNS, TURRETS, UPGRADES_TIER_0,
-		};
-	}
-
-	// Initiate build for all dread paths and do upgrades for all eggnoughts
-	for (let w in eggnoughtWeapons) {
-		let weaponName = eggnoughtWeapons[w];
-		Class[weaponName].UPGRADES_TIER_1 = [];
-		for (let b in eggnoughtBodies) {
-			let bodyName = eggnoughtBodies[b];
-			mergeDreadv2(weaponName, bodyName);
-			Class[weaponName].UPGRADES_TIER_1.push(weaponName.split("_")[0] + bodyName);
 		}
 	}
 };
