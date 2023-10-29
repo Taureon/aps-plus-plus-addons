@@ -68,6 +68,10 @@ module.exports = ({ Class }) => {
 	// For hexnought merging
 	const hexnoughtScaleFactor = 0.9;
 
+	// Missing stats
+	g.flame = {reload: 0.5, recoil: 0.1, shudder: 1.5, range: 0.5, spray: 7, damage: 2, health: 1/3};
+	g.honcho = {size: 2, damage: 2.5, health: 1.2, reload: 2, speed: 0.7};
+
 	// Misc
 	Class.genericDreadnoughtARDreadV2 = {
 		PARENT: ["genericTank"],
@@ -1011,7 +1015,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [5, 10, 1.5, 8, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.drone, g.over, g.over, {size: 2, damage: 2, health: 1.2, reload: 2, speed: 0.7}]),
+					SHOOT_SETTINGS: combineStats([g.drone, g.over, g.over, g.honcho]),
 					TYPE: "drone",
 					AUTOFIRE: true,
 					SYNCS_SKILLS: true,
@@ -1225,20 +1229,95 @@ module.exports = ({ Class }) => {
 			},
 		],
 	}
+	Class.lighterTurretARDreadV2 = {
+		PARENT: 'genericTank',
+		COLOR: 16,
+		CONTROLLERS: ['nearestDifferentMaster'],
+		FACING_TYPE: 'autospin',
+		INDEPENDENT: true,
+		GUNS: [
+			{
+				POSITION: [15, 11, 1, 0, 0, 180, 0],
+				PROPERTIES: {COLOR: 13},
+			},
+			{
+				POSITION: [16.5, 7, 1, 0, 0, 180, 0],
+			},
+			{
+				POSITION: [14, 2, 1, 0, 7, 0, 0],
+			},
+			{
+				POSITION: [14, 2, 1, 0, -7, 0, 0],
+			},
+			{
+				POSITION: [22, 7, 1, 0, 0, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.flame]),
+					TYPE: 'growBullet',
+				}
+			},
+		],
+	};
 	Class.lighterARDreadV2 = { // Flamethrower
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Lighter",
 	    TURRETS: [
 			{
-				POSITION: [12, 0, 0, 0, 0, 1],
+				POSITION: [13, 0, 0, 0, 0, 1],
 				TYPE: ["square", {TURRET_FACES_CLIENT: true}],
 			},
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: 'lighterTurretARDreadV2',
+			}
 		],
 	}
+	Class.stormTurretARDreadV2 = {
+		PARENT: 'genericTank',
+		LABEL: "",
+		BODY: {
+		  FOV: 1.5,
+		},
+		COLOR: 16,
+		MAX_CHILDREN: 6,
+		GUNS: [
+			{
+				POSITION: [6, 12, 1.2, 8, 0, 90, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.drone, g.over, {size: 1.2}]),
+					TYPE: 'drone',
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+					STAT_CALCULATOR: gunCalcNames.drone,
+					WAIT_TO_CYCLE: true,
+				},
+			},
+			{
+				POSITION: [6, 12, 1.2, 8, 0, 270, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.drone, g.over, {size: 1.2}]),
+					TYPE: 'drone',
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+					STAT_CALCULATOR: gunCalcNames.drone,
+					WAIT_TO_CYCLE: true,
+				},
+			},
+		],
+	};
 	Class.stormARDreadV2 = { // Drones
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Storm",
-	    TURRETS: [],
+	    TURRETS: [
+			{
+				POSITION: [14, 0, 0, 0, 0, 1],
+				TYPE: ["square", {TURRET_FACES_CLIENT: true}],
+			},
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: 'stormTurretARDreadV2',
+			}
+		],
 	}
 	Class.coronaAuraARDreadV2 = addAura(1.5, 0.8);
 	Class.coronaARDreadV2 = {
@@ -1341,37 +1420,220 @@ module.exports = ({ Class }) => {
 			},
 		],
 	}
+	Class.cottonTurretARDreadV2 = {
+		PARENT: ["genericSquarenought"],
+		MIRROR_MASTER_ANGLE: true,
+		SHAPE: [[1, 0], [0, 1], [-1, 0], [0, -1]],
+		GUNS: [],
+	}
+	for(let i = 0; i < 4; i++) {
+		Class.cottonTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [25, 16, 0.001, 0, 0, 90*i+45, 0],
+				PROPERTIES: {COLOR: 9}
+			},
+		)
+	  }
 	Class.cottonARDreadV2 = { // Drifter
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Cotton",
+		BODY: {
+			SPEED: 1.9,
+			ACCELERATION: 0.25,
+		},
+	    TURRETS: [
+			{
+				POSITION: [12, 0, 0, 0, 0, 1],
+				TYPE: 'cottonTurretARDreadV2',
+			}
+		],
+	}
+	Class.ironTurretARDreadV2 = {
+		PARENT: ["genericSquarenought"],
+		SHAPE: 0,
+		MIRROR_MASTER_ANGLE: true,
 		GUNS: [],
-	    TURRETS: [],
+	}
+	for(let i = 0; i < 8; i++) {
+		Class.ironTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [8, 6, 0.001, 20, 0, 45*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+			{
+				POSITION: [8, 6, 0.001, -20, 0, 45*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
 	}
 	Class.ironARDreadV2 = { // Body damage increase
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Iron",
+		BODY: {
+			DAMAGE: 1.5,
+			PENETRATION: 1.3,
+		},
 		GUNS: [],
-	    TURRETS: [],
+	    TURRETS: [
+			{
+				POSITION: [5.5, 0, 0, 0, 0, 1],
+				TYPE: 'ironTurretARDreadV2',
+			}
+		],
+	}
+	for(let i = 0; i < 4; i++) {
+		Class.ironARDreadV2.GUNS.push(
+			{
+				POSITION: [6, 6, 0.001, 9.5, 5, 90*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+			{
+				POSITION: [6, 6, 0.001, 9.5, -5, 90*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
+	}
+	Class.rollerTurretARDreadV2 = {
+		PARENT: ["genericSquarenought"],
+		MIRROR_MASTER_ANGLE: true,
+		GUNS: [],
+	}
+	for(let i = 0; i < 4; i++) {
+		Class.rollerTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [20, 20, 0, 0, 0, 90*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
 	}
 	Class.rollerARDreadV2 = { // Size increase
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Roller",
-	    TURRETS: [],
+		SIZE: 1.2,
+		BODY: {
+			SPEED: 0.9,
+			HEALTH: 1.2,
+		},
+	    TURRETS: [
+			{
+				POSITION: [10, 0, 0, 0, 0, 1],
+				TYPE: 'rollerTurretARDreadV2',
+			}
+		],
+	}
+	Class.owlTurretARDreadV2 = {
+		PARENT: ["genericSquarenought"],
+		MIRROR_MASTER_ANGLE: true,
+		SHAPE: 4.5,
+		GUNS: [],
+	}
+	for(let i = 0; i < 4; i++) {
+		Class.owlTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [18.5/2, 18.5, 0.001, 9.5, 0, 90*i+45, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
 	}
 	Class.owlARDreadV2 = { // Size decrease
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Owl",
-	    TURRETS: [],
+		SIZE_FACTOR: 0.82,
+		BODY: {
+			HEALTH: 0.82,
+			SPEED: 1.1,
+			ACCELERATION: 1.25,
+		},
+	    TURRETS: [
+			{
+				POSITION: [11 / 1.414, 0, 0, 0, 0, 1],
+				TYPE: 'owlTurretARDreadV2',
+			}
+		],
+	}
+	Class.baiterTurretARDreadV2 = {
+		PARENT: 'genericTank',
+		CONTROLLERS: [["spin", {speed: -0.035}]],
+		INDEPENDENT: true,
+		LABEL: "",
+		COLOR: 16,
+		GUNS: [
+			{ 
+			  	POSITION: [8, 28, 1, -4, 0, 0, 0],
+			},
+			{
+				POSITION: [8, 28, 1, -4, 0, 90, 0],
+			},
+		],
+		TURRETS: [
+			{
+			  	POSITION: [16, 0, 0, 0, 0, 1],
+			  	TYPE: ['egg', {COLOR: 13}]
+			},
+			{
+			  	POSITION: [11, 0, 0, 0, 0, 1],
+			  	TYPE: ['egg', {COLOR: 16}]
+			},
+		]
 	}
     Class.baiterARDreadV2 = { // Minelayer
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Baiter",
-	    TURRETS: [],
+		GUNS: [
+			{
+				POSITION: [0, 12, 1, 8, 0, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.trap, g.pound]),
+					TYPE: exports.trap,
+					STAT_CALCULATOR: gunCalcNames.trap,
+				},
+			}
+		],
+	    TURRETS: [
+			{
+				POSITION: [14, 0, 0, 0, 0, 1],
+				TYPE: ['square', {MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [11, 0, 0, 0, 0, 1],
+				TYPE: 'baiterTurretARDreadV2'
+			},
+		],
 	}
+	Class.spyRadarARDreadV2 = {
+		PARENT: 'genericTank',
+		CONTROLLERS: [['spin', {speed: 0.02}]],
+		INDEPENDENT: true,
+		SHAPE: [[0.2, 1], [0.2, -1], [-0.2, -1], [-0.2, 1]],
+		COLOR: 17,
+		GUNS: [
+			{
+				POSITION: [4, 26, 1, -2, 0, 0, 0],
+				PROPERTIES: {COLOR: 13}
+			}
+		]
+	};
     Class.spyARDreadV2 = { // FOV
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Spy",
-	    TURRETS: [],
+		BODY: {
+			SPEED: 0.95,
+			FOV: 1.15,
+		},
+	    TURRETS: [
+			{
+				POSITION: [14, 0, 0, 0, 0, 1],
+				TYPE: ['egg', {COLOR: 16, MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [10, 0, 0, 0, 0, 1],
+				TYPE: ['egg', {COLOR: 13, MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [15, 0, 0, 0, 360, 1],
+				TYPE: 'spyRadarARDreadV2',
+			}
+		],
 	}
 
 	// T3 Weapons
