@@ -548,7 +548,7 @@ module.exports = ({ Class }) => {
 	Class.slingARDreadV2 = { // hunter
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Sling",
-		CONTROLLERS: ["zoom"],
+		CONTROLLERS: [["zoom", { distance: 300 }]],
     	TOOLTIP: "Hold right click to zoom.",
 	    GUNS: [],
 	}
@@ -580,14 +580,14 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [22, 9, 1, 0, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.preda, g.preda]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.preda, g.preda, g.preda, g.bitlessspeed, {size: 2}]),
 					TYPE: "bullet",
 				},
 			},
 			{
 				POSITION: [4, 11, 1, 15, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.preda, g.preda, g.fake]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.preda, g.preda, g.preda, g.fake]),
 					TYPE: "bullet",
 				},
 			},
@@ -714,7 +714,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [22, 10, 1, 0, 0, 0, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank, g.auto, {reload: 0.9}]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank, g.flank, g.auto, {reload: 0.9, recoil: 0.25}]),
 					TYPE: "bullet",
 				},
 			},
@@ -867,10 +867,10 @@ module.exports = ({ Class }) => {
 	for(let i = 0; i < 4; i++) {
 		Class.swirlARDreadV2.GUNS.push(
 			{
-				POSITION: [10, 10, -0.5, 9, 0, 90*i, 0],
+				POSITION: [10, 9, -0.5, 9, 0, 90*i, 0],
 			},
 			{
-				POSITION: [17, 11, -1.4, 0, 0, 90*i, 0],
+				POSITION: [17, 10, -1.4, 0, 0, 90*i, 0],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.arty, g.skim, g.morespeed, g.one_third_reload]),
 					TYPE: "swirlMissileARDreadV2",
@@ -1013,7 +1013,7 @@ module.exports = ({ Class }) => {
 	for(let i = 0; i < 4; i++) {
 		Class.boxerARDreadV2.GUNS.push(
 			{
-				POSITION: [5, 10, 1.5, 8, 0, 90*i, 0],
+				POSITION: [5, 11, 1.5, 8, 0, 90*i, 0],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.drone, g.over, g.over, g.honcho]),
 					TYPE: "drone",
@@ -1125,7 +1125,8 @@ module.exports = ({ Class }) => {
 			},
 		)
 	}
-	Class.auraTrap = makeAuto(Class.trap, "", {type: 'trinoughtSmallAura'});
+	Class.auraTrapAura = addAura(1/3, 2, 0.15);
+	Class.auraTrap = makeAuto(Class.trap, "", {type: 'auraTrapAura'});
 	Class.shadeARDreadV2 = { // aura-traps
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Shade",
@@ -1139,7 +1140,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [3, 7, 1.6, 14, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.one_third_reload, {health: 1.2}]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.hexatrap, {range: 0.8, health: 1.2}]),
 					TYPE: 'auraTrap',
 					STAT_CALCULATOR: gunCalcNames.trap,
 				},
@@ -1147,7 +1148,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [2, 5, 1.6, 15, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.one_third_reload, g.fake]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.hexatrap, g.fake]),
 					TYPE: 'bullet',
 					STAT_CALCULATOR: gunCalcNames.trap,
 				},
@@ -1164,7 +1165,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [19, 7, 1, 0, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.flank]),
 					TYPE: 'bullet',
 					STAT_CALCULATOR: gunCalcNames.trap,
 				},
@@ -1175,7 +1176,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [3, 8, 1.6, 13.5, 0, 90*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.hexatrap]),
 					TYPE: 'trap',
 					STAT_CALCULATOR: gunCalcNames.trap,
 				},
@@ -1623,10 +1624,14 @@ module.exports = ({ Class }) => {
 	    TURRETS: [
 			{
 				POSITION: [14, 0, 0, 0, 0, 1],
-				TYPE: ['egg', {COLOR: 16, MIRROR_MASTER_ANGLE: true}]
+				TYPE: ['square', {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
 				POSITION: [10, 0, 0, 0, 0, 1],
+				TYPE: ['egg', {COLOR: 16, MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [6, 0, 0, 0, 0, 1],
 				TYPE: ['egg', {COLOR: 13, MIRROR_MASTER_ANGLE: true}]
 			},
 			{
@@ -1688,17 +1693,75 @@ module.exports = ({ Class }) => {
 	Class.atlatlARDreadV2 = { // hunter
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Atlatl",
+	    CONTROLLERS: [["zoom", { distance: 550 }]],
+    	TOOLTIP: "Hold right click to zoom.",
 	    GUNS: [],
+	}
+	for (let i = 0; i < 3; i++) {
+		Class.atlatlARDreadV2.GUNS.push(
+			{
+				POSITION: [20, 6, 1, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.hunter, g.hunter2, {health: 1.1, speed: 1.15}]),
+					TYPE: "bullet",
+				},
+			},
+			{
+				POSITION: [17.5, 9, 1, 0, 0, 120*i, 0.25],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.hunter, {health: 1.1, speed: 1.15}]),
+					TYPE: "bullet",
+				},
+			},
+			{
+				POSITION: [5, 9, -1.6, 6, 0, 120*i, 0],
+			},
+		)
 	}
 	Class.ballistaARDreadV2 = { // mega-sniper
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Ballista",
 	    GUNS: [],
 	}
+	for (let i = 0; i < 3; i++) {
+		Class.ballistaARDreadV2.GUNS.push(
+			{
+				POSITION: [22, 11, 1, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.preda, g.preda, g.preda, g.bitlessspeed, {health: 1.2, size: 2}]),
+					TYPE: "bullet",
+				},
+			},
+			{
+				POSITION: [4, 13, 1, 15, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.preda, g.preda, g.preda, g.bitlessspeed, g.fake]),
+					TYPE: "bullet",
+				},
+			},
+		)
+	}
 	Class.barbARDreadV2 = { // railgun
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Barb",
 	    GUNS: [],
+	}
+	for (let i = 0; i < 3; i++) {
+		Class.barbARDreadV2.GUNS.push(
+			{
+				POSITION: [23, 7, 1, 0, 0, 120*i, 0],
+			},
+			{
+				POSITION: [26.5, 4, 1, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.sniper, g.sniper, g.pound, g.lessreload, {damage: 1.15}]),
+					TYPE: "bullet",
+				},
+			},
+			{
+				POSITION: [5, 7, -1.7, 7, 0, 120*i, 0],
+			},
+		)
 	}
 	Class.mitigatorARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -1750,17 +1813,125 @@ module.exports = ({ Class }) => {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Amalgam",
 	    GUNS: [],
+		TURRETS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.amalgamARDreadV2.GUNS.push(
+			{
+				POSITION: [16, 2, 1, 0, -4.5, 120*i, 0.25],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.twin, g.nail, g.flank]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [16, 2, 1, 0, 4.5, 120*i, 0.75],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.twin, g.nail, g.flank]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [18, 7, 1, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.flank]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [5.5, 11, -1.6, 5, 0, 120*i, 0],
+			},
+		)
+		Class.amalgamARDreadV2.TURRETS.push(
+			{
+				POSITION: [8, 12.5, 0, 120*i+60, 190, 0],
+				TYPE: 'auto4gun',
+			},
+		)
+	  };
 	Class.breakerARDreadV2 = { // ultra bullet spam
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Breaker",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.breakerARDreadV2.GUNS.push(
+			{
+				POSITION: [19, 2.75, 1, 0, -3, 120*i, 1/3],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.nail, {speed: 1.05, maxSpeed: 1.05}]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [19, 2.75, 1, 0, 3, 120*i, 2/3],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.nail, {speed: 1.05, maxSpeed: 1.05}]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [21, 2.75, 1, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.nail, {speed: 1.05, maxSpeed: 1.05}]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [5.5, 9, -1.8, 6.5, 0, 120*i, 0],
+			},
+		)
+	}
+	Class.clasperTurret = {
+		PARENT: ["auto4gun"],
+		INDEPENDENT: true,
+		GUNS: [
+			{
+				POSITION: [16, 4, 1, 0, -3.5, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.twin, g.power, g.flank, g.flank, g.slow, {recoil: 0.25}]),
+					TYPE: "bullet",
+				},
+			},
+			{
+				POSITION: [16, 4, 1, 0, 3.5, 0, 0.5],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.twin, g.power, g.flank, g.flank, g.slow, {recoil: 0.25}]),
+					TYPE: "bullet",
+				},
+			},
+		],
+	};
 	Class.clasperARDreadV2 = { // crowbar
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Clasper",
 	    GUNS: [],
+		TURRETS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.clasperARDreadV2.GUNS.push(
+			{
+				POSITION: [38, 6.5, 1, 0, 0, 120*i, 0],
+			},
+			{
+				POSITION: [5, 8.5, -1.5, 8, 0, 120*i, 0],
+			},
+		)
+		Class.clasperARDreadV2.TURRETS.push(
+		  {
+			POSITION: [6.5, 38, 0, 120*i, 200, 1],
+			TYPE: 'clasperTurret'
+		  },
+		  {
+			POSITION: [6.5, 28, 0, 120*i, 200, 1],
+			TYPE: 'clasperTurret'
+		  },
+		  {
+			POSITION: [6.5, 18, 0, 120*i, 200, 1],
+			TYPE: 'clasperTurret'
+		  },
+		)
+	  }
 	Class.suppressorARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Suppressor",
@@ -1802,15 +1973,137 @@ module.exports = ({ Class }) => {
 	    LABEL: "Tranquilizer",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.tranquilizerARDreadV2.GUNS.push(
+			{
+				POSITION: [4, 3, 1, 11, -3, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, {damage: 2}]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [4, 3, 1, 11, 3, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, {damage: 2}]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [4, 4, 1, 13, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, {damage: 2}]),
+					TYPE: 'bullet',
+				},
+			},
+			{
+				POSITION: [1, 4, 1, 12, -1, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, {damage: 2}]),
+					TYPE: 'casing',
+				},
+			},
+			{
+				POSITION: [1, 5, 1, 11, 1, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, {damage: 2}]),
+					TYPE: 'casing',
+				},
+			},
+			{
+				POSITION: [1, 5, 1, 11, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, {damage: 2}]),
+					TYPE: 'casing',
+				},
+			},
+			{
+				POSITION: [15, 14, 1, 6, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, g.fake]),
+					TYPE: 'casing',
+				},
+			},
+			{
+				POSITION: [8, 14, -1.3, 4, 0, 120*i, 0],
+			},
+		)
+	}
+	Class.spiralMissileARDreadV2 = {
+		PARENT: 'spinmissile',
+		GUNS: [
+			{
+				POSITION: [14, 8, 1, 0, 0, 0, 0],
+				PROPERTIES: {
+					AUTOFIRE: !0,
+					SHOOT_SETTINGS: combineStats([g.basic, g.rocketeer, g.morespeed]),
+					TYPE: [ "bullet", { PERSISTS_AFTER_DEATH: true } ],
+					STAT_CALCULATOR: gunCalcNames.thruster,
+				},
+			},
+			{
+				POSITION: [14, 8, 1, 0, 0, 180, 0],
+				PROPERTIES: {
+					AUTOFIRE: !0,
+					SHOOT_SETTINGS: combineStats([g.basic, g.rocketeer, g.morespeed]),
+					TYPE: [ "bullet", { PERSISTS_AFTER_DEATH: true } ],
+					STAT_CALCULATOR: gunCalcNames.thruster,
+				},
+			},
+		],
+	}
 	Class.spiralARDreadV2 = { // twister
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Spiral",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.spiralARDreadV2.GUNS.push(
+			{
+				POSITION: [10, 10, -0.5, 9, 0, 120*i, 0],
+			},
+			{
+				POSITION: [17, 11, -1.4, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.arty, g.skim, g.morespeed, g.fast, g.one_third_reload]),
+					TYPE: "spiralMissileARDreadV2",
+					STAT_CALCULATOR: gunCalcNames.sustained,
+				},
+			},
+		)
+	}
 	Class.shellerARDreadV2 = { // artillery
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Sheller",
 	    GUNS: [],
+	}
+	for(let i = 0; i < 3; i++) {
+		Class.shellerARDreadV2.GUNS.push(
+			{
+				POSITION: [15, 3, 1, 0, -4.5, 120*i-7, 0.25],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, g.fast]),
+					TYPE: "bullet",
+					LABEL: "Secondary",
+				},
+			},
+			{
+				POSITION: [15, 3, 1, 0, 4.5, 120*i+7, 0.75],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, g.fast]),
+					TYPE: "bullet",
+					LABEL: "Secondary",
+				},
+			},
+			{
+				POSITION: [17, 10, 1, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.destroy, g.arty]),
+					TYPE: "bullet",
+					LABEL: "Heavy",
+				},
+			},
+		)
 	}
 	Class.infiltratorARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -1910,16 +2203,71 @@ module.exports = ({ Class }) => {
 	    LABEL: "Halo",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.haloARDreadV2.GUNS.push(
+			{
+				POSITION: [4, 14.5, 1.2, 8, 0, 120*i, 0],
+				PROPERTIES: {
+				SHOOT_SETTINGS: combineStats([g.drone, g.over, {reload: 1.2, size: 0.8, speed: 1.15, maxSpeed: 1.15}]),
+					TYPE: 'turretedDrone',
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+					STAT_CALCULATOR: gunCalcNames.drone,
+					WAIT_TO_CYCLE: true,
+					MAX_CHILDREN: 4,
+				},
+			},
+			{
+				POSITION: [2, 7, 1, 8, 0, 120*i, 0],
+			},
+		)
+	}
 	Class.sluggerARDreadV2 = { // honcho
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Slugger",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.sluggerARDreadV2.GUNS.push(
+			{
+				POSITION: [5, 13, 1.5, 8, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.drone, g.over, g.honcho, {maxSpeed: 0.9, size: 0.75}]),
+					TYPE: "drone",
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+					STAT_CALCULATOR: gunCalcNames.drone,
+					WAIT_TO_CYCLE: true,
+					MAX_CHILDREN: 2,
+				},
+			},
+		)
+	};
 	Class.debilitatorARDreadV2 = { // swarms
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Debilitator",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.debilitatorARDreadV2.GUNS.push(
+			{
+				POSITION: [7, 7, 0.6, 6, 3.5, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.swarm, g.over, g.over, {reload: 1.1}]),
+					TYPE: "swarm",
+					STAT_CALCULATOR: gunCalcNames.swarm,
+				},
+			},
+			{
+				POSITION: [7, 7, 0.6, 6, -3.5, 120*i, 0.5],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.swarm, g.over, g.over, {reload: 1.1}]),
+					TYPE: "swarm",
+					STAT_CALCULATOR: gunCalcNames.swarm,
+				},
+			},
+		)
+	};
 	Class.hydraARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Hydra",
@@ -1980,20 +2328,103 @@ module.exports = ({ Class }) => {
 			},
 		)
 	}
+	Class.unsetPillbox = {
+		PARENT: 'unsetTrap',
+		TURRETS: [
+			{
+				POSITION: [11, 0, 0, 0, 360, 1],
+				TYPE: "pillboxTurret",
+			},
+		],
+	}
 	Class.sweeperARDreadV2 = { // auto-traps
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Sweeper",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.sweeperARDreadV2.GUNS.push(
+			{
+				POSITION: [5, 12, 1, 7.5, 0, 120*i, 0],
+			},
+			{
+				POSITION: [3, 15, 1, 13, 0, 120*i, 0],
+			},
+			{
+				POSITION: [2, 15, 1.3, 15.5, 0, 120*i, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 5,
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.halfreload, {reload: 1.25}]),
+					TYPE: 'unsetPillbox',
+					SYNCS_SKILLS: true,
+					DESTROY_OLDEST_CHILD: true,
+				},
+			},
+			{
+				POSITION: [5, 15, 1, 5, 0, 120*i, 0],
+			},
+		)
+	}
+	Class.auraBlockAura = addAura(1/3, 1.6, 0.15);
+	Class.auraBlock = makeAuto(Class.unsetTrap, "", {type: 'auraBlockAura'});
 	Class.aegisARDreadV2 = { // aura-traps
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Aegis",
 	    GUNS: [],
 	}
+	for(let i = 0; i < 3; i++) {
+		Class.aegisARDreadV2.GUNS.push(
+			{
+				POSITION: [14, 8.5, 1, 0, 0, 120*i, 0],
+			},
+			{
+				POSITION: [3, 10, 1, 11, 0, 120*i, 0],
+			},
+			{
+				POSITION: [3, 10, 1.6, 14, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.hexatrap, {range: 0.8, health: 1.2}]),
+					TYPE: 'auraBlock',
+					STAT_CALCULATOR: gunCalcNames.trap,
+				},
+			},
+			{
+				POSITION: [2, 8, 1.6, 15, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.hexatrap, g.fake]),
+					TYPE: 'bullet',
+					STAT_CALCULATOR: gunCalcNames.trap,
+				},
+			},
+		)
+	}
 	Class.drillARDreadV2 = { // trap + gun
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Drill",
 	    GUNS: [],
+	}
+	for(let i = 0; i < 3; i++) {
+		Class.drillARDreadV2.GUNS.push(
+			{
+				POSITION: [20, 9, 1, 0, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.flank]),
+					TYPE: 'bullet',
+					STAT_CALCULATOR: gunCalcNames.trap,
+				},
+			},
+			{
+				POSITION: [13.5, 11, 1, 0, 0, 120*i, 0],
+			},
+			{
+				POSITION: [3, 11, 1.4, 13.5, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.hexatrap]),
+					TYPE: 'unsetTrap',
+					STAT_CALCULATOR: gunCalcNames.trap,
+				},
+			},
+		)
 	}
 
 	// T3 Bodies
