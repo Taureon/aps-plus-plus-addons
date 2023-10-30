@@ -85,7 +85,6 @@ module.exports = ({ Class, Config }) => {
         }]
     }
 
-    // DUO BRANCH
     Class.SCENEXE_duo = {
         PARENT: 'SCENEXE_node',
         LABEL: 'Duo',
@@ -104,7 +103,6 @@ module.exports = ({ Class, Config }) => {
         }]
     }
 
-    // FLANK BRANCH
     Class.SCENEXE_flank = {
         PARENT: 'SCENEXE_node',
         LABEL: 'Flank',
@@ -123,6 +121,36 @@ module.exports = ({ Class, Config }) => {
         }]
     }
 
+    // COMMANDER BRANCH
+
+    Class.SCENEXE_commander = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Commander',
+        GUNS: [{
+            POSITION: { LENGTH: 20, WIDTH: 9.5, ASPECT: -0.5, X: -3 },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone]),
+                TYPE: 'drone',
+                MAX_CHILDREN: 3
+            }
+        }]
+    }
+
+    // TRAPPER BRANCH
+    Class.SCENEXE_trapper = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Trapper',
+        GUNS: [{
+            POSITION: { LENGTH: 5, WIDTH: 12, ASPECT: -0.4, X: 15 },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, { reload: 1.4, damage: 1.5, speed: 0.35 }]),
+                TYPE: 'trap'
+            }
+        }, {
+            POSITION: { LENGTH: 15, WIDTH: 6 }
+        }]
+    }
+
     // -------------------------------------------------------------------
     // -----------------------------BODIES-------------------------------
     // -------------------------------------------------------------------
@@ -137,7 +165,8 @@ module.exports = ({ Class, Config }) => {
         PARENT: 'autoTurret',
         GUNS: [{
             POSITION: { LENGTH: 25, WIDTH: 10 },
-            SHOOT_SETTINGS: combineStats([g.basic, g.basic, g.gunner, g.power, g.morerecoil, g.turret])
+            SHOOT_SETTINGS: combineStats([g.basic, g.basic, g.gunner, g.power, g.morerecoil, g.turret]),
+            TYPE: 'bullet'
         }]
     }
     Class.SCENEXE_sentry = {
@@ -176,7 +205,7 @@ module.exports = ({ Class, Config }) => {
         GUNS: [{
             POSITION: { LENGTH: 15, WIDTH: 15, X: -8 },
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.drone, {reload: 0.05, size: 1.2}]),
+                SHOOT_SETTINGS: combineStats([g.drone, {size: 1.2}]),
                 MAX_CHILDREN: 3,
                 TYPE: 'drone',
                 SYNCS_SKILLS: true,
@@ -194,7 +223,7 @@ module.exports = ({ Class, Config }) => {
         }]
     }
 
-    Class.SCENEXE_node.UPGRADES_TIER_1 = ['SCENEXE_mono']
+    Class.SCENEXE_node.UPGRADES_TIER_1 = ['SCENEXE_mono', 'SCENEXE_commander', 'SCENEXE_trapper']
         Class.SCENEXE_mono.UPGRADES_TIER_2 = ['SCENEXE_duo', 'SCENEXE_flank']
     Class.SCENEXE_base.UPGRADES_TIER_1 = ['SCENEXE_smasher', 'SCENEXE_sentry', 'SCENEXE_wall', 'SCENEXE_hearth', 'SCENEXE_hangar']
 
