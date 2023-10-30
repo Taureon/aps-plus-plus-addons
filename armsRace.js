@@ -1555,6 +1555,20 @@ Class.renovater = {
             POSITION: [13, 0, 0, 0, 360, 1],
             TYPE: "healerSymbol",},],
 };
+    Ckass.physician = {
+    PARENT: ["genericTank"],
+    LABEL: "Physician",
+    DANGER: 4,
+    BODY: {FOV: 1.1 * base.FOV,DENSITY: 3 * base.DENSITY, DAMAGE: base.DAMAGE * -1},
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "physicianBody",
+        },
+    ],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.heal,
+};
     Class.avian = makeBird(Class.single, "Avian");
     Class.assistant = makeHybrid(Class.single, "Assistant");
     Class.autoSingle = makeAuto(Class.single);
@@ -1570,7 +1584,7 @@ Class.renovater = {
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-                Class.healer.UPGRADES_TIER_3.push("analyzer", "phychiatrist", "soother", "renovater");
+                Class.healer.UPGRADES_TIER_3.push("analyzer", "phychiatrist", "soother", "renovater", "physician");
                 Class.smasher.UPGRADES_TIER_3.push("bonker", "banger", "drifter");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
