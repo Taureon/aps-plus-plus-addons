@@ -114,70 +114,9 @@ Class.sootherDrone = {
 };
     
     //tripletwin upgrades
-    Class.quadTwin = {
-        PARENT: 'genericTank',
-        LABEL: 'Quad Twin',
-        GUNS: [{
-            POSITION: [20, 8, 1, 0, -5.5, 0, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        },{
-            POSITION: [20, 8, 1, 0, -5.5, -90, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        },{
-            POSITION: [20, 8, 1, 0, -5.5, 180, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        },{
-            POSITION: [20, 8, 1, 0, -5.5, 90, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        },{
-            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        },{
-            POSITION: [20, 8, 1, 0, 5.5, 90, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        },{
-            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        },{
-            POSITION: [20, 8, 1, 0, 5.5, -90, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
-        }]
-    };
+    Class.quadTwin = makeMulti(Class.twin, 4);
     Class.autoTripleTwin = makeAuto(Class.tripleTwin);
-    Class.bentTriple = {
-        PARENT: ["genericTank"],
-        LABEL: "Bent Triple",
-        DANGER: 6,
-        BODY: { SPEED: base.SPEED * 0.9 },
-        GUNS: [{
-            POSITION: [19, 8, 1, 0, -2, -17.5, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [19, 8, 1, 0, 2, 17.5, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [22, 8, 1, 0, 0, 0, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [19, 8, 1, 0, -2, -137.5, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [19, 8, 1, 0, 2, 137.5, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [22, 8, 1, 0, 0, 120, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [19, 8, 1, 0, -2, -257.5, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [19, 8, 1, 0, 2, 257.5, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        },{
-            POSITION: [22, 8, 1, 0, 0, 240, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
-        }]
-    };
+    Class.bentTriple makeMulti(Class.tripleShot, 3, "Bent Triple");
     Class.hewnTripleTwin = {
         PARENT: ["genericTank"],
         LABEL: "Hewn Triple",
@@ -241,48 +180,7 @@ Class.sootherDrone = {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
     };
-    Class.tripleGunner = {
-        PARENT: ["genericTank"],
-        LABEL: "Triple Gunner",
-        DANGER: 6,
-        GUNS: [{
-            POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [12, 3.5, 1, 0, 127.25, 0, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [12, 3.5, 1, 0, -127.25, 0, 0.75],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [16, 3.5, 1, 0, 123.75, 0, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [16, 3.5, 1, 0, -123.75, 0, 0.25],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [12, 3.5, 1, 0, 247.25, 0, 0.5],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [12, 3.5, 1, 0, -247.25, 0, 0.75],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [16, 3.5, 1, 0, 243.75, 0, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        },{
-            POSITION: [16, 3.5, 1, 0, -243.75, 0, 0.25],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
-        }]
-    };
+    Class.tripleGunner = makeMulti(Class.gunner, 3);
     Class.warkWarkWark = {
         PARENT: ["genericTank"],
         LABEL: "Warkwarkwark",
