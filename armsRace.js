@@ -493,27 +493,7 @@ Class.sootherDrone = {
             POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0]
         }]
     };
-    Class.ternion = {
-        PARENT: ["genericTank"],
-        LABEL: "Ternion",
-        BODY: { SPEED: 1.12 * base.SPEED },
-        GUNS: [{
-            POSITION: [18, 8, 1, 0, 0, 0, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
-        },{
-            POSITION: [18, 8, 1, 0, 0, 120, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
-        },{
-            POSITION: [18, 8, 1, 0, 0, 240, 0],
-            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
-        },{
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0]
-        },{
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 120, 0]
-        },{
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 240, 0]
-        }]
-    };
+    Class.ternion = makeMulti(Class.single, 3, "Ternion");
     Class.coordinator = {
         PARENT: ["genericTank"],
         LABEL: "Coordinator",
