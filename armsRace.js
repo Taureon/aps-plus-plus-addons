@@ -104,6 +104,15 @@ module.exports = ({ Class }) => {
 };
     //bullets 
 
+Class.sootherDrone = {
+    PARENT: ["drone"],
+     BODY: {HEALTH: base.HEALTH * 0.7,SPEED: base.SPEED * 0.75},
+    HITS_OWN_TYPE: "normal",
+    TURRETS: [{
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
+};
+    
     //tripletwin upgrades
     Class.quadTwin = {
         PARENT: 'genericTank',
@@ -1614,7 +1623,7 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
     GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
-            POSITION: [18, 10, 1.1, 0, 0, 0, 0],
+            POSITION: [18, 10, 1.2, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.healer]),
                 TYPE: "healerBullet",},},],
@@ -1624,25 +1633,37 @@ Class.soother = {
     PARENT: ["genericTank"],
     LABEL: "Soother",
     STAT_NAMES: statnames.heal,
-    BODY: {
-        FOV: base.FOV * 1.1,
-    },
-    GUNS: [
-        {
+    BODY: {FOV: base.FOV * 1.2,},
+    GUNS: [{
             /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
             POSITION: [6, 11, 1.3, 7, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.heal]),
+                SHOOT_SETTINGS: combineStats([g.drone, g.halfreload, g.one_third_reload, g.healer]),
                 TYPE: "healDrone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
                 STAT_CALCULATOR: gunCalcNames.drone,
-                MAX_CHILDREN: 6,
-            },
-        },
-    ],
+                MAX_CHILDREN: 6,},},],
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
 };
-
+Class.renovater = {
+    PARENT: ["genericTank"],
+    LABEL: "Renovater",
+    GUNS: [
+        { POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
+            POSITION: [19, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.single, g.healer]),
+                TYPE: "bullet",},},{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0],},],
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
+};
     Class.avian = makeBird(Class.single, "Avian");
     Class.assistant = makeHybrid(Class.single, "Assistant");
     Class.autoSingle = makeAuto(Class.single);
@@ -1658,7 +1679,7 @@ Class.soother = {
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-                Class.healer.UPGRADES_TIER_3.push("analyzer", "phychiatrist");
+                Class.healer.UPGRADES_TIER_3.push("analyzer", "phychiatrist", "soother", "renovater");
                 Class.smasher.UPGRADES_TIER_3.push("bonker", "banger", "drifter");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
