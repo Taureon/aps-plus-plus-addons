@@ -116,7 +116,7 @@ Class.sootherDrone = {
     //tripletwin upgrades
     Class.quadTwin = makeMulti(Class.twin, 4);
     Class.autoTripleTwin = makeAuto(Class.tripleTwin);
-    Class.bentTriple makeMulti(Class.tripleShot, 3, "Bent Triple");
+    Class.bentTriple = makeMulti(Class.tripleShot, 3, "Bent Triple");
     Class.hewnTripleTwin = {
         PARENT: ["genericTank"],
         LABEL: "Hewn Triple",
