@@ -1586,6 +1586,63 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
         }]
     };
 
+    //HEALERS
+
+    Class.analyzer = {
+    PARENT: ["genericTank"],
+    LABEL: "Analyzer",
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
+    GUNS: [{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [8, 11, -0.5, 12.5, 0, 0, 0],},{
+            POSITION: [18, 12, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.healer]),
+                TYPE: "healerBullet",},},],
+    STAT_NAMES: statnames.heal,
+};
+    Class.phychiatrist = {
+    PARENT: ["genericTank"],
+    LABEL: "Phychiatrist",
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
+    GUNS: [{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
+            POSITION: [18, 10, 1.1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.healer]),
+                TYPE: "healerBullet",},},],
+    STAT_NAMES: statnames.heal,
+};
+Class.soother = {
+    PARENT: ["genericTank"],
+    LABEL: "Soother",
+    STAT_NAMES: statnames.heal,
+    BODY: {
+        FOV: base.FOV * 1.1,
+    },
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [6, 11, 1.3, 7, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, g.heal]),
+                TYPE: "healDrone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: gunCalcNames.drone,
+                MAX_CHILDREN: 6,
+            },
+        },
+    ],
+};
+
     Class.avian = makeBird(Class.single, "Avian");
     Class.assistant = makeHybrid(Class.single, "Assistant");
     Class.autoSingle = makeAuto(Class.single);
@@ -1601,6 +1658,7 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
+                Class.healer.UPGRADES_TIER_3.push("analyzer", "phychiatrist");
                 Class.smasher.UPGRADES_TIER_3.push("bonker", "banger", "drifter");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
