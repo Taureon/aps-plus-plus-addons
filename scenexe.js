@@ -54,10 +54,11 @@ module.exports = ({ Class, Config }) => {
 
     // return console.log('Addon [scenexe.js] is disabled')
 
+    // TODO: why is the upgrade tree not working
     Config.SPAWN_CLASS = ['SCENEXE_node', 'SCENEXE_base']
     Class.SCENEXE_node = {
         PARENT: 'genericTank',
-        REROOT_UPGRADE_TREE: 'node',
+        REROOT_UPGRADE_TREE: 'SCENEXE_node',
         LABEL: 'Node',
         BODY: {
             FOV: base.FOV * 1.6
@@ -65,7 +66,7 @@ module.exports = ({ Class, Config }) => {
     }
     Class.SCENEXE_base = {
         PARENT: 'genericTank',
-        REROOT_UPGRADE_TREE: 'base',
+        REROOT_UPGRADE_TREE: 'SCENEXE_base',
         LABEL: 'Base'
     }
 
