@@ -869,6 +869,19 @@ Class.sootherDrone = {
 
     Class.sharperBody = { SHAPE: sharperBodyShape };
 
+    let physcianBodyShape = [];
+    Math.TAU = Math.PI * 2;
+    for (let i = 0; i < 128; i++) {
+        let angle = i * Math.TAU / 128,
+            length = 1 - Math.abs(Math.sin(10 * angle)) / Math.TAU;
+        physcianBodyShape.push([
+            Math.sin(angle) * length,
+            Math.cos(angle) * length
+        ]);
+    }
+
+    Class.physcianBody = { SHAPE: bangerBodyShape };
+
     Class.claymore = {
     PARENT: ["genericTank"],
     LABEL: "Claymore",
