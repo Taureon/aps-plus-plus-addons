@@ -48,7 +48,8 @@ addHearth = (damageFactor = 1, sizeFactor = 1, opacity = 0.3, auraColor) => {
 
 /**
  * 
- * @param {import("../../../..").Tanks} Class 
+ * @param {Object} params
+ * @param {import("../../../..").Tanks} params.Class
  */
 module.exports = ({ Class, Config }) => {
 
@@ -122,19 +123,88 @@ module.exports = ({ Class, Config }) => {
         }]
     }
 
+    Class.SCENEXE_split = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Split',
+        GUNS: [
+            {
+                POSITION: { LENGTH: 15, WIDTH: 4.75, ANGLE: 37.5, DELAY: 0.5 },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, {damage: 0.75, pen: 1.15 }]),
+                    TYPE: 'bullet'
+                }
+            },
+            {
+                POSITION: { LENGTH: 15, WIDTH: 4.75, ANGLE: -37.5, DELAY: 1 },
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, { damage: 0.75, pen: 1.15 }]),
+                    TYPE: 'bullet'
+                }
+            },
+            {...Class.SCENEXE_mono.GUNS[0]},
+        ]
+    }
+
+    Class.SCENEXE_single = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Single',
+        GUNS: [{
+            POSITION: { LENGTH: 21.5, WIDTH: 12.5 },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
+                TYPE: 'bullet'
+            }
+        }]
+    }
+
+    /* 
+        Class.alloy = { under SCENEXE_commander }
+    */
+
+    /*
+        Class.guard = { under SCENEXE_trapper }
+    */
+
+    Class.SCENEXE_sniper = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Sniper',
+        BODY: {
+            FOV: base.FOV * 2
+        },
+        GUNS: [{
+            POSITION: { LENGTH: 25, WIDTH: 9.5 },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper]),
+                TYPE: 'bullet'
+            }
+        }]
+    }
+
     // COMMANDER BRANCH
 
     Class.SCENEXE_commander = {
         PARENT: 'SCENEXE_node',
         LABEL: 'Commander',
         GUNS: [{
-            POSITION: { LENGTH: 20, WIDTH: 9.5, ASPECT: -0.5, X: -3 },
+            POSITION: { LENGTH: 20, WIDTH: 9.5, ASPECT: -0.5, X: -4 },
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone]),
                 TYPE: 'drone',
                 MAX_CHILDREN: 3
             }
         }]
+    }
+
+    Class.SCENEXE_alloy = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Alloy',
+        GUNS: [
+            { ...Class.SCENEXE_mono.GUNS[0] },
+            {
+                POSITION: { ...Class.SCENEXE_commander.GUNS[0].POSITION, ANGLE: 180 },
+                PROPERTIES: {...Class.SCENEXE_commander.GUNS[0].PROPERTIES}
+            }
+        ]
     }
 
     // TRAPPER BRANCH
@@ -152,6 +222,21 @@ module.exports = ({ Class, Config }) => {
         }]
     }
 
+    Class.SCENEXE_guard = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Guard',
+        GUNS: [
+            { ...Class.SCENEXE_mono.GUNS[0] },
+            {
+                POSITION: { ...Class.SCENEXE_trapper.GUNS[0].POSITION, ANGLE: 180 },
+                PROPERTIES: {...Class.SCENEXE_trapper.GUNS[0].PROPERTIES}
+            },
+            {
+                POSITION: { ...Class.SCENEXE_trapper.GUNS[1].POSITION, ANGLE: 180 },
+            }
+        ]
+    }
+
     // -------------------------------------------------------------------
     // -----------------------------BODIES-------------------------------
     // -------------------------------------------------------------------
@@ -163,11 +248,14 @@ module.exports = ({ Class, Config }) => {
     }
 
     Class.SCENEXE_sentryAutoTurret = {
-        PARENT: 'autoTurret',
+        PARENT: 'autoTankGun',
+        INDEPENDENT: true,
         GUNS: [{
             POSITION: { LENGTH: 25, WIDTH: 10 },
-            SHOOT_SETTINGS: combineStats([g.basic, g.basic, g.gunner, g.power, g.morerecoil, g.turret]),
-            TYPE: 'bullet'
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.auto]),
+                TYPE: 'bullet'
+            }
         }]
     }
     Class.SCENEXE_sentry = {
@@ -225,7 +313,7 @@ module.exports = ({ Class, Config }) => {
     }
 
     Class.SCENEXE_node.UPGRADES_TIER_1 = ['SCENEXE_mono', 'SCENEXE_commander', 'SCENEXE_trapper']
-        Class.SCENEXE_mono.UPGRADES_TIER_2 = ['SCENEXE_duo', 'SCENEXE_flank']
+        Class.SCENEXE_mono.UPGRADES_TIER_2 = ['SCENEXE_duo', 'SCENEXE_flank', 'SCENEXE_split', 'SCENEXE_single', 'SCENEXE_alloy', 'SCENEXE_guard', 'SCENEXE_sniper']
     Class.SCENEXE_base.UPGRADES_TIER_1 = ['SCENEXE_smasher', 'SCENEXE_sentry', 'SCENEXE_wall', 'SCENEXE_hearth', 'SCENEXE_hangar']
 
     Class.addons.UPGRADES_TIER_0.push(['SCENEXE_node', 'SCENEXE_base'])
