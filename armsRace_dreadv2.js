@@ -72,6 +72,68 @@ module.exports = ({ Class }) => {
 	g.flame = {reload: 0.5, recoil: 0.1, shudder: 1.5, range: 0.5, spray: 7, damage: 2, health: 1/3};
 	g.honcho = {size: 2, damage: 2.5, health: 1.2, reload: 2, speed: 0.7};
 
+	// Body helpers
+	const hpBuffBodyStats = [
+		{ HEALTH: 2.4, SHIELD: 2.4, REGEN: 2,   SPEED: 0.65 },
+		{ HEALTH: 3.2, SHIELD: 3.2, REGEN: 2.5, SPEED: 0.5  },
+		{ HEALTH: 4,   SHIELD: 4,   REGEN: 2.5, SPEED: 0.4  }
+	];
+	const speedBuffBodyStats = [
+		{ SPEED: 1.75, HEALTH: 0.65 },
+		{ SPEED: 2.15, HEALTH: 0.5  },
+		{ SPEED: 2.35, HEALTH: 0.35 }
+	];
+	function addTrinoughtAuraRing(heal = false) {
+		let output = [],
+			TYPE = heal ? "trinoughtSmallHealAura" : "trinoughtSmallAura";
+		for (let i = 0; i < 3; i++) {
+			output.push(
+				{
+					POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
+					TYPE,
+				},
+			);
+		}
+		return output;
+	}
+	function addTrinoughtTurretRing() {
+		let output = [];
+		for (let i = 0; i < 3; i++) {
+			output.push(
+				{
+					POSITION: [3.5, 10.5, 0, 120*i+60, 180, 1],
+					TYPE: "spamAutoTurret",
+				},
+			);
+		}
+		return output;
+	}
+	function addPentanoughtAuraRing(heal = false) {
+		let output = [],
+			TYPE = heal ? "pentanoughtSmallHealAura" : "pentanoughtSmallAura";
+		for (let i = 0; i < 5; i++) {
+			output.push(
+				{
+					POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
+					TYPE,
+				},
+			)
+		}
+		return output;
+	}
+	function addPentanoughtTurretRing() {
+		let output = [];
+		for (let i = 0; i < 5; i++) {
+			output.push(
+				{
+					POSITION: [3.25, 9, 0, 72*i+36, 180, 1],
+					TYPE: "spamAutoTurret",
+				},
+			)
+		}
+		return output;
+	}
+
 	// Misc
 	Class.genericDreadnoughtARDreadV2 = {
 		PARENT: ["genericTank"],
@@ -348,7 +410,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [6, 12, 1.2, 8, 0, 0, 0],
 				PROPERTIES: {
-				SHOOT_SETTINGS: combineStats([g.drone, g.over, {size: 1.2}]),
+				SHOOT_SETTINGS: combineStats([g.drone, g.over, {size: 1.3}]),
 				TYPE: "drone",
 				AUTOFIRE: true,
 				SYNCS_SKILLS: true,
@@ -1265,7 +1327,7 @@ module.exports = ({ Class }) => {
 	    TURRETS: [
 			{
 				POSITION: [13, 0, 0, 0, 0, 1],
-				TYPE: ["square", {TURRET_FACES_CLIENT: true}],
+				TYPE: ["square", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
 				POSITION: [9, 0, 0, 0, 360, 1],
@@ -1296,7 +1358,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [6, 12, 1.2, 8, 0, 270, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.drone, g.over, {size: 1.2}]),
+					SHOOT_SETTINGS: combineStats([g.drone, g.over, {size: 1.3}]),
 					TYPE: 'drone',
 					AUTOFIRE: true,
 					SYNCS_SKILLS: true,
@@ -1312,7 +1374,7 @@ module.exports = ({ Class }) => {
 	    TURRETS: [
 			{
 				POSITION: [14, 0, 0, 0, 0, 1],
-				TYPE: ["square", {TURRET_FACES_CLIENT: true}],
+				TYPE: ["square", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
 				POSITION: [10, 0, 0, 0, 360, 1],
@@ -1353,12 +1415,7 @@ module.exports = ({ Class }) => {
 	Class.jumboARDreadV2 = {
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Jumbo",
-	    BODY: {
-			HEALTH: 2.4,
-			SHIELD: 2.4,
-			REGEN: 2,
-			SPEED: 0.65,
-		},
+	    BODY: hpBuffBodyStats[0],
 	    TURRETS: [
 			{
 				POSITION: [15, 0, 0, 0, 0, 1],
@@ -1405,10 +1462,7 @@ module.exports = ({ Class }) => {
 	Class.colossalARDreadV2 = {
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Colossal",
-		BODY: {
-			SPEED: 1.75,
-			HEALTH: 0.65,
-		},
+		BODY: speedBuffBodyStats[0],
 		GUNS: [],
 	    TURRETS: [
 			{
@@ -1434,7 +1488,7 @@ module.exports = ({ Class }) => {
 				PROPERTIES: {COLOR: 9}
 			},
 		)
-	  }
+	}
 	Class.cottonARDreadV2 = { // Drifter
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Cotton",
@@ -1449,20 +1503,37 @@ module.exports = ({ Class }) => {
 			}
 		],
 	}
-	Class.ironTurretARDreadV2 = {
+	Class.ironTopARDreadV2 = {
 		PARENT: ["genericSquarenought"],
 		SHAPE: 0,
 		MIRROR_MASTER_ANGLE: true,
 		GUNS: [],
 	}
 	for(let i = 0; i < 8; i++) {
-		Class.ironTurretARDreadV2.GUNS.push(
+		Class.ironTopARDreadV2.GUNS.push(
 			{
 				POSITION: [8, 6, 0.001, 20, 0, 45*i, 0],
 				PROPERTIES: {COLOR: 9},
 			},
 			{
 				POSITION: [8, 6, 0.001, -20, 0, 45*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
+	}
+	Class.ironBottomARDreadV2 = {
+		PARENT: ["genericSquarenought"],
+		MIRROR_MASTER_ANGLE: true,
+		GUNS: [],
+	}
+	for(let i = 0; i < 4; i++) {
+		Class.ironBottomARDreadV2.GUNS.push(
+			{
+				POSITION: [6, 6, 0.001, 9.5, 5, 90*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+			{
+				POSITION: [6, 6, 0.001, 9.5, -5, 90*i, 0],
 				PROPERTIES: {COLOR: 9},
 			},
 		)
@@ -1478,21 +1549,13 @@ module.exports = ({ Class }) => {
 	    TURRETS: [
 			{
 				POSITION: [5.5, 0, 0, 0, 0, 1],
-				TYPE: 'ironTurretARDreadV2',
-			}
+				TYPE: 'ironTopARDreadV2',
+			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: 'ironBottomARDreadV2',
+			},
 		],
-	}
-	for(let i = 0; i < 4; i++) {
-		Class.ironARDreadV2.GUNS.push(
-			{
-				POSITION: [6, 6, 0.001, 9.5, 5, 90*i, 0],
-				PROPERTIES: {COLOR: 9},
-			},
-			{
-				POSITION: [6, 6, 0.001, 9.5, -5, 90*i, 0],
-				PROPERTIES: {COLOR: 9},
-			},
-		)
 	}
 	Class.rollerTurretARDreadV2 = {
 		PARENT: ["genericSquarenought"],
@@ -1539,9 +1602,9 @@ module.exports = ({ Class }) => {
 	Class.owlARDreadV2 = { // Size decrease
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Owl",
-		SIZE_FACTOR: 0.82,
+		SIZE: 0.8,
 		BODY: {
-			HEALTH: 0.82,
+			HEALTH: 0.9,
 			SPEED: 1.1,
 			ACCELERATION: 1.25,
 		},
@@ -1584,8 +1647,8 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [0, 12, 1, 8, 0, 0, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.pound]),
-					TYPE: exports.trap,
+					SHOOT_SETTINGS: combineStats([g.trap, {health: 1.3, maxSpeed: 1e-3, speed: 1e-3}]),
+					TYPE: 'trap',
 					STAT_CALCULATOR: gunCalcNames.trap,
 				},
 			}
@@ -1613,7 +1676,7 @@ module.exports = ({ Class }) => {
 				PROPERTIES: {COLOR: 13}
 			}
 		]
-	};
+	}
     Class.spyARDreadV2 = { // FOV
 	    PARENT: ["genericSquarenought"],
 	    LABEL: "Spy",
@@ -2459,19 +2522,12 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addTrinoughtTurretRing(),
 			{
 				POSITION: [9.5, 0, 0, 0, 360, 1],
 				TYPE: "trinoughtBigAura",
 			},
 		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.fusionARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 180, 1],
-				TYPE: "spamAutoTurret",
-			},
-		)
 	}
 	Class.binaryARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -2481,22 +2537,13 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addTrinoughtTurretRing(),
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "kilobyteTurretARDreadV2",
+			},
 		],
 	}
-	for (let i = 0; i < 3; i++) {
-		Class.binaryARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 180, 1],
-				TYPE: "spamAutoTurret",
-			},
-		)
-	}
-	Class.binaryARDreadV2.TURRETS.push(
-		{
-			POSITION: [10, 0, 0, 0, 360, 1],
-			TYPE: "kilobyteTurretARDreadV2",
-		},
-	)
 	Class.trinoughtBigHealAura = addAura(-1.5, 1.5);
 	Class.exosphereARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -2506,19 +2553,12 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addTrinoughtTurretRing(),
 			{
 				POSITION: [9.5, 0, 0, 0, 360, 1],
 				TYPE: "trinoughtBigHealAura",
 			},
 		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.exosphereARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 180, 1],
-				TYPE: "spamAutoTurret",
-			},
-		)
 	}
 	Class.megabyteTurretARDreadV2 = {
 		PARENT: ["autoTankGun"],
@@ -2556,22 +2596,13 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addTrinoughtAuraRing(),
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "kilobyteTurretARDreadV2",
+			},
 		],
 	}
-	for (let i = 0; i < 3; i++) {
-		Class.trojanARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 11, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallAura",
-			},
-		)
-	}
-	Class.trojanARDreadV2.TURRETS.push(
-		{
-			POSITION: [10, 0, 0, 0, 360, 1],
-			TYPE: "kilobyteTurretARDreadV2",
-		},
-	)
 	Class.trinoughtSmallHealAura = addAura(-2/3, 2.1, 0.15);
 	Class.hardwareARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -2581,31 +2612,111 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addTrinoughtAuraRing(true),
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "kilobyteTurretARDreadV2",
+			},
 		],
 	}
-	for (let i = 0; i < 3; i++) {
-		Class.hardwareARDreadV2.TURRETS.push(
+	Class.burnerTurretARDreadV2 = {
+		PARENT: 'genericTank',
+		COLOR: 16,
+		CONTROLLERS: ['nearestDifferentMaster'],
+		FACING_TYPE: 'autospin',
+		INDEPENDENT: true,
+		GUNS: [
 			{
-				POSITION: [3.5, 11, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallHealAura",
+				POSITION: [15, 11, 1, 0, 0, 140, 0],
+				PROPERTIES: {COLOR: 2},
 			},
-		)
-	}
-	Class.hardwareARDreadV2.TURRETS.push(
-		{
-			POSITION: [10, 0, 0, 0, 360, 1],
-			TYPE: "kilobyteTurretARDreadV2",
-		},
-	)
+			{
+				POSITION: [16.5, 7, 1, 0, 0, 140, 0],
+			},
+			{
+				POSITION: [15, 11, 1, 0, 0, -140, 0],
+				PROPERTIES: {COLOR: 2},
+			},
+			{
+				POSITION: [16.5, 7, 1, 0, 0, -140, 0],
+			},
+			{
+				POSITION: [16, 2, 1, 0, 7.5, 0, 0],
+			},
+			{
+				POSITION: [16, 2, 1, 0, -7.5, 0, 0],
+			},
+			{
+				POSITION: [24, 8, 1.25, 0, 0, 0, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.flame, g.morespeed]),
+					TYPE: 'growBullet',
+				}
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [11, 0, 0, 0, 0, 1],
+				TYPE: ['egg', {COLOR: 2}]
+			}
+		]
+	};
 	Class.burnerARDreadV2 = { // Flamethrower
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Burner",
-	    TURRETS: [],
+	    TURRETS: [
+			{
+				POSITION: [14, 0, 0, 180, 0, 1],
+				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
+			},
+			{
+				POSITION: [9, 0, 0, 0, 360, 1],
+				TYPE: 'burnerTurretARDreadV2',
+			}
+		],
+	}
+	Class.tempestTurretARDreadV2 = {
+		PARENT: 'genericTank',
+		LABEL: "",
+		BODY: {
+		  	FOV: 1.5,
+		},
+		COLOR: 16,
+		MAX_CHILDREN: 8,
+		GUNS: [],
+	};
+	for (let i = 0; i < 3; i++) {
+		Class.tempestTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [6, 12, 1.2, 8, 0, 120*i, 0],
+				PROPERTIES: {
+					SHOOT_SETTINGS: combineStats([g.drone, g.over, g.over, {size: 1.4}]),
+					TYPE: 'drone',
+					AUTOFIRE: true,
+					SYNCS_SKILLS: true,
+					STAT_CALCULATOR: gunCalcNames.drone,
+					WAIT_TO_CYCLE: true,
+				},
+			},
+		)
 	}
 	Class.tempestARDreadV2 = { // Drones
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Tempest",
-	    TURRETS: [],
+	    BODY: {
+			SPEED: 0.93,
+			FOV: 1.1,
+		},
+		TURRETS: [
+			{
+				POSITION: [12, 0, 0, 180, 0, 1],
+				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
+			},
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: 'tempestTurretARDreadV2',
+			},
+		]
 	}
 	Class.chromosphereARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -2615,19 +2726,12 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addTrinoughtAuraRing(),
 			{
 				POSITION: [9.5, 0, 0, 0, 360, 1],
 				TYPE: "trinoughtBigAura",
 			},
 		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.chromosphereARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallAura",
-			},
-		)
 	}
 	Class.mesosphereARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -2637,29 +2741,17 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addTrinoughtAuraRing(true),
 			{
 				POSITION: [9.5, 0, 0, 0, 360, 1],
 				TYPE: "trinoughtBigHealAura",
 			},
 		],
 	}
-	for (let i = 0; i < 3; i++) {
-		Class.mesosphereARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallHealAura",
-			},
-		)
-	}
 	Class.goliathARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Goliath",
-	    BODY: {
-			HEALTH: 3.2,
-			SHIELD: 3.2,
-			REGEN: 2.5,
-			SPEED: 0.5,
-		},
+	    BODY: hpBuffBodyStats[1],
 	    TURRETS: [
 			{
 				POSITION: [14, 0, 0, 180, 0, 1],
@@ -2674,12 +2766,7 @@ module.exports = ({ Class }) => {
 	Class.planetARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Planet",
-		BODY: {
-			HEALTH: 2.4,
-			SHIELD: 2.4,
-			REGEN: 2,
-			SPEED: 0.65,
-		},
+		BODY: hpBuffBodyStats[0],
 	    TURRETS: [
 			{
 				POSITION: [24, 0, 0, 180, 0, 0],
@@ -2688,26 +2775,14 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
-			}
-		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.planetARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallAura",
 			},
-		)
+			...addTrinoughtAuraRing(),
+		],
 	}
 	Class.moonARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Moon",
-		BODY: {
-			HEALTH: 2.4,
-			SHIELD: 2.4,
-			REGEN: 2,
-			SPEED: 0.65,
-		},
+		BODY: hpBuffBodyStats[0],
 	    TURRETS: [
 			{
 				POSITION: [24, 0, 0, 180, 0, 0],
@@ -2716,26 +2791,44 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
-			}
-		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.moonARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallHealAura",
 			},
-		)
+			...addTrinoughtAuraRing(true),
+		],
 	}
 	Class.burgARDreadV2 = { // HP + auto spam
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Burg",
-	    TURRETS: [],
+		BODY: hpBuffBodyStats[0],
+	    TURRETS: [
+			{
+				POSITION: [24, 0, 0, 180, 0, 0],
+				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [12, 0, 0, 180, 0, 1],
+				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
+			},
+			...addTrinoughtTurretRing(),
+		],
 	}
 	Class.siloARDreadV2 = { // HP + big auto
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Silo",
-	    TURRETS: [],
+		BODY: hpBuffBodyStats[0],
+	    TURRETS: [
+			{
+				POSITION: [24, 0, 0, 180, 0, 0],
+				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [13, 0, 0, 180, 0, 1],
+				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
+			},
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "kilobyteTurretARDreadV2",
+			},
+		],
 	}
 	Class.titanTopARDreadV2 = {
 	    PARENT: ["genericTrinought"],
@@ -2752,10 +2845,7 @@ module.exports = ({ Class }) => {
 	Class.titanARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Titan",
-		BODY: {
-			SPEED: 2.15,
-			HEALTH: 0.5,
-		},
+		BODY: speedBuffBodyStats[1],
 		GUNS: [],
 	    TURRETS: [
 			{
@@ -2771,10 +2861,7 @@ module.exports = ({ Class }) => {
 	Class.sirenARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Siren",
-		BODY: {
-			SPEED: 1.75,
-			HEALTH: 0.65,
-		},
+		BODY: speedBuffBodyStats[0],
 		GUNS: [],
 	    TURRETS: [
 			{
@@ -2785,23 +2872,13 @@ module.exports = ({ Class }) => {
 				POSITION: [20, 0, 0, 0, 0, 0],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
+			...addTrinoughtAuraRing(),
 		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.sirenARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallAura",
-			},
-		)
 	}
 	Class.harpyARDreadV2 = {
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Harpy",
-		BODY: {
-			SPEED: 1.75,
-			HEALTH: 0.65,
-		},
+		BODY: speedBuffBodyStats[0],
 		GUNS: [],
 	    TURRETS: [
 			{
@@ -2812,87 +2889,399 @@ module.exports = ({ Class }) => {
 				POSITION: [20, 0, 0, 0, 0, 0],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
+			...addTrinoughtAuraRing(true),
 		],
-	}
-	for (let i = 0; i < 3; i++) {
-		Class.harpyARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.5, 10.5, 0, 120*i+60, 360, 1],
-				TYPE: "trinoughtSmallHealAura",
-			},
-		)
 	}
 	Class.batonARDreadV2 = { // Speed + auto spam
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Baton",
-	    TURRETS: [],
+		BODY: speedBuffBodyStats[0],
+	    TURRETS: [
+			{
+				POSITION: [12, 0, 0, 180, 0, 1],
+				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
+			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
+			...addTrinoughtTurretRing(),
+		],
 	}
 	Class.fireworkARDreadV2 = { // Speed + big auto
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Firework",
-	    TURRETS: [],
+		BODY: speedBuffBodyStats[0],
+	    TURRETS: [
+			{
+				POSITION: [13, 0, 0, 180, 0, 1],
+				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
+			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "kilobyteTurretARDreadV2",
+			},
+		],
 	}
 	Class.armadaARDreadV2 = { // Speed + HP
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Armada",
-	    TURRETS: [],
+		BODY: {
+			HEALTH: 2, 
+			SHIELD: 2, 
+			REGEN: 1.5, 
+			SPEED: 1.5,
+		},
+	    TURRETS: [
+			{
+				POSITION: [14, 0, 0, 180, 0, 1],
+				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
+			},
+			{
+				POSITION: [20, 0, 0, 0, 0, 0],
+				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
+			},
+		],
+	}
+	Class.featherTurretARDreadV2 = {
+		PARENT: ["genericTrinought"],
+		MIRROR_MASTER_ANGLE: true,
+		GUNS: [],
+	}
+	for(let i = 0; i < 3; i++) {
+		Class.featherTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [29, 19, 0.001, 3, 0, 120*i+60, 0],
+                  PROPERTIES: {COLOR: 9}
+			},
+		)
 	}
 	Class.featherARDreadV2 = { // Drifter
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Feather",
+		BODY: {
+			SPEED: 2.05,
+			ACCELERATION: 0.21,
+		},
+	    TURRETS: [
+			{
+				POSITION: [10, 0, 0, 0, 0, 1],
+				TYPE: 'featherTurretARDreadV2',
+			}
+		],
+	}
+	Class.steelTopARDreadV2 = {
+		PARENT: ["genericTrinought"],
+		SHAPE: 0,
+		MIRROR_MASTER_ANGLE: true,
 		GUNS: [],
-	    TURRETS: [],
+	}
+	for(let i = 0; i < 9; i++) {
+		Class.steelTopARDreadV2.GUNS.push(
+			{
+				POSITION: [8, 6, 0.001, 20, 0, 40*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+			{
+				POSITION: [8, 6, 0.001, -20, 0, 40*i+20, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
+	}
+	Class.steelBottomARDreadV2 = {
+		PARENT: ["genericTrinought"],
+		MIRROR_MASTER_ANGLE: true,
+		GUNS: [],
+	}
+	for(let i = 0; i < 3; i++) {
+		Class.steelBottomARDreadV2.GUNS.push(
+			{
+				POSITION: [3, 5, 0.001, 8, 7.5, 120*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+			{
+				POSITION: [3, 5, 0.001, 8, 0, 120*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+			{
+				POSITION: [3, 5, 0.001, 8, -7.5, 120*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
 	}
 	Class.steelARDreadV2 = { // Body damage increase
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Steel",
+		BODY: {
+			DAMAGE: 1.6,
+			PENETRATION: 1.4,
+		},
 		GUNS: [],
-	    TURRETS: [],
+	    TURRETS: [
+			{
+				POSITION: [5, 0, 0, 0, 360, 1],
+				TYPE: 'steelTopARDreadV2'
+			},
+			{
+				POSITION: [20, 0, 0, 0, 360, 0],
+				TYPE: 'steelBottomARDreadV2'
+			},
+		],
+	}
+	Class.flattenerTurretARDreadV2 = {
+		PARENT: ["genericTrinought"],
+		MIRROR_MASTER_ANGLE: true,
+		GUNS: [],
+	}
+	Class.flattenerTurret2ARDreadV2 = {
+		PARENT: ["genericTrinought"],
+		MIRROR_MASTER_ANGLE: true,
+		GUNS: [],
+	}
+	for(let i = 0; i < 3; i++) {
+		Class.flattenerTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [18, 25, 0, 0, 0, 120*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
+		Class.flattenerTurret2ARDreadV2.GUNS.push(
+			{
+				POSITION: [17, 20, 0, 0, 0, 120*i, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
 	}
 	Class.flattenerARDreadV2 = { // Size increase
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Flattener",
-	    TURRETS: [],
+		SIZE: 1.3,
+		BODY: {
+			SPEED: 0.82,
+			HEALTH: 1.3,
+		},
+	    TURRETS: [
+			{
+				POSITION: [10, 0, 0, 0, 0, 1],
+				TYPE: 'flattenerTurretARDreadV2'
+			}
+		],
 	}
 	Class.towerARDreadV2 = { // Size increase + auras
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Tower",
-	    TURRETS: [],
+		SIZE: 1.2,
+		BODY: {
+			SPEED: 0.9,
+			HEALTH: 1.2,
+		},
+	    TURRETS: [
+			{
+				POSITION: [12, 0, 0, 0, 0, 1],
+				TYPE: 'flattenerTurret2ARDreadV2'
+			},
+			...addTrinoughtAuraRing(),
+		],
 	}
 	Class.creatureARDreadV2 = { // Size increase + heal auras
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Creature",
-	    TURRETS: [],
+	    SIZE: 1.2,
+		BODY: {
+			SPEED: 0.9,
+			HEALTH: 1.2,
+		},
+	    TURRETS: [
+			{
+				POSITION: [12, 0, 0, 0, 0, 1],
+				TYPE: 'flattenerTurret2ARDreadV2'
+			},
+			...addTrinoughtAuraRing(true),
+		],
 	}
 	Class.spotlightARDreadV2 = { // Size increase + big aura
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Spotlight",
-	    TURRETS: [],
+	    SIZE: 1.2,
+		BODY: {
+			SPEED: 0.9,
+			HEALTH: 1.2,
+		},
+	    TURRETS: [
+			{
+				POSITION: [12, 0, 0, 0, 0, 1],
+				TYPE: 'flattenerTurretARDreadV2'
+			},
+			{
+				POSITION: [9.5, 0, 0, 0, 360, 1],
+				TYPE: "trinoughtBigAura",
+			},
+		],
 	}
 	Class.furnaceARDreadV2 = { // Size increase + big heal aura
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Furnace",
-	    TURRETS: [],
+	    SIZE: 1.2,
+		BODY: {
+			SPEED: 0.9,
+			HEALTH: 1.2,
+		},
+	    TURRETS: [
+			{
+				POSITION: [12, 0, 0, 0, 0, 1],
+				TYPE: 'flattenerTurretARDreadV2'
+			},
+			{
+				POSITION: [9.5, 0, 0, 0, 360, 1],
+				TYPE: "trinoughtBigHealAura",
+			},
+		],
 	}
 	Class.asteroidARDreadV2 = { // Size increase + big auto
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Asteroid",
-	    TURRETS: [],
+	    SIZE: 1.2,
+		BODY: {
+			SPEED: 0.9,
+			HEALTH: 1.2,
+		},
+	    TURRETS: [
+			{
+				POSITION: [12, 0, 0, 0, 0, 1],
+				TYPE: 'flattenerTurretARDreadV2'
+			},
+			{
+				POSITION: [10, 0, 0, 0, 360, 1],
+				TYPE: "kilobyteTurretARDreadV2",
+			},
+		],
+	}
+	Class.cardinalTurretARDreadV2 = {
+		PARENT: ["genericTrinought"],
+		MIRROR_MASTER_ANGLE: true,
+		SHAPE: 3,
+		GUNS: [],
+	}
+	for(let i = 0; i < 3; i++) {
+		Class.cardinalTurretARDreadV2.GUNS.push(
+			{
+				POSITION: [14.5 * Math.sqrt(3), 29, 0.001, 6.5, 0, 120*i+60, 0],
+				PROPERTIES: {COLOR: 9},
+			},
+		)
 	}
 	Class.cardinalARDreadV2 = { // Size decrease
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Cardinal",
-	    TURRETS: [],
+		SIZE: 0.65,
+		BODY: {
+			HEALTH: 0.75,
+			SPEED: 1.2,
+			ACCELERATION: 1.4,
+		},
+	    TURRETS: [
+			{
+				POSITION: [9 / Math.sqrt(3), 0, 0, 0, 0, 1],
+				TYPE: 'cardinalTurretARDreadV2'
+			}
+		],
 	}
+	Class.cagerTurretARDreadV2 = {
+		PARENT: 'genericTank',
+		CONTROLLERS: [["spin", {speed: -0.035}]],
+		INDEPENDENT: true,
+		LABEL: "",
+		COLOR: 16,
+		GUNS: [
+			{ 
+				POSITION: [8, 30, 1, -4, 1.5, 0, 0],
+			},
+			{
+				POSITION: [8, 30, 1, -4, 1.5, 120, 0],
+			},
+			{
+				POSITION: [8, 30, 1, -4, 1.5, 240, 0],
+			},
+		],
+		TURRETS: [
+			{
+				POSITION: [16, 0, 0, 30, 0, 1],
+				TYPE: ['hexagon', {COLOR: 2}]
+			},
+			{
+				POSITION: [11, 0, 0, 30, 0, 1],
+				TYPE: ['hexagon', {COLOR: 16}]
+			},
+		]
+	};
     Class.cagerARDreadV2 = { // Minelayer
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Cager",
-	    TURRETS: [],
+		GUNS: [
+			{
+				POSITION: [0, 9, 1, 8, 0, 0, 0],
+				PROPERTIES: {
+					MAX_CHILDREN: 5,
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, {maxSpeed: 1e-3, speed: 1e-3}]),
+					TYPE: 'unsetPillbox',
+					SYNCS_SKILLS: true,
+					DESTROY_OLDEST_CHILD: true,
+				}
+			},
+		],
+	    TURRETS: [
+			{
+				POSITION: [14, 0, 0, 180, 0, 1],
+				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
+			},
+			{
+				POSITION: [11, 0, 0, 0, 360, 1],
+				TYPE: 'cagerTurretARDreadV2',
+			}
+		],
 	}
+	Class.monitorRadarARDreadV2 = {
+		PARENT: 'genericTank',
+		CONTROLLERS: [['spin', {speed: 0.02}]],
+		INDEPENDENT: true,
+		SHAPE: [[0.175, 1], [0.175, -1], [-0.175, -1], [-0.175, 1]],
+		COLOR: 17,
+		GUNS: [
+			{
+				POSITION: [3.5, 26, 1, -1.75, 0, 0, 0],
+				PROPERTIES: {COLOR: 2}
+			}
+		]
+	};
     Class.monitorARDreadV2 = { // FOV
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Monitor",
-	    TURRETS: [],
+	    BODY: {
+			FOV: 1.25,
+			SPEED: 0.9,
+		  },
+		  TURRETS: [
+			{
+				POSITION: [14, 0, 0, 180, 0, 1],
+				TYPE: ['triangle', {MIRROR_MASTER_ANGLE: true}],
+			},
+			{
+				POSITION: [9, 0, 0, 0, 0, 1],
+				TYPE: ['egg', {COLOR: 16}]
+			},
+			{
+				POSITION: [6, 0, 0, 0, 0, 1],
+				TYPE:['egg', {COLOR: 2}]
+			},
+			{
+				POSITION: [19, 0, 0, 0, 360, 1],
+				TYPE: 'monitorRadarARDreadV2'
+			}
+		]
 	}
 
 	// T4 Weapons
@@ -3368,19 +3757,12 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addPentanoughtTurretRing(),
 			{
 				POSITION: [9, 0, 0, 0, 360, 1],
 				TYPE: "pentanoughtBigAura",
 			},
 		],
-	}
-	for (let i = 0; i < 5; i++) {
-		Class.supernovaARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.25, 9, 0, 72*i+36, 180, 1],
-				TYPE: "spamAutoTurret",
-			},
-		)
 	}
 	Class.cipherARDreadV2 = {
 	    PARENT: ["genericPentanought"],
@@ -3390,22 +3772,13 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addPentanoughtTurretRing(),
+			{
+				POSITION: [11.5, 0, 0, 0, 360, 1],
+				TYPE: "megabyteTurretARDreadV2",
+			},
 		],
 	}
-	for (let i = 0; i < 5; i++) {
-		Class.cipherARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.25, 9, 0, 72*i+36, 180, 1],
-				TYPE: "spamAutoTurret",
-			},
-		)
-	}
-	Class.cipherARDreadV2.TURRETS.push(
-		{
-			POSITION: [11.5, 0, 0, 0, 360, 1],
-			TYPE: "megabyteTurretARDreadV2",
-		},
-	)
 	Class.pentanoughtBigHealAura = addAura(-2, 1.45);
 	Class.interstellarARDreadV2 = {
 	    PARENT: ["genericPentanought"],
@@ -3419,15 +3792,8 @@ module.exports = ({ Class }) => {
 				POSITION: [9.5, 0, 0, 0, 360, 1],
 				TYPE: "pentanoughtBigHealAura",
 			},
+			...addPentanoughtTurretRing(),
 		],
-	}
-	for (let i = 0; i < 5; i++) {
-		Class.interstellarARDreadV2.TURRETS.push(
-			{
-				POSITION: [3.25, 9, 0, 72*i+36, 180, 1],
-				TYPE: "spamAutoTurret",
-			},
-		)
 	}
 	Class.gigabyteTurretARDreadV2 = {
 		PARENT: ["autoTankGun"],
@@ -3456,6 +3822,7 @@ module.exports = ({ Class }) => {
 			},
 		],
 	}
+	Class.pentanoughtSmallAura = addAura(1, 1.6, 0.15);
 	Class.malwareARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Malware",
@@ -3464,23 +3831,13 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addPentanoughtAuraRing(),
+			{
+				POSITION: [11.5, 0, 0, 0, 360, 1],
+				TYPE: "megabyteTurretARDreadV2",
+			},
 		],
 	}
-	Class.pentanoughtSmallAura = addAura(1, 1.6, 0.15);
-	for (let i = 0; i < 5; i++) {
-		Class.malwareARDreadV2.TURRETS.push(
-			{
-				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
-				TYPE: "pentanoughtSmallAura",
-			},
-		)
-	}
-	Class.malwareARDreadV2.TURRETS.push(
-		{
-			POSITION: [11.5, 0, 0, 0, 360, 1],
-			TYPE: "megabyteTurretARDreadV2",
-		},
-	)
 	Class.pentanoughtSmallHealAura = addAura(-2/3, 1.6, 0.15);
 	Class.softwareARDreadV2 = {
 	    PARENT: ["genericPentanought"],
@@ -3490,22 +3847,13 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addPentanoughtAuraRing(true),
+			{
+				POSITION: [11.5, 0, 0, 0, 360, 1],
+				TYPE: "megabyteTurretARDreadV2",
+			},
 		],
 	}
-	for (let i = 0; i < 5; i++) {
-		Class.softwareARDreadV2.TURRETS.push(
-			{
-				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
-				TYPE: "pentanoughtSmallHealAura",
-			},
-		)
-	}
-	Class.softwareARDreadV2.TURRETS.push(
-		{
-			POSITION: [11.5, 0, 0, 0, 360, 1],
-			TYPE: "megabyteTurretARDreadV2",
-		},
-	)
 	Class.roasterARDreadV2 = { // Flamethrower
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Roaster",
@@ -3552,29 +3900,17 @@ module.exports = ({ Class }) => {
 				POSITION: [13, 0, 0, 180, 0, 1],
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
+			...addPentanoughtAuraRing(true),
 			{
 				POSITION: [9.5, 0, 0, 0, 360, 1],
 				TYPE: "pentanoughtBigHealAura",
 			},
 		],
 	}
-	for (let i = 0; i < 5; i++) {
-		Class.stratosphereARDreadV2.TURRETS.push(
-			{
-				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
-				TYPE: "pentanoughtSmallHealAura",
-			},
-		)
-	}
 	Class.behemothARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Behemoth",
-		BODY: {
-			HEALTH: 4,
-			SHIELD: 4,
-			REGEN: 2.5,
-			SPEED: 0.4,
-		},
+		BODY: hpBuffBodyStats[2],
 	    TURRETS: [
 			{
 				POSITION: [15, 0, 0, 180, 0, 1],
@@ -3589,12 +3925,7 @@ module.exports = ({ Class }) => {
 	Class.astronomicARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Astronomic",
-		BODY: {
-			HEALTH: 3.2,
-			SHIELD: 3.2,
-			REGEN: 2.5,
-			SPEED: 0.5,
-		},
+		BODY: hpBuffBodyStats[1],
 	    TURRETS: [
 			{
 				POSITION: [13, 0, 0, 180, 0, 1],
@@ -3604,25 +3935,13 @@ module.exports = ({ Class }) => {
 				POSITION: [24, 0, 0, 180, 0, 0],
 				TYPE: ["pentagon", {COLOR: 9,MIRROR_MASTER_ANGLE: true}],
 			},
+			...addPentanoughtAuraRing(),
 		],
-	}
-	for (let i = 0; i < 5; i++) {
-		Class.astronomicARDreadV2.TURRETS.push(
-			{
-				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
-				TYPE: "pentanoughtSmallAura",
-			},
-		)
 	}
 	Class.grandioseARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Grandiose",
-		BODY: {
-			HEALTH: 3.2,
-			SHIELD: 3.2,
-			REGEN: 2.5,
-			SPEED: 0.5,
-		},
+		BODY: hpBuffBodyStats[1],
 	    TURRETS: [
 			{
 				POSITION: [13, 0, 0, 180, 0, 1],
@@ -3632,24 +3951,19 @@ module.exports = ({ Class }) => {
 				POSITION: [24, 0, 0, 180, 0, 0],
 				TYPE: ["pentagon", {COLOR: 9,MIRROR_MASTER_ANGLE: true}],
 			},
+			...addPentanoughtAuraRing(true),
 		],
-	}
-	for (let i = 0; i < 5; i++) {
-		Class.grandioseARDreadV2.TURRETS.push(
-			{
-				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
-				TYPE: "pentanoughtSmallHealAura",
-			},
-		)
 	}
 	Class.bunkerARDreadV2 = { // HP + auto spam
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Bunker",
+		BODY: hpBuffBodyStats[1],
 	    TURRETS: [],
 	}
 	Class.arsenalARDreadV2 = { // HP + big auto
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Arsenal",
+		BODY: hpBuffBodyStats[1],
 	    TURRETS: [],
 	}
 	Class.pentagonLeviathanTopARDreadV2 = {
@@ -3708,10 +4022,7 @@ module.exports = ({ Class }) => {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Leviathan",
 		GUNS: [],
-		BODY: {
-			SPEED: 2.35,
-			HEALTH: 0.35,
-		},
+		BODY: speedBuffBodyStats[2],
 	    TURRETS: [
 			{
 				POSITION: [12, 0, 0, 0, 0, 1],
@@ -3727,10 +4038,7 @@ module.exports = ({ Class }) => {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Valrayvn",
 		GUNS: [],
-		BODY: {
-			SPEED: 2.15,
-			HEALTH: 0.5,
-		},
+		BODY: speedBuffBodyStats[1],
 	    TURRETS: [
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
@@ -3740,24 +4048,14 @@ module.exports = ({ Class }) => {
 				POSITION: [20, 0, 0, 0, 0, 0],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
+			...addPentanoughtAuraRing(),
 		],
-	}
-	for (let i = 0; i < 5; i++) {
-		Class.valrayvnARDreadV2.TURRETS.push(
-			{
-				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
-				TYPE: "pentanoughtSmallAura",
-			},
-		)
 	}
 	Class.pegasusARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Pegasus",
 		GUNS: [],
-		BODY: {
-			SPEED: 2.15,
-			HEALTH: 0.5,
-		},
+		BODY: speedBuffBodyStats[1],
 	    TURRETS: [
 			{
 				POSITION: [12, 0, 0, 180, 0, 1],
@@ -3767,29 +4065,25 @@ module.exports = ({ Class }) => {
 				POSITION: [20, 0, 0, 0, 0, 0],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
+			...addPentanoughtAuraRing(true),
 		],
-	}
-	for (let i = 0; i < 5; i++) {
-		Class.pegasusARDreadV2.TURRETS.push(
-			{
-				POSITION: [4, 8.5, 0, 72*i+36, 360, 1],
-				TYPE: "pentanoughtSmallHealAura",
-			},
-		)
 	}
 	Class.maceARDreadV2 = { // Speed + auto spam
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Mace",
+		BODY: speedBuffBodyStats[1],
 	    TURRETS: [],
 	}
 	Class.missileARDreadV2 = { // Speed + big auto
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Missile",
+		BODY: speedBuffBodyStats[1],
 	    TURRETS: [],
 	}
 	Class.battalionARDreadV2 = { // Speed + HP
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Battalion",
+		BODY: {},
 	    TURRETS: [],
 	}
 	Class.wispARDreadV2 = { // Drifter
