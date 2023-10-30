@@ -190,9 +190,39 @@ module.exports = ({ Class, Config }) => {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone]),
                 TYPE: 'drone',
-                MAX_CHILDREN: 3
+                MAX_CHILDREN: 3,
+                SYNCS_SKILLS: true
             }
         }]
+    }
+
+    Class.SCENEXE_director = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Director',
+        GUNS: [{
+            POSITION: { LENGTH: 25, WIDTH: 14.5, ASPECT: -0.5, X: -4 },
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, {damage: 2, reload: 1.15, pen: 2}]),
+                TYPE: 'drone',
+                MAX_CHILDREN: 3,
+                SYNCS_SKILLS: true
+            }
+        }]
+    }
+
+    Class.SCENEXE_overseer = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Overseer',
+        GUNS: [
+            {
+                POSITION: { ...Class.SCENEXE_commander.GUNS[0].POSITION },
+                PROPERTIES: { ...Class.SCENEXE_commander.GUNS[0].PROPERTIES, MAX_CHILDREN: 4 },
+            },
+            {
+                POSITION: {...Class.SCENEXE_commander.GUNS[0].POSITION, ANGLE: 180},
+                PROPERTIES: {...Class.SCENEXE_commander.GUNS[0].PROPERTIES, MAX_CHILDREN: 4},
+            },
+        ]
     }
 
     Class.SCENEXE_alloy = {
@@ -207,6 +237,10 @@ module.exports = ({ Class, Config }) => {
         ]
     }
 
+    /* 
+        Class.SCENEXE_fusion = { under SCENEXE_trapper }
+    */
+
     // TRAPPER BRANCH
     Class.SCENEXE_trapper = {
         PARENT: 'SCENEXE_node',
@@ -220,6 +254,19 @@ module.exports = ({ Class, Config }) => {
         }, {
             POSITION: { LENGTH: 15, WIDTH: 6 }
         }]
+    }
+
+    Class.SCENEXE_fusion = {
+        PARENT: 'SCENEXE_node',
+        LABEL: 'Fusion',
+        GUNS: [
+            { ...Class.SCENEXE_trapper.GUNS[0] },
+            { ...Class.SCENEXE_trapper.GUNS[1] },
+            {
+                POSITION: { ...Class.SCENEXE_commander.GUNS[0].POSITION, ANGLE: 180 },
+                PROPERTIES: { ...Class.SCENEXE_commander.GUNS[0].PROPERTIES }
+            }
+        ]
     }
 
     Class.SCENEXE_guard = {
@@ -314,6 +361,7 @@ module.exports = ({ Class, Config }) => {
 
     Class.SCENEXE_node.UPGRADES_TIER_1 = ['SCENEXE_mono', 'SCENEXE_commander', 'SCENEXE_trapper']
         Class.SCENEXE_mono.UPGRADES_TIER_2 = ['SCENEXE_duo', 'SCENEXE_flank', 'SCENEXE_split', 'SCENEXE_single', 'SCENEXE_alloy', 'SCENEXE_guard', 'SCENEXE_sniper']
+        Class.SCENEXE_commander.UPGRADES_TIER_2 = ['SCENEXE_director', 'SCENEXE_overseer', 'SCENEXE_alloy', 'SCENEXE_fusion']
     Class.SCENEXE_base.UPGRADES_TIER_1 = ['SCENEXE_smasher', 'SCENEXE_sentry', 'SCENEXE_wall', 'SCENEXE_hearth', 'SCENEXE_hangar']
 
     Class.addons.UPGRADES_TIER_0.push(['SCENEXE_node', 'SCENEXE_base'])
