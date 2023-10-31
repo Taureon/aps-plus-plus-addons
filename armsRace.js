@@ -1555,7 +1555,7 @@ Class.renovater = {
             POSITION: [13, 0, 0, 0, 360, 1],
             TYPE: "healerSymbol",},],
 };
-    Ckass.physician = {
+    Class.physician = {
     PARENT: ["genericTank"],
     LABEL: "Physician",
     DANGER: 4,
@@ -1568,6 +1568,38 @@ Class.renovater = {
     ],
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.heal,
+};
+Class.intern = {
+    PARENT: ["genericTank"],
+    LABEL: "Intern",
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
+    GUNS: [{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [8, 9, -0.5, 17.5, 0, 0, 0],},{
+            POSITION: [23.5, 10, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
+                TYPE: "healerBullet",},},],STAT_NAMES: statnames.heal,
+};
+    Class.ointment = {
+    PARENT: ["genericTank"],
+    LABEL: "Rifle",
+    BODY: {FOV: base.FOV * 1.225,},
+    GUNS: [
+        {POSITION: [8, 9, -0.5, 17.5, 0, 0, 0],},{{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [20, 12, 1, 0, 0, 0, 0],},{
+            POSITION: [24, 7, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.healer]),
+                TYPE: "healerbullet",},},],
+        TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
 };
     Class.avian = makeBird(Class.single, "Avian");
     Class.assistant = makeHybrid(Class.single, "Assistant");
@@ -1599,5 +1631,6 @@ Class.renovater = {
                                                        "autoBonker", "autoBanger", "autoDrifter"]
                     Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
                     Class.banger.UPGRADES_TIER_4 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"]
+                    Class.medic.UPGRADES_TIER_4 = ["medic", "ointment"]
                                                       
 };
