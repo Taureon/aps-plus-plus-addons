@@ -1586,7 +1586,7 @@ Class.intern = {
 };
     Class.ointment = {
     PARENT: ["genericTank"],
-    LABEL: "Rifle",
+    LABEL: "Ointment",
     BODY: {FOV: base.FOV * 1.225,},
     GUNS: [
         {POSITION: [8, 9, -0.5, 17.5, 0, 0, 0],},{{
@@ -1600,6 +1600,31 @@ Class.intern = {
             /** SIZE     X       Y     ANGLE    ARC */
             POSITION: [13, 0, 0, 0, 360, 1],
             TYPE: "healerSymbol",},],
+};
+Class.injection = {
+    PARENT: ["genericTank"],
+    LABEL: "Injection",
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},
+    ],
+    GUNS: [{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
+            POSITION: [18, 10, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
+                TYPE: "healerBullet",},},{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [9, 10, -0.5, 12.5, 0, 0, 0],
+        },{
+            POSITION: [21, 6, 1, 0, 0, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
+                TYPE: "healerBullet",},},
+    ],
+    STAT_NAMES: statnames.heal,
 };
     Class.avian = makeBird(Class.single, "Avian");
     Class.assistant = makeHybrid(Class.single, "Assistant");
@@ -1631,6 +1656,6 @@ Class.intern = {
                                                        "autoBonker", "autoBanger", "autoDrifter"]
                     Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
                     Class.banger.UPGRADES_TIER_4 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"]
-                    Class.medic.UPGRADES_TIER_4 = ["medic", "ointment"]
+                    Class.medic.UPGRADES_TIER_4 = ["medic", "ointment", "injection"]
                                                       
 };
