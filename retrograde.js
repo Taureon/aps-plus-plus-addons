@@ -19,7 +19,7 @@ module.exports = ({ Class }) => {
                 POSITION: [22, 7, 1, 0, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -41,7 +41,7 @@ module.exports = ({ Class }) => {
                 POSITION: [28, 7, 1, 0, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.rifle]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -62,7 +62,7 @@ module.exports = ({ Class }) => {
                 POSITION: [22, 7, 1, 0, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -99,7 +99,7 @@ module.exports = ({ Class }) => {
                         g.halfspeed,
                         g.halfrecoil,
                     ]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -112,7 +112,7 @@ module.exports = ({ Class }) => {
                         g.halfspeed,
                         g.halfrecoil,
                     ]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -125,7 +125,7 @@ module.exports = ({ Class }) => {
                         g.halfspeed,
                         g.halfrecoil,
                     ]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -138,7 +138,7 @@ module.exports = ({ Class }) => {
                         g.halfspeed,
                         g.halfrecoil,
                     ]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -151,7 +151,7 @@ module.exports = ({ Class }) => {
                         g.halfspeed,
                         g.halfrecoil,
                     ]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -164,14 +164,14 @@ module.exports = ({ Class }) => {
                         g.halfspeed,
                         g.halfrecoil,
                     ]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [22, 7, 1, 0, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -192,7 +192,7 @@ module.exports = ({ Class }) => {
                 POSITION: [11.5, 10.5, 1.4, 4, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.blaster]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -210,7 +210,7 @@ module.exports = ({ Class }) => {
                 POSITION: [16, 10, 1.4, 8, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.chain]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -224,14 +224,14 @@ module.exports = ({ Class }) => {
                 POSITION: [12, 10, 1.4, 8, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [12, 10, 1.4, 8, 0, 180, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -250,21 +250,21 @@ module.exports = ({ Class }) => {
                 POSITION: [11.5, 10.5, 1.4, 1.75, -0.75, 27.5, 0.5],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.blaster, g.bent]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [11.5, 10.5, 1.4, 1.75, 0.75, -27.5, 0.5],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.blaster, g.bent]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [11.5, 10.5, 1.4, 4, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.blaster, g.bent]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -284,14 +284,14 @@ module.exports = ({ Class }) => {
                         g.mach,
                         g.morerecoil,
                     ]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [10, 10, 1.4, 8, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.blaster]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -336,7 +336,7 @@ module.exports = ({ Class }) => {
                 POSITION: [14, 8, 1.4, 8, 0, 0, 0.5],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.chain]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -344,7 +344,7 @@ module.exports = ({ Class }) => {
                 POSITION: [12, 10, 1.4, 8, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.chain]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -388,21 +388,21 @@ module.exports = ({ Class }) => {
                 POSITION: [12, 10, 1.4, 8, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [12, 10, 1.4, 8, 0, 120, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [12, 10, 1.4, 8, 0, 240, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -416,14 +416,14 @@ module.exports = ({ Class }) => {
                 POSITION: [12, 10, 1.4, 8, 0, 180, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.flank]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
                 POSITION: [16, 10, 1.4, 8, 0, 0, 0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.chain, g.flank]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
         ],
@@ -440,7 +440,7 @@ module.exports = ({ Class }) => {
                 POSITION: [11, 12, 1, 6, 0, 0, 0.5],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.pound]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                     HAS_NO_RECOIL: true,
                 },
             },
@@ -474,7 +474,7 @@ module.exports = ({ Class }) => {
                 POSITION: [20,     8,      1,      0,    -5.5,     0,      0],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
@@ -482,7 +482,7 @@ module.exports = ({ Class }) => {
                 POSITION: [20,     8,      1,      0,     5.5,     0,     0.5],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
-                    TYPE: Class.bullet,
+                    TYPE: "bullet",
                 },
             },
             {
