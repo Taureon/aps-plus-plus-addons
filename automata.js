@@ -46,6 +46,13 @@ Class.trapper.UPGRADES_TIER_2.push("autoTrapper");
     Class.autoTrapper.UPGRADES_TIER_2 = [];
     Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "znpAutoTriTrapper", "znpAutoTrapGuard", "znpCeptTrapper"];
 
+/* // not implemented in aps++ yet
+Class.znpAutoDesmos = makeAuto(Class.desmos);
+Class.desmos.UPGRADES_TIER_2.push("znpAutoDesmos");
+    Class.znpAutoDesmos.UPGRADES_TIER_2 = [];
+    Class.znpAutoDesmos.UPGRADES_TIER_3 = ["znpAutoHelix", "znpAutoVolute", "znpCeptDesmos"];
+*/
+
 Class.znpAutoTripleShot = makeAuto(Class.tripleShot);
 Class.tripleShot.UPGRADES_TIER_3.push("znpAutoTripleShot");
     Class.znpAutoTripleShot.UPGRADES_TIER_3 = [];
@@ -98,6 +105,18 @@ Class.znpAutoTrapGuard = makeAuto(Class.trapGuard);
 Class.trapGuard.UPGRADES_TIER_3.push("znpAutoTrapGuard");
     Class.znpAutoTrapGuard.UPGRADES_TIER_3 = [];
 
+/* // not implemented in aps++ yet
+Class.znpAutoHelix = makeAuto(Class.helix);
+Class.helix.UPGRADES_TIER_3.push("znpAutoHelix");
+    Class.znpAutoHelix.UPGRADES_TIER_3 = [];
+*/
+
+/* // not implemented in aps++ yet
+Class.znpAutoVolute = makeAuto(Class.volute);
+Class.volute.UPGRADES_TIER_3.push("znpAutoVolute");
+    Class.znpAutoVolute.UPGRADES_TIER_3 = [];
+*/
+
 Class.znpCeptBasic = makeCeption(Class.basic, "Inception");
     Class.znpCeptBasic.UPGRADES_TIER_1 = [];
     Class.znpCeptBasic.UPGRADES_TIER_2 = [];
@@ -130,6 +149,12 @@ Class.znpCeptPounder = makeCeption(Class.pounder, "Poundception");
 Class.znpCeptTrapper = makeCeption(Class.trapper, "Trapception");
     Class.znpCeptTrapper.UPGRADES_TIER_2 = [];
     Class.znpCeptTrapper.UPGRADES_TIER_3 = [];
+
+/* // not implemented in aps++ yet
+Class.znpCeptDesmos = makeCeption(Class.desmos, "Deception");
+    Class.znpCeptDesmos.UPGRADES_TIER_2 = [];
+    Class.znpCeptDesmos.UPGRADES_TIER_3 = [];
+*/
 
 Class.znpCept2Basic = makeAuto(Class.basic, "Recursion", {
     type: "znpCeptBasic",
