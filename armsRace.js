@@ -112,13 +112,17 @@ module.exports = ({ Class }) => {
 
 Class.sootherDrone = {
     PARENT: ["drone"],
-     BODY: {HEALTH: base.HEALTH * 0.7,SPEED: base.SPEED * 0.75},
+    BODY: {HEALTH: base.HEALTH * 0.7,SPEED: base.SPEED * 0.75},
     HITS_OWN_TYPE: "normal",
+    HEALER: true,
     TURRETS: [{
             POSITION: [13, 0, 0, 0, 360, 1],
             TYPE: "healerSymbol",},],
 };
-    
+    Class.healerTrap = {
+    PARENT: ["trap"],
+    HEALER: true,
+};
     //tripletwin upgrades
     Class.quadTwin = makeMulti(Class.twin, 4);
     Class.autoTripleTwin = makeAuto(Class.tripleTwin);
@@ -1565,7 +1569,8 @@ Class.renovater = {
     PARENT: ["genericTank"],
     LABEL: "Physician",
     DANGER: 4,
-    BODY: {FOV: 1.1 * base.FOV,DENSITY: 3 * base.DENSITY, DAMAGE: base.DAMAGE * -1},
+    HEALER: true, 
+    BODY: {FOV: 1.1 * base.FOV,DENSITY: 3 * base.DENSITY},
     TURRETS: [
         {
             POSITION: [21.5, 0, 0, 0, 360, 0],
@@ -1662,12 +1667,51 @@ Class.injection = {
     ],
     STAT_NAMES: statnames.heal,
 };
+	
+    Class.scientist = {
+    PARENT: ["genericTank"],
+    LABEL: "Scientist",
+    STAT_NAMES: statnames.heal,
+    GUNS: [{
+            POSITION: [15, 7, 1, 0, 0, 0, 0],},{
+            POSITION: [3, 5.5, 1.7, 15, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.healer]),
+                TYPE: "healerTrap",
+                STAT_CALCULATOR: gunCalcNames.trap,},},],
+	    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
+};
+
+    Class.nurse = {
+    PARENT: ["genericTank"],
+    LABEL: "Nurse",
+    TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "healerSymbol",},],
+    GUNS: [{
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [8, 9, -0.5, 12.5, 5.5, 0, 0],},{
+            POSITION: [18, 10, 1, 0, 5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
+                TYPE: "healerBullet",},},
+	  POSITION: [8, 9, -0.5, 12.5, -5.5, 0, 0],},{
+            POSITION: [18, 10, 1, 0, -5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
+                TYPE: "healerBullet",},},],
+    STAT_NAMES: statnames.heal,
+};
     Class.avian = makeBird(Class.single, "Avian");
     Class.assistant = makeHybrid(Class.single, "Assistant");
     Class.autoSingle = makeAuto(Class.single);
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.autoDoubleFlankTwin = makeAuto(Class.doubleFlankTwin);
-
+    Class.triHealer = makeMulti (Class.healer, 3, 'Tri-Healer')
     Class.devBosses.UPGRADES_TIER_0.push("twilightBoss");
             Class.twin.UPGRADES_TIER_2.push ("duo")
             Class.sniper.UPGRADES_TIER_2.push ("sharpshooter")
@@ -1677,7 +1721,7 @@ Class.injection = {
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-                Class.healer.UPGRADES_TIER_3.push("analyzer", "phychiatrist", "soother", "renovater", "physician");
+                Class.healer.UPGRADES_TIER_3 = ["medic", "scientist", "nurse", "triHealer", "analyzer", "phychiatrist", "soother", "renovater", "physician"];
                 Class.smasher.UPGRADES_TIER_3.push("bonker", "banger", "drifter");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
