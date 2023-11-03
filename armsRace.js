@@ -9,7 +9,7 @@
 // KEEP THE STYLE CONSISTENT
 // IF YOU COPY-PASTED CODE WITH DIFFERENT FORMATTING, CHANGE IT TO MAKE IT ABIDE BY THE FORMATTING
 // THIS IS IMPORTANT TO KEEP THE CODE SMALL
-
+//i cant fix please help someone!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! please. (everything is messed up)
 const { dereference, combineStats, addBackGunner, makeAuto, makeHybrid } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
