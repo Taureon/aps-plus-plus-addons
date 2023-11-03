@@ -5348,7 +5348,7 @@ module.exports = ({ Class }) => {
 			Javelin: 'Javelin',
 			Rapier: 'Lance',
 			Woomera: 'PLACEHOLDER',
-			Trebuchet: 'PLACEHOLDER',
+			Trebuchet: 'Partisan',
 			Bolt: 'PLACEHOLDER',
 			Diplomat: 'Envoy',
 			Arbitrator: 'Cutlass',
@@ -5374,7 +5374,7 @@ module.exports = ({ Class }) => {
 		Rapier: {
 			Rapier: 'Rapier',
 			Woomera: 'PLACEHOLDER',
-			Trebuchet: 'PLACEHOLDER',
+			Trebuchet: 'Katana',
 			Bolt: 'PLACEHOLDER',
 			Diplomat: 'Emissary',
 			Arbitrator: 'Umpire',
@@ -5400,7 +5400,7 @@ module.exports = ({ Class }) => {
 		Woomera: {
 			Woomera: 'Woomera',
 			Trebuchet: 'PLACEHOLDER',
-			Bolt: 'PLACEHOLDER',
+			Bolt: 'Piercer', // Soap
 			Diplomat: 'PLACEHOLDER',
 			Arbitrator: 'PLACEHOLDER',
 			Dissolver: 'PLACEHOLDER',
@@ -5411,11 +5411,11 @@ module.exports = ({ Class }) => {
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
-			Raider: 'PLACEHOLDER',
+			Raider: 'Dispatcher', // Soap
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'PLACEHOLDER',
 			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Incapacitator: 'Scavenger', // Soap
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
 			Sterilizer: 'PLACEHOLDER',
@@ -5454,7 +5454,7 @@ module.exports = ({ Class }) => {
 			Eroder: 'PLACEHOLDER',
 			Gripper: 'PLACEHOLDER',
 			Retardant: 'PLACEHOLDER',
-			Tyrant: 'PLACEHOLDER',
+			Tyrant: 'Minister',
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
@@ -5464,7 +5464,7 @@ module.exports = ({ Class }) => {
 			Bruiser: 'PLACEHOLDER',
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'PLACEHOLDER',
-			Lucifer: 'PLACEHOLDER',
+			Lucifer: 'Terminator', // Siece
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
 			Jackhammer: 'PLACEHOLDER',
@@ -5483,8 +5483,8 @@ module.exports = ({ Class }) => {
 			Raider: 'Marauder',
 			Gladiator: 'Champion',
 			Starlight: 'PLACEHOLDER',
-			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Bruiser: 'Ambassador',
+			Incapacitator: 'Erebus', // Yharon
 			Cerberus: 'Orion',
 			Lucifer: 'Manticore',
 			Sterilizer: 'PLACEHOLDER',
@@ -5495,20 +5495,20 @@ module.exports = ({ Class }) => {
 			Arbitrator: 'Arbitrator',
 			Dissolver: 'PLACEHOLDER',
 			Eroder: 'PLACEHOLDER',
-			Gripper: 'PLACEHOLDER',
+			Gripper: 'Mortician',
 			Retardant: 'Extinguisher',
 			Tyrant: 'Shogun',
 			Anesthesiologist: 'PLACEHOLDER',
-			Helix: 'PLACEHOLDER',
+			Helix: 'Referee',
 			Bombardment: 'PLACEHOLDER',
 			Raider: 'Buccaneer',
 			Gladiator: 'Warrior',
-			Starlight: 'PLACEHOLDER',
-			Bruiser: 'PLACEHOLDER',
+			Starlight: 'Genesis', // Siece
+			Bruiser: 'Terminator', // Soap
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'Gorgon',
 			Lucifer: 'Keres',
-			Sterilizer: 'PLACEHOLDER',
+			Sterilizer: 'Warden',
 			Hielaman: 'PLACEHOLDER', 
 			Jackhammer: 'PLACEHOLDER',
 		},
@@ -5527,7 +5527,7 @@ module.exports = ({ Class }) => {
 			Bruiser: 'PLACEHOLDER',
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'PLACEHOLDER',
-			Lucifer: 'PLACEHOLDER',
+			Lucifer: 'Styx',
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
 			Jackhammer: 'PLACEHOLDER',
@@ -5535,7 +5535,7 @@ module.exports = ({ Class }) => {
 		Eroder: {
 			Eroder: 'Eroder',
 			Gripper: 'PLACEHOLDER',
-			Retardant: 'PLACEHOLDER',
+			Retardant: 'Shatterer',
 			Tyrant: 'PLACEHOLDER',
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'PLACEHOLDER',
@@ -5543,8 +5543,8 @@ module.exports = ({ Class }) => {
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'PLACEHOLDER',
-			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Bruiser: 'Gasher', // Soap
+			Incapacitator: 'Lacerator', // Soap
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
 			Sterilizer: 'PLACEHOLDER',
@@ -5562,7 +5562,7 @@ module.exports = ({ Class }) => {
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'PLACEHOLDER',
 			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Incapacitator: 'Restrainer',
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
 			Sterilizer: 'PLACEHOLDER',
@@ -5572,14 +5572,14 @@ module.exports = ({ Class }) => {
 		Retardant: {
 			Retardant: 'Retardant',
 			Tyrant: 'Anarchist',
-			Anesthesiologist: 'PLACEHOLDER',
+			Anesthesiologist: 'Buckshot', // Soap
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
 			Raider: 'Freebooter',
 			Gladiator: 'Combatant',
 			Starlight: 'PLACEHOLDER',
-			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Bruiser: 'Executioner', // Soap
+			Incapacitator: 'Smotherer',
 			Cerberus: 'Gigantes',
 			Lucifer: 'Demogorgon',
 			Sterilizer: 'PLACEHOLDER',
@@ -5594,7 +5594,7 @@ module.exports = ({ Class }) => {
 			Raider: 'Corsair',
 			Gladiator: 'Amazon',
 			Starlight: 'PLACEHOLDER',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Authoritarian',
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'Ouroboros',
 			Lucifer: 'Raiju',
@@ -5607,8 +5607,8 @@ module.exports = ({ Class }) => {
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
 			Raider: 'PLACEHOLDER',
-			Gladiator: 'PLACEHOLDER',
-			Starlight: 'PLACEHOLDER',
+			Gladiator: 'Harbinger', // Siece
+			Starlight: 'Hypnotizer',
 			Bruiser: 'PLACEHOLDER',
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'PLACEHOLDER',
@@ -5665,7 +5665,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'Wendigo',
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Jackhammer: 'Warlord',
 		},
 		Starlight: {
 			Starlight: 'Starlight',
@@ -5698,7 +5698,7 @@ module.exports = ({ Class }) => {
 			Cerberus: 'Cerberus',
 			Lucifer: 'Oni',
 			Sterilizer: 'PLACEHOLDER',
-			Hielaman: 'PLACEHOLDER', 
+			Hielaman: 'Typhon', 
 			Jackhammer: 'PLACEHOLDER',
 		},
 		Lucifer: {
@@ -5735,8 +5735,8 @@ module.exports = ({ Class }) => {
 			weapon2TurretsOnOneSide = [];
 
 		// Label
-		let name1 = null, // hexDreadNames[weapon1.LABEL][weapon2.LABEL],
-			name2 = null, // hexDreadNames[weapon2.LABEL][weapon1.LABEL],
+		let name1 = hexDreadNames[weapon1.LABEL][weapon2.LABEL],
+			name2 = hexDreadNames[weapon2.LABEL][weapon1.LABEL],
 			weaponName = weapon1.LABEL + weapon2.LABEL,
 			orientationId = 0;
 		if (name1) {
@@ -5746,7 +5746,7 @@ module.exports = ({ Class }) => {
 			orientationId = 1;
 		}
 		let LABEL = weaponName,
-			className = weaponName.toLowerCase() + orientationId + "ARDreadV2";
+			className = weapon1.LABEL.toLowerCase() + weapon2.LABEL + orientationId + "ARDreadV2";
 		
 		// Guns ----------------------
 		if (weapon1.GUNS) gunsOnOneSide.push(...JSON.parse(JSON.stringify(weapon1.GUNS.slice(0, weapon1.GUNS.length / 5))));
