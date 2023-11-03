@@ -11,7 +11,7 @@
 // THIS IS IMPORTANT TO KEEP THE CODE SMALL
 //i cant fix please help someone!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! please. (everything is messed up)
 const { dereference, combineStats, addBackGunner, makeAuto, makeHybrid } = require('../facilitators.js');
-const { base, gunCalcNames, statnames } = require('../constants.js');
+const { base, gunCalcNames, statnames, smshskl } = require('../constants.js');
 const g = require('../gunvals.js');
 
 let greekNumbers = ',Double ,Triple ,Quad ,Penta ,Hexa ,Septa ,Octo ,Nona ,Deca ,Undeca ,Dodeca ,Trideca ,Tetradeca ,Pentadeca ,Hexadeca ,Heptadeca ,Octadeca ,Nonadeca ,Icosa ,Henicosa ,Docosa ,Tricosa ,Triaconta ,Hentriaconta '.split(','),
@@ -567,7 +567,7 @@ Class.sootherDrone = {
         SPEED: 1.05 * base.SPEED, FOV: 1.245 * base.FOV, DENSITY: 6 * base.DENSITY,
     },
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
     TURRETS: [{
             POSITION: [29.5, 0, 0, 0, 360, 0],
@@ -579,7 +579,7 @@ Class.sootherDrone = {
     DANGER: 8,
     BODY: {SPEED: base.SPEED * 1, DAMAGE: base.DAMAGE * 1.15, FOV: base.FOV * 1.1, DENSITY: base.DENSITY * 3,},
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
     TURRETS: [
         {
@@ -613,14 +613,14 @@ Class.sootherDrone = {
             TYPE: "landmineBody",},
     ],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
 
     Class.autoMegaSmasher = makeAuto(Class.megaSmasher, "Auto-Mega-Smasher", {
     type: "autoSmasherTurret",
     size: 11,
     });
-    Class.autoMegaSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
+    Class.autoMegaSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
     
     Class.bonker = {
     PARENT: ["genericTank"],
@@ -632,7 +632,7 @@ Class.sootherDrone = {
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "smasherBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher, };
     
     Class.megaBonker = {
@@ -645,7 +645,7 @@ Class.sootherDrone = {
             POSITION: [25, 0, 0, 0, 360, 0],
             TYPE: "smasherBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
     
     Class.drifter = {
@@ -657,7 +657,7 @@ Class.sootherDrone = {
             POSITION: [19.5, 0, 0, 0, 360, 0],
             TYPE: "drifterBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
 
     Class.buncher = {
@@ -669,7 +669,7 @@ Class.sootherDrone = {
             POSITION: [30, 0, 0, 0, 360, 0],
             TYPE: "spikeBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
     
     Class.megaDrifter = {
@@ -681,7 +681,7 @@ Class.sootherDrone = {
             POSITION: [24, 0, 0, 0, 360, 0],
             TYPE: "drifterBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
     
     Class.thorn = {
@@ -695,7 +695,7 @@ Class.sootherDrone = {
         DENSITY: base.DENSITY * 2.25,
     },
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
     TURRETS: [{
             /** SIZE     X       Y     ANGLE    ARC */
@@ -778,7 +778,7 @@ Class.sootherDrone = {
     DANGER: 8,
     BODY: {SPEED: base.SPEED, DAMAGE: base.DAMAGE * 1.125, FOV: base.FOV * 1.08, DENSITY: base.DENSITY * 1.9,},
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
     TURRETS: [{
             /** SIZE     X       Y     ANGLE    ARC */
@@ -804,7 +804,7 @@ Class.sootherDrone = {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoSpike.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
 
     Class.spear = {
     PARENT: ["genericTank"],
@@ -817,7 +817,7 @@ Class.autoSpike.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
         DENSITY: base.DENSITY * 2.3,
     },
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
     TURRETS: [{/** SIZE     X       Y     ANGLE    ARC */
             POSITION: [18.5, 0, 0, 0, 360, 0],
@@ -841,7 +841,7 @@ Class.autoSpike.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [19.5, 0, 0, 0, 180, 0],
             TYPE: "drifterBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
     
     Class.megaAutoSmasher = {
@@ -855,7 +855,7 @@ Class.autoSpike.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "smasherBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.tripleAutoSmasher = {
@@ -874,14 +874,14 @@ Class.autoSpike.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]},
     ],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.doubleAutoSmasher = makeAuto(Class.autoSmasher, "Double Auto-Smasher", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.doubleAutoSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
+Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
 
     Class.tripletAutoSmasher = {
     PARENT: ["genericTank"],
@@ -895,7 +895,7 @@ Class.doubleAutoSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
             TYPE: ["triplet", { INDEPENDENT: true, COLOR: 16, CONTROLLERS: "nearestDifferentMaster", AUTOFIRE: true}]},
     ],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
 
@@ -909,7 +909,7 @@ Class.doubleAutoSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "bangerBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.sharper = {
@@ -925,7 +925,7 @@ Class.doubleAutoSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "sharperBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.megaBanger = {
@@ -938,7 +938,7 @@ Class.doubleAutoSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
             POSITION: [25, 0, 0, 0, 360, 0],
             TYPE: "bangerBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.slammer = {
@@ -951,7 +951,7 @@ Class.doubleAutoSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "bangerBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.hexaAutoSmasher = {
@@ -970,32 +970,32 @@ Class.doubleAutoSmasher.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12];
         },
     ],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.autoLandmine = makeAuto(Class.landmine, "Auto-Landmine", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoLandmine.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+Class.autoLandmine.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
     
     Class.autoBonker = makeAuto(Class.bonker, "Auto-Bonker", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoBonker.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+Class.autoBonker.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
 
     Class.autoBanger = makeAuto(Class.banger, "Auto-Banger", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoBanger.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+Class.autoBanger.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
 
     Class.autoDrifter = makeAuto(Class.drifter, "Auto-Drifter", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
+Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
 
     Class.limpet = {
     PARENT: ["genericTank"],
@@ -1010,7 +1010,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 30, 360, 0],
             TYPE: "limpetBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.decoy = {
@@ -1031,7 +1031,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 30, 360, 0],
             TYPE: "landmineBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
 
@@ -1049,7 +1049,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 30, 360, 0],
             TYPE: "bangerBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.vessel = {
@@ -1066,7 +1066,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 30, 360, 0],
             TYPE: "drifterBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.basher = {
@@ -1079,7 +1079,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "smasherBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher, };
 
     Class.thwacker = {
@@ -1091,7 +1091,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "bangerBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     Class.bundler = {
@@ -1104,7 +1104,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [19.5, 0, 0, 0, 360, 0],
             TYPE: "drifterBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,};
     
     Class.prick = {
@@ -1117,7 +1117,7 @@ Class.autoDrifter.SKILL_CAP = [12, 12, 12, 12, 12, 12, 12, 12, 12, 12],
             POSITION: [21.5, 0, 0, 0, 360, 0],
             TYPE: "prickBody",},],
     IS_SMASHER: true,
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
     //dev bosses
@@ -1577,7 +1577,7 @@ Class.renovater = {
             TYPE: "physicianBody",
         },
     ],
-    SKILL_CAP: [12, 0, 0, 0, 0, 12, 12, 12, 12, 12],
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.heal,
 };
 Class.intern = {
