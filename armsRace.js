@@ -9,7 +9,7 @@
 // KEEP THE STYLE CONSISTENT
 // IF YOU COPY-PASTED CODE WITH DIFFERENT FORMATTING, CHANGE IT TO MAKE IT ABIDE BY THE FORMATTING
 // THIS IS IMPORTANT TO KEEP THE CODE SMALL
-//i cant fix please help someone!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! please. (everything is messed up)
+
 const { dereference, combineStats, addBackGunner, makeAuto, makeHybrid } = require('../facilitators.js');
 const { base, gunCalcNames, statnames, smshskl } = require('../constants.js');
 const g = require('../gunvals.js');
@@ -53,12 +53,6 @@ makeBird = (type, name = -1, color) => {
 };
 
 module.exports = ({ Class }) => {
-
-
-
-
-    // Comment out the line below to enable this addon, uncomment it to disable this addon (WARNING: Increases load time by approximately 2x).
-	//return console.log('--- Arms Race addon [armsRace.js] is disabled. See lines 60-61 to enable it. ---');
     //needed turrets
     Class.megaAutoTurret = {
         PARENT: "genericTank",
@@ -101,7 +95,7 @@ module.exports = ({ Class }) => {
         {
             POSITION: [20, 9, 1, 0, -5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.morerecoil, g.morerecoil, g.turret, g.fast, g.fast, g.mach, g.pound, g.pound, g.morereload, g.morereload]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.power, g.morerecoil, g.morerecoi, g.turret, g.fast, g.fast, g.mach, g.pound, g.pound, g.morereload, g.morereload]),
                 TYPE: "bullet",
                 STAT_CALCULATOR: gunCalcNames.fixedReload,
             },
@@ -110,23 +104,71 @@ module.exports = ({ Class }) => {
 };
     //bullets 
 
-Class.sootherDrone = {
-    PARENT: ["drone"],
-    BODY: {HEALTH: base.HEALTH * 0.7,SPEED: base.SPEED * 0.75},
-    HITS_OWN_TYPE: "normal",
-    HEALER: true,
-    TURRETS: [{
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-};
-    Class.healerTrap = {
-    PARENT: ["trap"],
-    HEALER: true,
-};
     //tripletwin upgrades
-    Class.quadTwin = makeMulti(Class.twin, 4);
+    Class.quadTwin = {
+        PARENT: 'genericTank',
+        LABEL: 'Quad Twin',
+        GUNS: [{
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        },{
+            POSITION: [20, 8, 1, 0, -5.5, -90, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        },{
+            POSITION: [20, 8, 1, 0, -5.5, 180, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        },{
+            POSITION: [20, 8, 1, 0, -5.5, 90, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        },{
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        },{
+            POSITION: [20, 8, 1, 0, 5.5, 90, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        },{
+            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        },{
+            POSITION: [20, 8, 1, 0, 5.5, -90, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin]), TYPE: 'bullet' }
+        }]
+    };
     Class.autoTripleTwin = makeAuto(Class.tripleTwin);
-    Class.bentTriple = makeMulti(Class.tripleShot, 3, "Bent Triple");
+    Class.bentTriple = {
+        PARENT: ["genericTank"],
+        LABEL: "Bent Triple",
+        DANGER: 6,
+        BODY: { SPEED: base.SPEED * 0.9 },
+        GUNS: [{
+            POSITION: [19, 8, 1, 0, -2, -17.5, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [19, 8, 1, 0, 2, 17.5, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [22, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [19, 8, 1, 0, -2, -137.5, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [19, 8, 1, 0, 2, 137.5, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [22, 8, 1, 0, 0, 120, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [19, 8, 1, 0, -2, -257.5, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [19, 8, 1, 0, 2, 257.5, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        },{
+            POSITION: [22, 8, 1, 0, 0, 240, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]), TYPE: "bullet" }
+        }]
+    };
     Class.hewnTripleTwin = {
         PARENT: ["genericTank"],
         LABEL: "Hewn Triple",
@@ -190,7 +232,48 @@ Class.sootherDrone = {
             PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]), TYPE: "bullet" }
         }]
     };
-    Class.tripleGunner = makeMulti(Class.gunner, 3);
+    Class.tripleGunner = {
+        PARENT: ["genericTank"],
+        LABEL: "Triple Gunner",
+        DANGER: 6,
+        GUNS: [{
+            POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [12, 3.5, 1, 0, 127.25, 0, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [12, 3.5, 1, 0, -127.25, 0, 0.75],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [16, 3.5, 1, 0, 123.75, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [16, 3.5, 1, 0, -123.75, 0, 0.25],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [12, 3.5, 1, 0, 247.25, 0, 0.5],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [12, 3.5, 1, 0, -247.25, 0, 0.75],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [16, 3.5, 1, 0, 243.75, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        },{
+            POSITION: [16, 3.5, 1, 0, -243.75, 0, 0.25],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast]), TYPE: "bullet" }
+        }]
+    };
     Class.warkWarkWark = {
         PARENT: ["genericTank"],
         LABEL: "Warkwarkwark",
@@ -503,7 +586,27 @@ Class.sootherDrone = {
             POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0]
         }]
     };
-    Class.ternion = makeMulti(Class.single, 3, "Ternion");
+    Class.ternion = {
+        PARENT: ["genericTank"],
+        LABEL: "Ternion",
+        BODY: { SPEED: 1.12 * base.SPEED },
+        GUNS: [{
+            POSITION: [18, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
+        },{
+            POSITION: [18, 8, 1, 0, 0, 120, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
+        },{
+            POSITION: [18, 8, 1, 0, 0, 240, 0],
+            PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.single]), TYPE: "bullet" }
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0]
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 120, 0]
+        },{
+            POSITION: [5.5, 8, -1.8, 6.5, 0, 240, 0]
+        }]
+    };
     Class.coordinator = {
         PARENT: ["genericTank"],
         LABEL: "Coordinator",
@@ -757,19 +860,6 @@ Class.sootherDrone = {
 
     Class.sharperBody = { SHAPE: sharperBodyShape };
 
-    let physcianBodyShape = [];
-    Math.TAU = Math.PI * 2;
-    for (let i = 0; i < 128; i++) {
-        let angle = i * Math.TAU / 128,
-            length = 1 - Math.abs(Math.sin(10 * angle)) / Math.TAU;
-        physcianBodyShape.push([
-            Math.sin(angle) * length,
-            Math.cos(angle) * length
-        ]);
-    }
-
-    Class.physcianBody = { SHAPE: bangerBodyShape };
-
     Class.claymore = {
     PARENT: ["genericTank"],
     LABEL: "Claymore",
@@ -804,7 +894,7 @@ Class.sootherDrone = {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
+Class.autoSpike.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
 
     Class.spear = {
     PARENT: ["genericTank"],
@@ -977,25 +1067,25 @@ Class.doubleAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoLandmine.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
+Class.autoLandmine.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
     
     Class.autoBonker = makeAuto(Class.bonker, "Auto-Bonker", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoBonker.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
+Class.autoBonker.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
 
     Class.autoBanger = makeAuto(Class.banger, "Auto-Banger", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoBanger.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
+Class.autoBanger.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
 
     Class.autoDrifter = makeAuto(Class.drifter, "Auto-Drifter", {
     type: "autoSmasherTurret",
     size: 11,
 });
-Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl],
+Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
 
     Class.limpet = {
     PARENT: ["genericTank"],
@@ -1496,201 +1586,11 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
         }]
     };
 
-    //HEALERS
-
-    Class.analyzer = {
-    PARENT: ["genericTank"],
-    LABEL: "Analyzer",
-    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-    GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [8, 11, -0.5, 12.5, 0, 0, 0],},{
-            POSITION: [18, 12, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.healer]),
-                TYPE: "healerBullet",},},],
-    STAT_NAMES: statnames.heal,
-};
-    Class.phychiatrist = {
-    PARENT: ["genericTank"],
-    LABEL: "Phychiatrist",
-    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-    GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
-            POSITION: [18, 10, 1.2, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.healer]),
-                TYPE: "healerBullet",},},],
-    STAT_NAMES: statnames.heal,
-};
-Class.soother = {
-    PARENT: ["genericTank"],
-    LABEL: "Soother",
-    STAT_NAMES: statnames.heal,
-    BODY: {FOV: base.FOV * 1.2,},
-    GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [6, 11, 1.3, 7, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.drone, g.halfreload, g.one_third_reload, g.healer]),
-                TYPE: "healDrone",
-                AUTOFIRE: true,
-                SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.drone,
-                MAX_CHILDREN: 6,},},],
-    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-};
-Class.renovater = {
-    PARENT: ["genericTank"],
-    LABEL: "Renovater",
-    GUNS: [
-        { POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
-            POSITION: [19, 8, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.single, g.healer]),
-                TYPE: "bullet",},},{
-            POSITION: [5.5, 8, -1.8, 6.5, 0, 0, 0],},],
-    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-};
-    Class.physician = {
-    PARENT: ["genericTank"],
-    LABEL: "Physician",
-    DANGER: 4,
-    HEALER: true, 
-    BODY: {FOV: 1.1 * base.FOV,DENSITY: 3 * base.DENSITY},
-    TURRETS: [
-        {
-            POSITION: [21.5, 0, 0, 0, 360, 0],
-            TYPE: "physicianBody",
-        },
-    ],
-    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
-    STAT_NAMES: statnames.heal,
-};
-Class.intern = {
-    PARENT: ["genericTank"],
-    LABEL: "Intern",
-    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-    GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [8, 9, -0.5, 17.5, 0, 0, 0],},{
-            POSITION: [23.5, 10, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
-                TYPE: "healerBullet",},},],STAT_NAMES: statnames.heal,
-};
-    Class.ointment = {
-    PARENT: ["genericTank"],
-    LABEL: "Ointment",
-    BODY: {FOV: base.FOV * 1.225,},
-    GUNS: [
-        {POSITION: [8, 9, -0.5, 17.5, 0, 0, 0],},{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [20, 12, 1, 0, 0, 0, 0],},{
-            POSITION: [24, 7, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.rifle, g.healer]),
-                TYPE: "healerbullet",},},],
-        TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-};
-Class.injection = {
-    PARENT: ["genericTank"],
-    LABEL: "Injection",
-    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},
-    ],
-    GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
-            POSITION: [18, 10, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
-                TYPE: "healerBullet",},},{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [9, 10, -0.5, 12.5, 0, 0, 0],
-        },{
-            POSITION: [21, 6, 1, 0, 0, 0, 0.5],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
-                TYPE: "healerBullet",},},
-    ],
-    STAT_NAMES: statnames.heal,
-};
-    Class.actuary = {
-    PARENT: ["genericTank"],
-    LABEL: "Actuary",
-    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},
-    ],
-    GUNS: [{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [8, 9, -0.5, 12.5, 0, 0, 0],},{
-            POSITION: [18, 10, 1, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
-                TYPE: "healerBullet",},},{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [8, 9, -0.5, 13.25, 0, 0, 0],},{
-            POSITION: [18, 10, 1, 1, 0, 0, 0.2],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
-                TYPE: "healerBullet",},},{
-            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
-            POSITION: [8, 9, -0.5, 15, 0, 0, 0],},{
-            POSITION: [18, 10, 1, 2, 0, 0, 0.4],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.healer]),
-                TYPE: "healerBullet",},},
-    ],
-    STAT_NAMES: statnames.heal,
-};
-	
-    Class.scientist = {
-    PARENT: ["genericTank"],
-    LABEL: "Scientist",
-    STAT_NAMES: statnames.heal,
-    GUNS: [{
-            POSITION: [15, 7, 1, 0, 0, 0, 0],},{
-            POSITION: [3, 5.5, 1.7, 15, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.trap, g.healer]),
-                TYPE: "healerTrap",
-                STAT_CALCULATOR: gunCalcNames.trap,},},],
-	    TURRETS: [{
-            /** SIZE     X       Y     ANGLE    ARC */
-            POSITION: [13, 0, 0, 0, 360, 1],
-            TYPE: "healerSymbol",},],
-};
-
-
     Class.avian = makeBird(Class.single, "Avian");
     Class.assistant = makeHybrid(Class.single, "Assistant");
     Class.autoSingle = makeAuto(Class.single);
     Class.autoBentDouble = makeAuto(Class.bentDouble);
-    Class.triHealer = makeMulti (Class.healer, 3, 'Tri-Healer')
+
     Class.devBosses.UPGRADES_TIER_0.push("twilightBoss");
             Class.twin.UPGRADES_TIER_2.push ("duo")
             Class.sniper.UPGRADES_TIER_2.push ("sharpshooter")
@@ -1700,7 +1600,6 @@ Class.injection = {
             Class.pounder.UPGRADES_TIER_2.push ("bruiser")
             Class.trapper.UPGRADES_TIER_2.push ("tricker")
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
-                Class.healer.UPGRADES_TIER_3 = ["medic", "scientist", "nurse", "triHealer", "analyzer", "phychiatrist", "soother", "renovater", "physician"];
                 Class.smasher.UPGRADES_TIER_3.push("bonker", "banger", "drifter");
                     Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
@@ -1714,6 +1613,5 @@ Class.injection = {
                                                        "autoBonker", "autoBanger", "autoDrifter"]
                     Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
                     Class.banger.UPGRADES_TIER_4 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"]
-                    Class.medic.UPGRADES_TIER_4 = ["medic", "ointment", "injection", "actuary"]
                                                       
 };
