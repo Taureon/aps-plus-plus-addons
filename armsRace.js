@@ -442,7 +442,7 @@ Class.sootherDrone = {
             TYPE: ["autoTurret", { INDEPENDENT: true, COLOR: 16 }]
         }]
     };
-    Class.DoubleFlankTwin = {
+    Class.doubleFlankTwin = {
         PARENT: ["genericTank"],
         LABEL: "Double Flank Twin",
         DANGER: 6,
