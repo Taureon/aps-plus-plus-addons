@@ -1702,18 +1702,18 @@ Class.injection = {
                 Class.doubleTwin.UPGRADES_TIER_3.push("doubleFlankTwin");
                 Class.healer.UPGRADES_TIER_3 = ["medic", "scientist", "nurse", "triHealer", "analyzer", "phychiatrist", "soother", "renovater", "physician"];
                 Class.smasher.UPGRADES_TIER_3.push("bonker", "banger", "drifter");
-                    Class.tripleTwin.UPGRADES_TIER_4 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
-                    Class.hewnDouble.UPGRADES_TIER_4 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
-                    Class.autoDouble.UPGRADES_TIER_4 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
-                    Class.single.UPGRADES_TIER_4 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
-                    Class.megaSmasher.UPGRADES_TIER_4 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
-                    Class.bonker.UPGRADES_TIER_4 = ["decoy", "spear", "autoBonker","megaBonker", "basher", "thwacker", "bundler"];
-                    Class.drifter.UPGRADES_TIER_4 = ["buncher", "megaDrifter", "autoDrifter", "vessel", "cauldron", "sharper", "bundler"];
-                    Class.spike.UPGRADES_TIER_4 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
-                    Class.autoSmasher.UPGRADES_TIER_4 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine",
+                    Class.tripleTwin.UPGRADES_TIER_3 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
+                    Class.hewnDouble.UPGRADES_TIER_3 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
+                    Class.autoDouble.UPGRADES_TIER_3 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
+                    Class.single.UPGRADES_TIER_3 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
+                    Class.megaSmasher.UPGRADES_TIER_3 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
+                    Class.bonker.UPGRADES_TIER_3 = ["decoy", "spear", "autoBonker","megaBonker", "basher", "thwacker", "bundler"];
+                    Class.drifter.UPGRADES_TIER_3 = ["buncher", "megaDrifter", "autoDrifter", "vessel", "cauldron", "sharper", "bundler"];
+                    Class.spike.UPGRADES_TIER_3 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
+                    Class.autoSmasher.UPGRADES_TIER_3 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine",
                                                        "autoBonker", "autoBanger", "autoDrifter"]
-                    Class.landmine.UPGRADES_TIER_4 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
-                    Class.banger.UPGRADES_TIER_4 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"]
-                    Class.medic.UPGRADES_TIER_4 = ["medic", "ointment", "injection", "actuary"]
+                    Class.landmine.UPGRADES_TIER_3 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
+                    Class.banger.UPGRADES_TIER_3 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"]
+                    Class.medic.UPGRADES_TIER_3 = ["medic", "ointment", "injection", "actuary"]
                                                       
 };
