@@ -5542,7 +5542,7 @@ module.exports = ({ Class }) => {
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
 			Raider: 'PLACEHOLDER',
-			Gladiator: 'PLACEHOLDER',
+			Gladiator: 'Uziel', // Zenphia
 			Starlight: 'PLACEHOLDER',
 			Bruiser: 'Gasher', // Soap
 			Incapacitator: 'Lacerator', // Soap
