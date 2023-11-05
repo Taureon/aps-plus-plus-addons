@@ -58,7 +58,7 @@ const hexnoughtBody = {
 
 module.exports = ({ Class }) => {
 	// Comment out the line below to enable this addon, uncomment it to disable this addon (WARNING: Increases load time by approximately 3x).
-	//return console.log('--- Arms Race Dreadnoughts v2 addon [armsRace_dreadv2.js] is disabled. See lines 60-61 to enable it. ---');
+	// return console.log('--- Arms Race Dreadnoughts v2 addon [armsRace_dreadv2.js] is disabled. See lines 60-61 to enable it. ---');
 	console.log('--- The Arms Race Dreadnoughts v2 addon [armsRace_dreadv2.js] is intended to replace the regular Dreadnoughts v2 addon [dreadv2.js]. ' + 
 				'Please make sure that the Dreadnoughts v2 addon has been disabled or does not exist.---');
 
@@ -5347,29 +5347,29 @@ module.exports = ({ Class }) => {
 		Javelin: {
 			Javelin: 'Javelin',
 			Rapier: 'Lance',
-			Woomera: 'PLACEHOLDER',
-			Trebuchet: 'Partisan',
-			Bolt: 'PLACEHOLDER',
+			Woomera: 'Shikari',
+			Trebuchet: 'Ballista',
+			Bolt: 'Tomahawk',
 			Diplomat: 'Envoy',
 			Arbitrator: 'Cutlass',
-			Dissolver: 'PLACEHOLDER',
-			Eroder: 'PLACEHOLDER',
-			Gripper: 'PLACEHOLDER',
+			Dissolver: 'Hellfire',
+			Eroder: 'Partisan',
+			Gripper: 'Encircler',
 			Retardant: 'Rebel',
 			Tyrant: 'Autocrat',
-			Anesthesiologist: 'PLACEHOLDER',
-			Helix: 'PLACEHOLDER',
-			Bombardment: 'PLACEHOLDER',
+			Anesthesiologist: 'Patriot',
+			Helix: 'Stinger',
+			Bombardment: 'Downpour',
 			Raider: 'Pirate',
 			Gladiator: 'Pillager',
-			Starlight: 'PLACEHOLDER',
-			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Starlight: 'Hornet',
+			Bruiser: 'Felon',
+			Incapacitator: 'Stretcher',
 			Cerberus: 'Argonaut',
 			Lucifer: 'Kitsune',
-			Sterilizer: 'PLACEHOLDER',
-			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Sterilizer: 'Mastermind',
+			Hielaman: 'Swordsman', 
+			Jackhammer: 'Fissure',
 		},
 		Rapier: {
 			Rapier: 'Rapier',
@@ -5424,13 +5424,13 @@ module.exports = ({ Class }) => {
 		},
 		Trebuchet: {
 			Trebuchet: 'Trebuchet',
-			Bolt: 'PLACEHOLDER',
+			Bolt: 'Archer',
 			Diplomat: 'PLACEHOLDER',
 			Arbitrator: 'PLACEHOLDER',
 			Dissolver: 'PLACEHOLDER',
 			Eroder: 'PLACEHOLDER',
 			Gripper: 'PLACEHOLDER',
-			Retardant: 'PLACEHOLDER',
+			Retardant: 'Mangonel',
 			Tyrant: 'PLACEHOLDER',
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'PLACEHOLDER',
@@ -5473,7 +5473,7 @@ module.exports = ({ Class }) => {
 			Diplomat: 'Diplomat',
 			Arbitrator: 'Moderator',
 			Dissolver: 'PLACEHOLDER',
-			Eroder: 'PLACEHOLDER',
+			Eroder: 'Vulcan',
 			Gripper: 'PLACEHOLDER',
 			Retardant: 'Insurgent',
 			Tyrant: 'Dictator',
@@ -5509,7 +5509,7 @@ module.exports = ({ Class }) => {
 			Cerberus: 'Gorgon',
 			Lucifer: 'Keres',
 			Sterilizer: 'Warden',
-			Hielaman: 'PLACEHOLDER', 
+			Hielaman: 'Crusader', 
 			Jackhammer: 'PLACEHOLDER',
 		},
 		Dissolver: {
