@@ -193,7 +193,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [22, 10, 1, 0, 0, 0, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank, g.auto]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank, g.auto, {recoil: 0.2}]),
 					TYPE: "bullet",
 				},
 			},
@@ -3467,14 +3467,14 @@ module.exports = ({ Class }) => {
 		BODY: {FOV: 5},
 		GUNS: [
 			{
-				POSITION: [25.5, 6, 1, 0, -3.5, 0, 0],
+				POSITION: [25.5, 5, 1, 0, -3.5, 0, 0],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.flank, g.flank, g.auto]),
 					TYPE: "bullet",
 				},
 			},
 			{
-				POSITION: [25.5, 6, 1, 0, 3.5, 0, 0.5],
+				POSITION: [25.5, 5, 1, 0, 3.5, 0, 0.5],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass, g.flank, g.flank, g.auto]),
 					TYPE: "bullet",
@@ -3493,7 +3493,7 @@ module.exports = ({ Class }) => {
 	for(let i = 0; i < 5; i++) {
 		Class.dissolverARDreadV2.TURRETS.push(
 			{
-				POSITION: [9, 10, 0, 72*i, 190, 0],
+				POSITION: [9, 10, 0, 72*i, 200, 0],
 				TYPE: 'dissolverAutoARDreadV2',
 			},
 		)
@@ -5373,29 +5373,29 @@ module.exports = ({ Class }) => {
 		},
 		Rapier: {
 			Rapier: 'Rapier',
-			Woomera: 'PLACEHOLDER',
+			Woomera: 'Cavalier',
 			Trebuchet: 'Katana',
-			Bolt: 'PLACEHOLDER',
+			Bolt: 'Claymore',
 			Diplomat: 'Emissary',
 			Arbitrator: 'Umpire',
-			Dissolver: 'PLACEHOLDER',
-			Eroder: 'PLACEHOLDER',
-			Gripper: 'PLACEHOLDER',
+			Dissolver: 'Relocator',
+			Eroder: 'Debris',
+			Gripper: 'Interrogator',
 			Retardant: 'Impeder',
 			Tyrant: 'Oppressor',
-			Anesthesiologist: 'PLACEHOLDER',
-			Helix: 'PLACEHOLDER',
-			Bombardment: 'PLACEHOLDER',
+			Anesthesiologist: 'Slumberer',
+			Helix: 'Vortex',
+			Bombardment: 'Butcher',
 			Raider: 'Bandit',
 			Gladiator: 'Bruiser',
-			Starlight: 'PLACEHOLDER',
-			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Starlight: 'Radiance',
+			Bruiser: 'Ringster',
+			Incapacitator: 'Swamper',
 			Cerberus: 'Cyclops',
 			Lucifer: 'Damocles',
-			Sterilizer: 'PLACEHOLDER',
-			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Sterilizer: 'Sanitizer',
+			Hielaman: 'Escutcheon', 
+			Jackhammer: 'Borer',
 		},
 		Woomera: {
 			Woomera: 'Woomera',
@@ -5519,7 +5519,7 @@ module.exports = ({ Class }) => {
 			Retardant: 'PLACEHOLDER',
 			Tyrant: 'PLACEHOLDER',
 			Anesthesiologist: 'PLACEHOLDER',
-			Helix: 'PLACEHOLDER',
+			Helix: 'Solution',
 			Bombardment: 'PLACEHOLDER',
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'PLACEHOLDER',
