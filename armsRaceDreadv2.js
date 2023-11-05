@@ -5465,7 +5465,7 @@ module.exports = ({ Class }) => {
 			Bruiser: 'PLACEHOLDER',
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'PLACEHOLDER',
-			Lucifer: 'Terminator', // Siece
+			Lucifer: 'Incarcerator', // Zenphia
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
 			Jackhammer: 'PLACEHOLDER',
