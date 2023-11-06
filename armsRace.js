@@ -1120,9 +1120,37 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
     SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
     STAT_NAMES: statnames.smasher,
 };
-    //dev bosses
-	
-    //HEALERS
+//dev bosses
+Class.twilightBossTurret = {
+   PARENT: ["basic"],
+   LABEL: '',
+   COLOR: '5',
+   SKILL: [9,9,9,9,9,9,9,9,9,9],
+   GUNS: [ {
+         POSITION: [ 18, 8, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.op, g.halfreload, g.halfreload]),
+            TYPE: "bullet",
+            LABEL: '???',}, }, ],
+};
+
+   Class.twilightBossReal = {
+   PARENT: ["basic"],
+   LABEL: 'Twilight?',
+   COLOR: '5',
+   SKILL: [9,9,9,9,9,9,9,9,9,9],
+   BODY: {ACCELERATION: base.ACCEL, SPEED: base.SPEED * 0.5, HEALTH: base.HEALTH * 9, DAMAGE: base.DAMAGE * 2, PENETRATION: base.PENETRATION * 5, SHIELD: base.SHIELD * 9, REGEN: base.REGEN * 0.95, FOV: base.FOV * 2, DENSITY: base.DENSITY * 3, },
+   GUNS: [ {
+         POSITION: [ 18, 8, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.op, g.halfreload, g.halfreload]),
+            TYPE: "bullet",
+            LABEL: '???',}, }, ],
+            TURRETS:[{
+            POSITION: [10, 0, 0, 0, 360, 1],
+            TYPE: "twilightBossTurret",}]
+   };
+//HEALERS
 
     Class.analyzer = {
     PARENT: ["genericTank"],
@@ -1317,7 +1345,7 @@ Class.injection = {
     Class.autoSingle = makeAuto(Class.single);
     Class.autoBentDouble = makeAuto(Class.bentDouble);
     Class.triHealer = makeMulti (Class.healer, 3, 'Tri-Healer')
-    Class.devBosses.UPGRADES_TIER_0.push("twilightBoss");
+    Class.devBosses.UPGRADES_TIER_0.push("twilightBossReal");
             Class.twin.UPGRADES_TIER_2.push ("duo")
             Class.sniper.UPGRADES_TIER_2.push ("sharpshooter")
             Class.machineGun.UPGRADES_TIER_2.push ("gadgetGun")
