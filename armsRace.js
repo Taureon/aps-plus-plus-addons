@@ -1121,7 +1121,7 @@ Class.autoDrifter.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smsh
     STAT_NAMES: statnames.smasher,
 };
 //dev bosses
-Class.twilightBossTurret = {
+exports.twilightBossTurret = {
    PARENT: ["basic"],
    LABEL: '',
    COLOR: '5',
@@ -1134,7 +1134,7 @@ Class.twilightBossTurret = {
             LABEL: '???',}, }, ],
 };
 
-   Class.twilightBossReal = {
+   exports.twilightBossReal = {
    PARENT: ["basic"],
    LABEL: 'Twilight?',
    COLOR: '5',
@@ -1146,9 +1146,11 @@ Class.twilightBossTurret = {
             SHOOT_SETTINGS: combineStats([g.basic, g.op, g.halfreload, g.halfreload]),
             TYPE: "bullet",
             LABEL: '???',}, }, ],
-            TURRETS:[{
-            POSITION: [10, 0, 0, 0, 360, 1],
-            TYPE: "twilightBossTurret",}]
+     TURRETS: [{
+        POSITION: {ANGLE: 180,LAYER: 1},
+        TYPE: ["twilightBossTurret", {
+            CONTROLLERS: ["nearestDifferentMaster"],
+            INDEPENDENT: true,}]}]
    };
 //HEALERS
 
