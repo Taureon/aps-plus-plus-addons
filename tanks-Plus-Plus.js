@@ -65,7 +65,24 @@ Class.twinPounder = {
          }, }, 
      ],
 };
+
+Class.pacifierNormalTank = {
+   PARENT: ["genericTank"],
+   LABEL: 'Pacifier',
+   GUNS: [ {
+         POSITION: [ 21, 8, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 21, 8, 1, 0, 0, -180, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
+            TYPE: "bullet",
+         }, }, 
+     ],
+};
 	
 //upgrades
 	
-Class.twin.UPGRADES_TIER_2.push ("twinPounder")
+Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank")
