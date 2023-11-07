@@ -5541,7 +5541,7 @@ module.exports = ({ Class }) => {
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
-			Raider: 'PLACEHOLDER',
+			Raider: 'Militant', // Umbra
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'Stardust',
 			Bruiser: 'Gasher', // Soap
@@ -5559,7 +5559,7 @@ module.exports = ({ Class }) => {
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
-			Raider: 'PLACEHOLDER',
+			Raider: 'Warmongerer', // Umbra
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'Cryogen',
 			Bruiser: 'PLACEHOLDER',
@@ -5649,7 +5649,7 @@ module.exports = ({ Class }) => {
 			Raider: 'Raider',
 			Gladiator: 'Filibuster',
 			Starlight: 'Colonizer',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Plunderer', // Umbra
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'Wyvern',
 			Lucifer: 'Kraken',
@@ -5661,10 +5661,10 @@ module.exports = ({ Class }) => {
 			Gladiator: 'Gladiator',
 			Starlight: 'Enveloper',
 			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Incapacitator: 'Overloader', // Umbra
 			Cerberus: 'Ogre',
 			Lucifer: 'Wendigo',
-			Sterilizer: 'PLACEHOLDER',
+			Sterilizer: 'Garrison', // Umbra
 			Hielaman: 'Uziel', // Zenphia
 			Jackhammer: 'Warlord',
 		},
