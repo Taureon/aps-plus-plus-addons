@@ -49,3 +49,23 @@ module.exports = ({ Class }) => {
 	return console.log('--- tanks++ addon [tanks-Plus-Plus.js] is disabled. See lines 48-49 to enable it. ---');
 
    
+Class.twinPound = {
+   PARENT: ["genericTank"],
+   LABEL: 'Twin Pounder',
+   GUNS: [ {
+         POSITION: [ 20.5, 12, 1, 0, 8, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 20.5, 12, 1, 0, -8, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "bullet",
+         }, }, 
+     ],
+};
+	
+//upgrades
+	
+Class.twin
