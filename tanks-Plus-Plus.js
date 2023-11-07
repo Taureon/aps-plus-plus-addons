@@ -46,4 +46,6 @@ module.exports = ({ Class }) => {
 
 
     // Comment out the line below to enable this addon, uncomment it to disable this addon (WARNING: Increases load time by approximately 1.5x).
-	//return console.log('--- tanks++ addon [tanks++.js] is disabled. See lines 48-49 to enable it. ---');
+	return console.log('--- tanks++ addon [tanks-Plus-Plus.js] is disabled. See lines 48-49 to enable it. ---');
+
+   
