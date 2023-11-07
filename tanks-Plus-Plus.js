@@ -58,7 +58,7 @@ Class.twinPounder = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pound]),
             TYPE: "bullet",
          }, }, {
-         POSITION: [ 20.5, 12, 1, 0, -8, 0, 0, ],
+         POSITION: [ 20.5, 12, 1, 0, -8, 0, 0.5, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pound]),
             TYPE: "bullet",
