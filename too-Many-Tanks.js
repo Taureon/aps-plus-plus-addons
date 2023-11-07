@@ -62,8 +62,7 @@ Class.twinPounder = {
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pound]),
             TYPE: "bullet",
-         }, }, 
-     ],
+         }, }, ],
 };
 
 Class.pacifierNormalTank = {
@@ -79,11 +78,26 @@ Class.pacifierNormalTank = {
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin]),
             TYPE: "bullet",
+         }, }, ],
+};
+	
+   Class.bentTwin = {
+   PARENT: ["genericTank"],
+   LABEL: 'Bent Twin',
+   GUNS: [ {
+         POSITION: [ 20, 8, 1, 0, 0, -30, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 20, 8, 1, 0, 0, 30, 0.5, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin]),
+            TYPE: "bullet",
          }, }, 
      ],
 };
-	
 //upgrades
 	
-Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank")
+Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin")
 };
