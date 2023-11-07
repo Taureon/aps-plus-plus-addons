@@ -86,3 +86,4 @@ Class.pacifierNormalTank = {
 //upgrades
 	
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank")
+};
