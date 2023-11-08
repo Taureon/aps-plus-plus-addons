@@ -117,9 +117,10 @@ Class.pacifierNormalTank = {
      ],
 };
 Class.sniperHybrid = makeHybrid (Class.sniper, "PLACEHOLDER")
+Class.sniperBird = makeBird (Class.sniper, "Hawk")
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper"),
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder"),
-Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid")
+Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird")
 };
