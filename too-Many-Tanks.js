@@ -100,6 +100,9 @@ Class.pacifierNormalTank = {
    Class.twinSniper = {
    PARENT: ["genericTank"],
    LABEL: 'Double Sniper',
+   BODY: {
+      FOV: base.FOV * 1.3,
+   },
    GUNS: [ {
          POSITION: [ 25, 8.5, 1, 0, -5.5, 0, 0.5, ],
          PROPERTIES: {
@@ -113,10 +116,10 @@ Class.pacifierNormalTank = {
          }, }, 
      ],
 };
-
+Class.sniperHybrid = makeHybrid (Class.sniper, "PLACEHOLDER")
 //upgrades
-	
+
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper"),
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder"),
-Class.sniper.UPGRADES_TIER_2.push ("twinSniper")
+Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid")
 };
