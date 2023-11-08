@@ -117,8 +117,8 @@ Class.pacifierNormalTank = {
      ],
 };
 Class.sniperHybrid = makeHybrid (Class.sniper, "Soldier")
-Class.sniperBird = makeBird (Class.sniper, "Hawk")
-Class.hunterBird = makeBird (Class.hunter, "Eagle")
+Class.sniperBird = makeBird (Class.sniper, "Kingfisher")
+Class.hunterBird = makeBird (Class.hunter, "Hawk")
 Class.rifleBird = makeBird (Class.rifle, "Owl")
 Class.bbGun = {
    PARENT: ["genericTank"],
@@ -134,6 +134,30 @@ Class.bbGun = {
          }, }, 
      ],
 };
+Class.twinAssassin = {
+   PARENT: ["genericTank"],
+   LABEL: 'Double Assasin',
+   BODY: {
+      SPEED: base.SPEED * 0.8,
+      FOV: base.FOV * 1.5,
+   },
+   GUNS: [ {
+         POSITION: [ 27, 8, 1, 0, 5.5, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.sniper, g.assass]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 27, 8, 1, 0, -5.5, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.sniper, g.assass]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 5, 6, -1.4, 8, -5.5, 0, 0, ],
+         }, {
+         POSITION: [ 5, 6, -1.4, 8, 5.5, 0, 0, ],
+         }, 
+     ],
+};
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper"),
@@ -141,4 +165,6 @@ Class.pounder.UPGRADES_TIER_2.push ("twinPounder"),
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird", "bbGun")
 Class.machineGun.UPGRADES_TIER_2.push ("bbGun")
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
+Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
+Class.twinSniper.UPGADES_TIER_3 = ["twinAssassin"]
 };
