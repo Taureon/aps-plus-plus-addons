@@ -1367,9 +1367,9 @@ Class.injection = {
                     Class.drifter.UPGRADES_TIER_3 = ["buncher", "megaDrifter", "autoDrifter", "vessel", "cauldron", "sharper", "bundler"];
                     Class.spike.UPGRADES_TIER_3 = ["thorn", "megaSpike", "claymore", "autoSpike", "spear", "cauldron"];
                     Class.autoSmasher.UPGRADES_TIER_3 = ["megaAutoSmasher", "tripleAutoSmasher", "doubleAutoSmasher", "tripletAutoSmasher", "hexaAutoSmasher", "autoMegaSmasher", "autoSpike", "autoLandmine",
-                                                       "autoBonker", "autoBanger", "autoDrifter"]
-                    Class.landmine.UPGRADES_TIER_3 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"]
-                    Class.banger.UPGRADES_TIER_3 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"]
-                    Class.medic.UPGRADES_TIER_3 = ["medic", "ointment", "injection", "actuary"]
+                                                       "autoBonker", "autoBanger", "autoDrifter"];
+                    Class.landmine.UPGRADES_TIER_3 = ["limpet", "megaLandmine", "claymore", "autoLandmine", "decoy", "tripwire", "vessel"];
+                    Class.banger.UPGRADES_TIER_3 = ["slammer", "megaBanger", "prick", "autoBanger", "tripwire", "thwacker", "sharper"];
+                    Class.medic.UPGRADES_TIER_3 = ["medic", "ointment", "injection", "actuary"];
                                                       
 };
