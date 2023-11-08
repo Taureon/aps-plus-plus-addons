@@ -119,7 +119,7 @@ Class.pacifierNormalTank = {
 Class.sniperHybrid = makeHybrid (Class.sniper, "PLACEHOLDER")
 Class.sniperBird = makeBird (Class.sniper, "Hawk")
 
-exports.bbGun = {
+Class.bbGun = {
    PARENT: ["genericTank"],
    LABEL: 'BB Gun',
    BODY: {
