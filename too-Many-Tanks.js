@@ -147,7 +147,7 @@ Class.twinAssassin = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.sniper, g.assass]),
             TYPE: "bullet",
          }, }, {
-         POSITION: [ 27, 8, 1, 0, -5.5, 0, 0, ],
+         POSITION: [ 27, 8, 1, 0, -5.5, 0, 0.5, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.sniper, g.assass]),
             TYPE: "bullet",
@@ -166,5 +166,5 @@ Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird", "
 Class.machineGun.UPGRADES_TIER_2.push ("bbGun")
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
 Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
-Class.twinSniper.UPGADES_TIER_3 = ["twinAssassin"]
+Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin"]
 };
