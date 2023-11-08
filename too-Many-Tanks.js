@@ -123,4 +123,5 @@ Class.sniperBird = makeBird (Class.sniper, "Hawk")
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper"),
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder"),
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird")
+Class.sniperBird.UPGRADES_TIER_3 = ["falcon"];
 };
