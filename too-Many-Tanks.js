@@ -118,7 +118,8 @@ Class.pacifierNormalTank = {
 };
 Class.sniperHybrid = makeHybrid (Class.sniper, "PLACEHOLDER")
 Class.sniperBird = makeBird (Class.sniper, "Hawk")
-
+Class.hunterBird = makeBird (Class.hunter, "Eagle")
+Class.rifleBird = makeBird (Class.rifle, "Owl")
 Class.bbGun = {
    PARENT: ["genericTank"],
    LABEL: 'BB Gun',
@@ -138,5 +139,6 @@ Class.bbGun = {
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper"),
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder"),
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird", "bbGun")
-Class.sniperBird.UPGRADES_TIER_3 = ["falcon"];
+Class.machineGun.UPGRADES_TIER_2.push ("bbGun")
+Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
 };
