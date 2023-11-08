@@ -116,7 +116,7 @@ Class.pacifierNormalTank = {
          }, }, 
      ],
 };
-Class.sniperHybrid = makeHybrid (Class.sniper, "PLACEHOLDER")
+Class.sniperHybrid = makeHybrid (Class.sniper, "Soldier")
 Class.sniperBird = makeBird (Class.sniper, "Hawk")
 Class.hunterBird = makeBird (Class.hunter, "Eagle")
 Class.rifleBird = makeBird (Class.rifle, "Owl")
