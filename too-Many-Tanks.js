@@ -62,7 +62,10 @@ Class.twinPounder = {
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pound]),
             TYPE: "bullet",
-         }, }, ],
+         }, },
+	  {
+         POSITION: [ 8, 9, 3, -9, 0, 0, 0, ],
+         }, ],
 };
 
 Class.pacifierNormalTank = {
@@ -155,6 +158,37 @@ Class.twinAssassin = {
          POSITION: [ 5, 6, -1.4, 8, -5.5, 0, 0, ],
          }, {
          POSITION: [ 5, 6, -1.4, 8, 5.5, 0, 0, ],
+         }, 
+     ],
+};
+Class.twinHunter = {
+   PARENT: ["genericTank"],
+   LABEL: 'Double Hunter',
+   BODY: {
+      SPEED: base.SPEED * 0.9, FOV: base.FOV * 1.25,
+   },
+   GUNS: [ {
+         POSITION: [ 24, 8, 1, 0, 8, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.hunter2]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 24, 8, 1, 0, -8, 0, 0.5, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.hunter2]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 21, 12, 1, 0, 8, 0, 0.75, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 21, 12, 1, 0, -8, 0, 0.25, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 8, 9, 3, -9, 0, 0, 0, ],
          }, 
      ],
 };
