@@ -158,6 +158,7 @@ Class.twinAssassin = {
          }, 
      ],
 };
+Class.assassinHybrid = makeHybrid (Class.assassin, "Armyman")
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper"),
@@ -165,6 +166,7 @@ Class.pounder.UPGRADES_TIER_2.push ("twinPounder"),
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird", "bbGun")
 Class.machineGun.UPGRADES_TIER_2.push ("bbGun")
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
+Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsMan"];
 Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
 Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin"]
 };
