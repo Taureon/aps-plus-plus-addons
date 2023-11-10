@@ -68,20 +68,21 @@
 //     lasts 10 seconds.
 
 // Effects I considered but did not add because of the weirdness of the process of adding them:
-// - Vanish: Makes you COMPLETELY invisible for 15 seconds.
+// -#Vanish: Makes you COMPLETELY invisible for 15 seconds.
 // -#Sidewinder: Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire. Was originally going to be an Annihilator bullet. Was replaced with Boulder.
 // - Time Bomb: Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
 // Effect ideas I thought of.
 // -#WRATH: Every bullet you shoot is an Annihilator bullet (incl. strenght and size, but not its speed). Does not affect your tank's fire rate.
 // - Magnetic Projectiles: Shot bullets, traps, and drones get pulled to the nearest enemy.
-// - Summon Sanctuary: Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
-// - Summon Dominator: Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
+// -#Spawn Sanctuary: Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
+// -#Spawn Dominator: Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
 // -#Noclip: Disables all entity collisions with your main body, does not do anything to your projectiles.
 // -#Thorns: Makes you immune against enemy knockback and increases body damage by 300%.
 // -#Tornado: Makes your body spawn 5 ai-guided swarmers per second.
 // - Guided Projectiles: Makes your projectiles go to your mouse.
-// - Exploding Projectiles: Applies SHOOT_ON_DEATH guns to fired projectiles.
+// -#Exploding Projectiles: Applies SHOOT_ON_DEATH guns to fired projectiles.
+// -#Jalopy Reload: Makes your guns shoot 8 times as fast as basic.
 //
 // - Random Projectiles: Gives you the projectiles of some other tank.
 // -#Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
@@ -98,12 +99,13 @@
 // -#Earthquake: Every game tick, changes your position by a maximum value of 5 in a random direction..
 // - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
 // -#Frozen Camera: Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
-// -+Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
+// -#Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
 // -#Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
 // -#Random Barrel Positions: Randomises each of your barrels' angle and direction.
 // - Antisocial Projectiles: Projectiles get slightly repelled by enemy entities.
 // -#Backpetal: Inverts movement directions.
 // -#Impotence: Same as WRATH, but it's Machine Gunner bullets instead.
+// -#Railgun Reload: Makes your guns shoot 1/8th as fast as basic.
 
 //#=added
 //+=unfinished
@@ -120,7 +122,7 @@ effects = [
     name: '', // Name of it
     splash '', // Splash msg of it
     duration: 0, // how many seconds it lasts
-    noEndNotification: false, // if it should display an "about to end" notification. duration doesnt need to be defined if this is
+    noEndNotification: false, // if it should display an "about to end" notification. duration doesnt need to be defined if this is true
     run: body => {}, // function to run when the effect gets rolled
     statusEffect: new StatusEffect(0 * 30), // the StatusEffect to apply which also includes a "run on every tick" function
 },
@@ -158,7 +160,7 @@ effects = [
                 }
             }
         }
-        setTimeout(() => {
+        setSyncedTimeout(() => {
             for (let gun of body.guns) {
                 if (remember[gun.id]) {
                     for (let key in remember[gun.id]) {
@@ -166,7 +168,23 @@ effects = [
                     }
                 }
             }
-        }, 15 * 1000);
+        }, 15 * 30);
+    }
+},
+
+{
+    name: 'Vanish',
+    splash 'You are now completely invisible, now do some trolling!',
+    duration: 15,
+    run: body => {
+        let alphaRange = body.alphaRange,
+            invisible = body.invisible;
+        body.alphaRange = [0, 0];
+        body.invisible = [0, 0];
+        setSyncedTimeout(() => {
+            body.alphaRange = alphaRange;
+            body.invisible = invisible;
+        }, 15 * 30);
     }
 },
 
@@ -186,7 +204,107 @@ effects = [
             },
         });
         body.guns.push(gun);
-        setTimeout(() => body.guns = body.guns.filter(g => g !== gun), 15 * 1000);
+        setSyncedTimeout(() => body.guns = body.guns.filter(g => g !== gun), 15 * 30);
+    }
+},
+
+{
+    name: 'Exploding Projectiles',
+    splash 'Who turned on "4th Of July"?',
+    duration: 20,
+    run: body => {
+        //this is completely batshit insane
+        let g = new Gun(body, {
+            POSITION: [1, 1, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.fake]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            },
+        }),
+        h = ({ gun, child }) => {
+            for (let i = 0; i < 16; i++) {
+                child.guns.push(new Gun(child, {
+                    POSITION: [1, 1, 1, 0, 0, 0, 0],
+                    PROPERTIES: {
+                        SHOOT_SETTINGS: Object.fromEntries(Object.entries(gun.settings).map(([key, value]) => [key, key === 'damage' ? value / 2 : value)),
+                        TYPE: "bullet"
+                    },
+                });
+            }
+        };
+        body.onDef.push({ event: "fire", handler: h }, { event: "altFire", handler: h });
+        body.guns.push(g);
+        setSyncedTimeout(() => {
+            body.onDef = body.onDef.filter({ handler } => handler !== h);
+            body.guns = body.guns.filter(gun => gun !== g);
+        }, 20 * 30);
+    }
+},
+
+{
+    name: 'Spawn Sanctuary',
+    splash 'Press Alt-Fire to summon a Sanctuary',
+    noEndNotification: true,
+    run: body => {
+        //this is completely batshit insane
+        let gun = new Gun(body, {
+            POSITION: [1, 1, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.fake]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            },
+        }),
+        h = () => {
+            body.onDef = body.onDef.filter({ handler } => handler !== h);
+            body.guns = body.guns.filter(g => g !== gun);
+            let o = new Entity({
+                x: body.x + body.control.target.x,
+                y: body.y + body.control.target.y
+            }, body);
+            o.define('sanctuaryTier1');
+            o.health.max /= 2;
+            o.shield.max /= 2;
+            o.team = body.team;
+            o.color = body.color;
+            o.guns.forEach(gun => gun.settings.damage /= 2);
+        };
+        body.onDef.push({ event: "altFire", handler: h });
+        body.guns.push(gun);
+    }
+},
+
+{
+    name: 'Spawn Dominator',
+    splash 'Press Alt-Fire to summon a Dominator',
+    noEndNotification: true,
+    run: body => {
+        //this is completely batshit insane
+        let gun = new Gun(body, {
+            POSITION: [1, 1, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.fake]),
+                TYPE: "bullet",
+                ALT_FIRE: true
+            },
+        }),
+        h = () => {
+            body.onDef = body.onDef.filter({ handler } => handler !== h);
+            body.guns = body.guns.filter(g => g !== gun);
+            let o = new Entity({
+                x: body.x + body.control.target.x,
+                y: body.y + body.control.target.y
+            }, body);
+            o.define('gunnerDominator');
+            o.health.max /= 2;
+            o.shield.max /= 2;
+            o.team = body.team;
+            o.color = body.color;
+            o.guns.forEach(gun => gun.settings.damage /= 2);
+        };
+        body.onDef.push({ event: "altFire", handler: h });
+        body.guns.push(gun);
     }
 },
 
@@ -205,7 +323,7 @@ effects = [
             },
         });
         body.guns.push(gun);
-        setTimeout(() => body.guns = body.guns.filter(g => g !== gun), 15 * 1000);
+        setSyncedTimeout(() => body.guns = body.guns.filter(g => g !== gun), 15 * 30);
     }
 },
 
@@ -215,7 +333,7 @@ effects = [
     duration: 15,
     run: body => {
         body.removeFromGrid();
-        setTimeout(() => body.addToGrid(), 15 * 1000);
+        setSyncedTimeout(() => body.addToGrid(), 15 * 30);
     }
 },
 
@@ -224,6 +342,30 @@ effects = [
     splash: "Don't touch me!",
     duration: 20,
     statusEffect: new StatusEffect(20 * 30, { damage: 4, pushability: 0 }),
+},
+
+{
+    name: 'Jalopy Reload',
+    splash 'Flooding the screen with bullets!',
+    duration: 15,
+    run: body => {
+        let newReload = combineStats([g.basic]).reload / 8,
+            remember = {};
+
+        for (let gun of body.guns) {
+            if (gun.settings) {
+                remember[gun.id] = gun.settings.reload;
+                gun.settings.reload = newReload;
+            }
+        }
+        setSyncedTimeout(() => {
+            for (let gun of body.guns) {
+                if (remember[gun.id]) {
+                    gun.settings.reload = remember[gun.id];
+                }
+            }
+        }, 15 * 30);
+    },
 },
 
 {
@@ -247,13 +389,13 @@ effects = [
             remember[gun.id] = true;
             gun.length += 50;
         }
-        setTimeout(() => {
+        setSyncedTimeout(() => {
             for (let gun of body.guns) {
                 if (remember[gun.id]) {
                     gun.length -= 50;
                 }
             }
-        }, 20 * 1000);
+        }, 20 * 30);
     }
 },
 
@@ -269,13 +411,13 @@ effects = [
                 gun.settings.recoil *= 2;
             }
         }
-        setTimeout(() => {
+        setSyncedTimeout(() => {
             for (let gun of body.guns) {
                 if (remember[gun.id]) {
                     gun.settings.recoil /= 2;
                 }
             }
-        }, 20 * 1000);
+        }, 20 * 30);
     }
 },
 
@@ -309,7 +451,7 @@ effects = [
     run: body => {
         let controller = new ioTypes.zoom(body, { distance: 750, dynamic: true, permanent: true });
         body.addController(controller);
-        setTimeout(() => body.controllers = body.controllers.filter(c => c !== controller), 20 * 1000);
+        setSyncedTimeout(() => body.controllers = body.controllers.filter(c => c !== controller), 20 * 30);
     }
 },
 
@@ -329,12 +471,10 @@ effects = [
     name: 'Forced spin',
     splash "Can't.. stop.. teaming...",
     duration: 20,
-    statusEffect: new StatusEffect(20 * 30, undefined, body => {
-        let selfTime = Date.now() + body.id;
-        if (selfTime % 2000 > 1500) return;
-        body.facing = Math.cos(selfTime / 420) * 2 + Math.sin(selfTime / 666);
-        //TODO: prevent the entity from controlling themselves
-    })
+    run: body => {
+        body.controllers.unshift(new io_plugin_effectRoller_forcedSpin(body));
+        setSyncedTimeout(() => body.controllers = body.controllers.filter(x => !(x instanceOf io_plugin_effectRoller_forcedSpin)), 20 * 30);
+    }
 },
 
 {
@@ -370,13 +510,13 @@ effects = [
             remember[gun.id] = gun.angle;
             gun.angle = Math.PI * 2 * Math.random();
         }
-        setTimeout(() => {
+        setSyncedTimeout(() => {
             for (let gun of body.guns) {
                 if (remember[gun.id] != null) {
                     gun.angle = remember[gun.id];
                 }
             }
-        }, 15 * 1000);
+        }, 15 * 30);
     }
 },
 
@@ -387,7 +527,7 @@ effects = [
     run: body => {
         let controller = new ioTypes.zoom(body, { distance: 0, permanent: true });
         body.addController(controller);
-        setTimeout(() => body.controllers = body.controllers.filter(c => c !== controller), 20 * 1000);
+        setSyncedTimeout(() => body.controllers = body.controllers.filter(c => c !== controller), 20 * 30);
     }
 },
 
@@ -449,7 +589,7 @@ effects = [
                 }
             }
         }
-        setTimeout(() => {
+        setSyncedTimeout(() => {
             for (let gun of body.guns) {
                 if (remember[gun.id]) {
                     for (let key in remember[gun.id]) {
@@ -457,8 +597,32 @@ effects = [
                     }
                 }
             }
-        }, 15 * 1000);
+        }, 15 * 30);
     }
+},
+
+{
+    name: 'Railgun Reload',
+    splash 'Where did my reload speed go?',
+    duration: 15,
+    run: body => {
+        let newReload = combineStats([g.basic]).reload * 8,
+            remember = {};
+
+        for (let gun of body.guns) {
+            if (gun.settings) {
+                remember[gun.id] = gun.settings.reload;
+                gun.settings.reload = newReload;
+            }
+        }
+        setSyncedTimeout(() => {
+            for (let gun of body.guns) {
+                if (remember[gun.id]) {
+                    gun.settings.reload = remember[gun.id];
+                }
+            }
+        }, 15 * 30);
+    },
 },*/
 
 // Stronger
@@ -476,12 +640,12 @@ effects = [
         body.skill.set(stronk);
         body.color = 36;
 
-        setTimeout(()=>{
+        setSyncedTimeout(()=>{
             body.skill.setCaps(capsOld);
             body.skill.set(rawOld);
             body.color = colorOld;
             body.skill.points = pointsOld;
-        }, 20 * 1000);
+        }, 20 * 30);
     },
     statusEffect: new StatusEffect(20 * 30, undefined, body => {
         let e = new Entity(body),
@@ -493,7 +657,7 @@ effects = [
         e.team = body.team;
         e.color = getTeamColor(body.team);
         e.alpha = 0.5;
-        setTimeout(() => e.kill(), 100);
+        setSyncedTimeout(() => e.kill(), 3);
     })
 },
 
@@ -531,7 +695,7 @@ effects = [
                 gun.settings.spray *= 0.5;
             }
         }
-        setTimeout(() => {
+        setSyncedTimeout(() => {
             for (let gun of body.guns) {
                 if (remember[gun.id]) {
                     gun.angle = remember[gun.id].angle;
@@ -541,7 +705,7 @@ effects = [
                     gun.settings.spray /= 0.5;
                 }
             }
-        }, 20 * 1000);
+        }, 20 * 30);
     }
 },
 
@@ -559,7 +723,7 @@ effects = [
                 gun.trueRecoil *= g.mach.recoil;
             }
         }
-        setTimeout(() => {
+        setSyncedTimeout(() => {
             for (let gun of body.guns) {
                 if (gun.settings) {
                     for (let stat in g.mach) {
@@ -568,7 +732,7 @@ effects = [
                     gun.trueRecoil /= g.mach.recoil;
                 }
             }
-        }, 20 * 1000);
+        }, 20 * 30);
     }
 },
 
@@ -620,7 +784,7 @@ effects = [
         anni.facing = angle;
         anni.team = TEAM_ROOM;
         anni.color = getTeamColor(TEAM_ROOM);
-        setTimeout(() => anni.kill(), 3000);
+        setSyncedTimeout(() => anni.kill(), 3 * 30);
     }
 },
 
@@ -679,7 +843,7 @@ effects = [
     splash: 'Oh no where is my life support???',
     noEndNotification: true,
     run: (body, socket) => {
-        setTimeout(()=> body.kill(), 20 * 1000);
+        setSyncedTimeout(()=> body.kill(), 20 * 30);
     }
 },
 
@@ -714,7 +878,28 @@ class io_plugin_effectRoller_lookAtEntity extends IO {
         }
     }
 }
+class io_plugin_effectRoller_forcedSpin extends IO {
+    constructor(body) {
+        super(body);
+        this.start = Date.now();
+    }
+    think() {
+        let selfTime = Date.now() - this.start;
+        if (selfTime % 2000 < 1000) return {
+            goal: this.body,
+            fire: false,
+            main: false,
+            alt: false,
+            power: false,
+            target: {
+                x: Math.cos(selfTime / 420) * 2,
+                y: Math.sin(selfTime / 666)
+            }
+        };
+    }
+}
 ioTypes.plugin_effectRoller_lookAtEntity = io_plugin_effectRoller_lookAtEntity;
+ioTypes.plugin_effectRoller_forcedSpin = io_plugin_effectRoller_forcedSpin;
 
 module.exports = ({ Class, Config, Events }) => {
 
@@ -742,9 +927,9 @@ module.exports = ({ Class, Config, Events }) => {
 
     let recent = {},
         regex = /^[!\/$]roll ?(\d*)?$/i,
-        rollCooldown = 30_000;
+        rollCooldown = 30; // unit is seconds
 
-    Events.on('chatMessage', ({message, socket}) => {
+    Events.on('chatMessage', ({ message, socket }) => {
 
         if (!regex.test(message)) return;
 
@@ -758,9 +943,9 @@ module.exports = ({ Class, Config, Events }) => {
             }
 
             recent[body.id] = Date.now() + rollCooldown;
-            setTimeout(() => {
+            setSyncedTimeout(() => {
                 delete recent[body.id];
-            }, rollCooldown);
+            }, rollCooldown * 30);
         }
 
         let match = (perms && perms.chooseRoll) ? message.match(regex) : null,
@@ -783,9 +968,11 @@ module.exports = ({ Class, Config, Events }) => {
         }
 
         if (!effect.noEndNotification) {
-            setTimeout(() => {
-                socket.talk('m', '§3§[Effect Roller] §2§' + effect.name + '§reset§ is about to end in §12§5§reset§ seconds!');
-            }, effect.duration * 1000 - 5000);
+            if (effect.duration > 5) {
+                setSyncedTimeout(() => socket.talk('m', '§3§[Effect Roller] §2§' + effect.name + '§reset§ is about to end in §12§5§reset§ seconds!'), (effect.duration - 5) * 30);
+            } else {
+                socket.talk('m', '§3§[Effect Roller] §2§' + effect.name + '§reset§ ends in §12§' + effect.duration + '§reset§ seconds!');
+            }
         }
     });
 };
