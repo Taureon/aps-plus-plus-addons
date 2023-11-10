@@ -192,6 +192,45 @@ Class.twinHunter = {
          }, 
      ],
 };
+   Class.twinMinigun = {
+   PARENT: ["genericTank"],
+   LABEL: 'Double Minigun',
+   BODY: {
+      FOV: base.FOV * 1.2,
+   },
+   GUNS: [ {
+         POSITION: [ 21, 8, 1, 0, -5.5, 0, 0.5, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.twin]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 21, 8, 1, 0, 5.5, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.twin]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 19, 8, 1, 0, 5.5, 0, 1 / 3, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.twin]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 19, 8, 1, 0, -5.5, 0, 0.5 + 1 / 3, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.twin]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 17, 8, 1, 0, -5.5, 0,0.5 + 2 / 3, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.twin]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 17, 8, 1, 0, 5.5, 0, 2 / 3, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.twin]),
+            TYPE: "bullet",
+         }, }, 
+     ],
+};
 Class.assassinHybrid = makeHybrid (Class.assassin, "Armyman")
 //upgrades
 
@@ -203,5 +242,5 @@ Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBir
 Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsman"];
 Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
 Class.hunter.UPGRADES_TIER_3.push ("twinHunter")
-Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin", "twinHunter"]
+Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin", "twinHunter", "twinMinigun"]
 };
