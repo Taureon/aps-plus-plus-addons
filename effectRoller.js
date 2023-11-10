@@ -68,44 +68,44 @@
 //     lasts 10 seconds.
 
 // Effects I considered but did not add because of the weirdness of the process of adding them:
-// -#Vanish: Makes you COMPLETELY invisible for 15 seconds.
-// -#Sidewinder: Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire. Was originally going to be an Annihilator bullet. Was replaced with Boulder.
-// - Time Bomb: Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
+// # - Vanish: Makes you COMPLETELY invisible for 15 seconds.
+// # - Sidewinder: Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire. Was originally going to be an Annihilator bullet. Was replaced with Boulder.
+//   - Time Bomb: Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
 // Effect ideas I thought of.
-// -#WRATH: Every bullet you shoot is an Annihilator bullet (incl. strenght and size, but not its speed). Does not affect your tank's fire rate.
-// - Magnetic Projectiles: Shot bullets, traps, and drones get pulled to the nearest enemy.
-// -#Spawn Sanctuary: Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
-// -#Spawn Dominator: Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
-// -#Noclip: Disables all entity collisions with your main body, does not do anything to your projectiles.
-// -#Thorns: Makes you immune against enemy knockback and increases body damage by 300%.
-// -#Tornado: Makes your body spawn 5 ai-guided swarmers per second.
-// - Guided Projectiles: Makes your projectiles go to your mouse.
-// -#Exploding Projectiles: Applies SHOOT_ON_DEATH guns to fired projectiles.
-// -#Jalopy Reload: Makes your guns shoot 8 times as fast as basic.
+// # - WRATH: Every bullet you shoot is an Annihilator bullet (incl. strenght and size, but not its speed). Does not affect your tank's fire rate.
+//   - Magnetic Projectiles: Shot bullets, traps, and drones get pulled to the nearest enemy.
+// # - Spawn Sanctuary: Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
+// # - Spawn Dominator: Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
+// # - Noclip: Disables all entity collisions with your main body, does not do anything to your projectiles.
+// # - Thorns: Makes you immune against enemy knockback and increases body damage by 300%.
+// # - Tornado: Makes your body spawn 5 ai-guided swarmers per second.
+//   - Guided Projectiles: Makes your projectiles go to your mouse.
+// # - Exploding Projectiles: Applies SHOOT_ON_DEATH guns to fired projectiles.
+// # - Jalopy Reload: Makes your guns shoot 8 times as fast as basic.
 //
-// - Random Projectiles: Gives you the projectiles of some other tank.
-// -#Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
-// -#Mom-doer: Makes your bullets spawn 500 units further away.
-// -#On The Move: Forces your velocity to be your top speed.
-// -#Increased Recoil: Multiplies your recoil received by 2.
-// -#Blast: Blasts away nearby entities once, with a lot of force.
-// -#Get Trolled: Does NOTHING..
-// -#Turtle: Makes you 5x as healthy, but also makes your max speed 80% slower.
-// - Orb: Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
-// -#Gamer Neck: Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
+//   - Random Projectiles: Gives you the projectiles of some other tank.
+// # - Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
+// # - Mom-doer: Makes your bullets spawn 500 units further away.
+// # - On The Move: Forces your velocity to be your top speed.
+// # - Increased Recoil: Multiplies your recoil received by 2.
+// # - Blast: Blasts away nearby entities once, with a lot of force.
+// # - Get Trolled: Does NOTHING..
+// # - Turtle: Makes you 5x as healthy, but also makes your max speed 80% slower.
+//   - Orb: Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
+// # - Gamer Neck: Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
 //
-// -#Alcoholic: Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
-// -#Earthquake: Every game tick, changes your position by a maximum value of 5 in a random direction..
-// - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
-// -#Frozen Camera: Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
-// -#Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
-// -#Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
-// -#Random Barrel Positions: Randomises each of your barrels' angle and direction.
-// - Antisocial Projectiles: Projectiles get slightly repelled by enemy entities.
-// -#Backpetal: Inverts movement directions.
-// -#Impotence: Same as WRATH, but it's Machine Gunner bullets instead.
-// -#Railgun Reload: Makes your guns shoot 1/8th as fast as basic.
+// # - Alcoholic: Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
+// # - Earthquake: Every game tick, changes your position by a maximum value of 5 in a random direction..
+//   - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
+// # - Frozen Camera: Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
+// # - Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
+// # - Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
+// # - Random Barrel Positions: Randomises each of your barrels' angle and direction.
+//   - Antisocial Projectiles: Projectiles get slightly repelled by enemy entities.
+// # - Backpetal: Inverts movement directions.
+// # - Impotence: Same as WRATH, but it's Machine Gunner bullets instead.
+// # - Railgun Reload: Makes your guns shoot 1/8th as fast as basic.
 
 //#=added
 //+=unfinished
