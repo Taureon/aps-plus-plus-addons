@@ -285,16 +285,16 @@ Class.doubleTwinSniper = {
 };
 //upgrades
 
-Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper"),
-Class.pounder.UPGRADES_TIER_2.push ("twinPounder"),
+Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper")
+Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird", "bbGun")
 Class.machineGun.UPGRADES_TIER_2.push ("bbGun")
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
-Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsman"];
+Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsman"]
 Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
 Class.hunter.UPGRADES_TIER_3.push ("twinHunter")
 Class.minigun.UPGRADES_TIER_3.push ("twinMinigun")
 Class.rifle.UPGRADES_TIER_3.push ("twinRifle")
-Class.bushwhacker.UPGRADES_TIER_3.push ("twinBushwhacker")
+Class.bushwhacker.UPGRADES_TIER_3 = ["twinBushwhacker"]
 Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin", "twinHunter", "twinMinigun", "twinRifle", "twinBushwhacker", "tetraSniper", "doubleTwinSniper"]
 };
