@@ -1,4 +1,4 @@
-const { dereference, combineStats, addBackGunner, makeAuto, makeHybrid } = require('../facilitators.js');
+const { dereference, combineStats, addBackGunner, makeAuto, makeHybrid, makeGuard } = require('../facilitators.js');
 const { base, gunCalcNames, statnames, smshskl } = require('../constants.js');
 const g = require('../gunvals.js');
 
