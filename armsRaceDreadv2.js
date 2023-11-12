@@ -5482,24 +5482,24 @@ module.exports = ({ Class }) => {
 		},
 		Arbitrator: {
 			Arbitrator: 'Arbitrator',
-			Dissolver: 'PLACEHOLDER',
+			Dissolver: 'Bargainer',
 			Eroder: 'Inevitability',
 			Gripper: 'Mortician',
 			Retardant: 'Extinguisher',
 			Tyrant: 'Shogun',
-			Anesthesiologist: 'PLACEHOLDER',
+			Anesthesiologist: 'Brute',
 			Helix: 'Referee',
-			Bombardment: 'PLACEHOLDER',
+			Bombardment: 'Jury',
 			Raider: 'Buccaneer',
 			Gladiator: 'Warrior',
 			Starlight: 'Genesis', // Siece
 			Bruiser: 'Terminator', // Soap
-			Incapacitator: 'PLACEHOLDER',
+			Incapacitator: 'Debater',
 			Cerberus: 'Gorgon',
 			Lucifer: 'Keres',
 			Sterilizer: 'Warden',
 			Hielaman: 'Crusader', 
-			Jackhammer: 'PLACEHOLDER',
+			Jackhammer: 'Excavator',
 		},
 		Dissolver: {
 			Dissolver: 'Dissolver',
@@ -5703,7 +5703,7 @@ module.exports = ({ Class }) => {
 		},
 		Hielaman: {
 			Hielaman: 'Hielaman', 
-			Jackhammer: 'Excavator',
+			Jackhammer: 'Compactor',
 		},
 		Jackhammer: {
 			Jackhammer: 'Jackhammer',
