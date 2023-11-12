@@ -3212,6 +3212,7 @@ module.exports = ({ Class }) => {
 					MAX_CHILDREN: 5,
 					SHOOT_SETTINGS: combineStats([g.trap, g.block, {maxSpeed: 1e-3, speed: 1e-3}]),
 					TYPE: 'unsetPillbox',
+					INDEPENDENT: true,
 					SYNCS_SKILLS: true,
 					DESTROY_OLDEST_CHILD: true,
 				}
@@ -5030,11 +5031,12 @@ module.exports = ({ Class }) => {
 	    LABEL: "Hoarder",
 	    GUNS: [
 			{
-				POSITION: [0, 14, 1, 8, 0, 0, 0],
+				POSITION: [0, 14, 1, 0, 0, 0, 0],
 				PROPERTIES: {
 					MAX_CHILDREN: 5,
 					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.construct, {maxSpeed: 1e-3, speed: 1e-3}]),
 					TYPE: 'unsetPillbox',
+					INDEPENDENT: true,
 					SYNCS_SKILLS: true,
 					DESTROY_OLDEST_CHILD: true,
 				}
@@ -5462,14 +5464,14 @@ module.exports = ({ Class }) => {
 		Diplomat: {
 			Diplomat: 'Diplomat',
 			Arbitrator: 'Moderator',
-			Dissolver: 'PLACEHOLDER',
+			Dissolver: 'Current',
 			Eroder: 'Vulcan',
-			Gripper: 'PLACEHOLDER',
+			Gripper: 'Officer',
 			Retardant: 'Insurgent',
 			Tyrant: 'Dictator',
-			Anesthesiologist: 'PLACEHOLDER',
-			Helix: 'PLACEHOLDER',
-			Bombardment: 'PLACEHOLDER',
+			Anesthesiologist: 'Transporter',
+			Helix: 'Signature',
+			Bombardment: 'Backstabber',
 			Raider: 'Marauder',
 			Gladiator: 'Champion',
 			Starlight: 'Comet',
@@ -5477,9 +5479,9 @@ module.exports = ({ Class }) => {
 			Incapacitator: 'Erebus', // Yharon
 			Cerberus: 'Orion',
 			Lucifer: 'Manticore',
-			Sterilizer: 'PLACEHOLDER',
-			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Sterilizer: 'Cornerer',
+			Hielaman: 'Investigator', 
+			Jackhammer: 'Fracker',
 		},
 		Arbitrator: {
 			Arbitrator: 'Arbitrator',
@@ -5644,7 +5646,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'Kraken',
 			Sterilizer: 'Splatterer',
 			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Jackhammer: 'Extractor',
 		},
 		Gladiator: {
 			Gladiator: 'Gladiator',
@@ -5838,7 +5840,7 @@ module.exports = ({ Class }) => {
 			if (turret.TYPE[0].indexOf('pentagon') >= 0) { // Replace pentagons with hexagons
 				TURRETS.push(
 					{
-						POSITION: [turret.POSITION[0], 0, 0, 0, 0, turret.POSITION[5]],
+						POSITION: [turret.POSITION[0], 0, 0, turret.POSITION[3], turret.POSITION[4], turret.POSITION[5]],
 						TYPE: ['hexagon' + turret.TYPE[0].substring(8), turret.TYPE[1]],
 					}
 				);
