@@ -2413,15 +2413,6 @@ module.exports = ({ Class }) => {
 			},
 		)
 	}
-	Class.unsetPillbox = {
-		PARENT: 'unsetTrap',
-		TURRETS: [
-			{
-				POSITION: [11, 0, 0, 0, 360, 1],
-				TYPE: "pillboxTurret",
-			},
-		],
-	}
 	Class.sweeperARDreadV2 = { // auto-traps
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Sweeper",
@@ -4560,7 +4551,6 @@ module.exports = ({ Class }) => {
 	Class.leviathanARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Leviathan",
-		GUNS: [],
 		BODY: speedBuffBodyStats[2],
 	    TURRETS: [
 			{
@@ -4576,7 +4566,6 @@ module.exports = ({ Class }) => {
 	Class.valrayvnARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Valrayvn",
-		GUNS: [],
 		BODY: speedBuffBodyStats[1],
 	    TURRETS: [
 			{
@@ -4593,7 +4582,6 @@ module.exports = ({ Class }) => {
 	Class.pegasusARDreadV2 = {
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Pegasus",
-		GUNS: [],
 		BODY: speedBuffBodyStats[1],
 	    TURRETS: [
 			{
@@ -5457,7 +5445,7 @@ module.exports = ({ Class }) => {
 			Retardant: 'Evicter',
 			Tyrant: 'Minister',
 			Anesthesiologist: 'Ambusher',
-			Helix: 'PLACEHOLDER',
+			Helix: 'Ultraviolet',
 			Bombardment: 'PLACEHOLDER',
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'PLACEHOLDER',
@@ -5539,7 +5527,7 @@ module.exports = ({ Class }) => {
 			Retardant: 'Shatterer',
 			Tyrant: 'PLACEHOLDER',
 			Anesthesiologist: 'PLACEHOLDER',
-			Helix: 'PLACEHOLDER',
+			Helix: 'Tornado',
 			Bombardment: 'PLACEHOLDER',
 			Raider: 'Militant', // Umbra
 			Gladiator: 'PLACEHOLDER',
@@ -5590,8 +5578,8 @@ module.exports = ({ Class }) => {
 		Tyrant: {
 			Tyrant: 'Tyrant',
 			Anesthesiologist: 'Barbarian',
-			Helix: 'PLACEHOLDER',
-			Bombardment: 'PLACEHOLDER',
+			Helix: 'Nautilus',
+			Bombardment: 'Admiral',
 			Raider: 'Corsair',
 			Gladiator: 'Amazon',
 			Starlight: 'Theocrat',
@@ -5599,9 +5587,9 @@ module.exports = ({ Class }) => {
 			Incapacitator: 'Jailkeeper',
 			Cerberus: 'Ouroboros',
 			Lucifer: 'Raiju',
-			Sterilizer: 'PLACEHOLDER',
-			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Sterilizer: 'Purifier',
+			Hielaman: 'Protectorate', 
+			Jackhammer: 'Detailer',
 		},
 		Anesthesiologist: {
 			Anesthesiologist: 'Anesthesiologist',
@@ -5625,10 +5613,10 @@ module.exports = ({ Class }) => {
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'Orbit',
 			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Incapacitator: 'Windfall',
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
-			Sterilizer: 'PLACEHOLDER',
+			Sterilizer: 'Networker',
 			Hielaman: 'PLACEHOLDER', 
 			Jackhammer: 'PLACEHOLDER',
 		},
@@ -5650,10 +5638,10 @@ module.exports = ({ Class }) => {
 			Gladiator: 'Filibuster',
 			Starlight: 'Colonizer',
 			Bruiser: 'Plunderer', // Umbra
-			Incapacitator: 'PLACEHOLDER',
+			Incapacitator: 'Blitzkrieg',
 			Cerberus: 'Wyvern',
 			Lucifer: 'Kraken',
-			Sterilizer: 'PLACEHOLDER',
+			Sterilizer: 'Splatterer',
 			Hielaman: 'PLACEHOLDER', 
 			Jackhammer: 'PLACEHOLDER',
 		},
@@ -5833,29 +5821,12 @@ module.exports = ({ Class }) => {
 		let PARENT = Class.genericHexnought,
 			SIZE = body.SIZE ?? 1,
 			BODY = {},
-			GUNS = [],
-			gunsOnOneSide = [],
+			GUNS = body.GUNS ?? [],
 			TURRETS = [],
 			LABEL = body.LABEL;
 
 		// Label
 		let className = LABEL.toLowerCase() + "HexARDreadV2";
-		
-		// Guns ----------------------
-		if (body.GUNS) gunsOnOneSide.push(...JSON.parse(JSON.stringify(body.GUNS.slice(0, body.GUNS.length / 5 * 2))));
-		for (let g in gunsOnOneSide) {
-			gunsOnOneSide[g].POSITION[5] *= 5 / 6;
-			gunsOnOneSide[g].POSITION[1] *= hexnoughtScaleFactor ** 3;
-			gunsOnOneSide[g].POSITION[4] *= hexnoughtScaleFactor ** 2;
-		}
-
-		for (let i = 0; i < 3; i++) {
-			for (let g in gunsOnOneSide) {
-				let gun = JSON.parse(JSON.stringify(gunsOnOneSide[g]));
-				gun.POSITION[5] += 120 * i;
-				GUNS.push(gun);
-			}
-		};
 		
 		// Turrets --------------------
 		let turretRingLoopLength = Math.floor(body.TURRETS.length / 5);
