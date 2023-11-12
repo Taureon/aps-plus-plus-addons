@@ -2407,7 +2407,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [3.5, 10, 1.6, 13, 0, 120*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.pound, g.morespeed, {health: 2}]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.pound, g.morespeed, {size: 1.2, health: 2}]),
 					TYPE: "unsetTrap",
 				},
 			},
@@ -4043,7 +4043,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [3.5, 10, 1.6, 13, 0, 72*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.pound, g.morespeed, {health: 2}]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.pound, g.morespeed, {size: 1.3, health: 2}]),
 					TYPE: "unsetTrap",
 				},
 			},
@@ -5446,17 +5446,17 @@ module.exports = ({ Class }) => {
 			Tyrant: 'Minister',
 			Anesthesiologist: 'Ambusher',
 			Helix: 'Ultraviolet',
-			Bombardment: 'PLACEHOLDER',
-			Raider: 'PLACEHOLDER',
-			Gladiator: 'PLACEHOLDER',
+			Bombardment: 'Dynamo',
+			Raider: 'Infector',
+			Gladiator: 'Blinder',
 			Starlight: 'Neutrino',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Impacter',
 			Incapacitator: 'Volt',
-			Cerberus: 'PLACEHOLDER',
-			Lucifer: 'PLACEHOLDER',
-			Sterilizer: 'PLACEHOLDER',
-			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Cerberus: 'Collapse',
+			Lucifer: 'Barycenter',
+			Sterilizer: 'Greenhouse',
+			Hielaman: 'Nebula', 
+			Jackhammer: 'Archaeologist',
 		},
 		Diplomat: {
 			Diplomat: 'Diplomat',
@@ -5538,7 +5538,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'PLACEHOLDER',
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Jackhammer: 'Hoser',
 		},
 		Gripper: {
 			Gripper: 'Gripper',
@@ -5604,7 +5604,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'PLACEHOLDER',
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Jackhammer: 'Sledgehammer',
 		},
 		Helix: {
 			Helix: 'Helix',
