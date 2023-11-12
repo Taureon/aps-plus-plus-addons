@@ -1665,7 +1665,7 @@ module.exports = ({ Class }) => {
 				TYPE: ['square', {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
-				POSITION: [11, 0, 0, 0, 0, 1],
+				POSITION: [11, 0, 0, 0, 360, 1],
 				TYPE: 'baiterTurretARDreadV2'
 			},
 		],
