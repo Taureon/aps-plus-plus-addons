@@ -1885,21 +1885,21 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [16, 4, 1, 0, -3.5, 0, 0.5],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.power]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.power, g.twin, g.bent, {recoil: 0.5}]),
 					TYPE: "bullet",
 				},
 			},
 			{
 				POSITION: [16, 4, 1, 0, 3.5, 0, 0.5],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.power]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.power, g.twin, g.bent, {recoil: 0.5}]),
 					TYPE: "bullet",
 				},
 			},
 			{
 				POSITION: [18, 4, 1, 0, 0, 0, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.power]),
+					SHOOT_SETTINGS: combineStats([g.basic, g.auto, g.gunner, g.power, g.twin, g.bent, {recoil: 0.5}]),
 					TYPE: "bullet",
 				},
 			},
@@ -1908,6 +1908,7 @@ module.exports = ({ Class }) => {
 	Class.amalgamARDreadV2 = { // all auto
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Amalgam",
+		TOOLTIP: "Reverse tank to focus more fire.",
 		TURRETS: [],
 	}
 	for(let i = 0; i < 3; i++) {
