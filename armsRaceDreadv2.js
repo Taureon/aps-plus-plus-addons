@@ -84,9 +84,9 @@ module.exports = ({ Class }) => {
 		{ SPEED: 2.35, HEALTH: 0.35 }
 	];
 	const sizeBuffBodyStats = [
-		{ SPEED: 0.8, HEALTH: 2.2 },
-		{ SPEED: 0.7, HEALTH: 2.9 },
-		{ SPEED: 0.6, HEALTH: 3.4 },
+		{ SPEED: 0.9,  HEALTH: 2.4 },
+		{ SPEED: 0.85, HEALTH: 3.2 },
+		{ SPEED: 0.8,  HEALTH: 3.7 },
 	];
 	function addTrinoughtAuraRing(heal = false) {
 		let output = [],
@@ -1610,7 +1610,7 @@ module.exports = ({ Class }) => {
 	    LABEL: "Owl",
 		SIZE: 0.85,
 		BODY: {
-			HEALTH: 0.9,
+			HEALTH: 0.8,
 			SPEED: 1.1,
 			ACCELERATION: 1.25,
 		},
@@ -3163,7 +3163,7 @@ module.exports = ({ Class }) => {
 	    LABEL: "Cardinal",
 		SIZE: 0.75,
 		BODY: {
-			HEALTH: 0.85,
+			HEALTH: 0.65,
 			SPEED: 1.2,
 			ACCELERATION: 1.4,
 		},
@@ -4966,7 +4966,7 @@ module.exports = ({ Class }) => {
 	    LABEL: "Finch",
 		SIZE: 0.65,
 		BODY: {
-			HEALTH: 0.75,
+			HEALTH: 0.5,
 			SPEED: 1.3,
 			ACCELERATION: 1.6,
 		},
