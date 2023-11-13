@@ -5443,7 +5443,7 @@ module.exports = ({ Class }) => {
 			Diplomat: 'Informant',
 			Arbitrator: 'Assaulter',
 			Dissolver: 'Sprinter',
-			Eroder: 'Chipper',
+			Eroder: 'Discharger', // Soap
 			Gripper: 'Lightning',
 			Retardant: 'Evicter',
 			Tyrant: 'Minister',
@@ -5464,14 +5464,14 @@ module.exports = ({ Class }) => {
 		Diplomat: {
 			Diplomat: 'Diplomat',
 			Arbitrator: 'Moderator',
-			Dissolver: 'Current',
+			Dissolver: 'Impaler', // Soap
 			Eroder: 'Vulcan',
-			Gripper: 'Officer',
+			Gripper: 'Politician',
 			Retardant: 'Insurgent',
 			Tyrant: 'Dictator',
 			Anesthesiologist: 'Transporter',
 			Helix: 'Signature',
-			Bombardment: 'Backstabber',
+			Bombardment: 'Berserker', // Soap
 			Raider: 'Marauder',
 			Gladiator: 'Champion',
 			Starlight: 'Comet',
@@ -5479,9 +5479,9 @@ module.exports = ({ Class }) => {
 			Incapacitator: 'Erebus', // Yharon
 			Cerberus: 'Orion',
 			Lucifer: 'Manticore',
-			Sterilizer: 'Cornerer',
+			Sterilizer: 'Officer',
 			Hielaman: 'Investigator', 
-			Jackhammer: 'Fracker',
+			Jackhammer: 'Devourer', // Soap
 		},
 		Arbitrator: {
 			Arbitrator: 'Arbitrator',
@@ -5506,7 +5506,7 @@ module.exports = ({ Class }) => {
 		},
 		Dissolver: {
 			Dissolver: 'Dissolver',
-			Eroder: 'PLACEHOLDER',
+			Eroder: 'Current',
 			Gripper: 'PLACEHOLDER',
 			Retardant: 'Corroder',
 			Tyrant: 'PLACEHOLDER',
@@ -5531,9 +5531,9 @@ module.exports = ({ Class }) => {
 			Tyrant: 'PLACEHOLDER',
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'Tornado',
-			Bombardment: 'PLACEHOLDER',
+			Bombardment: 'Backstabber',
 			Raider: 'Militant', // Umbra
-			Gladiator: 'PLACEHOLDER',
+			Gladiator: 'Vitrifier',
 			Starlight: 'Stardust',
 			Bruiser: 'Gasher', // Soap
 			Incapacitator: 'Lacerator', // Soap
@@ -5546,7 +5546,7 @@ module.exports = ({ Class }) => {
 		Gripper: {
 			Gripper: 'Gripper',
 			Retardant: 'Arrester',
-			Tyrant: 'PLACEHOLDER',
+			Tyrant: 'Tormentor', // Soap
 			Anesthesiologist: 'PLACEHOLDER',
 			Helix: 'PLACEHOLDER',
 			Bombardment: 'PLACEHOLDER',
@@ -5596,22 +5596,22 @@ module.exports = ({ Class }) => {
 		},
 		Anesthesiologist: {
 			Anesthesiologist: 'Anesthesiologist',
-			Helix: 'PLACEHOLDER',
-			Bombardment: 'PLACEHOLDER',
+			Helix: 'Blizzard',
+			Bombardment: 'Nightmare',
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'Harbinger', // Siece
 			Starlight: 'Hypnotizer',
 			Bruiser: 'PLACEHOLDER',
-			Incapacitator: 'PLACEHOLDER',
+			Incapacitator: 'Psychic', // Soap
 			Cerberus: 'Revenant',
 			Lucifer: 'PLACEHOLDER',
-			Sterilizer: 'PLACEHOLDER',
+			Sterilizer: 'Pestilence',
 			Hielaman: 'PLACEHOLDER', 
 			Jackhammer: 'Sledgehammer',
 		},
 		Helix: {
 			Helix: 'Helix',
-			Bombardment: 'PLACEHOLDER',
+			Bombardment: 'Derecho',
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'Orbit',
@@ -5625,8 +5625,8 @@ module.exports = ({ Class }) => {
 		},
 		Bombardment: {
 			Bombardment: 'Bombardment',
-			Raider: 'PLACEHOLDER',
-			Gladiator: 'PLACEHOLDER',
+			Raider: 'Specialist',
+			Gladiator: 'Leonidas',
 			Starlight: 'Meteor',
 			Bruiser: 'PLACEHOLDER',
 			Incapacitator: 'PLACEHOLDER',
@@ -5634,7 +5634,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'PLACEHOLDER',
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Jackhammer: 'Mallet', // Soap
 		},
 		Raider: {
 			Raider: 'Raider',
@@ -5645,7 +5645,7 @@ module.exports = ({ Class }) => {
 			Cerberus: 'Wyvern',
 			Lucifer: 'Kraken',
 			Sterilizer: 'Splatterer',
-			Hielaman: 'PLACEHOLDER', 
+			Hielaman: 'Strategist', 
 			Jackhammer: 'Extractor',
 		},
 		Gladiator: {
@@ -5684,7 +5684,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'PLACEHOLDER',
 			Sterilizer: 'PLACEHOLDER',
 			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Jackhammer: 'Thrasher', // Soap
 		},
 		Cerberus: {
 			Cerberus: 'Cerberus',
