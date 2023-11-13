@@ -16,7 +16,7 @@ const eggnoughtBody = {
 	SHIELD: base.SHIELD * 1.5,
 	REGEN: base.REGEN * 1.5,
     FOV: base.FOV,
-	RESIST: base.RESIST * 1.5,
+	RESIST: base.RESIST,
 	DENSITY: base.DENSITY * 1.5,
 };
 const squarenoughtBody = {
@@ -25,7 +25,7 @@ const squarenoughtBody = {
 	SHIELD: base.SHIELD * 2,
 	REGEN: base.REGEN * 2,
     FOV: base.FOV * 0.95,
-	RESIST: base.RESIST * 2,
+	RESIST: base.RESIST,
 	DENSITY: base.DENSITY * 2,
 };
 const trinoughtBody = {
@@ -34,7 +34,7 @@ const trinoughtBody = {
 	SHIELD: base.SHIELD * 2.5,
 	REGEN: base.REGEN * 2.5,
     FOV: base.FOV * 0.95,
-	RESIST: base.RESIST * 2.5,
+	RESIST: base.RESIST,
 	DENSITY: base.DENSITY * 2.5,
 };
 const pentanoughtBody = {
@@ -43,7 +43,7 @@ const pentanoughtBody = {
 	SHIELD: base.SHIELD * 3,
 	REGEN: base.REGEN * 3,
     FOV: base.FOV * 0.95,
-	RESIST: base.RESIST * 3,
+	RESIST: base.RESIST,
 	DENSITY: base.DENSITY * 3,
 };
 const hexnoughtBody = {
@@ -52,7 +52,7 @@ const hexnoughtBody = {
 	SHIELD: base.SHIELD * 3.5,
 	REGEN: base.REGEN * 3.5,
     FOV: base.FOV * 0.95,
-	RESIST: base.RESIST * 3.5,
+	RESIST: base.RESIST,
 	DENSITY: base.DENSITY * 3.5,
 };
 
