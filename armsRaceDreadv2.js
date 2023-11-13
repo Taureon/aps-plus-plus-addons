@@ -5517,7 +5517,7 @@ module.exports = ({ Class }) => {
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'Accretion',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Piranha',
 			Incapacitator: 'Sandstorm',
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'Styx',
@@ -5554,7 +5554,7 @@ module.exports = ({ Class }) => {
 			Raider: 'Warmongerer', // Umbra
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'Cryogen',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Knockout',
 			Incapacitator: 'Restrainer',
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
@@ -5602,7 +5602,7 @@ module.exports = ({ Class }) => {
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'Harbinger', // Siece
 			Starlight: 'Hypnotizer',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Tactician',
 			Incapacitator: 'Psychic', // Soap
 			Cerberus: 'Revenant',
 			Lucifer: 'PLACEHOLDER',
@@ -5616,7 +5616,7 @@ module.exports = ({ Class }) => {
 			Raider: 'PLACEHOLDER',
 			Gladiator: 'PLACEHOLDER',
 			Starlight: 'Orbit',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Cobra',
 			Incapacitator: 'Windfall',
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
@@ -5662,7 +5662,7 @@ module.exports = ({ Class }) => {
 		},
 		Starlight: {
 			Starlight: 'Starlight',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Wanderer',
 			Incapacitator: 'Starstruck',
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
@@ -5672,12 +5672,12 @@ module.exports = ({ Class }) => {
 		},
 		Bruiser: {
 			Bruiser: 'Bruiser',
-			Incapacitator: 'PLACEHOLDER',
-			Cerberus: 'PLACEHOLDER',
-			Lucifer: 'PLACEHOLDER',
-			Sterilizer: 'PLACEHOLDER',
-			Hielaman: 'PLACEHOLDER', 
-			Jackhammer: 'PLACEHOLDER',
+			Incapacitator: 'Mauler',
+			Cerberus: 'Serpent',
+			Lucifer: 'Trident',
+			Sterilizer: 'Suture',
+			Hielaman: 'Heavyweight', 
+			Jackhammer: 'Stapler',
 		},
 		Incapacitator: {
 			Incapacitator: 'Incapacitator',
