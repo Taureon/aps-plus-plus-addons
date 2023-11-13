@@ -1762,7 +1762,7 @@ module.exports = ({ Class }) => {
 	Class.atlatlARDreadV2 = { // hunter
 	    PARENT: ["genericTrinought"],
 	    LABEL: "Atlatl",
-	    CONTROLLERS: [["zoom", { distance: 550 }]],
+	    CONTROLLERS: [["zoom", { distance: 500 }]],
     	TOOLTIP: "Hold right click to zoom.",
 	    GUNS: [],
 	}
@@ -3321,6 +3321,7 @@ module.exports = ({ Class }) => {
 	Class.woomeraARDreadV2 = { // hunter
 	    PARENT: ["genericPentanought"],
 	    LABEL: "Woomera",
+		CONTROLLERS: [["zoom", { distance: 450 }]],
 	    GUNS: [],
 	}
 	for (let i = 0; i < 5; i++) {
@@ -3724,7 +3725,7 @@ module.exports = ({ Class }) => {
 	for(let i = 0; i < 5; i++) {
 		Class.bombardmentARDreadV2.GUNS.push(
 			{
-				POSITION: [12.5, 3, 1, 0, -6.5, 72*i-7, 0.6],
+				POSITION: [12.5, 2, 1, 0, -4.25, 72*i-7, 0.6],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, {speed: 1.1, maxSpeed: 1.1}]),
 					TYPE: "bullet",
@@ -3732,7 +3733,7 @@ module.exports = ({ Class }) => {
 				},
 			},
 			{
-				POSITION: [12.5, 3, 1, 0, 6.5, 72*i+7, 0.8],
+				POSITION: [12.5, 2, 1, 0, 4.25, 72*i+7, 0.8],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty, {speed: 1.1, maxSpeed: 1.1}]),
 					TYPE: "bullet",
@@ -3740,7 +3741,7 @@ module.exports = ({ Class }) => {
 				},
 			},
 			{
-				POSITION: [15.5, 3, 1, 0, -4.5, 72*i-7, 0.2],
+				POSITION: [15.5, 2.5, 1, 0, -2.5, 72*i-7, 0.2],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty]),
 					TYPE: "bullet",
@@ -3748,7 +3749,7 @@ module.exports = ({ Class }) => {
 				},
 			},
 			{
-				POSITION: [15.5, 3, 1, 0, 4.5, 72*i+7, 0.4],
+				POSITION: [15.5, 2.5, 1, 0, 2.5, 72*i+7, 0.4],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty]),
 					TYPE: "bullet",
@@ -3756,7 +3757,7 @@ module.exports = ({ Class }) => {
 				},
 			},
 			{
-				POSITION: [17.5, 10, 1, 0, 0, 72*i, 0],
+				POSITION: [17.5, 8, 1, 0, 0, 72*i, 0],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, g.destroy, g.arty, {speed: 1.1, maxSpeed: 1.1}]),
 					TYPE: "bullet",
@@ -5724,7 +5725,8 @@ module.exports = ({ Class }) => {
 			weapon2GunsOnOneSide = [],
 			TURRETS = [],
 			turretsOnOneSide = [],
-			weapon2TurretsOnOneSide = [];
+			weapon2TurretsOnOneSide = [],
+			CONTROLLERS = weapon2.CONTROLLERS;
 
 		// Label
 		let name1 = hexDreadNames[weapon1.LABEL][weapon2.LABEL],
@@ -5811,7 +5813,7 @@ module.exports = ({ Class }) => {
 
 		// Smash it together
 		Class[className] = {
-			PARENT, BODY, LABEL, GUNS, TURRETS,
+			PARENT, BODY, LABEL, GUNS, TURRETS, CONTROLLERS
 		};
 		return className;
 	}
