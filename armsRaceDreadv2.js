@@ -5628,7 +5628,7 @@ module.exports = ({ Class }) => {
 			Raider: 'Specialist',
 			Gladiator: 'Leonidas',
 			Starlight: 'Meteor',
-			Bruiser: 'PLACEHOLDER',
+			Bruiser: 'Shellshocker',
 			Incapacitator: 'PLACEHOLDER',
 			Cerberus: 'PLACEHOLDER',
 			Lucifer: 'PLACEHOLDER',
