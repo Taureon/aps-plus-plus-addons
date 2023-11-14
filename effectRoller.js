@@ -1,115 +1,80 @@
 // You can do '!roll [id]' in chat to roll an effect.
 // Prefix can also be '$'' or '/'.
 // 'id' parameter lets you pick the effect if defined.
+// 'id' value corresponds to the index inside the 'effects' array.
 // 'id' parameter requires 'chooseRoll' permission.
 // Cooldown of 30 seconds after rolling.
 // Cooldown bypass requires 'infiniteRolls' permission.
 
-// Stronger [0]:
-//     Sets all your stats to 15.
-//     Lasts 20 seconds.
-//     Makes you rainbow colored.
-//
-// Boulder [1]:
-//     Makes you ten times as immovable.
-//     Lasts 20 seconds.
-//
-// Hedgehog [2]:
-//     Increases your max speed and acceleration by 400%.
-//     Lasts 20 seconds.
-//
-// Focus [3]:
-//     Decreases spread by 50% and all your guns shoot forward.
-//     Lasts 20 seconds.
-//
-// Machine Gun [4]:
-//     Applies g.mach to your guns.
-//     Lasts 20 seconds.
-//
-// Damage Sponge [5]:
-//     Increases your Max Health and Shield by 400%.
-//     Lasts 10 seconds.
-//
-// Ant [6]:
-//     Makes you 75% smaller.
-//     Lasts 15 seconds.
-//
-// Carrot [7]:
-//     Increase your FOV by 100%
-//     Lasts 20 seconds.
+// ID | name                    | description
 
-// Growth Annihilator [8]:
-//     Spawns a Stronger LVL 250 Growth Annihilator, which shoots you once from 10-20 players of distance away and then despawns.
-//
-// No Health [9]:
-//     Sets your shield to 0 and sets your health to 1% of max health.
-//
-// Slippery [10]:
-//     Decreases your acceleration by 66% and increases your max speed by 50%.
-//     Lasts 20 seconds.
-//
-// Vulnerable [11]:
-//     Decreases your Max Health and Shield by 80%.
-//     Lasts 10 seconds.
-//
-// Black Hole [12]:
-//     Movable entities near you get pulled towards you.
-//     Lasts 15 seconds.
-//
-// Old Age [13]:
-//     Kills you in 20 seconds.
-//
-// Balloon [14]:
-//     Makes you 300% larger.
-//     Lasts 15 seconds.
-//
-// Blind [15]:
-//     Decreases your fov by 80%.
-//     lasts 10 seconds.
+// Positive Effects
+//  0 : WRATH                   : Every bullet you shoot is an Annihilator bullet.
+//  1 : Vanish                  : Makes you COMPLETELY invisible for 15 seconds.
+//  2 : Tornado                 : Makes your body spawn 5 ai-guided swarmers per second.
+//  3 : Exploding Projectiles   : Applies SHOOT_ON_DEATH guns to fired projectiles.
+//  4 : Spawn Sanctuary         : Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
+//  5 : Spawn Dominator         : Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
+//  6 : Sidewinder              : Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire.
+//  7 : Noclip                  : Disables all entity collisions with your main body, does not do anything to your projectiles.
+//  8 : Thorns                  : Makes you immune against enemy knockback and increases body damage by 300%.
+//  9 : Jalopy Reload           : Makes your guns shoot 8 times as fast as basic.
+// 10 : Stronger                : Sets all your stats to 15.
+// 11 : Boulder                 : Makes you ten times as immovable.
+// 12 : Hedgehog                : Increases your max speed and acceleration by 400%.
+// 13 : Focus                   : Decreases spread by 50% and all your guns shoot forward.
+// 14 : Machine Gun             : Applies g.mach to your guns.
+// 15 : Damage Sponge           : Increases your Max Health and Shield by 400%.
+// 16 : Ant                     : Makes you 75% smaller.
+// 17 : Carrot                  : Increase your FOV by 100%
+// 18   Magnetic Projectiles    : Shot bullets, traps, and drones get pulled to the nearest enemy.
+// 19   Guided Projectiles      : Makes your projectiles go to your mouse.
 
-// Effects I considered but did not add because of the weirdness of the process of adding them:
-// # - Vanish: Makes you COMPLETELY invisible for 15 seconds.
-// # - Sidewinder: Gives you an invisible Sidewinder barrel which shoots a (straight-forward moving) snake when you alt-fire. Was originally going to be an Annihilator bullet. Was replaced with Boulder.
-//   - Time Bomb: Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
+// Neutral Effects
+// 20 : On The Move             : Forces your velocity to be your top speed.
+// 21 : Mom-doer                : Makes your bullets spawn 500 units further away.
+// 22 : Increased Recoil        : Multiplies your recoil received by 2.
+// 23 : No Effect               : Does NOTHING..
+// 24 : Drugged                 : Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
+// 25 : Turtle                  : Makes you 5x as healthy, but also makes your max speed 80% slower.
+// 26 : Gamer Neck              : Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
+// 27 : Random Barrel Positions : Randomises each of your barrels' angle and direction.
+// 28   Random Projectiles        Gives you the projectiles of some other tank.
+// 29   Orb                       Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
+// 30   Pumpkin                   Gives you the pumpkin curse: invis, orange, 0.0001 hp
+// 31   Downgrade to Basic        Sets you to c.SPAWN_CLASS
+// 32   Spy                       Changes player color to someone else's team
+// 33   Paper-thin                Makes you 2x as fast, but 4x easier to kill
+// 34   Just walking past         Makes you practically immune to damage, but stops your guns from firing
+// 35   Spawn Rock                Spawns a rock that dies after a minute at where you alt fire
+// 36   Teleport forward          Teleports you in the direction you're looking 1000 units
+// 37   Heavy projectiles         Multiplies your guns' bullet health, reload and recoil by 2 and multiplies bullet size by 1.2
+// 38   PLACEHOLDER               PLACEHOLDER
+// 39   PLACEHOLDER               PLACEHOLDER
 
-// Effect ideas I thought of.
-// # - WRATH: Every bullet you shoot is an Annihilator bullet (incl. strenght and size, but not its speed). Does not affect your tank's fire rate.
-//   - Magnetic Projectiles: Shot bullets, traps, and drones get pulled to the nearest enemy.
-// # - Spawn Sanctuary: Spawns a small, much weaker sanctuary with reduced damage for your team at where you alt-fire.
-// # - Spawn Dominator: Spawns a small, lower health gunner dominator with reduced damage for your team at where you alt-fire.
-// # - Noclip: Disables all entity collisions with your main body, does not do anything to your projectiles.
-// # - Thorns: Makes you immune against enemy knockback and increases body damage by 300%.
-// # - Tornado: Makes your body spawn 5 ai-guided swarmers per second.
-//   - Guided Projectiles: Makes your projectiles go to your mouse.
-// # - Exploding Projectiles: Applies SHOOT_ON_DEATH guns to fired projectiles.
-// # - Jalopy Reload: Makes your guns shoot 8 times as fast as basic.
-//
-//   - Random Projectiles: Gives you the projectiles of some other tank.
-// # - Drugged: Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
-// # - Mom-doer: Makes your bullets spawn 500 units further away.
-// # - On The Move: Forces your velocity to be your top speed.
-// # - Increased Recoil: Multiplies your recoil received by 2.
-// # - Blast: Blasts away nearby entities once, with a lot of force.
-// # - Get Trolled: Does NOTHING..
-// # - Turtle: Makes you 5x as healthy, but also makes your max speed 80% slower.
-//   - Orb: Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
-// # - Gamer Neck: Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
-//
-// # - Alcoholic: Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
-// # - Earthquake: Every game tick, changes your position by a maximum value of 5 in a random direction..
-//   - Death Mark: Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
-// # - Frozen Camera: Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
-// # - Forced spin: Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting.
-// # - Statue: Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
-// # - Random Barrel Positions: Randomises each of your barrels' angle and direction.
-//   - Antisocial Projectiles: Projectiles get slightly repelled by enemy entities.
-// # - Backpetal: Inverts movement directions.
-// # - Impotence: Same as WRATH, but it's Machine Gunner bullets instead.
-// # - Railgun Reload: Makes your guns shoot 1/8th as fast as basic.
+// Negative Effects
+// 40 : Growth Annihilator      : Stronger LVL 250 Growth Annihilator, which shoots you once from 10-20 players of distance away and then despawns.
+// 41 : No Health               : Sets your shield to 0 and sets your health to 1% of max health.
+// 42 : Slippery                : Decreases your acceleration by 66% and increases your max speed by 50%.
+// 43 : Vulnerable              : Decreases your Max Health and Shield by 80%.
+// 44 : Black Hole              : Movable entities near you get pulled towards you.
+// 45 : Old Age                 : Kills you in 20 seconds.
+// 46 : Balloon                 : Makes you 300% larger.
+// 47 : Blind                   : Decreases your fov by 80%.
+// 48 : Frozen Camera           : Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
+// 49 : Statue                  : Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
+// 50 : Blast                   : Blasts away nearby entities once, with a lot of force.
+// 51 : Impotence               : Same as WRATH, but it's Machine Gunner bullets instead.
+// 52 : Railgun Reload          : Makes your guns shoot 1/8th as fast as basic.
+// 53 : Alcoholic               : Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
+// 54 : Forced spin             : Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting and moving.
+// 55 : Earthquake              : Every game tick, changes your position by a maximum value of 5 in a random direction..
+// 56 : Backpetal               : Inverts movement directions.
+// 57   Death Mark                Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
+// 58   Antisocial Projectiles    Projectiles get slightly repelled by enemy entities.
+// 59   Time Bomb                 Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
-//#=added
-//+=unfinished
-// =not added
+// team switch
 
 let { combineStats } = require('../facilitators.js'),
     { gunCalcNames } = require('../constants.js'),
@@ -120,7 +85,7 @@ effects = [
 /*
 {
     name: '', // Name of it
-    splash '', // Splash msg of it
+    splash: '', // Splash msg of it
     duration: 0, // how many seconds it lasts
     noEndNotification: false, // if it should display an "about to end" notification. duration doesnt need to be defined if this is true
     run: body => {}, // function to run when the effect gets rolled
@@ -130,9 +95,9 @@ effects = [
 
 /// Positive Effects
 
-/*{
+{
     name: 'WRATH',
-    splash "You are all about to have a really bad day...",
+    splash: "You are all about to have a really bad day...",
     duration: 15,
     run: body => {
         let anniGunWidth = 19.5 / 10,
@@ -174,7 +139,7 @@ effects = [
 
 {
     name: 'Vanish',
-    splash 'You are now completely invisible, now do some trolling!',
+    splash: 'You are now completely invisible, now do some trolling!',
     duration: 15,
     run: body => {
         let alphaRange = body.alphaRange,
@@ -190,7 +155,7 @@ effects = [
 
 {
     name: 'Tornado',
-    splash 'The Storm of Hell.',
+    splash: 'The Storm of Hell.',
     duration: 15,
     run: body => {
         let gun = new Gun(body, {
@@ -210,7 +175,7 @@ effects = [
 
 {
     name: 'Exploding Projectiles',
-    splash 'Who turned on "4th Of July"?',
+    splash: 'Who turned on "4th Of July"?',
     duration: 20,
     run: body => {
         //this is completely batshit insane
@@ -227,16 +192,16 @@ effects = [
                 child.guns.push(new Gun(child, {
                     POSITION: [1, 1, 1, 0, 0, 0, 0],
                     PROPERTIES: {
-                        SHOOT_SETTINGS: Object.fromEntries(Object.entries(gun.settings).map(([key, value]) => [key, key === 'damage' ? value / 2 : value)),
+                        SHOOT_SETTINGS: Object.fromEntries(Object.entries(gun.settings).map(([key, value]) => [key, key === 'damage' ? value / 2 : value])),
                         TYPE: "bullet"
                     },
-                });
+                }));
             }
         };
         body.onDef.push({ event: "fire", handler: h }, { event: "altFire", handler: h });
         body.guns.push(g);
         setSyncedTimeout(() => {
-            body.onDef = body.onDef.filter({ handler } => handler !== h);
+            body.onDef = body.onDef.filter(({ handler }) => handler !== h);
             body.guns = body.guns.filter(gun => gun !== g);
         }, 20 * 30);
     }
@@ -244,7 +209,7 @@ effects = [
 
 {
     name: 'Spawn Sanctuary',
-    splash 'Press Alt-Fire to summon a Sanctuary',
+    splash: 'Press Alt-Fire to summon a Sanctuary',
     noEndNotification: true,
     run: body => {
         //this is completely batshit insane
@@ -257,7 +222,7 @@ effects = [
             },
         }),
         h = () => {
-            body.onDef = body.onDef.filter({ handler } => handler !== h);
+            body.onDef = body.onDef.filter(({ handler }) => handler !== h);
             body.guns = body.guns.filter(g => g !== gun);
             let o = new Entity({
                 x: body.x + body.control.target.x,
@@ -268,6 +233,7 @@ effects = [
             o.shield.max /= 2;
             o.team = body.team;
             o.color = body.color;
+            o.size = 50;
             o.guns.forEach(gun => gun.settings.damage /= 2);
         };
         body.onDef.push({ event: "altFire", handler: h });
@@ -277,7 +243,7 @@ effects = [
 
 {
     name: 'Spawn Dominator',
-    splash 'Press Alt-Fire to summon a Dominator',
+    splash: 'Press Alt-Fire to summon a Dominator',
     noEndNotification: true,
     run: body => {
         //this is completely batshit insane
@@ -290,7 +256,7 @@ effects = [
             },
         }),
         h = () => {
-            body.onDef = body.onDef.filter({ handler } => handler !== h);
+            body.onDef = body.onDef.filter(({ handler }) => handler !== h);
             body.guns = body.guns.filter(g => g !== gun);
             let o = new Entity({
                 x: body.x + body.control.target.x,
@@ -301,6 +267,7 @@ effects = [
             o.shield.max /= 2;
             o.team = body.team;
             o.color = body.color;
+            o.size = 50;
             o.guns.forEach(gun => gun.settings.damage /= 2);
         };
         body.onDef.push({ event: "altFire", handler: h });
@@ -310,7 +277,7 @@ effects = [
 
 {
     name: 'Sidewinder',
-    splash 'Press Alt-Fire to fire a Sidewinder Snake.',
+    splash: 'Press Alt-Fire to fire a Sidewinder Snake.',
     duration: 15,
     run: body => {
         let gun = new Gun(body, {
@@ -329,7 +296,7 @@ effects = [
 
 {
     name: 'Noclip',
-    splash '',
+    splash: '',
     duration: 15,
     run: body => {
         body.removeFromGrid();
@@ -346,7 +313,7 @@ effects = [
 
 {
     name: 'Jalopy Reload',
-    splash 'Flooding the screen with bullets!',
+    splash: 'Flooding the screen with bullets!',
     duration: 15,
     run: body => {
         let newReload = combineStats([g.basic]).reload / 8,
@@ -369,8 +336,139 @@ effects = [
 },
 
 {
+    name: 'Stronger',
+    splash: 'I feel powerful...',
+    duration: 20,
+    run: body => {
+        let colorOld = body.color,
+            pointsOld = body.skill.points,
+            rawOld = body.skill.raw.map(x=>x),
+            capsOld = body.skill.caps.map(x=>x),
+            stronk = Array(10).fill(15);
+        body.skill.setCaps(stronk);
+        body.skill.set(stronk);
+        body.color = 36;
+
+        setSyncedTimeout(()=>{
+            body.skill.setCaps(capsOld);
+            body.skill.set(rawOld);
+            body.color = colorOld;
+            body.skill.points = pointsOld;
+        }, 20 * 30);
+    },
+    statusEffect: new StatusEffect(20 * 30, undefined, body => {
+        let e = new Entity(body),
+            ang = Math.random() * Math.PI * 2;
+        e.define('genericEntity');
+        e.velocity.x = 5 * Math.sin(ang);
+        e.velocity.y = 5 * Math.cos(ang);
+        e.SIZE = body.size;
+        e.team = body.team;
+        e.color = getTeamColor(body.team);
+        e.alpha = 0.5;
+        setSyncedTimeout(() => e.kill(), 3);
+    })
+},
+
+{
+    name: 'Boulder',
+    splash: 'I am become wall',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { pushability: 0.1, recoilReceived: 0.1 })
+},
+
+{
+    name: 'Hedgehog',
+    splash: 'Gotta go fast!',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { acceleration: 5, topSpeed: 5 })
+},
+
+{
+    name: 'Focus',
+    splash: 'I CAN AIM.',
+    duration: 20,
+    run: body => {
+        let remember = {};
+        for (let gun of body.guns) {
+            remember[gun.id] = {
+                angle: gun.angle,
+                direction: gun.direction
+            };
+            gun.angle = 0;
+            gun.direction = 0;
+            if (gun.settings) {
+                gun.settings.spray *= 0.5;
+            }
+        }
+        setSyncedTimeout(() => {
+            for (let gun of body.guns) {
+                if (remember[gun.id]) {
+                    gun.angle = remember[gun.id].angle;
+                    gun.direction = remember[gun.id].direction;
+                }
+                if (gun.settings) {
+                    gun.settings.spray /= 0.5;
+                }
+            }
+        }, 20 * 30);
+    }
+},
+
+{
+    name: 'Machine Gun',
+    splash: 'I CANNOT AIM!',
+    duration: 20,
+    run: body => {
+        for (let gun of body.guns) {
+            if (gun.settings) {
+                for (let stat in g.mach) {
+                    gun.settings[stat] *= g.mach[stat];
+                }
+                gun.trueRecoil *= g.mach.recoil;
+            }
+        }
+        setSyncedTimeout(() => {
+            for (let gun of body.guns) {
+                if (gun.settings) {
+                    for (let stat in g.mach) {
+                        gun.settings[stat] /= g.mach[stat];
+                    }
+                    gun.trueRecoil /= g.mach.recoil;
+                }
+            }
+        }, 20 * 30);
+    }
+},
+
+{
+    name: 'Damage Sponge',
+    splash: 'Hehe, that bullet tickles!',
+    duration: 10,
+    statusEffect: new StatusEffect(10 * 30, { health: 5, shield: 5 })
+},
+
+{
+    name: 'Ant',
+    splash: 'Time to be annoying >:3',
+    duration: 15,
+    statusEffect: new StatusEffect(15 * 30, { size: 0.25, fov: 2 })
+},
+
+{
+    name: 'Carrot',
+    splash: 'Ranger²',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { fov: 2 })
+},
+
+
+
+/// Neutral Effects
+
+{
     name: 'On The Move',
-    splash 'Doing the Cardio for the whole team!',
+    splash: 'Doing the Cardio for the whole team!',
     duration: 20, // how many seconds it lasts
     statusEffect: new StatusEffect(20 * 30, undefined, body => {
         let factor = (body.topSpeed ** 2) / (body.velocity.x ** 2 + body.velocity.y ** 2);
@@ -381,7 +479,7 @@ effects = [
 
 {
     name: 'Mom-doer',
-    splash '',
+    splash: '',
     duration: 20,
     run: body => {
         let remember = {};
@@ -401,7 +499,7 @@ effects = [
 
 {
     name: 'Increased Recoil',
-    splash '',
+    splash: '',
     duration: 15,
     run: body => {
         let remember = {};
@@ -423,13 +521,13 @@ effects = [
 
 {
     name: 'No Effect',
-    splash 'Get Trolled',
+    splash: 'Get Trolled',
     noEndNotification: true
 },
 
 {
     name: 'Drugged',
-    splash "Ohhh... that's the stuff!",
+    splash: "Ohhh... that's the stuff!",
     duration: 20,
     statusEffect: new StatusEffect(20 * 30, {}, (body, effect) => {
         effect.fov = 1 + Math.sin(Math.PI * effect.duration / 15) / 2
@@ -439,14 +537,14 @@ effects = [
 
 {
     name: 'Turtle',
-    splash 'Are you rammer or not?',
+    splash: 'Are you rammer or not?',
     duration: 20,
     statusEffect: new StatusEffect(20 * 30, { acceleration: 0.2, topSpeed: 0.2, health: 5, shield: 5 })
 },
 
 {
     name: 'Gamer Neck',
-    splash 'Maybe you should stand up more..',
+    splash: 'Maybe you should stand up more..',
     duration: 20,
     run: body => {
         let controller = new ioTypes.zoom(body, { distance: 750, dynamic: true, permanent: true });
@@ -456,52 +554,8 @@ effects = [
 },
 
 {
-    name: 'Alcoholic',
-    splash "I can't walk straight...",
-    duration: 20,
-    statusEffect: new StatusEffect(20 * 30, undefined, body => {
-        let angle = body.velocity.direction + Math.sin(body.id + Date.now() / 750),
-            length = body.velocity.length;
-        body.velocity.x = Math.cos(angle) * length;
-        body.velocity.y = Math.sin(angle) * length;
-    })
-},
-
-{
-    name: 'Forced spin',
-    splash "Can't.. stop.. teaming...",
-    duration: 20,
-    run: body => {
-        body.controllers.unshift(new io_plugin_effectRoller_forcedSpin(body));
-        setSyncedTimeout(() => body.controllers = body.controllers.filter(x => !(x instanceOf io_plugin_effectRoller_forcedSpin)), 20 * 30);
-    }
-},
-
-{
-    name: 'Earthquake',
-    splash 'Welcome to Chile.',
-    duration: 15,
-    statusEffect: new StatusEffect(15 * 30, undefined, body => {
-        let angle = Math.PI * 2 * Math.random(),
-            x = Math.cos(angle) * Math.random() * 5,
-            y = Math.sin(angle) * Math.random() * 5;
-        body.x += x;
-        body.y += y;
-        body.velocity.x += x;
-        body.velocity.y += y;
-    })
-},
-
-{
-    name: 'Backpetal',
-    splash 'Muscle memory be damned.',
-    duration: 20,
-    statusEffect: new StatusEffect(20 * 30, { acceleration: -1 })
-},
-
-{
     name: 'Random Barrel Positions',
-    splash 'In which direction do I aim?',
+    splash: 'In which direction do I aim?',
     duration: 20,
     run: body => {
         let remember = {};
@@ -520,9 +574,99 @@ effects = [
     }
 },
 
+
+
+/// Negative Effects
+
+{
+    name: 'Growth Annihilator',
+    splash: 'WATCH OUT!!',
+    noEndNotification: true,
+    run: body => {
+        let angle = Math.random() * 2 * Math.PI,
+        anni = new Entity({
+            x: body.x - Math.sin(angle) * 400,
+            y: body.y - Math.cos(angle) * 400
+        });
+        anni.define('plugin_effectRoller_strongerGrowthAnnihilator');
+        anni.define({ CONTROLLERS: [["plugin_effectRoller_lookAtEntity", { entity: body }]] });
+        anni.facing = angle;
+        anni.team = TEAM_ROOM;
+        anni.color = getTeamColor(TEAM_ROOM);
+        setSyncedTimeout(() => anni.kill(), 3 * 30);
+    }
+},
+
+{
+    name: 'No Health',
+    splash: 'Oh..',
+    noEndNotification: true,
+    run: body => {
+        body.shield.amount = 0.001;
+        body.health.amount = body.health.max / 100;
+    }
+},
+
+{
+    name: 'Slippery',
+    splash: 'Why is the floor suddenly out of ice?',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { acceleration: 1 / 3, topSpeed: 1.5 })
+},
+
+{
+    name: 'Vulnerable',
+    splash: "Don't even get breathed on!",
+    duration: 10,
+    statusEffect: new StatusEffect(10 * 30, { health: 0.2, shield: 0.2 })
+},
+
+{
+    name: 'Black Hole',
+    splash: 'GROUP HUG!!!',
+    duration: 15,
+    statusEffect: new StatusEffect(15 * 30, undefined, body => {
+        for (let i = 0; i < entities.length; i++) {
+            let entity = entities[i];
+            if (entity.pushability) {
+                let diffX = entity.x - body.x,
+                    diffY = entity.y - body.y,
+                    dist2 = diffX ** 2 + diffY ** 2;
+                if (dist2 < 250000) {
+                    let force = 1000 * entity.pushability / Math.max(1, dist2);
+                    entity.velocity.x -= diffX * force;
+                    entity.velocity.y -= diffY * force;
+                }
+            }
+        }
+    })
+},
+
+{
+    name: 'Old Age',
+    splash: 'Oh no where is my life support???',
+    noEndNotification: true,
+    run: (body, socket) => setSyncedTimeout(()=> body.kill(), 20 * 30),
+    statusEffect: new StatusEffect(20 * 30, { acceleration: 0.8, topSpeed: 0.8 });
+},
+
+{
+    name: 'Balloon',
+    splash: "I shouldn't have ordered fast food before this..",
+    duration: 15,
+    statusEffect: new StatusEffect(15 * 30, { size: 2, fov: Math.SQRT1_2 })
+},
+
+{
+    name: 'Blind',
+    splash: "Short sightedness, a common eye condition.",
+    duration: 10,
+    statusEffect: new StatusEffect(10 * 30, { fov: 0.2 })
+},
+
 {
     name: 'Frozen Camera',
-    splash 'This area looks pretty nice.',
+    splash: 'This area looks pretty nice.',
     duration: 20,
     run: body => {
         let controller = new ioTypes.zoom(body, { distance: 0, permanent: true });
@@ -533,7 +677,7 @@ effects = [
 
 {
     name: 'Statue',
-    splash 'Arras, Become Turret',
+    splash: 'Arras, Become Turret',
     duration: 10,
     statusEffect: new StatusEffect(10 * 30, { acceleration: 0, topSpeed: 0 })
 },
@@ -541,7 +685,7 @@ effects = [
 {
     name: 'Blast',
     splash: 'Look how many close friends I have!',
-    noEndNotification: true;
+    noEndNotification: true,
     run: body => {
         for (let i = 0; i < entities.length; i++) {
             let entity = entities[i];
@@ -561,7 +705,7 @@ effects = [
 
 {
     name: 'Impotence',
-    splash "Your gun is weak! Haha!",
+    splash: "Your gun is weak! Haha!",
     duration: 15,
     run: body => {
         let mgGunWidth = 3 / 10,
@@ -603,7 +747,7 @@ effects = [
 
 {
     name: 'Railgun Reload',
-    splash 'Where did my reload speed go?',
+    splash: 'Where did my reload speed go?',
     duration: 15,
     run: body => {
         let newReload = combineStats([g.basic]).reload * 8,
@@ -623,246 +767,51 @@ effects = [
             }
         }, 15 * 30);
     },
-},*/
+},
 
-// Stronger
 {
-    name: 'Stronger',
-    splash: 'I feel powerful...',
+    name: 'Alcoholic',
+    splash: "I can't walk straight...",
     duration: 20,
-    run: body => {
-        let colorOld = body.color,
-            pointsOld = body.skill.points,
-            rawOld = body.skill.raw.map(x=>x),
-            capsOld = body.skill.caps.map(x=>x),
-            stronk = Array(10).fill(15);
-        body.skill.setCaps(stronk);
-        body.skill.set(stronk);
-        body.color = 36;
-
-        setSyncedTimeout(()=>{
-            body.skill.setCaps(capsOld);
-            body.skill.set(rawOld);
-            body.color = colorOld;
-            body.skill.points = pointsOld;
-        }, 20 * 30);
-    },
     statusEffect: new StatusEffect(20 * 30, undefined, body => {
-        let e = new Entity(body),
-            ang = Math.random() * Math.PI * 2;
-        e.define('genericEntity');
-        e.velocity.x = 5 * Math.sin(ang);
-        e.velocity.y = 5 * Math.cos(ang);
-        e.SIZE = body.size;
-        e.team = body.team;
-        e.color = getTeamColor(body.team);
-        e.alpha = 0.5;
-        setSyncedTimeout(() => e.kill(), 3);
+        let angle = body.velocity.direction + Math.sin(body.id + Date.now() / 750),
+            length = body.velocity.length;
+        body.velocity.x = Math.cos(angle) * length;
+        body.velocity.y = Math.sin(angle) * length;
     })
 },
 
-// Boulder
 {
-    name: 'Boulder',
-    splash: 'I am become wall',
-    duration: 20,
-    statusEffect: new StatusEffect(20 * 30, { pushability: 0.1, recoilReceived: 0.1 })
-},
-
-// Hedgehog
-{
-    name: 'Hedgehog',
-    splash: 'Gotta go fast!',
-    duration: 20,
-    statusEffect: new StatusEffect(20 * 30, { acceleration: 5, topSpeed: 5 })
-},
-
-// Focus
-{
-    name: 'Focus',
-    splash: 'I CAN AIM.',
+    name: 'Forced spin',
+    splash: "Can't.. stop.. teaming...",
     duration: 20,
     run: body => {
-        let remember = {};
-        for (let gun of body.guns) {
-            remember[gun.id] = {
-                angle: gun.angle,
-                direction: gun.direction
-            };
-            gun.angle = 0;
-            gun.direction = 0;
-            if (gun.settings) {
-                gun.settings.spray *= 0.5;
-            }
-        }
-        setSyncedTimeout(() => {
-            for (let gun of body.guns) {
-                if (remember[gun.id]) {
-                    gun.angle = remember[gun.id].angle;
-                    gun.direction = remember[gun.id].direction;
-                }
-                if (gun.settings) {
-                    gun.settings.spray /= 0.5;
-                }
-            }
-        }, 20 * 30);
+        body.controllers.unshift(new io_plugin_effectRoller_forcedSpin(body));
+        setSyncedTimeout(() => body.controllers = body.controllers.filter(x => !(x instanceof io_plugin_effectRoller_forcedSpin)), 20 * 30);
     }
 },
 
-// Machine Gun
 {
-    name: 'Machine Gun',
-    splash: 'I CANNOT AIM!',
-    duration: 20,
-    run: body => {
-        for (let gun of body.guns) {
-            if (gun.settings) {
-                for (let stat in g.mach) {
-                    gun.settings[stat] *= g.mach[stat];
-                }
-                gun.trueRecoil *= g.mach.recoil;
-            }
-        }
-        setSyncedTimeout(() => {
-            for (let gun of body.guns) {
-                if (gun.settings) {
-                    for (let stat in g.mach) {
-                        gun.settings[stat] /= g.mach[stat];
-                    }
-                    gun.trueRecoil /= g.mach.recoil;
-                }
-            }
-        }, 20 * 30);
-    }
-},
-
-// Damage Sponge
-{
-    name: 'Damage Sponge',
-    splash: 'Hehe, that bullet tickles!',
-    duration: 10,
-    statusEffect: new StatusEffect(10 * 30, { health: 5, shield: 5 })
-},
-
-// Ant
-{
-    name: 'Ant',
-    splash: 'Time to be annoying >:3',
-    duration: 15,
-    statusEffect: new StatusEffect(15 * 30, { size: 0.25, fov: 2 })
-},
-
-// Carrot
-{
-    name: 'Carrot',
-    splash: 'Ranger²',
-    duration: 20,
-    statusEffect: new StatusEffect(20 * 30, { fov: 2 })
-},
-
-
-/// Neutral Effects
-
-
-
-
-/// Negative Effects
-
-// Growth Annihilator
-{
-    name: 'Growth Annihilator',
-    splash: 'WATCH OUT!!',
-    noEndNotification: true,
-    run: body => {
-        let angle = Math.random() * 2 * Math.PI,
-        anni = new Entity({
-            x: body.x - Math.sin(angle) * 400,
-            y: body.y - Math.cos(angle) * 400
-        });
-        anni.define('plugin_effectRoller_strongerGrowthAnnihilator');
-        anni.define({ CONTROLLERS: [["plugin_effectRoller_lookAtEntity", { entity: body }]] });
-        anni.facing = angle;
-        anni.team = TEAM_ROOM;
-        anni.color = getTeamColor(TEAM_ROOM);
-        setSyncedTimeout(() => anni.kill(), 3 * 30);
-    }
-},
-
-// No Health
-{
-    name: 'No Health',
-    splash: 'Oh..',
-    noEndNotification: true,
-    run: body => {
-        body.shield.amount = 0.001;
-        body.health.amount = body.health.max / 100;
-    }
-},
-
-// Slippery
-{
-    name: 'Slippery',
-    splash: 'Why is the floor suddenly out of ice?',
-    duration: 20,
-    statusEffect: new StatusEffect(20 * 30, { acceleration: 1 / 3, topSpeed: 1.5 })
-},
-
-// Vulnerable
-{
-    name: 'Vulnerable',
-    splash: "Don't even get breathed on!",
-    duration: 10,
-    statusEffect: new StatusEffect(10 * 30, { health: 0.2, shield: 0.2 })
-},
-
-// Black Hole
-{
-    name: 'Black Hole',
-    splash: 'GROUP HUG!!!',
+    name: 'Earthquake',
+    splash: 'Welcome to Chile.',
     duration: 15,
     statusEffect: new StatusEffect(15 * 30, undefined, body => {
-        for (let i = 0; i < entities.length; i++) {
-            let entity = entities[i];
-            if (entity.pushability) {
-                let diffX = entity.x - body.x,
-                    diffY = entity.y - body.y,
-                    dist2 = diffX ** 2 + diffY ** 2;
-                if (dist2 < 250000) {
-                    let force = 1000 * entity.pushability / Math.max(1, dist2);
-                    entity.velocity.x -= diffX * force;
-                    entity.velocity.y -= diffY * force;
-                }
-            }
-        }
+        let angle = Math.PI * 2 * Math.random(),
+            x = Math.cos(angle) * Math.random() * 5,
+            y = Math.sin(angle) * Math.random() * 5;
+        body.x += x;
+        body.y += y;
+        body.velocity.x += x;
+        body.velocity.y += y;
     })
 },
 
-// Old Age
 {
-    name: 'Old Age',
-    splash: 'Oh no where is my life support???',
-    noEndNotification: true,
-    run: (body, socket) => {
-        setSyncedTimeout(()=> body.kill(), 20 * 30);
-    }
-},
-
-// Balloon
-{
-    name: 'Balloon',
-    splash: "I shouldn't have ordered fast food before this..",
-    duration: 15,
-    statusEffect: new StatusEffect(15 * 30, { size: 2, fov: Math.SQRT1_2 })
-},
-
-// Blind
-{
-    name: 'Blind',
-    splash: "Short sightedness, a common eye condition.",
-    duration: 10,
-    statusEffect: new StatusEffect(10 * 30, { fov: 0.2 })
-},
-];
+    name: 'Backpetal',
+    splash: 'Muscle memory be damned.',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { acceleration: -1 })
+}];
 
 class io_plugin_effectRoller_lookAtEntity extends IO {
     constructor(body, { entity } = {}) {
