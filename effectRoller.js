@@ -49,8 +49,8 @@
 // 35   Spawn Rock                Spawns a rock that dies after a minute at where you alt fire
 // 36   Teleport forward          Teleports you in the direction you're looking 1000 units
 // 37   Heavy projectiles         Multiplies your guns' bullet health, reload and recoil by 2 and multiplies bullet size by 1.2
-// 38   PLACEHOLDER               PLACEHOLDER
-// 39   PLACEHOLDER               PLACEHOLDER
+// 38   Random Tank               Sets you to a random tank available from c.SPAWN_CLASS
+// 39   Auto-Balance              Makes you join another team
 
 // Negative Effects
 // 40 : Growth Annihilator      : Stronger LVL 250 Growth Annihilator, which shoots you once from 10-20 players of distance away and then despawns.
