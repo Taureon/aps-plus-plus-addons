@@ -467,7 +467,7 @@ Class.sootherDrone = {
         }]
     };
 
-//Triplex upgrades
+//Desmos branch
 Class.quintuplex = {
     PARENT: ["genericTank"],
     LABEL: "Quintuplex",
@@ -534,6 +534,7 @@ Class.quintuplex = {
         },
     ],
 };
+Class.hextuplex = makeMulti(Class.desmos, 6, "Hextuplex", 30);
 
     //Single upgrades
 
