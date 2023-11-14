@@ -114,6 +114,94 @@ Class.quadBuilder = {
         },
     ],
 };
+Class.masterBullet = {
+    PARENT: ["trap"],
+    SHAPE: 0,
+    GUNS: [
+        {
+            /*** LENGTH    WIDTH     ASPECT        X             Y         ANGLE     DELAY */
+            POSITION: [18, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.flank,
+                    g.tri,
+                    g.trifront,
+                    g.tonsmorrecoil,
+                    g.minion,
+                    g.weak,
+                ]),
+                TYPE: "bullet",
+                LABEL: "Front",
+                AUTOFIRE: true,
+            },
+        },
+        {
+            POSITION: [13, 8, 1, 0, -1, 140, 0.6],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.flank,
+                    g.tri,
+                    g.thruster,
+                    g.minion,
+                    g.weak,
+                ]),
+                TYPE: "bullet",
+                LABEL: "Thruster",
+                AUTOFIRE: true,
+            },
+        },
+        {
+            POSITION: [13, 8, 1, 0, 1, 220, 0.6],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.flank,
+                    g.tri,
+                    g.thruster,
+                    g.minion,
+                    g.weak,
+                ]),
+                TYPE: "bullet",
+                LABEL: "Thruster",
+                AUTOFIRE: true,
+            },
+        },
+        {
+            POSITION: [16, 8, 1, 0, 0, 150, 0.1],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.flank,
+                    g.tri,
+                    g.thruster,
+                    g.minion,
+                    g.weak,
+                ]),
+                TYPE: "bullet",
+                LABEL: "Thruster",
+                AUTOFIRE: true,
+            },
+        },
+        {
+            POSITION: [16, 8, 1, 0, 0, 210, 0.1],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.flank,
+                    g.tri,
+                    g.thruster,
+                    g.minion,
+                    g.weak,
+                ]),
+                TYPE: "bullet",
+                LABEL: "Thruster",
+                AUTOFIRE: true,
+            },
+        },
+    ],
+};
 Class.master = {
     PARENT: ["genericTank"],
     LABEL: "Master",
