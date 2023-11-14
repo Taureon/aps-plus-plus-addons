@@ -1431,7 +1431,9 @@ Class.injection = {
                     Class.hewnDouble.UPGRADES_TIER_3 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
                     Class.autoDouble.UPGRADES_TIER_3 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
                     Class.pentaShot.UPGRADES_TIER_3.push("quintuplex");
+                    Class.hexaTank.UPGRADES_TIER_3.push("hextuplex");
                     Class.triplex.UPGRADES_TIER_3.push("quintuplex");
+                    Class.quadruplex.UPGRADES_TIER_3.push("hextuplex");
                     Class.single.UPGRADES_TIER_3 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
                     Class.megaSmasher.UPGRADES_TIER_3 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_3 = ["decoy", "spear", "autoBonker","megaBonker", "basher", "thwacker", "bundler"];
