@@ -467,6 +467,74 @@ Class.sootherDrone = {
         }]
     };
 
+//Triplex upgrades
+Class.quintuplex = {
+    PARENT: ["genericTank"],
+    LABEL: "Quintuplex",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [18, 10, 0.7, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [18, 10, 0.7, 0, 0, 45, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [18, 10, 0.7, 0, 0, -45, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [18, 10, 0.7, 0, 0, 90, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [18, 10, 0.7, 0, 0, -90, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [3.75, 10, 2.125, 1, -4.25, -35, 0],
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [3.75, 10, 2.125, 1, 4.25, 35, 0],
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [5, 6, 0.5, 10.5, 0, 22.5, 0],
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [5, 6, 0.5, 10.5, 0, -22.5, 0],
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [5, 6, 0.5, 10.5, 0, 67.5, 0],
+        },
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [5, 6, 0.5, 10.5, 0, -67.5, 0],
+        },
+    ],
+};
+
     //Single upgrades
 
     Class.duo = {
@@ -1361,6 +1429,8 @@ Class.injection = {
                     Class.tripleTwin.UPGRADES_TIER_3 = ["quadTwin", "autoTripleTwin", "bentTriple", "hewnTripleTwin", "tripleFlankTwin", "tripleGunner", "warkWarkWark"];
                     Class.hewnDouble.UPGRADES_TIER_3 = ["hewnTriple", "autoHewnDouble", "cleft", "skewnDouble", "hewnFlankDouble", "hewnGunner", "warkWaWarkrk"];
                     Class.autoDouble.UPGRADES_TIER_3 = ["megaAutoDoubleTwin", "tripleAutoDoubleTwin", "autoTripleTwin", "autoHewnDouble", "autoBentDouble", "autoDoubleFlankTwin"];
+                    Class.pentaShot.UPGRADES_TIER_3.push("quintuplex");
+                    Class.triplex.UPGRADES_TIER_3.push("quintuplex");
                     Class.single.UPGRADES_TIER_3 = ["duo", "sharpshooter", "gadgetGun", "ternion", "coordinator", "bruiser", "tricker", "mono", "avian", "assistant", "autoSingle"];
                     Class.megaSmasher.UPGRADES_TIER_3 = ["ultraSmasher", "megaSpike", "megaLandmine", "autoMegaSmasher", "megaBonker", "megaDrifter"]
                     Class.bonker.UPGRADES_TIER_3 = ["decoy", "spear", "autoBonker","megaBonker", "basher", "thwacker", "bundler"];
