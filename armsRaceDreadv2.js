@@ -76,12 +76,12 @@ module.exports = ({ Class }) => {
 	const hpBuffBodyStats = [
 		{ HEALTH: 2.4, SHIELD: 2.4, REGEN: 2,   SPEED: 0.65 },
 		{ HEALTH: 3.2, SHIELD: 3.2, REGEN: 2.5, SPEED: 0.5  },
-		{ HEALTH: 4,   SHIELD: 4,   REGEN: 2.5, SPEED: 0.4  }
+		{ HEALTH: 4,   SHIELD: 4,   REGEN: 2.5, SPEED: 0.4  },
 	];
 	const speedBuffBodyStats = [
 		{ SPEED: 1.75, HEALTH: 0.65 },
 		{ SPEED: 2.15, HEALTH: 0.5  },
-		{ SPEED: 2.35, HEALTH: 0.35 }
+		{ SPEED: 2.35, HEALTH: 0.35 },
 	];
 	const sizeBuffBodyStats = [
 		{ SPEED: 0.9,  HEALTH: 2.4 },
@@ -2389,7 +2389,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [2.5, 5, 1.7, 12, 0, 120*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.twin, g.pound, g.fast]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.twin, g.pound, g.fast, {reload: 1/1.1}]),
 					TYPE: "unsetTrap",
 				},
 			},
@@ -4005,7 +4005,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [1.5, 4, 1.6, 12, 2.5, 72*i+10, 0.5],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.pound, g.fast]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.pound, g.fast, {reload: 1.09}]),
 					TYPE: "trap",
 					STAT_CALCULATOR: gunCalcNames.trap,
 				},
@@ -4016,7 +4016,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [1.5, 4, 1.6, 12, -2.5, 72*i-10, 0.5],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.pound, g.fast]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.pound, g.fast, {reload: 1.09}]),
 					TYPE: "trap",
 					STAT_CALCULATOR: gunCalcNames.trap,
 				},
@@ -4027,7 +4027,7 @@ module.exports = ({ Class }) => {
 			{
 				POSITION: [2, 5.5, 1.7, 14, 0, 72*i, 0],
 				PROPERTIES: {
-					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.twin, g.pound, g.fast]),
+					SHOOT_SETTINGS: combineStats([g.trap, g.block, g.pound, g.fast, {reload: 1.09}]),
 					TYPE: "unsetTrap",
 				},
 			},
@@ -5881,11 +5881,11 @@ module.exports = ({ Class }) => {
 
 	// Merge hexdreads
 	const pentanoughtWeapons = [
-								"rapierARDreadV2", "javelinARDreadV2", "woomeraARDreadV2", "trebuchetARDreadV2", "boltARDreadV2",
-								"diplomatARDreadV2", "arbitratorARDreadV2", "dissolverARDreadV2", "eroderARDreadV2", "gripperARDreadV2",
-								"retardantARDreadV2", "tyrantARDreadV2", "anesthesiologistARDreadV2", "helixARDreadV2", "bombardmentARDreadV2",
-								"raiderARDreadV2", "gladiatorARDreadV2", "starlightARDreadV2", "bruiserARDreadV2", "incapacitatorARDreadV2",
-								"cerberusARDreadV2", "luciferARDreadV2", "sterilizerARDreadV2", "hielamanARDreadV2", "jackhammerARDreadV2",
+								"rapierARDreadV2",     "javelinARDreadV2",     "woomeraARDreadV2",           "trebuchetARDreadV2",  "boltARDreadV2",
+								"diplomatARDreadV2",   "arbitratorARDreadV2",  "dissolverARDreadV2",         "eroderARDreadV2",     "gripperARDreadV2",
+								"retardantARDreadV2",  "tyrantARDreadV2",      "anesthesiologistARDreadV2",  "helixARDreadV2",      "bombardmentARDreadV2",
+								"raiderARDreadV2",     "gladiatorARDreadV2",   "starlightARDreadV2",         "bruiserARDreadV2",    "incapacitatorARDreadV2",
+								"cerberusARDreadV2",   "luciferARDreadV2",     "sterilizerARDreadV2",        "hielamanARDreadV2",   "jackhammerARDreadV2",
 								];
 	if(buildHexnoughts) {
 		for (let i of pentanoughtWeapons) {
