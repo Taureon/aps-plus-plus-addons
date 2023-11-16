@@ -5413,7 +5413,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'Hunkerer',
 			Sterilizer: 'Janitor',
 			Hielaman: 'Reinforcer', 
-			Jackhammer: 'Fault',
+			Jackhammer: 'Pyroclastic',
 		},
 		Trebuchet: {
 			Trebuchet: 'Trebuchet',
@@ -5668,7 +5668,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'Galaxy',
 			Sterilizer: 'Evaporator',
 			Hielaman: 'Protostar', 
-			Jackhammer: 'Laser',
+			Jackhammer: 'Luminance',
 		},
 		Bruiser: {
 			Bruiser: 'Bruiser',
@@ -5697,12 +5697,12 @@ module.exports = ({ Class }) => {
 		Lucifer: {
 			Lucifer: 'Lucifer',
 			Sterilizer: 'Lipid',
-			Hielaman: 'Buffer', 
-			Jackhammer: 'Quake',
+			Hielaman: 'Insulator', 
+			Jackhammer: 'Earthquaker',
 		},
 		Sterilizer: {
 			Sterilizer: 'Sterilizer',
-			Hielaman: 'Landmine', 
+			Hielaman: 'Homeland', 
 			Jackhammer: 'Bulldozer',
 		},
 		Hielaman: {
