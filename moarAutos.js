@@ -24,7 +24,7 @@ Class.machineGun.UPGRADES_TIER_2.push("znpAutoMachineGun");
 
 Class.znpAutoFlankGuard = makeAuto(Class.flankGuard);
 Class.flankGuard.UPGRADES_TIER_2.push("znpAutoFlankGuard");
-    Class.znpAutoFlankGuard.UPGRADES_TIER_3 = ["znpAutoHexaTank", "autoTriAngle", "znpAutoAuto3", "znpAutoTrapGuard", "znpHexaTrapper", "znpCeptFlankGuard"];
+    Class.znpAutoFlankGuard.UPGRADES_TIER_3 = ["znpAutoHexaTank", "autoTriAngle", "znpAutoAuto3", "znpAutoTrapGuard", "hexaTrapper", "znpCeptFlankGuard"];
 
 Class.znpAutoDirector = makeAuto(Class.director);
 Class.director.UPGRADES_TIER_2.push("znpAutoDirector");
