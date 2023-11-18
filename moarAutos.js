@@ -7,7 +7,7 @@ module.exports = ({ Class }) => {
 
 Class.znpAutoBasic = makeAuto(Class.basic);
 Class.basic.UPGRADES_TIER_1.push("znpAutoBasic");
-    Class.znpAutoBasic.UPGRADES_TIER_2 = ["znpAutoTwin", "znpAutoSniper", "znpAutoMachineGun", "znpAutoFlankGuard", "znpAutoDirector", "znpAutoPounder", "autoTrapper", "znpAutoDesmos", "znpCeptBasic"];
+    Class.znpAutoBasic.UPGRADES_TIER_2 = ["znpAutoTwin", "znpAutoSniper", "znpAutoMachineGun", "znpAutoFlankGuard", "znpAutoDirector", "znpAutoPounder", "znpAutoTrapper", "znpAutoDesmos", "znpCeptBasic"];
     Class.znpAutoBasic.UPGRADES_TIER_3 = ["autoSmasher"];
 
 Class.znpAutoTwin = makeAuto(Class.twin);
