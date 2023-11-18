@@ -7,12 +7,12 @@ module.exports = ({ Class }) => {
 
 Class.znpAutoBasic = makeAuto(Class.basic);
 Class.basic.UPGRADES_TIER_1.push("znpAutoBasic");
-    Class.znpAutoBasic.UPGRADES_TIER_2 = ["znpAutoTwin", "znpAutoSniper", "znpAutoMachineGun", "znpAutoFlankGuard", "znpAutoDirector", "znpAutoPounder", "autoTrapper", "znpCeptBasic"];
+    Class.znpAutoBasic.UPGRADES_TIER_2 = ["znpAutoTwin", "znpAutoSniper", "znpAutoMachineGun", "znpAutoFlankGuard", "znpAutoDirector", "znpAutoPounder", "autoTrapper", "znpAutoDesmos", "znpCeptBasic"];
     Class.znpAutoBasic.UPGRADES_TIER_3 = ["autoSmasher"];
 
 Class.znpAutoTwin = makeAuto(Class.twin);
 Class.twin.UPGRADES_TIER_2.push("znpAutoTwin");
-    Class.znpAutoTwin.UPGRADES_TIER_3 = ["autoDouble", "znpAutoTripleShot", "autoGunner", "znpAutoHexaTank", "znpCeptTwin"];
+    Class.znpAutoTwin.UPGRADES_TIER_3 = ["autoDouble", "znpAutoTripleShot", "autoGunner", "znpAutoHexaTank", "znpAutoHelix", "znpCeptTwin"];
 
 Class.znpAutoSniper = makeAuto(Class.sniper);
 Class.sniper.UPGRADES_TIER_2.push("znpAutoSniper");
@@ -32,17 +32,15 @@ Class.director.UPGRADES_TIER_2.push("znpAutoDirector");
 
 Class.znpAutoPounder = makeAuto(Class.pounder);
 Class.pounder.UPGRADES_TIER_2.push("znpAutoPounder");
-    Class.znpAutoPounder.UPGRADES_TIER_3 = ["znpAutoDestroyer", "autoBuilder", "znpAutoArtillery", "znpAutoLauncher", "znpCeptPounder"];
+    Class.znpAutoPounder.UPGRADES_TIER_3 = ["znpAutoDestroyer", "autoBuilder", "znpAutoArtillery", "znpAutoLauncher", "znpAutoVolute", "znpCeptPounder"];
 
 // auto trapper already exists in definitions lol
 Class.trapper.UPGRADES_TIER_2.push("autoTrapper");
     Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "znpAutoTriTrapper", "znpAutoTrapGuard", "znpCeptTrapper"];
 
-/* // not implemented in aps++ yet
 Class.znpAutoDesmos = makeAuto(Class.desmos);
 Class.desmos.UPGRADES_TIER_2.push("znpAutoDesmos");
-    Class.znpAutoDesmos.UPGRADES_TIER_3 = ["znpAutoHelix", "znpAutoVolute", "znpCeptDesmos"];
-*/
+    Class.znpAutoDesmos.UPGRADES_TIER_3 = ["znpAutoVolute", "znpAutoHelix", "znpCeptDesmos"];
 
 Class.znpAutoTripleShot = makeAuto(Class.tripleShot);
 Class.tripleShot.UPGRADES_TIER_3.push("znpAutoTripleShot");
@@ -83,36 +81,23 @@ Class.triTrapper.UPGRADES_TIER_3.push("znpAutoTriTrapper");
 Class.znpAutoTrapGuard = makeAuto(Class.trapGuard);
 Class.trapGuard.UPGRADES_TIER_3.push("znpAutoTrapGuard");
 
-/* // not implemented in aps++ yet
 Class.znpAutoHelix = makeAuto(Class.helix);
 Class.helix.UPGRADES_TIER_3.push("znpAutoHelix");
-*/
 
-/* // not implemented in aps++ yet
 Class.znpAutoVolute = makeAuto(Class.volute);
 Class.volute.UPGRADES_TIER_3.push("znpAutoVolute");
-*/
 
 Class.znpCeptBasic = makeCeption(Class.basic, "Inception");
-    Class.znpCeptBasic.UPGRADES_TIER_3 = ["znpCeptTwin", "znpCeptSniper", "znpCeptMachineGun", "znpCeptFlankGuard", "znpCeptDirector", "znpCeptPounder", "znpCeptTrapper", "znpCept2Basic"];
+    Class.znpCeptBasic.UPGRADES_TIER_3 = ["znpCeptTwin", "znpCeptSniper", "znpCeptMachineGun", "znpCeptFlankGuard", "znpCeptDirector", "znpCeptPounder", "znpCeptTrapper", "znpCeptDesmos", "znpCept2Basic"];
 
 Class.znpCeptTwin = makeCeption(Class.twin, "Twinception");
-
 Class.znpCeptSniper = makeCeption(Class.sniper, "Snipeception");
-
 Class.znpCeptMachineGun = makeCeption(Class.machineGun, "Machineception");
-
 Class.znpCeptFlankGuard = makeCeption(Class.flankGuard, "Flankception");
-
 Class.znpCeptDirector = makeCeption(Class.director, "Direction");
-
 Class.znpCeptPounder = makeCeption(Class.pounder, "Poundception");
-
 Class.znpCeptTrapper = makeCeption(Class.trapper, "Trapception");
-
-/* // not implemented in aps++ yet
 Class.znpCeptDesmos = makeCeption(Class.desmos, "Deception");
-*/
 
 Class.znpCept2Basic = makeAuto(Class.basic, "Recursion", {
     type: "znpCeptBasic",
