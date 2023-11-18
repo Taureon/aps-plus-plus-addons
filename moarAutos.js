@@ -24,7 +24,7 @@ Class.machineGun.UPGRADES_TIER_2.push("znpAutoMachineGun");
 
 Class.znpAutoFlankGuard = makeAuto(Class.flankGuard);
 Class.flankGuard.UPGRADES_TIER_2.push("znpAutoFlankGuard");
-    Class.znpAutoFlankGuard.UPGRADES_TIER_3 = ["znpAutoHexaTank", "autoTriAngle", "znpAutoAuto3", "znpAutoTrapGuard", "znpAutoTriTrapper", "znpCeptFlankGuard"];
+    Class.znpAutoFlankGuard.UPGRADES_TIER_3 = ["znpAutoHexaTank", "autoTriAngle", "znpAutoAuto3", "znpAutoTrapGuard", "znpHexaTrapper", "znpCeptFlankGuard"];
 
 Class.znpAutoDirector = makeAuto(Class.director);
 Class.director.UPGRADES_TIER_2.push("znpAutoDirector");
@@ -34,9 +34,9 @@ Class.znpAutoPounder = makeAuto(Class.pounder);
 Class.pounder.UPGRADES_TIER_2.push("znpAutoPounder");
     Class.znpAutoPounder.UPGRADES_TIER_3 = ["znpAutoDestroyer", "autoBuilder", "znpAutoArtillery", "znpAutoLauncher", "znpAutoVolute", "znpCeptPounder"];
 
-// auto trapper already exists in definitions lol
-Class.trapper.UPGRADES_TIER_2.push("autoTrapper");
-    Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "znpAutoTriTrapper", "znpAutoTrapGuard", "znpCeptTrapper"];
+Class.znpAutoTrapper = makeAuto(Class.trapper);
+Class.trapper.UPGRADES_TIER_2.push("znpAutoTrapper");
+    Class.znpAutoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper", "znpAutoTrapGuard", "znpCeptTrapper"];
 
 Class.znpAutoDesmos = makeAuto(Class.desmos);
 Class.desmos.UPGRADES_TIER_2.push("znpAutoDesmos");
@@ -74,9 +74,6 @@ Class.artillery.UPGRADES_TIER_3.push("znpAutoArtillery");
 
 Class.znpAutoLauncher = makeAuto(Class.launcher);
 Class.launcher.UPGRADES_TIER_3.push("znpAutoLauncher");
-
-Class.znpAutoTriTrapper = makeAuto(Class.triTrapper);
-Class.triTrapper.UPGRADES_TIER_3.push("znpAutoTriTrapper");
 
 Class.znpAutoTrapGuard = makeAuto(Class.trapGuard);
 Class.trapGuard.UPGRADES_TIER_3.push("znpAutoTrapGuard");
