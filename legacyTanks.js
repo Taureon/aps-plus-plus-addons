@@ -5,10 +5,14 @@ const g = require('../gunvals.js');
 
 module.exports = ({ Class }) => {
 
+// Set these to either true to display their respective tanks in the main tank branch.
+// The enableLegacy option will make some existing tanks unplayable. They can always be accessed in the unplayable branch of the developer menu.
+const enableScrapped = false;
+const enableLegacy = false;
+
 Class.weirdSpike = {
     PARENT: ["genericTank"],
     LABEL: "Spike",
-    UPGRADE_LABEL: "Weird Spike",
     DANGER: 7,
     BODY: {
         DAMAGE: 1.15 * base.DAMAGE,
@@ -32,7 +36,6 @@ Class.weirdSpike = {
 Class.oldBentBoomer = {
     PARENT: ["genericTank"],
     LABEL: "Boomer",
-    UPGRADE_LABEL: "Old Bent Boomer",
     DANGER: 7,
     STAT_NAMES: statnames.trap,
     BODY: {
@@ -205,7 +208,7 @@ Class.masterBullet = {
 Class.master = {
     PARENT: ["genericTank"],
     LABEL: "Master",
-    STAT_NAMES: statnames.drone,
+    STAT_NAMES: statnames.mixed,
     BODY: {
         HEALTH: base.HEALTH * 0.4,
         SHIELD: base.SHIELD * 0.4,
@@ -321,7 +324,6 @@ Class.blunderbuss = {
 Class.oldRimfire = {
     PARENT: ["genericTank"],
     LABEL: "Rimfire",
-    UPGRADE_LABEL: "Old Rimfire",
     DANGER: 7,
     GUNS: [
         {
@@ -358,7 +360,6 @@ Class.oldRimfire = {
 Class.oldSpreadshot = {
     PARENT: ["genericTank"],
     LABEL: "Spreadshot",
-    UPGRADE_LABEL: "Old Spreadshot",
     DANGER: 7,
     GUNS: [
         {
@@ -546,7 +547,6 @@ Class.oldCommanderGun = {
 Class.oldCommander = {
     PARENT: ["genericTank"],
     LABEL: "Commander",
-    UPGRADE_LABEL: "Old Commander",
     STAT_NAMES: statnames.drone,
     DANGER: 7,
     BODY: {
@@ -1121,7 +1121,7 @@ Class.whirlGuard = {
         },
     ],
 };
-Class.prohpet = {
+Class.prophet = {
     PARENT: ["genericTank"],
     LABEL: "Prophet",
     DANGER: 7,
@@ -1192,7 +1192,7 @@ Class.vortex = {
 };
 
 Class.whirlwind.UPGRADES_TIER_2 = ["tornado", "hurricane"];
-    Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "prohpet", "vortex"];
+    Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "prophet", "vortex"];
     Class.tornado.UPGRADES_TIER_3 = ["megaTornado", "tempest", "thunderbolt"];
     Class.hurricane.UPGRADES_TIER_3 = ["typhoon", "blizzard"];
 
@@ -1623,11 +1623,112 @@ Class.flail.UPGRADES_TIER_2 = ["doubleFlail", "mace", "flangle"];
     Class.mace.UPGRADES_TIER_3 = ["bigMama", "itHurtsDontTouchIt", "flace"];
     Class.flangle.UPGRADES_TIER_3 = ["flooster", "flace"];
 
-Class.legacyTanks = {
-    PARENT: ["menu"],
-    LABEL: "Legacy Tanks",
-    UPGRADES_TIER_0: ["weirdSpike", "oldBentBoomer", "quadBuilder", "master", "blunderbuss", "oldRimfire", "oldSpreadshot", "oldCommander", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "whirlwind", "flail"]
-};
-Class.addons.UPGRADES_TIER_0.push("legacyTanks");
+
+// delicious spaghetti
+
+if (enableScrapped == true && enableLegacy == false) {
+Class.weirdSpike.UPGRADE_LABEL = "Weird Spike";
+Class.oldBentBoomer.UPGRADE_LABEL = "Old Bent Boomer";
+Class.oldRimfire.UPGRADE_LABEL = "Old Rimfire";
+Class.oldSpreadshot.UPGRADE_LABEL = "Old Spreadshot";
+Class.oldCommander.UPGRADE_LABEL = "Old Commander";
+
+Class.basic.UPGRADES_TIER_1.push("flail", "whirlwind");
+
+    // machine gun
+        Class.gunner.UPGRADES_TIER_3.push("tetraGunner");
+
+    // flank guard
+        Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl");
+        Class.auto3.UPGRADES_TIER_3.push("whirl3");
+
+    // director
+        Class.cruiser.UPGRADES_TIER_3.push("corvette");
+        Class.underseer.UPGRADES_TIER_3.push("prophet", "prodigy");
+
+    // pounder
+        Class.artillery.UPGRADES_TIER_3.push("munition", "mender");
+        Class.launcher.UPGRADES_TIER_3.push("vortex");
+
+    Class.trapper.UPGRADES_TIER_2.push("autoTrapper");
+        Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper"];
+        Class.triTrapper.UPGRADES_TIER_3.push("prodigy");
+        Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard");
+
+Class.unavailable.UPGRADES_TIER_0.push("weirdSpike", "oldBentBoomer", "quadBuilder", "master", "blunderbuss", "oldRimfire", "oldSpreadshot", "oldCommander");
+
+} else if (enableScrapped == false && enableLegacy == true) {
+Class.basic.UPGRADES_TIER_3.push("master");
+    Class.smasher.UPGRADES_TIER_3.splice(1, 1, "weirdSpike");
+
+    // twin
+        Class.tripleShot.UPGRADES_TIER_3.splice(1, 1, "oldSpreadshot");
+
+    // sniper
+        Class.rifle.UPGRADES_TIER_3.splice(1, 1, "blunderbuss");
+
+    // machine gun
+        Class.gunner.UPGRADES_TIER_3.push("oldRimfire");
+
+    // director
+        Class.overseer.UPGRADES_TIER_3.splice(6, 1, "oldCommander");
+        Class.cruiser.UPGRADES_TIER_3.pop();
+
+    // pounder
+        Class.artillery.UPGRADES_TIER_3.splice(0, 1, "mortar", "oldSpreadshot");
+
+    // trapper
+        Class.builder.UPGRADES_TIER_3.splice(3, 1, "oldBentBoomer");
+        Class.builder.UPGRADES_TIER_3.push("quadBuilder");
+
+Class.unavailable.UPGRADES_TIER_0.push("spreadshot", "crossbow", "commander", "boomer", "spike", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "whirlwind", "flail");
+
+} else if (enableScrapped == true && enableLegacy == true) {
+Class.basic.UPGRADES_TIER_1.push("flail", "whirlwind");
+    Class.basic.UPGRADES_TIER_3.push("master");
+    Class.smasher.UPGRADES_TIER_3.splice(1, 1, "weirdSpike");
+
+    // twin
+        Class.tripleShot.UPGRADES_TIER_3.splice(1, 1, "oldSpreadshot");
+
+    // sniper
+        Class.rifle.UPGRADES_TIER_3.splice(1, 1, "blunderbuss");
+
+    // machine gun
+        Class.gunner.UPGRADES_TIER_3.push("tetraGunner", "oldRimfire");
+
+    // flank guard
+        Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl");
+        Class.auto3.UPGRADES_TIER_3.push("whirl3");
+
+    // director
+        Class.overseer.UPGRADES_TIER_3.splice(6, 1, "oldCommander");
+        Class.cruiser.UPGRADES_TIER_3.pop();
+        Class.cruiser.UPGRADES_TIER_3.push("corvette");
+        Class.underseer.UPGRADES_TIER_3.push("prophet", "prodigy");
+
+    // pounder
+        Class.artillery.UPGRADES_TIER_3.splice(0, 1, "mortar", "oldSpreadshot");
+        Class.artillery.UPGRADES_TIER_3.push("munition", "mender");
+        Class.launcher.UPGRADES_TIER_3.push("vortex");
+
+    Class.trapper.UPGRADES_TIER_2.push("autoTrapper");
+        Class.builder.UPGRADES_TIER_3.splice(3, 1, "oldBentBoomer");
+        Class.builder.UPGRADES_TIER_3.push("quadBuilder");
+        Class.triTrapper.UPGRADES_TIER_3.push("prodigy");
+        Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard");
+        Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper"];
+
+Class.unavailable.UPGRADES_TIER_0.push("spreadshot", "crossbow", "commander", "boomer", "spike");
+
+} else {
+Class.weirdSpike.UPGRADE_LABEL = "Weird Spike";
+Class.oldBentBoomer.UPGRADE_LABEL = "Old Bent Boomer";
+Class.oldRimfire.UPGRADE_LABEL = "Old Rimfire";
+Class.oldSpreadshot.UPGRADE_LABEL = "Old Spreadshot";
+Class.oldCommander.UPGRADE_LABEL = "Old Commander";
+
+Class.unavailable.UPGRADES_TIER_0.push("weirdSpike", "oldBentBoomer", "quadBuilder", "master", "blunderbuss", "oldRimfire", "oldSpreadshot", "oldCommander", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "whirlwind", "flail");
+}
 
 };
