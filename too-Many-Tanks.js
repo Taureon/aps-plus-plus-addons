@@ -283,12 +283,34 @@ Class.doubleTwinSniper = {
                 TYPE: "bullet",},},
     ],
 };
+Class.twinDestroyer = {
+   PARENT: ["genericTank"],
+   LABEL: 'Twin Destroyer',
+   DANGER: 7,
+   GUNS: [ {
+         POSITION: [ 21, 14, 1, 0, 10, 0, 0.5, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pound, g.destroy]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 21, 14, 1, 0, -10, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pound, g.destroy]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 10, 6.8, 5, -10.5, 0, 0, 0, ],
+         }, 
+     ],
+};
+Class.triplePounder = makeMulti (Class.pounder, 3, 'Triple-Pounder')
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
-Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird", "bbGun")
-Class.machineGun.UPGRADES_TIER_2.push ("bbGun")
+Class.twinPounder.UPGRADES_TIER_2 = ["twinDestroyer", "triplePounder"]
+Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird")
+Class.sniper.UPGRADES_TIER_3.push ("bbGun")
+Class.machineGun.UPGRADES_TIER_3 = ["bbGun"]
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
 Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsman"]
 Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
