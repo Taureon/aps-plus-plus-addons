@@ -70,7 +70,7 @@
 // 54 : Forced spin             : Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting and moving.
 // 55 : Earthquake              : Every game tick, changes your position by a maximum value of 5 in a random direction..
 // 56 : Backpetal               : Inverts movement directions.
-// 57   Death Mark                Puts you on the minimap for everyone, multiplies the score received when someone kills you by 2, spawns a large pulse around you.
+// 57   Death Mark                Puts you on the minimap for everyone, spawns a large pulse around you.
 // 58   Antisocial Projectiles    Projectiles get slightly repelled by enemy entities.
 // 59   Time Bomb                 Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
@@ -811,6 +811,38 @@ effects = [
     splash: 'Muscle memory be damned.',
     duration: 20,
     statusEffect: new StatusEffect(20 * 30, { acceleration: -1 })
+},
+
+{
+    name: 'Death Mark',
+    splash: "EVERYOOOONE! I'M RIGHT HEEERE!!",
+    duration: 20,
+    run: body => {},
+    statusEffect: new StatusEffect(0 * 30)
+},
+
+{
+    name: 'Antisocial Projectiles',
+    splash: 'The things you shoot can also have anxiety.',
+    duration: 20,
+    run: body => {},
+    statusEffect: new StatusEffect(0 * 30)
+},
+
+{
+    name: 'Time Bomb',
+    splash: 'You will explode in a moment, now go kill people with that information.',
+    noEndNotification: true,
+    run: body => {
+        let o = new Entity(body, body.master);
+        o.define("plugin_effectRoller_bomb");
+        o.bindToMaster({ SIZE: 15, ANGLE: 45 }, body);
+        setSyncedTimeout(() => {
+            //todo: add kaboom
+            body.kill();
+        }, 15 * 30);
+        setSyncedTimeout(() => o.color = 16, 10 * 30);
+    }
 }];
 
 class io_plugin_effectRoller_lookAtEntity extends IO {
@@ -869,6 +901,20 @@ module.exports = ({ Class, Config, Events }) => {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.anni]),
                 TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
+                AUTOFIRE: true
+            }
+        }]
+    };
+
+    Class.plugin_effectRoller_bomb = {
+        PARENT: 'genericTank',
+        COLOR: 17,
+        GUNS: [{
+            POSITION: { WIDTH: 5, HEIGHT: 17 },
+            PROPERTIES: {
+                SHOOT_SETTINGS: { reload: 1, recoil: 0, shudder: 1, damage: 0, speed: 1.5, spray: 150, size: 0.5, range: 0.5 },
+                TYPE: ["bullet", { COLOR: 35, BORDERLESS: true }],
+                COLOR: 17,
                 AUTOFIRE: true
             }
         }]
