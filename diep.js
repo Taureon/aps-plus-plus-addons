@@ -4,6 +4,134 @@ const g = require('../gunvals.js');
 
 module.exports = ({ Class }) => {
 
+const enableRemoved = false;
+
+// PROJECTILES
+Class.diepMissile = {
+    PARENT: ["missile"],
+    GUNS: [
+        {
+            POSITION: [15, 7, 1, 0, 0, 145, 0],
+            PROPERTIES: {
+                AUTOFIRE: true,
+                COLOR: -1,
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.skim,
+                    g.doublereload,
+                    g.lowpower,
+                    g.muchmorerecoil,
+                    g.morespeed,
+                    g.morespeed,
+                ]),
+                TYPE: [
+                    "bullet",
+                    {
+                        PERSISTS_AFTER_DEATH: true,
+                    },
+                ],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            },
+        },
+        {
+            POSITION: [15, 7, 1, 0, 0, 215, 0],
+            PROPERTIES: {
+                AUTOFIRE: true,
+                COLOR: -1,
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.skim,
+                    g.doublereload,
+                    g.lowpower,
+                    g.muchmorerecoil,
+                    g.morespeed,
+                    g.morespeed,
+                ]),
+                TYPE: [
+                    "bullet",
+                    {
+                        PERSISTS_AFTER_DEATH: true,
+                    },
+                ],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            },
+        },
+    ],
+};
+Class.diepSpinMissile = {
+    PARENT: ["spinmissile"],
+    GUNS: [
+        {
+            POSITION: [15, 7, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                AUTOFIRE: !0,
+                COLOR: -1,
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.skim,
+                    g.doublereload,
+                    g.lowpower,
+                    g.morereload,
+                    g.morespeed,
+                ]),
+                TYPE: [
+                    "bullet",
+                    {
+                        PERSISTS_AFTER_DEATH: !0,
+                    },
+                ],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            },
+        },
+        {
+            POSITION: [15, 7, 1, 0, 0, 180, 0],
+            PROPERTIES: {
+                AUTOFIRE: !0,
+                COLOR: -1,
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.skim,
+                    g.doublereload,
+                    g.lowpower,
+                    g.morereload,
+                    g.morespeed,
+                ]),
+                TYPE: [
+                    "bullet",
+                    {
+                        PERSISTS_AFTER_DEATH: !0,
+                    },
+                ],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            },
+        },
+    ],
+};
+Class.diepRocketeerMissile = {
+    PARENT: ["rocketeerMissile"],
+    GUNS: [
+        {
+            POSITION: [15, 10, 1.65, 0, 0, 180, 2],
+            PROPERTIES: {
+                AUTOFIRE: true,
+                COLOR: -1,
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.missileTrail,
+                    g.rocketeerMissileTrail,
+                ]),
+                TYPE: [
+                    "bullet",
+                    {
+                        PERSISTS_AFTER_DEATH: true,
+                    },
+                ],
+                STAT_CALCULATOR: gunCalcNames.thruster,
+            },
+        },
+    ],
+};
+
 // BASIC TANK AND UPGRADES
 Class.diepTank = {
     PARENT: ["genericTank"],
@@ -492,7 +620,7 @@ Class.diepAssassin = {
     },
     GUNS: [
         {
-            POSITION: [27, 7.5, 1, 0, 0, 0, 0],
+            POSITION: [25.5, 7.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass]),
                 TYPE: "bullet",
@@ -537,6 +665,7 @@ Class.diepOverseer = {
         SPEED: 0.9 * base.SPEED,
         FOV: 1.1 * base.FOV,
     },
+    TOOLTIP: "Use your left mouse button to control the drones",
     MAX_CHILDREN: 8,
     GUNS: [
         {
@@ -595,14 +724,34 @@ Class.diepRanger = {
     },
     GUNS: [
         {
-            POSITION: [27, 8.5, 1, 0, 0, 0, 0],
+            POSITION: [25.5, 7.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass]),
                 TYPE: "bullet",
             },
         },
         {
-            POSITION: [5, 8.5, -1.6, 8, 0, 0, 0],
+            POSITION: [5, 7.5, -1.6, 8, 0, 0, 0],
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepStalker = {
+    PARENT: ["genericTank"],
+    LABEL: "Stalker",
+    DANGER: 7,
+    BODY: {
+        SPEED: 0.85 * base.SPEED,
+        FOV: 1.4 * base.FOV,
+    },
+    INVISIBLE: [0.08, 0.03],
+    GUNS: [
+        {
+            POSITION: [17.5, 7.5, -1.6, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass]),
+                TYPE: "bullet",
+            },
         },
     ],
     REROOT_UPGRADE_TREE: "diepTank",
@@ -803,6 +952,66 @@ Class.diepOverlord = {
     ],
     REROOT_UPGRADE_TREE: "diepTank",
 };
+Class.diepNecromancer = {
+    PARENT: ["genericTank"],
+    LABEL: "Necromancer",
+    DANGER: 7,
+    SHAPE: 4,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        SPEED: 0.9 * base.SPEED,
+        FOV: 1.1 * base.FOV,
+    },
+    MAX_CHILDREN: 14,
+    GUNS: [
+        {
+            POSITION: [6, 12, 1.2, 8, 0, 90, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, g.sunchip]),
+                TYPE: "sunchip",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: gunCalcNames.necro,
+            },
+        },
+        {
+            POSITION: [6, 12, 1.2, 8, 0, 270, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, g.sunchip]),
+                TYPE: "sunchip",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: gunCalcNames.necro,
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepManager = {
+    PARENT: ["genericTank"],
+    LABEL: "Manager",
+    DANGER: 7,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        SPEED: 0.85 * base.SPEED,
+        FOV: 1.1 * base.FOV,
+    },
+    INVISIBLE: [0.08, 0.03],
+    MAX_CHILDREN: 8,
+    GUNS: [
+        {
+            POSITION: [6, 12, 1.2, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone, g.over, g.doublereload]),
+                TYPE: "drone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: gunCalcNames.drone,
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
 Class.diepBattleship = {
     PARENT: ["genericTank"],
     LABEL: "Battleship",
@@ -847,6 +1056,75 @@ Class.diepBattleship = {
                 TYPE: "swarm",
                 STAT_CALCULATOR: gunCalcNames.swarm,
                 LABEL: "Guided",
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepFactory = {
+    PARENT: ["genericTank"],
+    LABEL: "Factory",
+    DANGER: 7,
+    SHAPE: 4,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        SPEED: 0.9 * base.SPEED,
+        FOV: 1.1 * base.FOV,
+    },
+    MAX_CHILDREN: 6,
+    GUNS: [
+        {
+            POSITION: [6, 12, 1.2, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.factory]),
+                TYPE: "minion",
+                STAT_CALCULATOR: gunCalcNames.drone,
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepMaster = {
+    PARENT: ["genericTank"],
+    LABEL: "Master",
+    DANGER: 7,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        SPEED: 0.9 * base.SPEED,
+        FOV: 1.1 * base.FOV,
+    },
+    MAX_CHILDREN: 6,
+    GUNS: [
+        {
+            POSITION: [6, 12, 1.2, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.factory]),
+                TYPE: [ "minion", { INDEPENDENT: true } ],
+                STAT_CALCULATOR: gunCalcNames.drone,
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+            },
+        },
+        {
+            POSITION: [6, 12, 1.2, 8, 0, 120, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.factory]),
+                TYPE: [ "minion", { INDEPENDENT: true } ],
+                STAT_CALCULATOR: gunCalcNames.drone,
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+            },
+        },
+        {
+            POSITION: [6, 12, 1.2, 8, 0, 240, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.factory]),
+                TYPE: [ "minion", { INDEPENDENT: true } ],
+                STAT_CALCULATOR: gunCalcNames.drone,
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
             },
         },
     ],
@@ -939,7 +1217,7 @@ Class.diepDestroyer = {
     DANGER: 6,
     GUNS: [
         {
-            POSITION: [21, 14, 1, 0, 0, 0, 0],
+            POSITION: [20, 14, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy]),
                 TYPE: "bullet",
@@ -984,12 +1262,207 @@ Class.diepGunner = {
     ],
     REROOT_UPGRADE_TREE: "diepTank",
 };
+Class.diepSprayer = {
+    PARENT: ["genericTank"],
+    LABEL: "Sprayer",
+    GUNS: [
+        {
+            POSITION: [23, 7, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.gunner,
+                    g.lowpower,
+                    g.mach,
+                    g.morerecoil,
+                ]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [12, 10, 1.4, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+};
 
 // GUNNER UPGRADES
 Class.diepAutoGunner = makeAuto(Class.diepGunner);
+Class.diepStreamliner = {
+    PARENT: ["genericTank"],
+    LABEL: "Streamliner",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.3,
+    },
+    GUNS: [
+        {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+            POSITION: [23, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.stream]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [21, 8, 1, 0, 0, 0, 0.2],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.stream]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [19, 8, 1, 0, 0, 0, 0.4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.stream]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [17, 8, 1, 0, 0, 0, 0.6],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.stream]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [15, 8, 1, 0, 0, 0, 0.8],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mini, g.stream]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepAutoTank = {
+    PARENT: ["genericTank"],
+    LABEL: "Auto Tank",
+    DANGER: 7,
+    TURRETS: [
+        {
+            POSITION: [11, 8, 0, 0, 190, 0],
+            TYPE: "autoTankGun",
+        },
+        {
+            POSITION: [11, 8, 0, 90, 190, 0],
+            TYPE: "autoTankGun",
+        },
+        {
+            POSITION: [11, 8, 0, 180, 190, 0],
+            TYPE: "autoTankGun",
+        },
+        {
+            POSITION: [11, 8, 0, 270, 190, 0],
+            TYPE: "autoTankGun",
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
 
 // DESTROYER UPGRADES
 Class.diepHybrid = makeHybrid(Class.diepDestroyer, "Hybrid");
+Class.diepAnnihilator = {
+    PARENT: ["genericTank"],
+    LABEL: "Annihilator",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [20, 20, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.destroy, g.anni]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepSkimmer = {
+    PARENT: ["genericTank"],
+    LABEL: "Skimmer",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.15 * base.FOV,
+    },
+    GUNS: [
+        {
+            POSITION: [10, 12, -0.5, 10, 0, 0, 0],
+        },
+        {
+            POSITION: [17, 15, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.pound,
+                    g.arty,
+                    g.arty,
+                    g.skim,
+                ]),
+                TYPE: "diepSpinMissile",
+                STAT_CALCULATOR: gunCalcNames.sustained,
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepRocketeer = {
+    PARENT: ["genericTank"],
+    LABEL: "Rocketeer",
+    BODY: {
+        FOV: 1.15 * base.FOV,
+    },
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [10, 12.5, -0.7, 10, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.pound,
+                    g.launcher,
+                    g.rocketeer,
+                ]),
+                TYPE: "diepRocketeerMissile",
+                STAT_CALCULATOR: gunCalcNames.sustained,
+            },
+        },
+        {
+            POSITION: [17, 18, 0.65, 0, 0, 0, 0],
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepGlider = {
+    PARENT: ["genericTank"],
+    LABEL: "Glider",
+    DANGER: 7,
+    BODY: {
+        FOV: 1.15 * base.FOV,
+    },
+    GUNS: [
+        {
+            POSITION: [10, 10, 0.6, 9, 0, 0, 0],
+        },
+        {
+            POSITION: [16, 20, 0.6, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    g.basic,
+                    g.pound,
+                    g.arty,
+                    g.arty,
+                    g.skim,
+                ]),
+                TYPE: "diepMissile",
+                STAT_CALCULATOR: gunCalcNames.sustained,
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
 
 // FLANK GUARD UPGRADES
 Class.diepTriAngle = {
@@ -1152,6 +1625,58 @@ Class.diepBooster = {
             },
         },
     ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepFighter = {
+    PARENT: ["genericTank"],
+    LABEL: "Fighter",
+    BODY: {
+        DENSITY: 0.6 * base.DENSITY,
+    },
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [19, 7.5, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront]),
+                TYPE: "bullet",
+                LABEL: "Front",
+            },
+        },
+        {
+            POSITION: [16, 8, 1, 0, -1, 90, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront]),
+                TYPE: "bullet",
+                LABEL: "Side",
+            },
+        },
+        {
+            POSITION: [16, 8, 1, 0, 1, -90, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront]),
+                TYPE: "bullet",
+                LABEL: "Side",
+            },
+        },
+        {
+            POSITION: [16, 8, 1, 0, 0, 150, 0.1],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                TYPE: "bullet",
+                LABEL: gunCalcNames.thruster,
+            },
+        },
+        {
+            POSITION: [16, 8, 1, 0, 0, 210, 0.1],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                TYPE: "bullet",
+                LABEL: gunCalcNames.thruster,
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
 };
 
 // QUAD TANK UPGRADES
@@ -1251,6 +1776,89 @@ Class.diepAuto5 = {
     REROOT_UPGRADE_TREE: "diepTank",
 };
 
+// SMASHER UPGRADES
+Class.diepLandmine = {
+    PARENT: ["genericTank"],
+    LABEL: "Landmine",
+    INVISIBLE: [0.12, 0.01],
+    DANGER: 7,
+    BODY: {
+        SPEED: 1.1 * base.SPEED,
+        FOV: 1.05 * base.FOV,
+        DENSITY: 2 * base.DENSITY,
+    },
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",
+        },
+        {
+            POSITION: [21.5, 0, 0, 30, 360, 0],
+            TYPE: "landmineBody",
+        },
+    ],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepAutoSmasher = makeAuto(Class.diepSmasher);
+Class.diepAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
+Class.diepSpike = {
+    PARENT: ["genericTank"],
+    LABEL: "Spike",
+    DANGER: 7,
+    BODY: {
+        SPEED: base.SPEED * 0.9,
+        DAMAGE: base.DAMAGE * 1.1,
+        FOV: base.FOV * 1.05,
+        DENSITY: base.DENSITY * 2,
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    TURRETS: [
+        {
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [17.5, 0, 0, 0, 360, 0],
+            TYPE: "spikeBody",
+        },
+        {
+            POSITION: [17.5, 0, 0, 90, 360, 0],
+            TYPE: "spikeBody",
+        },
+        {
+            POSITION: [17.5, 0, 0, 180, 360, 0],
+            TYPE: "spikeBody",
+        },
+        {
+            POSITION: [17.5, 0, 0, 270, 360, 0],
+            TYPE: "spikeBody",
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepMegaSmasher = {
+    PARENT: ["genericTank"],
+    LABEL: "Mega Smasher",
+    DANGER: 7,
+    BODY: {
+        SPEED: 1.05 * base.SPEED,
+        FOV: 1.1 * base.FOV,
+        DENSITY: 4 * base.DENSITY,
+    },
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    TURRETS: [
+        {
+            POSITION: [25, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+
 // UNCLASSED TANKS
 Class.diepBall = {
     PARENT: ["genericTank"],
@@ -1264,24 +1872,43 @@ Class.diepTanks = {
     COLOR: "#00B1DE",
     REROOT_UPGRADE_TREE: "diepTank",
 };
+Class.diepRemoved = {
+    PARENT: ["menu"],
+    LABEL: "Removed",
+    COLOR: "#00B1DE",
+    REROOT_UPGRADE_TREE: "diepTank",
+};
 Class.addons.UPGRADES_TIER_0.push("diepTanks");
-Class.diepTanks.UPGRADES_TIER_0 = ["diepTank", "diepXHunter", "diepOldPredator", "diepBall"];
+Class.diepTanks.UPGRADES_TIER_0 = ["diepTank", "diepRemoved", "diepBall"];
     Class.diepTank.UPGRADES_TIER_1 = ["diepTwin", "diepSniper", "diepMachineGun", "diepFlankGuard"];
         Class.diepTank.UPGRADES_TIER_2 = ["diepSmasher"];
+            Class.diepSmasher.UPGRADES_TIER_3 = ["diepLandmine", "diepAutoSmasher", "diepSpike"];
         Class.diepTwin.UPGRADES_TIER_2 = ["diepTripleShot", "diepQuadTank", "diepTwinFlank"];
             Class.diepTripleShot.UPGRADES_TIER_3 = ["diepTriplet", "diepPentaShot", "diepSpreadShot"];
             Class.diepTwinFlank.UPGRADES_TIER_3 = ["diepTripleTwin", "diepBattleship"];
         Class.diepSniper.UPGRADES_TIER_2 = ["diepAssassin", "diepHunter", "diepOverseer", "diepTrapper"];
-            Class.diepAssassin.UPGRADES_TIER_3 = ["diepRanger"];
-            Class.diepHunter.UPGRADES_TIER_3 = ["diepPredator"];
-            Class.diepOverseer.UPGRADES_TIER_3 = ["diepOverlord", "diepOvertrapper", "diepBattleship"];
+            Class.diepAssassin.UPGRADES_TIER_3 = ["diepRanger", "diepStalker"];
+            Class.diepHunter.UPGRADES_TIER_3 = ["diepPredator", "diepStreamliner"];
+            Class.diepOverseer.UPGRADES_TIER_3 = ["diepOverlord", "diepNecromancer", "diepManager", "diepOvertrapper", "diepBattleship", "diepFactory"];
             Class.diepTrapper.UPGRADES_TIER_3 = ["diepTriTrapper", "diepGunnerTrapper", "diepOvertrapper", "diepMegaTrapper", "diepAutoTrapper"];
         Class.diepMachineGun.UPGRADES_TIER_2 = ["diepDestroyer", "diepGunner"];
-            Class.diepGunner.UPGRADES_TIER_3 = ["diepAutoGunner", "diepGunnerTrapper"];
-            Class.diepDestroyer.UPGRADES_TIER_3 = ["diepHybrid"];
+            Class.diepMachineGun.UPGRADES_TIER_3 = ["diepSprayer"];
+            Class.diepGunner.UPGRADES_TIER_3 = ["diepAutoGunner", "diepGunnerTrapper", "diepStreamliner"];
+            Class.diepDestroyer.UPGRADES_TIER_3 = ["diepHybrid", "diepAnnihilator", "diepSkimmer", "diepRocketeer", "diepGlider"];
         Class.diepFlankGuard.UPGRADES_TIER_2 = ["diepTriAngle", "diepQuadTank", "diepTwinFlank", "diepAuto3"];
-            Class.diepTriAngle.UPGRADES_TIER_3 = ["diepBooster"];
+            Class.diepTriAngle.UPGRADES_TIER_3 = ["diepBooster", "diepFighter"];
             Class.diepQuadTank.UPGRADES_TIER_3 = ["diepOctoTank", "diepAuto5"];
             Class.diepAuto3.UPGRADES_TIER_3 = ["diepAuto5", "diepAutoGunner"];
+        Class.diepRemoved.UPGRADES_TIER_0 = ["diepXHunter", "diepOldPredator", "diepAutoTank", "diepMegaSmasher", "diepMaster"]
+
+if (enableRemoved == true) {
+    Class.diepTanks.UPGRADES_TIER_0.splice(1, 1)
+    Class.diepHunter.UPGRADES_TIER_3.splice(0, 1, "diepXHunter", "diepOldPredator")
+    Class.diepOverseer.UPGRADES_TIER_3.splice(5, 1, "diepMaster")
+    Class.diepGunner.UPGRADES_TIER_3.splice(0, 1, "diepAutoGunner", "diepAutoTank")
+    Class.diepFlankGuard.UPGRADES_TIER_2.pop()
+    Class.diepQuadTank.UPGRADES_TIER_3.splice(1, 1, "diepAutoTank")
+    Class.diepSmasher.UPGRADES_TIER_3.splice(0, 1, "diepMegaSmasher", "diepLandmine")
+} else return
 
 };
