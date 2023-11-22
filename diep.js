@@ -1899,7 +1899,7 @@ Class.diepTanks.UPGRADES_TIER_0 = ["diepTank", "diepRemoved", "diepBall"];
             Class.diepTriAngle.UPGRADES_TIER_3 = ["diepBooster", "diepFighter"];
             Class.diepQuadTank.UPGRADES_TIER_3 = ["diepOctoTank", "diepAuto5"];
             Class.diepAuto3.UPGRADES_TIER_3 = ["diepAuto5", "diepAutoGunner"];
-        Class.diepRemoved.UPGRADES_TIER_0 = ["diepXHunter", "diepOldPredator", "diepAutoTank", "diepMegaSmasher", "diepMaster"]
+        Class.diepRemoved.UPGRADES_TIER_0 = ["diepXHunter", "diepOldPredator", "diepMegaSmasher", "diepAutoTank", "diepMaster"]
 
 if (enableRemoved == true) {
     Class.diepTanks.UPGRADES_TIER_0.splice(1, 1)
