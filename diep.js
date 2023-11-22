@@ -656,6 +656,88 @@ Class.diepHunter = {
     ],
     REROOT_UPGRADE_TREE: "diepTank",
 };
+Class.diepOldHunter = {
+    PARENT: ["genericTank"],
+    DANGER: 6,
+    LABEL: "Hunter",
+    GUNS: [
+        {
+            POSITION: [4, 3, 1, 11, -3, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [4, 3, 1, 11, 3, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [4, 4, 1, 13, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "casing",
+            },
+        },
+        {
+            POSITION: [1, 4, 1, 12, -1, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "casing",
+            },
+        },
+        {
+            POSITION: [1, 4, 1, 11, 1, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "casing",
+            },
+        },
+        {
+            POSITION: [1, 3, 1, 13, -1, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [1, 3, 1, 13, 1, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [1, 2, 1, 13, 2, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "casing",
+            },
+        },
+        {
+            POSITION: [1, 2, 1, 13, -2, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                TYPE: "casing",
+            },
+        },
+        {
+            /*** LENGTH    WIDTH     ASPECT        X             Y         ANGLE     DELAY */
+            POSITION: [24, 8, 1, 0, 0, 0, 0],
+        },
+        {
+            POSITION: [21, 12, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, g.fake]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
 Class.diepOverseer = {
     PARENT: ["genericTank"],
     LABEL: "Overseer",
@@ -748,6 +830,25 @@ Class.diepStalker = {
     GUNS: [
         {
             POSITION: [17.5, 7.5, -1.6, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+    REROOT_UPGRADE_TREE: "diepTank",
+};
+Class.diepOldRanger = {
+    PARENT: ["genericTank"],
+    LABEL: "Ranger",
+    DANGER: 7,
+    BODY: {
+        SPEED: 0.8 * base.SPEED,
+        FOV: 1.5 * base.FOV,
+    },
+    GUNS: [
+        {
+            POSITION: [25.5, 7.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass]),
                 TYPE: "bullet",
@@ -1838,6 +1939,27 @@ Class.diepSpike = {
     ],
     REROOT_UPGRADE_TREE: "diepTank",
 };
+Class.diepOldLandmine = {
+    PARENT: ["genericTank"],
+    LABEL: "Landmine",
+    INVISIBLE: [0.12, 0.01],
+    DANGER: 7,
+    BODY: {
+        SPEED: 1.1 * base.SPEED,
+        FOV: 1.05 * base.FOV,
+        DENSITY: 2 * base.DENSITY,
+    },
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody",
+        },
+    ],
+    IS_SMASHER: true,
+    SKILL_CAP: [smshskl, 0, 0, 0, 0, smshskl, smshskl, smshskl, smshskl, smshskl],
+    STAT_NAMES: statnames.smasher,
+    REROOT_UPGRADE_TREE: "diepTank",
+};
 Class.diepMegaSmasher = {
     PARENT: ["genericTank"],
     LABEL: "Mega Smasher",
@@ -1874,7 +1996,7 @@ Class.diepTanks = {
 };
 Class.diepRemoved = {
     PARENT: ["menu"],
-    LABEL: "Removed",
+    LABEL: "Removed/Old",
     COLOR: "#00B1DE",
     REROOT_UPGRADE_TREE: "diepTank",
 };
@@ -1899,16 +2021,17 @@ Class.diepTanks.UPGRADES_TIER_0 = ["diepTank", "diepRemoved", "diepBall"];
             Class.diepTriAngle.UPGRADES_TIER_3 = ["diepBooster", "diepFighter"];
             Class.diepQuadTank.UPGRADES_TIER_3 = ["diepOctoTank", "diepAuto5"];
             Class.diepAuto3.UPGRADES_TIER_3 = ["diepAuto5", "diepAutoGunner"];
-        Class.diepRemoved.UPGRADES_TIER_0 = ["diepXHunter", "diepOldPredator", "diepMegaSmasher", "diepAutoTank", "diepMaster"]
+        Class.diepRemoved.UPGRADES_TIER_0 = ["diepOldRanger", "diepOldHunter", "diepMegaSmasher", "diepOldLandmine", "diepAutoTank", "diepXHunter", "diepOldPredator", "diepMaster"]
 
 if (enableRemoved == true) {
     Class.diepTanks.UPGRADES_TIER_0.splice(1, 1)
+    Class.diepAssassin.UPGRADES_TIER_3.splice(0, 1, "diepOldRanger")
     Class.diepHunter.UPGRADES_TIER_3.splice(0, 1, "diepXHunter", "diepOldPredator")
     Class.diepOverseer.UPGRADES_TIER_3.splice(5, 1, "diepMaster")
     Class.diepGunner.UPGRADES_TIER_3.splice(0, 1, "diepAutoGunner", "diepAutoTank")
     Class.diepFlankGuard.UPGRADES_TIER_2.pop()
     Class.diepQuadTank.UPGRADES_TIER_3.splice(1, 1, "diepAutoTank")
-    Class.diepSmasher.UPGRADES_TIER_3.splice(0, 1, "diepMegaSmasher", "diepLandmine")
+    Class.diepSmasher.UPGRADES_TIER_3.splice(0, 1, "diepMegaSmasher", "diepOldLandmine")
 } else return
 
 };
