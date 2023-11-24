@@ -257,7 +257,11 @@ Class.twinRifle = {
          }, 
      ],
 };
-Class.twinBushwhacker = makeGuard(Class.twinSniper, "BushBushwhacker");
+Class.twinBushwhacker = makeGuard(Class.twinSniper, "Bushbushwhacker");
+Class.assassinBushwhacker = makeGuard(Class.assassin, "Bushthrower");
+Class.hunterBushwhacker = makeGuard(Class.hunter, "Bushthwaker");
+Class.minigunBushwhacker = makeGuard(Class.minigun, "Minibusher");
+Class.rifleBushwhacker = makeGuard(Class.rifle, "Bushrunner");
 Class.tetraSniper = makeMulti (Class.sniper, 4, 'Tetra-Sniper')
 Class.doubleTwinSniper = {
     PARENT: ["genericTank"],
@@ -317,6 +321,6 @@ Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
 Class.hunter.UPGRADES_TIER_3.push ("twinHunter")
 Class.minigun.UPGRADES_TIER_3.push ("twinMinigun")
 Class.rifle.UPGRADES_TIER_3.push ("twinRifle")
-Class.bushwhacker.UPGRADES_TIER_3 = ["twinBushwhacker"]
+Class.bushwhacker.UPGRADES_TIER_3 = ["assassinBushwhacker", "hunterBushwhacker", "minigunBushwhacker", "rifleBushwhacker", "twinBushwhacker"]
 Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin", "twinHunter", "twinMinigun", "twinRifle", "twinBushwhacker", "tetraSniper", "doubleTwinSniper"]
 };
