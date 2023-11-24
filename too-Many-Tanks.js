@@ -310,6 +310,7 @@ Class.triplePounder = makeMulti (Class.pounder, 3, 'Triple-Pounder')
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper")
+Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
 Class.twinPounder.UPGRADES_TIER_2 = ["twinDestroyer", "triplePounder"]
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird")
@@ -317,10 +318,10 @@ Class.sniper.UPGRADES_TIER_3.push ("bbGun")
 Class.machineGun.UPGRADES_TIER_3 = ["bbGun"]
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
 Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsman"]
-Class.assassin.UPGRADES_TIER_3.push ("twinAssassin")
-Class.hunter.UPGRADES_TIER_3.push ("twinHunter")
+Class.assassin.UPGRADES_TIER_3.push ("twinAssassin", "assassinBushwhacker")
+Class.hunter.UPGRADES_TIER_3.push ("twinHunter", "hunterBushwhacker",)
 Class.minigun.UPGRADES_TIER_3.push ("twinMinigun")
-Class.rifle.UPGRADES_TIER_3.push ("twinRifle")
+Class.rifle.UPGRADES_TIER_3.push ("twinRifle", "rifleBushwhacker")
 Class.bushwhacker.UPGRADES_TIER_3 = ["assassinBushwhacker", "hunterBushwhacker", "minigunBushwhacker", "rifleBushwhacker", "twinBushwhacker"]
 Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin", "twinHunter", "twinMinigun", "twinRifle", "twinBushwhacker", "tetraSniper", "doubleTwinSniper"]
 };
