@@ -320,10 +320,24 @@ Class.twinDestroyer = {
      ],
 };
 Class.triplePounder = makeMulti (Class.pounder, 3, 'Triple-Pounder')
-
+Class.laserGun = {
+   PARENT: [exports.genericTank],
+   LABEL: 'Laser Gun',
+   GUNS: [ {
+         POSITION: [ 20, 10, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic]),
+            TYPE: "laser",
+         }, }, {
+         POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
+	 COLOR: "red",
+         }, 
+     ],
+};
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper")
+Class.basic.UPGRADES_TIER_1.push ("laserGun")
 Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
 Class.twinPounder.UPGRADES_TIER_2 = ["twinDestroyer", "triplePounder"]
