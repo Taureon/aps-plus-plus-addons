@@ -51,6 +51,7 @@ module.exports = ({ Class }) => {
 Class.laser = {
 PARENT: ["bullet"],
 SHAPE: "M -1 0 L -1 -1 L 1 -1 L 1 0",
+COLOR: "red",
 BODY: {
         PENETRATION: 999,
         SPEED: 6.5,
@@ -60,6 +61,7 @@ BODY: {
         DAMAGE: 3,
         PUSHABILITY: 0,
     },
+ALPHA: 0.6
 };
 //tanks 
 Class.twinPounder = {
@@ -327,7 +329,7 @@ Class.laserGun = {
          POSITION: [ 20, 10, 1, 0, 0, 0, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic]),
-            TYPE: "laser",
+            TYPE: ["laser", COLOR: "red"],
          }, }, {
          POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
 	 COLOR: "red",
