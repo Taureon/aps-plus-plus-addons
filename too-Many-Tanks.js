@@ -50,7 +50,7 @@ module.exports = ({ Class }) => {
 //bullets
 Class.laser = {
 PARENT: ["bullet"],
-SHAPE: "M 1 0 A 1 1 0 0 0 -1 0 M -1 0 A 1 1 0 0 0 1 0",
+SHAPE: "M -1 0 L -1 -1 L 1 -1 L 1 0",
 BODY: {
         PENETRATION: 999,
         SPEED: 6.5,
