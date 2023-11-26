@@ -52,9 +52,10 @@ Class.laser = {
 PARENT: ["bullet"],
 SHAPE: "M -1 0 L -1 -1 L 1 -1 L 1 0",
 COLOR: "red",
+BORDERLESS: true,
 BODY: {
         PENETRATION: 999,
-        SPEED: 6.5,
+        SPEED: 10,
         RANGE: 135,
         DENSITY: 999,
         HEALTH: 0.18,
@@ -323,16 +324,16 @@ Class.twinDestroyer = {
 };
 Class.triplePounder = makeMulti (Class.pounder, 3, 'Triple-Pounder')
 Class.laserGun = {
-   PARENT: [exports.genericTank],
+   PARENT: ["genericTank"],
    LABEL: 'Laser Gun',
    GUNS: [ {
          POSITION: [ 20, 10, 1, 0, 0, 0, 0, ],
          PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.basic]),
-            TYPE: ["laser", COLOR: "red"],
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach]),
+            TYPE: ['laser', { COLOR: 'red' }],
          }, }, {
          POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
-	 COLOR: "red",
+	      COLOR: "red",
          }, 
      ],
 };
