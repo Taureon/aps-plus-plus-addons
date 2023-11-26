@@ -47,8 +47,21 @@ module.exports = ({ Class }) => {
 
     // Comment out the line below to enable this addon, uncomment it to disable this addon (WARNING: Increases load time by approximately 1.5x).
 	//return console.log('--- Too ManyTanks addon [too-Many-Tanks.js] is disabled. See lines 48-49 to enable it. ---');
-
-   
+//bullets
+Class.laser = {
+PARENT: ["bullet"],
+SHAPE: "M 1 0 A 1 1 0 0 0 -1 0 M -1 0 A 1 1 0 0 0 1 0",
+BODY: {
+        PENETRATION: 999,
+        SPEED: 6.5,
+        RANGE: 135,
+        DENSITY: 999,
+        HEALTH: 0.18,
+        DAMAGE: 3,
+        PUSHABILITY: 0,
+    },
+};
+//tanks 
 Class.twinPounder = {
    PARENT: ["genericTank"],
    LABEL: 'Twin Pounder',
@@ -307,6 +320,7 @@ Class.twinDestroyer = {
      ],
 };
 Class.triplePounder = makeMulti (Class.pounder, 3, 'Triple-Pounder')
+
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper")
