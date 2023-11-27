@@ -50,7 +50,7 @@ module.exports = ({ Class }) => {
 //bullets
 Class.laser = {
 PARENT: ["bullet"],
-SHAPE: "M -1 0 L -1 -1 L 1 -1 L 1 0",
+SHAPE: "M -1 0.5 L -1 -0.5 L 1 -0.5 L 1 0.5",
 COLOR: "red",
 BORDERLESS: true,
 BODY: {
@@ -330,17 +330,32 @@ Class.laserGun = {
          POSITION: [ 20, 10, 1, 0, 0, 0, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.mach]),
-            TYPE: ['laser', { COLOR: 'red' }],
+            TYPE: "laser",
          }, }, {
          POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
-	      COLOR: "red",
+	       COLOR: "red",
+         }, 
+     ],
+};
+Class.machineLaserGun = {
+   PARENT: ["genericTank"],
+   LABEL: 'Machine Laser Gun',
+   GUNS: [ {
+         POSITION: [ 20, 10, 1.5, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.mach]),
+            TYPE: "laser",
+         }, }, {
+         POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
+	       COLOR: "red",
          }, 
      ],
 };
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper")
-Class.basic.UPGRADES_TIER_1.push ("laserGun")
+Class.basic.UPGRADES_TIER_2.push ("laserGun")
+Class.laserGun.UPGRADES_TIER_3 = ["machineLaserGun"]  
 Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
 Class.twinPounder.UPGRADES_TIER_2 = ["twinDestroyer", "triplePounder"]
