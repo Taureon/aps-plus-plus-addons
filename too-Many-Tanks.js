@@ -58,7 +58,7 @@ BODY: {
         RANGE: 135,
         DENSITY: 999,
         HEALTH: 0.18,
-        DAMAGE: 3,
+        DAMAGE: 8,
         PUSHABILITY: 0,
     },
 ALPHA: 0.7
@@ -332,7 +332,44 @@ Class.laserGun = {
             TYPE: "laser",
          }, }, {
          POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
-         PROPERTIES: {COLOR: "red", ALPHA: 0.7, BORDERLESS: true},
+         PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
+         }, 
+     ],
+};
+Class.twinLaserGun = {
+   PARENT: ["genericTank"],
+   LABEL: 'Double Laser Gun',
+   GUNS: [ {
+         POSITION: [ 20, 8, 1, 0, -6, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.twin]),
+            TYPE: "laser",
+         }, }, {
+         POSITION: [ 5, 5, 1, 13, -6, 0, 0, ],
+         PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
+         }, {
+         POSITION: [ 20, 8, 1, 0, 6, 0, 0.5, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.twin]),
+            TYPE: "laser",
+         }, }, {
+         POSITION: [ 5, 5, 1, 13, 6, 0, 0, ],
+         PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
+         }, 
+     ],
+};
+Class.sniperLaserGun = {
+   PARENT: ["genericTank"],
+   LABEL: 'Accurater',
+   BODY: {FOV: base.FOV * 1.5},
+   GUNS: [ {
+         POSITION: [ 26, 10.5, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sniper]),
+            TYPE: "laser",
+         }, }, {
+         POSITION: [ 5, 5, 1, 15, 0, 0, 0, ],
+         PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
          }, 
      ],
 };
@@ -346,21 +383,39 @@ Class.machineLaserGun = {
             TYPE: "laser",
          }, }, {
          POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
-         PROPERTIES: {COLOR: "red", ALPHA: 0.7, BORDERLESS: true},
+         PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
+         }, 
+     ],
+};
+Class.flankLaserGun = makeMulti (Class.laserGun, 3, 'Tri Laser Gun')
+
+Class.pounderLaserGun = {
+   PARENT: ["genericTank"],
+   LABEL: 'Heavy Laser Gun',
+   GUNS: [ {
+         POSITION: [ 22.5, 13, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.pound]),
+            TYPE: "laser",
+         }, }, {
+         POSITION: [ 7, 7, 1, 13, 0, 0, 0, ],
+         PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
          }, 
      ],
 };
 //upgrades
 
-Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper")
+Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper", "twinLaserGun")
 Class.basic.UPGRADES_TIER_2.push ("laserGun")
-Class.laserGun.UPGRADES_TIER_3 = ["machineLaserGun"]  
+Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun"]  
+Class.flankGuard.UPGRADES_TIER_3.push ("flankLaserGun") 
 Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
+Class.pounder.UPGRADES_TIER_3.push ("pounderLaserGun")
 Class.twinPounder.UPGRADES_TIER_2 = ["twinDestroyer", "triplePounder"]
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird")
-Class.sniper.UPGRADES_TIER_3.push ("bbGun")
-Class.machineGun.UPGRADES_TIER_3 = ["bbGun"]
+Class.sniper.UPGRADES_TIER_3.push ("bbGun", "sniperLaserGun")
+Class.machineGun.UPGRADES_TIER_3 = ["bbGun", "machineLaserGun"]
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
 Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsman"]
 Class.assassin.UPGRADES_TIER_3.push ("twinAssassin", "assassinBushwhacker")
