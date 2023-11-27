@@ -51,18 +51,17 @@ module.exports = ({ Class }) => {
 Class.laser = {
 PARENT: ["bullet"],
 SHAPE: "M -1 0.5 L -1 -0.5 L 1 -0.5 L 1 0.5",
-COLOR: "red",
 BORDERLESS: true,
 BODY: {
         PENETRATION: 999,
-        SPEED: 10,
+        SPEED: 15,
         RANGE: 135,
         DENSITY: 999,
         HEALTH: 0.18,
         DAMAGE: 3,
         PUSHABILITY: 0,
     },
-ALPHA: 0.6
+ALPHA: 0.7
 };
 //tanks 
 Class.twinPounder = {
@@ -333,7 +332,7 @@ Class.laserGun = {
             TYPE: "laser",
          }, }, {
          POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
-	       COLOR: "red",
+         PROPERTIES: {COLOR: "red", ALPHA: 0.7, BORDERLESS: true},
          }, 
      ],
 };
@@ -347,7 +346,7 @@ Class.machineLaserGun = {
             TYPE: "laser",
          }, }, {
          POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
-	       COLOR: "red",
+         PROPERTIES: {COLOR: "red", ALPHA: 0.7, BORDERLESS: true},
          }, 
      ],
 };
