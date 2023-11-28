@@ -864,6 +864,32 @@ Class.undertow = {
         }
     ]
 }
+Class.repeater = {
+    PARENT: "genericTank",
+    LABEL: "Repeater",
+    TOOLTIP: "[DEV NOTE] The Repeater is not finished yet. This tank is currently just a mockup.",
+    GUNS: [
+        {
+            POSITION: [20, 10, 0.8, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [4.625, 9.5, 2, 0.375, -8, 91.5, 0]
+        },
+        {
+            POSITION: [4.625, 9.5, 2, 0.375, 8, -91.5, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, 0, -4.75, 50, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, 0, 4.75, -50, 0]
+        }
+    ]
+}
 
 // WHIRLWIND!!!
 Class.whirlwindDeco = makeDeco(6);
@@ -1675,7 +1701,7 @@ Class.basic.UPGRADES_TIER_1.push("flail", "whirlwind");
         Class.triTrapper.UPGRADES_TIER_3.push("prodigy");
         Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard");
 
-    Class.desmos.UPGRADES_TIER_2.push("undertow");
+    Class.desmos.UPGRADES_TIER_2.push("undertow", "repeater");
 
 Class.unavailable.UPGRADES_TIER_0.push("weirdSpike", "oldBentBoomer", "quadBuilder", "master", "blunderbuss", "oldRimfire", "oldSpreadshot", "oldCommander");
 
@@ -1703,7 +1729,7 @@ Class.basic.UPGRADES_TIER_3.push("master");
         Class.builder.UPGRADES_TIER_3.splice(3, 1, "oldBentBoomer");
         Class.builder.UPGRADES_TIER_3.push("quadBuilder");
 
-Class.unavailable.UPGRADES_TIER_0.push("spreadshot", "crossbow", "commander", "boomer", "spike", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "whirlwind", "flail", "undertow");
+Class.unavailable.UPGRADES_TIER_0.push("spreadshot", "crossbow", "commander", "boomer", "spike", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "whirlwind", "flail", "undertow", "repeater");
 
 } else if (enableScrapped == true && enableLegacy == true) {
 Class.basic.UPGRADES_TIER_1.push("flail", "whirlwind");
@@ -1741,7 +1767,7 @@ Class.basic.UPGRADES_TIER_1.push("flail", "whirlwind");
         Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard");
         Class.autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper"];
 
-    Class.desmos.UPGRADES_TIER_2.push("undertow");
+    Class.desmos.UPGRADES_TIER_2.push("undertow", "repeater");
 
 Class.unavailable.UPGRADES_TIER_0.push("spreadshot", "crossbow", "commander", "boomer", "spike");
 
@@ -1752,7 +1778,7 @@ Class.oldRimfire.UPGRADE_LABEL = "Old Rimfire";
 Class.oldSpreadshot.UPGRADE_LABEL = "Old Spreadshot";
 Class.oldCommander.UPGRADE_LABEL = "Old Commander";
 
-Class.unavailable.UPGRADES_TIER_0.push("weirdSpike", "oldBentBoomer", "quadBuilder", "master", "blunderbuss", "oldRimfire", "oldSpreadshot", "oldCommander", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "whirlwind", "flail", "undertow");
+Class.unavailable.UPGRADES_TIER_0.push("weirdSpike", "oldBentBoomer", "quadBuilder", "master", "blunderbuss", "oldRimfire", "oldSpreadshot", "oldCommander", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "whirlwind", "flail", "undertow", "repeater");
 }
 
 };
