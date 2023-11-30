@@ -404,11 +404,29 @@ Class.pounderLaserGun = {
      ],
 };
 Class.autoLaserGun = makeAuto (Class.laserGun, 'Auto Laser Gun')
+Class.zapper = {
+   PARENT: ["genericTank"],
+   LABEL: 'Zapper',
+   GUNS: [ {
+         POSITION: [ 20, 10, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.single]),
+            TYPE: "bullet",
+         }, }, {
+         POSITION: [ 8, 8, 1, 10, 0, 0, 0, ],
+	 PROPERTIES: {Color: -1,ALPHA: 0.7, BORDERLESS: true},
+         }, {
+         POSITION: [ 5, 5, 1, 12, 0, 0, 0, ],
+	 PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
+         }, 
+     ],
+};
+
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper", "twinLaserGun")
 Class.basic.UPGRADES_TIER_2.push ("laserGun")
-Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun", "autoLaserGun"]  
+Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun", "zapper", "autoLaserGun"]  
 Class.flankGuard.UPGRADES_TIER_3.push ("flankLaserGun") 
 Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
