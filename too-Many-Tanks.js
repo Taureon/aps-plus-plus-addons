@@ -403,11 +403,12 @@ Class.pounderLaserGun = {
          }, 
      ],
 };
+Class.autoLaserGun = makeAuto (Class.laserGun, 'Auto Laser Gun')
 //upgrades
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper", "twinLaserGun")
 Class.basic.UPGRADES_TIER_2.push ("laserGun")
-Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun"]  
+Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun", "autoLaserGun"]  
 Class.flankGuard.UPGRADES_TIER_3.push ("flankLaserGun") 
 Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
