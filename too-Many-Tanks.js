@@ -404,6 +404,12 @@ Class.pounderLaserGun = {
      ],
 };
 Class.autoLaserGun = makeAuto (Class.laserGun, 'Auto Laser Gun')
+Class.zapperTurret = {
+   PARENT: ["genericEntity"],
+   LABEL: '',
+   TYPE: 'tank',
+   SHAPE: 6,
+};
 Class.zapper = {
    PARENT: ["genericTank"],
    LABEL: 'Zapper',
@@ -411,7 +417,7 @@ Class.zapper = {
          POSITION: [ 20, 10, 1, 0, 0, 0, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.single]),
-            TYPE: "bullet",
+            TYPE: "laser",
          }, }, {
          POSITION: [ 8, 8, 1, 10, 0, 0, 0, ],
 	 PROPERTIES: {Color: -1,ALPHA: 0.7, BORDERLESS: true},
@@ -420,6 +426,10 @@ Class.zapper = {
 	 PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
          }, 
      ],
+  TURRETS: [{
+            /** SIZE     X       Y     ANGLE    ARC */
+            POSITION: [13, 0, 0, 0, 360, 1],
+            TYPE: "zapperTurret",},],
 };
 
 //upgrades
