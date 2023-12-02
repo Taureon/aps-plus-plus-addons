@@ -431,6 +431,63 @@ Class.zapper = {
             POSITION: [13, 0, 0, 0, 360, 1],
             TYPE: "zapperTurret",},],
 };
+Class.blaster = {
+   PARENT: ["genericTank"],
+   LABEL: 'Blaster',
+   BODY: { SPEED: base.SPEED * 1.1,FOV: base.FOV * 0.9,},
+   GUNS: [ {
+         POSITION: [ 20, 12, 1.5, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.pound]),
+            TYPE: "bullet",
+         }, }, ],
+};
+Class.blazer = {
+   PARENT: ["genericTank"],
+   LABEL: 'Blazer',
+   BODY: {
+      SPEED: base.SPEED * 0.8,
+      FOV: base.FOV * 1.2,
+   },
+   GUNS: [ {
+         POSITION: [ 21, 14, 1.3, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.pound, g.destroy]),
+            TYPE: "bullet",
+         }, }, 
+     ],
+};
+Class.bloomer = {
+   PARENT: ["genericTank"],
+   LABEL: 'Bloomer',
+   BODY: {
+      SPEED: base.SPEED * 0.8,
+      HEALTH: base.HEALTH * 0.95,
+      FOV: base.FOV * 1.125,
+   },
+   GUNS: [ {
+         POSITION: [ 20, 12, 1.8, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.pound, g.muchmorerecoil, g.morereload]),
+            TYPE: "bullet",
+         }, }, 
+     ],
+};
+Class.blocker = {
+   PARENT: ["genericTank"],
+   LABEL: 'Blocker',
+   GUNS: [ {
+         POSITION: [ 20, 12, 1.4, 0, 0, 0, 0, ],
+         }, {
+         POSITION: [ 5, 18, 1.4, 20, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.pound, g.block]),
+            TYPE: "block",
+         }, }, {
+         POSITION: [ 5, 8, 1, 20, 0, 0, 0, ],
+         }, 
+     ],
+};
 
 //upgrades
 
@@ -439,12 +496,13 @@ Class.basic.UPGRADES_TIER_2.push ("laserGun")
 Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun", "zapper", "autoLaserGun"]  
 Class.flankGuard.UPGRADES_TIER_3.push ("flankLaserGun") 
 Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
-Class.pounder.UPGRADES_TIER_2.push ("twinPounder")
+Class.pounder.UPGRADES_TIER_2.push ("twinPounder", "blaster")
 Class.pounder.UPGRADES_TIER_3.push ("pounderLaserGun")
 Class.twinPounder.UPGRADES_TIER_2 = ["twinDestroyer", "triplePounder"]
 Class.sniper.UPGRADES_TIER_2.push ("twinSniper", "sniperHybrid", "sniperBird")
 Class.sniper.UPGRADES_TIER_3.push ("bbGun", "sniperLaserGun")
 Class.machineGun.UPGRADES_TIER_3 = ["bbGun", "machineLaserGun"]
+Class.machineGun.UPGRADES_TIER_2.push ("blaster")
 Class.sniperBird.UPGRADES_TIER_3 = ["falcon", "hunterBird", "vulture", "rifleBird"];
 Class.sniperHybrid.UPGRADES_TIER_3 = ["assassinHybrid", "poacher", "cropDuster", "armsman"]
 Class.assassin.UPGRADES_TIER_3.push ("twinAssassin", "assassinBushwhacker")
@@ -453,4 +511,5 @@ Class.minigun.UPGRADES_TIER_3.push ("twinMinigun")
 Class.rifle.UPGRADES_TIER_3.push ("twinRifle", "rifleBushwhacker")
 Class.bushwhacker.UPGRADES_TIER_3 = ["assassinBushwhacker", "hunterBushwhacker", "minigunBushwhacker", "rifleBushwhacker", "twinBushwhacker"]
 Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin", "twinHunter", "twinMinigun", "twinRifle", "twinBushwhacker", "tetraSniper", "doubleTwinSniper"]
+Class.blaster.UPGRADES_TIER_3 = ["blazer", "bloomer", "blocker"]
 };
