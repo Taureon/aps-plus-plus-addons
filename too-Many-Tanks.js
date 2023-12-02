@@ -511,7 +511,7 @@ Class.blocker = {
 
 Class.twin.UPGRADES_TIER_2.push ("twinPounder", "pacifierNormalTank", "bentTwin", "twinSniper", "twinLaserGun")
 Class.basic.UPGRADES_TIER_2.push ("laserGun")
-Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun", "zapper", "autoLaserGun"]  
+Class.laserGun.UPGRADES_TIER_3 = ["twinLaserGun", "machineLaserGun", "sniperLaserGun", "flankLaserGun", "pounderLaserGun", "zapper", "autoLaserGun", "hologram"]  
 Class.flankGuard.UPGRADES_TIER_3.push ("flankLaserGun") 
 Class.minigun.UPGRADES_TIER_3.push ("minigunBushwhacker")
 Class.pounder.UPGRADES_TIER_2.push ("twinPounder", "blaster")
