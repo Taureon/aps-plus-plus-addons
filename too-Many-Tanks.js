@@ -431,6 +431,24 @@ Class.zapper = {
             POSITION: [13, 0, 0, 0, 360, 1],
             TYPE: "zapperTurret",},],
 };
+Class.hologram = {
+   PARENT: ["genericTank"],
+   LABEL: 'Hologram',
+   INVISIBLE: [0.06, 0.01],
+   TOOLTIP: "Stay still to turn invisible.",
+   SHAPE: 6,
+   GUNS: [ {
+         POSITION: [ 20, 10, 1, 0, 0, 0, 0, ],
+         PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach]),
+            TYPE: "laser",
+         }, }, {
+         POSITION: [ 5, 5, 1, 13, 0, 0, 0, ],
+         PROPERTIES: {COLOR: -1, ALPHA: 0.7, BORDERLESS: false},
+         }, 
+     ],
+};
+
 Class.blaster = {
    PARENT: ["genericTank"],
    LABEL: 'Blaster',
