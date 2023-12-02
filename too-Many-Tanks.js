@@ -482,7 +482,7 @@ Class.blocker = {
          POSITION: [ 5, 18, 1.4, 20, 0, 0, 0, ],
          PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.pound, g.block]),
-            TYPE: "block",
+            TYPE: "setTrap",
          }, }, {
          POSITION: [ 5, 8, 1, 20, 0, 0, 0, ],
          }, 
