@@ -871,8 +871,9 @@ effects = [
                 o1.define({ BODY }, false);
                 o2.define({ BODY }, false);
                 o1.velocity.x = -sizeSqrd * Math.cos(angle1) + point1.x;
-                o2.velocity.x = -sizeSqrd * Math.cos(angle1) + point2.x;
-                o1.velocity.y = sizeSqrd * Math.sin(angle1) + point1.y;
+                o1.velocity.y = -sizeSqrd * Math.sin(angle1) + point1.y;
+                sizeSqrd *= Math.log(sizeSqrd);
+                o2.velocity.x = sizeSqrd * Math.cos(angle1) + point2.x;
                 o2.velocity.y = sizeSqrd * Math.sin(angle1) + point2.y;
                 o1.team = body.team;
                 o2.team = body.team;
