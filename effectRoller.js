@@ -838,7 +838,46 @@ effects = [
         o.define("plugin_effectRoller_bomb");
         o.bindToMaster({ SIZE: 15, ANGLE: 45 }, body);
         setSyncedTimeout(() => {
-            //todo: add kaboom
+            if (body.isDead()) return;
+
+            let sizeSqrd = 16 + Math.ceil(Math.sqrt(o.size)),
+                sizeSqrdPI = sizeSqrd * Math.PI,
+                angleShift = 32400 / sizeSqrdPI,
+                BODY = {
+                    HEALTH: Math.sqrt(o.health.max),
+                    DAMAGE: Math.sqrt(o.damage),
+                    RANGE: sizeSqrd
+                }; // ((360 / sizeSqrt) / (180 / Math.PI)) / 2
+            for (let i = sizeSqrd; i--;) {
+                let angle1 = i * 180 / sizeSqrdPI,
+                    angle2 = i * 180 / sizeSqrdPI + angleShift,
+                o1 = new Entity({
+                    body.x + o.size * Math.cos(angle1),
+                    body.y + o.size * Math.sin(angle1)
+                }),
+                o2 = new Entity({
+                    body.x + o.size * Math.cos(angle2),
+                    body.y + o.size * Math.sin(angle2)
+                }),
+                point1 = ran.pointInUnitCircle(),
+                point2 = ran.pointInUnitCircle();
+                o1.facing = angle1;
+                o2.facing = -angle2;
+
+                o1.define("growBullet", false);
+                o2.define("growBullet", false);
+                o1.define({ BODY }, false);
+                o2.define({ BODY }, false);
+                o1.velocity.x = -sizeSqrd * Math.cos(angle1) + point1.x;
+                o2.velocity.x = -sizeSqrd * Math.cos(angle1) + point2.x;
+                o1.velocity.y = sizeSqrd * Math.sin(angle1) + point1.y;
+                o2.velocity.y = sizeSqrd * Math.sin(angle1) + point2.y;
+                o1.team = body.team;
+                o2.team = body.team;
+                o1.life();
+                o2.life();
+            }
+
             body.kill();
         }, 15 * 30);
         setSyncedTimeout(() => o.color = 16, 10 * 30);
