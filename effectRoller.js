@@ -6,6 +6,8 @@
 // Cooldown of 30 seconds after rolling.
 // Cooldown bypass requires 'infiniteRolls' permission.
 
+// NOTE: you need to verify that ALL of them work.
+
 // ID | name                    | description
 
 // Positive Effects
@@ -72,7 +74,7 @@
 // 56 : Backpetal               : Inverts movement directions.
 // 57   Death Mark                Puts you on the minimap for everyone, spawns a large pulse around you.
 // 58   Antisocial Projectiles    Projectiles get slightly repelled by enemy entities.
-// 59   Time Bomb                 Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
+// 59 : Time Bomb               : Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
 // team switch
 
