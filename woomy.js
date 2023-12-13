@@ -5559,6 +5559,11 @@ Entity.prototype.move = function() {
         this.penetration += .01;
         if (this.velocity.x > 0) this.velocity.x -= .0035;
         if (this.velocity.y > 0) this.velocity.y -= .0035;
+    } else if (this.motionType == 'flamethrower') {
+        this.maxSpeed = this.topSpeed;
+        this.damp = -.02;
+        this.SIZE += .175;
+        this.DAMAGE -= 2.25;
     } else {
         entityMoveOld.call(this);
     }
@@ -5569,6 +5574,81 @@ const hurricaneProps = {
 }
 
 // Functions
+const deepCopy = (type) => {
+    const pushArray = (input, key) => {
+        let arrOut = [];
+        for (let i = 0; i < input.length; i++) {
+            switch (typeof input[i]) {
+                case 'object':
+                    if (Array.isArray(input[i])) arrOut.push(pushArray(input[i]));
+                    else {
+                        if (key == "TYPE") arrOut.push(input[i]);
+                        else arrOut.push(deepCopy(input[i]));
+                    }
+                    break;
+                default:
+                    arrOut.push(input[i]);
+                    break;
+            }
+        }
+        return arrOut;
+    };
+    let output = JSON.parse(JSON.stringify(type));
+    if (Array.isArray(type)) output = pushArray(type);
+    else {
+        for (let key in type) {
+            switch (typeof type[key]) {
+                case 'object':
+                    if (Array.isArray(type[key])) output[key] = pushArray(type[key], key);
+                    else {
+                        if (key == "TYPE") output[key] = type[key];
+                        else output[key] = deepCopy(type[key]);
+                    }
+                    break;
+                default:
+                    output[key] = type[key];
+                    break;
+            }
+        }
+    }
+    return output;
+};
+let customCounters = {};
+const makeExportName = (type, append, stats = []) => {
+    let out;
+
+    for (let entity in exports) {
+        if (exports[entity] == type) out = entity;
+    }
+
+    if (out == undefined) {
+        if (customCounters[append] == undefined) customCounters[append] = 0;
+        return `custom${append}${customCounters[append]++}`;
+    }
+
+    out += append;
+
+    for (let starArr of stats) {
+        for (let numb of starArr) {
+            out += `${numb}`.replaceAll('.', 'o').replaceAll(',', 'l');
+        }
+    }
+
+    return out;
+};
+const applyStats = (guns, stats, options = {}) => {
+    if (guns) {
+        for (let gun of guns) {
+            if (gun.PROPERTIES) {
+                if (options.propertyEdit) options.propertyEdit(gun.PROPERTIES);
+                if (gun.PROPERTIES.SHOOT_SETTINGS) {
+                    if (options.shootEdit) options.shootEdit(gun.PROPERTIES);
+                    gun.PROPERTIES.SHOOT_SETTINGS = combineStats([Object.values(gun.PROPERTIES.SHOOT_SETTINGS), ...stats]);
+                }
+            }
+        }
+    }
+};
 const woomyHybrid = (type, name = -1) => {
     let output = dereference(type);
     let spawner = {
@@ -5609,6 +5689,38 @@ const woomyHybridSwarm = (type, name = -1) => {
     output.LABEL = name == -1 ? "Hybrid " + type.LABEL : name;
     return output;
 }
+const woomyAutoN = (type, sides = 3, name, options = {}) => {
+    let output = deepCopy(type),
+        stats = options.stats || [g.blank],
+        swivel = options.swivel,
+        turretName = makeExportName(type, `AutoN${swivel ? 'Swivel' : ''}`, [stats]);
+
+    if (!exports[turretName]) {
+        exports[turretName] = deepCopy(type);
+        applyStats(exports[turretName].GUNS, [g.auto, ...stats, swivel ? [1.5, 1, 1, 1, .81, .765, .9, 1, 1, 1, 1, 1, 1] : g.blank]);
+    };
+
+    if (type.DANGER + sides - 1 < 7) output.DANGER += sides - 1;
+    output.LABEL = name || `${output.LABEL}-${sides}`;
+    output.FACING_TYPE = 'autospin';
+    output.GUNS = [];
+    output.PROPS = [];
+    output.TURRETS = ((out = []) => {
+        for (let i = 0; i < sides; i++) out.push({
+            POSITION: [swivel ? 8 * (Math.pow(Math.sqrt(.625, 4), sides - 3)) + 1 : 10 * (Math.pow(Math.sqrt(.78, 4), sides - 3)) + 1, swivel ? 7 : 9, 0, 360 / sides * i, swivel ? 360 : 360 / sides + 65, swivel ? 1 : 0],
+            TYPE: [exports[turretName], {
+                LABEL: '',
+                BODY: {
+                    FOV: 2.5
+                },
+                CONTROLLERS: ['canRepel', 'onlyAcceptInArc', 'mapAltToFire', 'nearestDifferentMaster'],
+                COLOR: options.color || 16
+            }]
+        });
+        return out;
+    })();
+    return output;
+};
 
 // Generics
 Class.woomy = {
@@ -5632,6 +5744,127 @@ Class.woomyMiniGrowerBullet = {
     MOTION_TYPE: "miniGrower"
 }
 Class.woomyAutoBullet = makeAuto(Class.bullet)
+Class.woomyFlare = {
+    PARENT: "flare",
+    MOTION_TYPE: "flamethrower"
+}
+Class.woomyBubble = {
+    PARENT: "bullet",
+    LABEL: 'Bubble',
+    GUNS: [{
+        POSITION: [1, 1, 1, 0, 0, -45, 1],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, -25, 1.071],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, -5, 1.143],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 0, 1.214],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.half_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 5, 1.286],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.half_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 25, 1.357],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 45, 1.429],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 45, 1.5],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 25, 1.571],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.half_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 5, 1.643],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.half_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 0, 1.714],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.half_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, -5, 1.786],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, -25, 1.857],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, -45, 1.929],
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.half_damage, g.less_damage]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 160, 1], // 2
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.slow, g.bit_slow]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 1, 1, 0, 0, 200, 1.5], // 2.071
+        PROPERTIES: {
+            AUTOFIRE: true,
+            SHOOT_SETTINGS: combineStats([g.basic, g.weak, g.no_recoil, g.slow, g.slow]),
+            TYPE: "bullet"
+        }
+    }]
+}
 
 // Turrets
 Class.woomyAuto2gun = {
@@ -5777,6 +6010,7 @@ Class.woomyPounder = {
 Class.woomySingle = {
     PARENT: "woomyZoom",
     LABEL: 'Single',
+    DANGER: 7,
     GUNS: [{
         POSITION: [19, 8, 1, 0, 0, 0, 0],
         PROPERTIES: {
@@ -6391,6 +6625,51 @@ Class.woomyGatlingGun = {
         }
     }]
 }
+Class.woomyFlankMachine = makeMulti(Class.woomyMachineGun, 3, "Flank Machine")
+Class.woomySprayer = {
+    PARENT: "woomy",
+    LABEL: 'Sprayer',
+    DANGER: 6,
+    GUNS: [{
+        POSITION: [23, 7, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.low_power, g.mach, g.bit_smaller]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [12, 10, 1.4, 8, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.mach_smaller]),
+            TYPE: "bullet"
+        }
+    }]
+}
+Class.woomyInferno = {
+    PARENT: "woomy",
+    LABEL: 'Inferno',
+    DANGER: 6,
+    GUNS: [{
+        POSITION: [10, 6, 1.5, 3, 2, 0, 0]
+    }, {
+        POSITION: [20, 6, 1, 8, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.firestick]),
+            TYPE: "woomyFlare"
+        }
+    }]
+}
+Class.woomyFoamGun = {
+    PARENT: "woomy",
+    LABEL: 'Foam Gun',
+    DANGER: 7,
+    GUNS: [{
+        POSITION: [10, 10, 1.2, 8, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.mach_smaller, g.half_reload, g.one_third_reload]),
+            TYPE: "woomyBubble"
+        }
+    }]
+}
 Class.woomyTwinMachine = {
     PARENT: "woomy",
     LABEL: 'Twin Machine',
@@ -6410,6 +6689,37 @@ Class.woomyTwinMachine = {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.mach, g.bigger, g.less_range]),
             TYPE: "bullet"
         }
+    }]
+}
+Class.woomyAssult = {
+    PARENT: "woomyInvis",
+    LABEL: 'Assult',
+    DANGER: 7,
+    BODY: {
+        ACCELERATION: base.ACCEL * .7,
+        SPEED: base.SPEED * .9,
+        FOV: 1.2
+    },
+    GUNS: [{
+        POSITION: [17.25, 9.75, 1.3, 4.125, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [17.25, 6, 1, 4.125, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.fake]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [18, 3, 1, 2.25, 0, 0, 0]
+    }, {
+        POSITION: [1.5, 3.75, 1, 11.25, 0, 0, 0]
+    }, {
+        POSITION: [1.5, 3.75, 1, 14.25, 0, 0, 0]
+    }, {
+        POSITION: [1.5, 3.75, 1, 17.25, 0, 0, 0]
     }]
 }
 
@@ -6579,6 +6889,60 @@ Class.woomyObliterator = {
         }
     }]
 }
+Class.woomyMultishot = {
+    PARENT: "woomy",
+    LABEL: 'Multishot',
+    DANGER: 6,
+    BODY: {
+        ACCELERATION: base.ACCEL * .75,
+        FOV: 1.05
+    },
+    GUNS: [{
+        POSITION: [4, 3, 1, 11, -3, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sgun]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [4, 3, 1, 11, 3, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sgun]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [4, 4, 1, 13, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sgun]),
+            TYPE: "casing"
+        }
+    }, {
+        POSITION: [1, 4, 1, 12, -1, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sgun]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [1, 4, 1, 11, 1, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sgun]),
+            TYPE: "casing"
+        }
+    }, {
+        POSITION: [1, 3, 1, 13, -1, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sgun]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [15, 12, 1, 6, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.sgun, g.fake]),
+            TYPE: "casing"
+        }
+    }, {
+        POSITION: [8, 12, -1.3, 4, 0, 0, 0]
+    }]
+}
 Class.woomyHeavyTwin = {
     PARENT: "woomy",
     LABEL: 'Heavy Twin',
@@ -6607,7 +6971,7 @@ Class.woomyHeavyTwin = {
 Class.woomyDouble = {
     PARENT: "woomyZoom",
     LABEL: 'Double',
-    DANGER: 6,
+    DANGER: 7,
     BODY: {
         ACCELERATION: base.ACCEL * .95
     },
@@ -6644,6 +7008,24 @@ Class.woomyLumberjack = {
         }
     }, {
         POSITION: [8.5, 8.5, -1.8, 6.5, 0, 0, 0]
+    }]
+}
+Class.woomyMachinist = {
+    PARENT: "woomy",
+    LABEL: 'Machinist',
+    DANGER: 7,
+    BODY: {
+        ACCELERATION: base.ACCEL * .95
+    },
+    SCOPED: true,
+    GUNS: [{
+        POSITION: [13, 8.5, 1.5, 12, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.single, g.bigger, g.mach_smaller]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [11.5, 10.5, -1.7, 4.5, 0, 0, 0]
     }]
 }
 
@@ -6700,6 +7082,48 @@ Class.woomyBorer = {
         POSITION: [22, 2, 1, 0, -3, 0, .5],
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.pure_gunner, g.faster, g.pellet, g.bore]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [4.5, 8.5, -1.6, 7.5, 0, 0, 0]
+    }]
+}
+Class.woomySubmachine = {
+    PARENT: "woomy",
+    LABEL: 'Submachine',
+    DANGER: 7,
+    GUNS: [{
+        POSITION: [30, 1.5, 1, 0, 2.5, 0, .25],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.vulc]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [30, 1.5, 1, 0, -2.5, 0, .75],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.vulc]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [30, 1.5, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.vulc, g.double_reload]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [12, 10, 1, 0, 0, 0, 0]
+    }, {
+        POSITION: [5, 10, 1, 20, 0, 0, 0]
+    }]
+}
+Class.woomyNaturalist = {
+    PARENT: "woomy",
+    LABEL: 'Naturalist',
+    DANGER: 6,
+    GUNS: [{
+        POSITION: [5, 2, -1.6, 12, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.mach, g.pure_gunner, g.faster, g.pellet, g.double_reload, g.less_damage, g.more_health]),
             TYPE: "bullet"
         }
     }, {
@@ -6855,6 +7279,26 @@ Class.woomyTwinTrapper = {
         }
     }]
 }
+Class.woomyMachineTrapper = {
+    PARENT: "woomy",
+    LABEL: 'Machine Trapper',
+    DANGER: 6,
+    STAT_NAMES: statNames.trap,
+    BODY: {
+        SPEED: base.SPEED * .95,
+        FOV: 1.1
+    },
+    GUNS: [{
+        POSITION: [13.5, 7, 1.75, 0, 0, 0, 0]
+    }, {
+        POSITION: [3, 13.1, 1.5, 13.5, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.trap, g.mach, g.less_range, g.smaller, g.bit_smaller, g.less_spread, g.double_reload, g.bit_less_reload]),
+            TYPE: "trap",
+            STAT_CALCULATOR: gunCalcNames.trap
+        }
+    }]
+}
 
 // Propeller upgrades
 Class.woomyRotor = {
@@ -6894,6 +7338,9 @@ Class.woomyRotor = {
         }
     }]
 }
+
+// Auto-2 upgrades
+Class.woomyMachine2 = woomyAutoN(Class.woomyMachineGun, 2, "Machine-2")
 
 // Minishot upgrades
 Class.woomyArtillery = {
@@ -6950,6 +7397,33 @@ Class.woomyShootist = {
         POSITION: [24, 8.5, 1, 0, 0, 0, 0],
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.sniper]),
+            TYPE: "bullet",
+            LABEL: 'Primary'
+        }
+    }]
+}
+Class.woomyMagmach = {
+    PARENT: "woomy",
+    LABEL: 'Magmach',
+    DANGER: 6,
+    GUNS: [{
+        POSITION: [17, 3, 1, 0, -5, -7, .25],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty]),
+            TYPE: "bullet",
+            LABEL: 'Secondary'
+        }
+    }, {
+        POSITION: [17, 3, 1, 0, 5, 7, .75],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty]),
+            TYPE: "bullet",
+            LABEL: 'Secondary'
+        }
+    }, {
+        POSITION: [12, 10, 1.4, 8, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.arty, g.mach_smaller]),
             TYPE: "bullet",
             LABEL: 'Primary'
         }
@@ -7084,6 +7558,29 @@ Class.woomyBinary = {
         }
     }]
 }
+Class.woomyBlowgun = {
+    PARENT: "woomy",
+    LABEL: 'Blowgun',
+    DANGER: 6,
+    BODY: {
+        ACCELERATION: base.ACCEL * .85,
+        SPEED: base.SPEED * .95,
+        FOV: 1.1
+    },
+    GUNS: [{
+        POSITION: [20, 5, 1, 0, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.hunter, g.hunter2, g.more_reload]),
+            TYPE: "bullet"
+        }
+    }, {
+        POSITION: [17, 8, 1, 0, 0, 0, .2],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.hunter, g.more_reload]),
+            TYPE: "bullet"
+        }
+    }]
+}
 
 // Mini Grower upgrades
 Class.woomyTwiniGrower = {
@@ -7112,6 +7609,31 @@ Class.woomyTwiniGrower = {
     }]
 }
 
+// Inceptioner upgrades
+Class.woomyMachceptioner = {
+    PARENT: "woomy",
+    LABEL: 'Machceptioner',
+    DANGER: 6,
+    BODY: {
+        ACCELERATION: base.ACCEL * .8,
+        SPEED: base.SPEED * .85
+    },
+    GUNS: [{
+        POSITION: [24.65, 3, 1, 2.25, 0, 0, 0]
+    }, {
+        POSITION: [8, 6, 1, 15.25, 0, 0, 0],
+        PROPERTIES: {
+            SKIN: 3
+        }
+    }, {
+        POSITION: [12, 10, 1.4, 8, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.mach_smaller, g.intercept, g.bit_less_reload]),
+            TYPE: "woomyAutoBullet"
+        }
+    }]
+}
+
 // Hybrid tanks
 Class.woomyBasebrid = woomyHybrid(Class.woomyBasic, 'Basebrid')
     Class.woomyTwinbrid = woomyHybrid(Class.woomyTwin, "Twinbrid")
@@ -7120,7 +7642,7 @@ Class.woomyBasebrid = woomyHybrid(Class.woomyBasic, 'Basebrid')
     Class.woomyHybridPelleter = woomyHybrid(Class.woomyPelleter)
     Class.woomyTrapbrid = woomyHybrid(Class.woomyTrapper, "Trapbrid")
     Class.woomyEqualizer = woomyHybrid(Class.woomySingle, "Equalizer")
-    Class.woomyFlankCruiser = woomyHybridSwarm(Class.woomyBasic)
+    Class.woomyFlankCruiser = woomyHybridSwarm(Class.woomyBasic, "Flank Cruiser")
     Class.woomyLancebrid = woomyHybrid(Class.woomyLancer, "Lancebrid")
     Class.woomyPrivate = woomyHybrid(Class.woomyMinishot, "Private")
 
@@ -7146,8 +7668,9 @@ Class.woomyAutoBasic = makeAuto(Class.woomyBasic)
     Class.woomyAutoBasebrid = makeAuto(Class.woomyBasebrid)
 
 // Dev generics
-Class.woomyDevBase = {
+Class.woomyDeveloper = {
     PARENT: "developer",
+    UPGRADE_LABEL: "Woomy-Arras",
     SHAPE: 9,
     FACING_TYPE: 'autospin',
     LEVEL: 60,
@@ -7161,119 +7684,9 @@ Class.woomyDevBase = {
         TYPE: "woomyDeveloperBody"
     }]
 }
-Class.woomyMenu = {
-    PARENT: "menu",
-    REROOT_UPGRADE_TREE: "woomyBasic"
-}
-
-// Dev menus
-Class.woomyDeveloper = {
-    PARENT: "woomyDevBase",
-    UPGRADE_LABEL: "Woomy-Arras"
-}
-Class.woomyBosses = {
-    PARENT: "woomyDevBase",
-    LABEL: "Bosses"
-}
-Class.woomyDominators = {
-    PARENT: "woomyDevBase",
-    LABEL: "Dominators"
-}
-Class.woomyMisc = {
-    PARENT: "woomyDevBase",
-    LABEL: "Misc"
-}
-Class.woomyFeatured = {
-    PARENT: "woomyMenu",
-    LABEL: "Featured Tanks"
-}
-Class.woomyRemoved = {
-    PARENT: "woomyMenu",
-    LABEL: "Removed Tanks"
-}
-Class.woomySentries = {
-    PARENT: "woomyDevBase",
-    LABEL: "Sentries"
-}
-Class.woomyXKX = {
-    PARENT: "woomyDevBase",
-    LABEL: "X-K-X Bosses"
-}
-Class.woomyOverdone = {
-    PARENT: "woomyDevBase",
-    LABEL: "Overdone Tanks"
-}
-Class.woomyCustomShapes = {
-    PARENT: "woomyDevBase",
-    LABEL: "Custom Shapes"
-}
-Class.woomyArenaClosers = {
-    PARENT: "woomyDevBase",
-    LABEL: "Arena Closers"
-}
-Class.woomyOPCeptionists = {
-    PARENT: "woomyDevBase",
-    LABEL: "OP Ceptionists"
-}
-Class.woomyAWPs = {
-    PARENT: "woomyDevBase",
-    LABEL: "AWPs"
-}
-Class.woomySanctuaries = {
-    PARENT: "woomyDevBase",
-    LABEL: "Sanctuaries"
-}
-Class.woomyInfiltration = {
-    PARENT: "woomyDevBase",
-    LABEL: "Infiltration (WIP)"
-}
-Class.woomyEventDev = {
-    PARENT: "woomyDevBase",
-    LABEL: "Event Developer"
-}
-Class.woomyCRF = {
-    PARENT: "woomyDevBase",
-    LABEL: "Cutting Room Floor"
-}
-Class.woomyOldTanks = {
-    PARENT: "woomyDevBase",
-    LABEL: "Old Tanks"
-}
-Class.woomyTertiaQuartus = {
-    PARENT: "woomyDevBase",
-    LABEL: "Tertia & Quartus"
-}
-Class.woomyDreadnoughts = {
-    PARENT: "woomyMenu",
-    LABEL: "Dreadnoughts"
-}
-Class.woomyAdminTB = {
-    PARENT: "woomyDevBase",
-    LABEL: "Admin Testbed"
-}
 Class.addons.UPGRADES_TIER_0.push("woomyDeveloper")
 Class.woomyDeveloper.UPGRADES_TIER_0 = [
     "woomyBasic",
-    "woomyBosses",
-    "woomyDominators",
-    "woomyMisc",
-    "woomyFeatured",
-    "woomyRemoved",
-    "woomySentries",
-    "woomyXKX",
-    "woomyOverdone",
-    "woomyCustomShapes",
-    "woomyArenaClosers",
-    "woomyOPCeptionists",
-    "woomyAWPs",
-    "woomySanctuaries",
-    "woomyInfiltration",
-    "woomyEventDev",
-    "woomyCRF",
-    "woomyOldTanks",
-    "woomyTertiaQuartus",
-    "woomyDreadnoughts",
-    "woomyAdminTB",
 ]
 
 // Basic upgrade paths
@@ -7356,22 +7769,22 @@ Class.woomyMachineGun.UPGRADES_TIER_2 = [
     "woomyGunner",
     "woomyBlaster",
     "woomyGatlingGun",
-    //"woomyFlankMachine",
+    "woomyFlankMachine",
     "woomyAutoMachineGun",
-    //"woomySprayer",
-    //"woomyMachinist",
-    //"woomyMachineTrapper",
-    //"woomySubmachine",
-    //"woomyInferno",
-    //"woomyFoamGun",
+    "woomySprayer",
+    "woomyMachinist",
+    "woomyMachineTrapper",
+    "woomySubmachine",
+    "woomyInferno",
+    "woomyFoamGun",
     "woomyTwinMachine",
-    //"woomyAssult",
-    //"woomyNaturalist",
-    //"woomyMachine2",
-    //"woomyBlogun",
-    //"woomyMultishot",
-    //"woomyMagmach",
-    //"woomyMachceptioner",
+    "woomyAssult",
+    "woomyNaturalist",
+    "woomyMachine2",
+    "woomyBlowgun",
+    "woomyMultishot",
+    "woomyMagmach",
+    "woomyMachceptioner",
 ]
 
 // Flank Guard upgrade paths
@@ -7384,7 +7797,7 @@ Class.woomyFlankGuard.UPGRADES_TIER_2 = [
     "woomyTriPelleter",
     "woomyTriTrapper",
     "woomyFlankSniper",
-    //"woomyFlankMachine",
+    "woomyFlankMachine",
     //"woomyFlankPounder",
     "woomyAutoFlankGuard",
     //"woomyTriLancer",
@@ -7429,7 +7842,7 @@ Class.woomyPounder.UPGRADES_TIER_2 = [
     //"woomyLauncher",
     //"woomyBruiser",
     "woomyObliterator",
-    //"woomyMultishot",
+    "woomyMultishot",
     "woomyHeavyTwin",
     //"woomyKinetic",
     "woomyBoxer",
@@ -7450,7 +7863,7 @@ Class.woomyPounder.UPGRADES_TIER_2 = [
 Class.woomySingle.UPGRADES_TIER_2 = [
     "woomyDouble",
     "woomyLumberjack",
-    //"woomyMachinist",
+    "woomyMachinist",
     //"woomyFlankSingle",
     "woomyAssailant",
     "woomyEqualizer",
@@ -7474,10 +7887,10 @@ Class.woomyPelleter.UPGRADES_TIER_2 = [
     "woomyAutoPelleter",
     "woomyHybridPelleter",
     "woomyGunner",
-    //"woomySubmachine",
+    "woomySubmachine",
     //"woomyAirscrew",
     //"woomyBallista",
-    //"woomyNaturalist",
+    "woomyNaturalist",
     //"woomyPelleter2",
     "woomyCruiser",
     "woomyStorm",
@@ -7495,7 +7908,7 @@ Class.woomyTrapper.UPGRADES_TIER_2 = [
     //"woomyPacker",
     //"woomySwarmingTrapper",
     "woomyTwinTrapper",
-    //"woomyMachineTrapper",
+    "woomyMachineTrapper",
     //"woomyArsenal",
     //"woomyFoghorn",
     "woomyTrapbrid",
@@ -7522,7 +7935,7 @@ Class.woomyAuto2.UPGRADES_TIER_2 = [
     //"woomySwivel2",
     //"woomyTrapper2",
     //"woomySingle2",
-    //"woomyMachine2",
+    "woomyMachine2",
     "woomyAutoAuto2",
     //"woomyMega2",
     //"woomyPelleter2",
@@ -7549,7 +7962,7 @@ Class.woomyMinishot.UPGRADES_TIER_2 = [
     //"woomyMachete",
     "woomyShootist",
     "woomyPrivate",
-    //"woomyMagmach",
+    "woomyMagmach",
     //"woomyDropship",
 ]
 
@@ -7613,11 +8026,11 @@ Class.woomySubduer.UPGRADES_TIER_2 = [
     "woomyMinigun",
     "woomyBinary",
     "woomyHunter",
-    //"woomySprayer",
+    "woomySprayer",
     //"woomyPathogen",
     "woomyContagion",
     //"woomyMitochondrion",
-    //"woomyBlogun",
+    "woomyBlowgun",
     //"woomySSubduer",
     //"woomySubduer2",
     //"woomyFlankSubduer",
@@ -7627,7 +8040,7 @@ Class.woomySubduer.UPGRADES_TIER_2 = [
 Class.woomyMiniGrower.UPGRADES_TIER_2 = [
     //"woomyGrower",
     "woomyAutoMiniGrower",
-    //"woomyInferno",
+    "woomyInferno",
     //"woomyFlankMiniGrower",
     //"woomyTwiniGrower",
 ]
@@ -7638,7 +8051,7 @@ Class.woomyInceptioner.UPGRADES_TIER_2 = [
     //"woomyTailgator",
     //"woomyMotor",
     //"woomyArsenal",
-    //"woomyMachceptioner",
+    "woomyMachceptioner",
     //"woomyFlankceptioner",
 ]
 
