@@ -361,6 +361,7 @@ Class.retrogradeHalfNHalf = {
     ]
 }
 Class.retrogradeMachineFlank.UPGRADES_TIER_3 = ["retrogradeMachineTriple", "retrogradeHalfNHalf"]
+Class.flankGuard.UPGRADES_TIER_3.push("retrogradeMachineTriple")
 
 // Pounder upgrade
 Class.retrogradeProtector = {
