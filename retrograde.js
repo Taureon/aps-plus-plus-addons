@@ -274,6 +274,8 @@ Class.retrogradeFlamethrower = {
 }
 Class.retrogradeBlaster.UPGRADES_TIER_3 = ["retrogradeTriBlaster", "retrogradeSplasher", "retrogradeFlamethrower"]
 
+Class.sprayer.UPGRADES_TIER_3.push("retrogradeSplasher")
+
 // Gatling Gun upgrades
 Class.retrogradeSprayer = {
     PARENT: "genericTank",
@@ -325,7 +327,7 @@ Class.retrogradeAccurator = {
         },
     ],
 };
-Class.retrogradeGatlingGun.UPGRADES_TIER_3 = ["retrogradeSprayer", "retrogradeAccurator"]
+Class.retrogradeGatlingGun.UPGRADES_TIER_3 = ["focal", "retrogradeAccurator"]
 
 // Machine Flank upgrades
 Class.retrogradeMachineTriple = makeMulti({
@@ -442,6 +444,6 @@ Class.retrogradeDoubleTrapGuard = {
 }
 
 // Dev Tanks
-Class.unavailable.UPGRADES_TIER_0.push("retrogradeRifle", "retrogradeDoubleTrapGuard")
+Class.unavailable.UPGRADES_TIER_0.push("retrogradeDoubleTrapGuard", "retrogradeRifle", "retrogradeSprayer")
 
 }
