@@ -7,7 +7,7 @@ module.exports = ({ Class }) => {
 
 // Set these to either true to display their respective tanks in the main tank branch.
 // The enableLegacy option will make some existing tanks unplayable. They can always be accessed in the unplayable branch of the developer menu.
-const enableScrapped = false;
+const enableScrapped = true;
 const enableLegacy = false;
 
 Class.weirdSpike = {
