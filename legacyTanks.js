@@ -10,6 +10,14 @@ module.exports = ({ Class }) => {
 const enableScrapped = true;
 const enableLegacy = false;
 
+Class.weirdSpikeBody1 = {
+    PARENT: "spikeBody"
+    CONTROLLERS: [["spin", { independent: true, speed: 0.08 }]]
+};
+Class.weirdSpikeBody2 = {
+    PARENT: "spikeBody"
+    CONTROLLERS: [["spin", { independent: true, speed: -0.05 }]]
+};
 Class.weirdSpike = {
     PARENT: ["genericTank"],
     LABEL: "Spike",
