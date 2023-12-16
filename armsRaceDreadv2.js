@@ -5668,7 +5668,7 @@ module.exports = ({ Class }) => {
 			Lucifer: 'Galaxy',
 			Sterilizer: 'Evaporator',
 			Hielaman: 'Protostar', 
-			Jackhammer: 'Luminance',
+			Jackhammer: 'Illuminator',
 		},
 		Bruiser: {
 			Bruiser: 'Bruiser',
