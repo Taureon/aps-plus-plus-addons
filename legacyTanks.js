@@ -11,12 +11,18 @@ const enableScrapped = true;
 const enableLegacy = false;
 
 Class.weirdSpikeBody1 = {
-    PARENT: "spikeBody",
-    CONTROLLERS: [["spin", { independent: true, speed: 0.08 }]]
+    LABEL: "",
+    CONTROLLERS: [["spin", { independent: true, speed: 0.08 }]],
+    COLOR: 9,
+    SHAPE: 3,
+    INDEPENDENT: true,
 };
 Class.weirdSpikeBody2 = {
-    PARENT: "spikeBody",
-    CONTROLLERS: [["spin", { independent: true, speed: -0.05 }]]
+    LABEL: "",
+    CONTROLLERS: [["spin", { independent: true, speed: -0.05 }]],
+    COLOR: 9,
+    SHAPE: 3,
+    INDEPENDENT: true,
 };
 Class.weirdSpike = {
     PARENT: ["genericTank"],
