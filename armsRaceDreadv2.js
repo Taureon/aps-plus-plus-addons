@@ -475,7 +475,7 @@ module.exports = ({ Class }) => {
 				TYPE: 'egg',
 			},
 			{
-				POSITION: [24, 0, 0, 0, 0, 0],
+				POSITION: [24, 0, 0, 0, 0, -1],
 				TYPE: ['egg', {COLOR: 9}]
 			},
 		],
@@ -1445,7 +1445,7 @@ module.exports = ({ Class }) => {
 				TYPE: ['square', {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
-				POSITION: [24, 0, 0, 0, 0, 0],
+				POSITION: [24, 0, 0, 0, 0, -1],
 				TYPE: ['square', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 		],
@@ -1493,7 +1493,7 @@ module.exports = ({ Class }) => {
 				TYPE: ['colossalTopARDreadV2', {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ['colossalBottomARDreadV2', {MIRROR_MASTER_ANGLE: true}]
 			},
 		],
@@ -1575,7 +1575,7 @@ module.exports = ({ Class }) => {
 				TYPE: 'ironTopARDreadV2',
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: 'ironBottomARDreadV2',
 			},
 		],
@@ -2774,7 +2774,7 @@ module.exports = ({ Class }) => {
 				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
+				POSITION: [24, 0, 0, 180, 0, -1],
 				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 		],
@@ -2785,7 +2785,7 @@ module.exports = ({ Class }) => {
 		BODY: hpBuffBodyStats[0],
 	    TURRETS: [
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
+				POSITION: [24, 0, 0, 180, 0, -1],
 				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 			{
@@ -2801,7 +2801,7 @@ module.exports = ({ Class }) => {
 		BODY: hpBuffBodyStats[0],
 	    TURRETS: [
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
+				POSITION: [24, 0, 0, 180, 0, -1],
 				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 			{
@@ -2817,7 +2817,7 @@ module.exports = ({ Class }) => {
 		BODY: hpBuffBodyStats[0],
 	    TURRETS: [
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
+				POSITION: [24, 0, 0, 180, 0, -1],
 				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 			{
@@ -2833,7 +2833,7 @@ module.exports = ({ Class }) => {
 		BODY: hpBuffBodyStats[0],
 	    TURRETS: [
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
+				POSITION: [24, 0, 0, 180, 0, -1],
 				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 			{
@@ -2869,7 +2869,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 		],
@@ -2885,7 +2885,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			...addTrinoughtAuraRing(),
@@ -2902,7 +2902,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			...addTrinoughtAuraRing(true),
@@ -2918,7 +2918,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			...addTrinoughtTurretRing(),
@@ -2934,7 +2934,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["triangle", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
@@ -2958,7 +2958,7 @@ module.exports = ({ Class }) => {
 				TYPE: ['triangle', {COLOR: 9, MIRROR_MASTER_ANGLE: true}]
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["titanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 		],
@@ -3043,7 +3043,7 @@ module.exports = ({ Class }) => {
 				TYPE: 'steelTopARDreadV2'
 			},
 			{
-				POSITION: [20, 0, 0, 0, 360, 0],
+				POSITION: [20, 0, 0, 0, 360, -1],
 				TYPE: 'steelBottomARDreadV2'
 			},
 		],
@@ -4427,7 +4427,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {COLOR: 9, MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
+				POSITION: [24, 0, 0, 180, 0, -1],
 				TYPE: ["pentagon", {COLOR: 9, MIRROR_MASTER_ANGLE: true}],
 			},
 		],
@@ -4442,8 +4442,8 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
-				TYPE: ["pentagon", {COLOR: 9,MIRROR_MASTER_ANGLE: true}],
+				POSITION: [24, 0, 0, 180, 0, -1],
+				TYPE: ["pentagon", {COLOR: 9, MIRROR_MASTER_ANGLE: true}],
 			},
 			...addPentanoughtAuraRing(),
 		],
@@ -4458,8 +4458,8 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
-				TYPE: ["pentagon", {COLOR: 9,MIRROR_MASTER_ANGLE: true}],
+				POSITION: [24, 0, 0, 180, 0, -1],
+				TYPE: ["pentagon", {COLOR: 9, MIRROR_MASTER_ANGLE: true}],
 			},
 			...addPentanoughtAuraRing(true),
 		],
@@ -4474,8 +4474,8 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
-				TYPE: ["pentagon", {COLOR: 9,MIRROR_MASTER_ANGLE: true}],
+				POSITION: [24, 0, 0, 180, 0, -1],
+				TYPE: ["pentagon", {COLOR: 9, MIRROR_MASTER_ANGLE: true}],
 			},
 			...addPentanoughtTurretRing(),
 		],
@@ -4490,8 +4490,8 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [24, 0, 0, 180, 0, 0],
-				TYPE: ["pentagon", {COLOR: 9,MIRROR_MASTER_ANGLE: true}],
+				POSITION: [24, 0, 0, 180, 0, -1],
+				TYPE: ["pentagon", {COLOR: 9, MIRROR_MASTER_ANGLE: true}],
 			},
 			{
 				POSITION: [11.5, 0, 0, 0, 360, 1],
@@ -4561,7 +4561,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagonLeviathanTopARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 		],
@@ -4576,7 +4576,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			...addPentanoughtAuraRing(),
@@ -4592,7 +4592,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			...addPentanoughtAuraRing(true),
@@ -4608,7 +4608,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			...addPentanoughtTurretRing(),
@@ -4624,7 +4624,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 			{
@@ -4648,7 +4648,7 @@ module.exports = ({ Class }) => {
 				TYPE: ["pentagon", {COLOR: 9, MIRROR_MASTER_ANGLE: true}],
 			},
 			{
-				POSITION: [20, 0, 0, 0, 0, 0],
+				POSITION: [20, 0, 0, 0, 0, -1],
 				TYPE: ["pentagonLeviathanBottomARDreadV2", {MIRROR_MASTER_ANGLE: true}]
 			},
 		],
@@ -4778,7 +4778,7 @@ module.exports = ({ Class }) => {
 				TYPE: ['pentagonTitaniumTopARDreadV2', {}]
 			},
 			{
-				POSITION: [20, 0, 0, 0, 360, 0],
+				POSITION: [20, 0, 0, 0, 360, -1],
 				TYPE: ['pentagonTitaniumBottomARDreadV2', {}]
 			},
 		],
