@@ -4,8 +4,6 @@ const g = require('../gunvals.js');
 
 module.exports = ({ Class }) => {
 
-return
-
 // Bullets
 Class.masterBullet = {
     PARENT: "missile",
