@@ -1840,14 +1840,14 @@ module.exports = ({ Class }) => {
 	for (let i = 0; i < 3; i++) {
 		Class.mitigatorARDreadV2.GUNS.push(
 			{
-				POSITION: [13, 8, 1, 0, 5, 120*i, 0],
+				POSITION: [10, 8, 1, 3, 5, 120*i, 0],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.85}]),
 					TYPE: "bullet",
 				},
 			},
 			{
-				POSITION: [13, 8, 1, 0, -5, 120*i, 0.5],
+				POSITION: [10, 8, 1, 3, -5, 120*i, 0.5],
 				PROPERTIES: {
 					SHOOT_SETTINGS: combineStats([g.basic, {reload: 0.85}]),
 					TYPE: "bullet",
