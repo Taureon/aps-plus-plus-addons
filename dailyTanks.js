@@ -826,7 +826,7 @@ Class.tempest = {
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.satellite, g.pound]), 
-                    TYPE: ["satellite", { ANGLE: i * 120 + 180, CONTROLLERS: [['orbit', {invert: true}]] }], 
+                    TYPE: ["satellite", { ANGLE: i * 120, CONTROLLERS: [['orbit', {invert: true}]] }], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
                     SYNCS_SKILLS: false,
@@ -950,7 +950,7 @@ Class.blizzard = {
                 POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", { ANGLE: i * 72 + 180, CONTROLLERS: [['orbit', {invert: true}]] }], 
+                    TYPE: ["satellite", { ANGLE: i * 72, CONTROLLERS: [['orbit', {invert: true}]] }], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
                     SYNCS_SKILLS: false,
