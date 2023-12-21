@@ -105,35 +105,34 @@ Class.lamgSpinnerTurret = makeMulti({
 
 // Decorations
 Class.whirlwindDeco = makeDeco(6)
-Class.whirlwindDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.05 }]]
+Class.whirlwindDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.128 }]]
 Class.tornadoDeco = makeDeco(4);
-Class.tornadoDeco.CONTROLLERS = [["spin", { independent: true }]];
+Class.tornadoDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.128 }]];
 Class.megaTornadoDeco = makeDeco([[0,-1],[0.5,0],[0,1],[-0.5,0]])
 Class.megaTornadoDeco.CONTROLLERS = [["spin", { independent: true }]];
 Class.tempestDeco1 = makeDeco(3);
-Class.tempestDeco1.CONTROLLERS = [["spin", { independent: true }]];
+Class.tempestDeco1.CONTROLLERS = [["spin", { independent: true, speed: 0.128 }]];
 Class.tempestDeco2 = makeDeco(3);
-Class.tempestDeco2.CONTROLLERS = [["spin", { independent: true, speed: 0.025 }]];
+Class.tempestDeco2.CONTROLLERS = [["spin", { independent: true, speed: -0.128 }]];
 Class.thunderboltDeco = makeDeco(4);
-Class.thunderboltDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.1 }]];
+Class.thunderboltDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.16 }]];
 Class.hurricaneDeco = makeDeco(8);
-Class.hurricaneDeco.CONTROLLERS = [["spin", { independent: true }]];
+Class.hurricaneDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.128 }]];
 Class.typhoonDeco = makeDeco(10);
-Class.typhoonDeco.CONTROLLERS = [["spin", { independent: true }]];
+Class.typhoonDeco.CONTROLLERS = [["spin", { independent: true, speed: 0.128 }]];
 Class.blizzardDeco1 = makeDeco(5);
-Class.blizzardDeco1.CONTROLLERS = [["spin", { independent: true }]];
+Class.blizzardDeco1.CONTROLLERS = [["spin", { independent: true, speed: 0.128 }]];
 Class.blizzardDeco2 = makeDeco(5);
-Class.blizzardDeco2.CONTROLLERS = [["spin", { independent: true, speed: 0.025 }]];
+Class.blizzardDeco2.CONTROLLERS = [["spin", { independent: true, speed: -0.128 }]];
 
 // December 13th - Whirlwind
 Class.whirlwind = {
     PARENT: "genericTank",
     LABEL: "Whirlwind",
     ANGLE: 60,
-    CONTROLLERS: [["whirlwind", {initialDist: 110, radiusScalingSpeed: 10}]],
+    CONTROLLERS: ["whirlwind"],
     HAS_NO_RECOIL: true,
     STAT_NAMES: statnames.whirlwind,
-    TOOLTIP: "[DEV NOTE] We are aware of an issue dramatically affecting satellite speed when upgrading.",
     TURRETS: [
         {
             POSITION: [8, 0, 0, 0, 360, 1],
@@ -788,7 +787,6 @@ Class.tempest = {
     PARENT: "genericTank",
     LABEL: "Tempest",
     DANGER: 7,
-    TOOLTIP: "[DEV NOTE] The Tempest does not function as intended yet!",
     TURRETS: [
         {
             POSITION: [8, 0, 0, 0, 360, 1],
@@ -807,7 +805,7 @@ Class.tempest = {
         SPEED: 2, 
     }, 
     GUNS: (() => { 
-        let output = []
+        let output = [];
         for (let i = 0; i < 3; i++) { 
             output.push({ 
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
@@ -821,7 +819,20 @@ Class.tempest = {
                 }
             }) 
         }
-        return output
+        for (let i = 0; i < 3; i++) { 
+            output.push({ 
+                POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.satellite, g.pound]), 
+                    TYPE: ["satellite", { ANGLE: i * 120, CONTROLLERS: [['orbit', {invert: true}]] }], 
+                    MAX_CHILDREN: 1,   
+                    AUTOFIRE: true,  
+                    SYNCS_SKILLS: false,
+                    WAIT_TO_CYCLE: true
+                }
+            }) 
+        }
+        return output;
     })()
 }
 Class.thunderbolt = {
@@ -900,7 +911,6 @@ Class.blizzard = {
     PARENT: "genericTank",
     LABEL: "Blizzard",
     DANGER: 7,
-    TOOLTIP: "[DEV NOTE] The Blizzard does not function as intended yet!",
     TURRETS: [
         {
             POSITION: [8, 0, 0, 0, 360, 1],
@@ -933,7 +943,20 @@ Class.blizzard = {
                 }
             }) 
         }
-        return output
+        for (let i = 0; i < 5; i++) { 
+            output.push({ 
+                POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.satellite]), 
+                    TYPE: ["satellite", { ANGLE: i * 72, CONTROLLERS: [['orbit', {invert: true}]] }], 
+                    MAX_CHILDREN: 1,   
+                    AUTOFIRE: true,  
+                    SYNCS_SKILLS: false,
+                    WAIT_TO_CYCLE: true
+                }
+            }) 
+        }
+        return output;
     })()
 }
 
@@ -1076,20 +1099,20 @@ Class.dailyTanks = {
 		//"literallyATank",
 	]
 }
-Class.basic.UPGRADES_TIER_3 = ["dailyTanks"]
+Class.basic.UPGRADES_TIER_3 = ["dailyTanks"];
 
 // Upgrade paths
-Class.whirlwind.UPGRADES_TIER_2 = ["tornado", "hurricane"]
-	Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "prophet", "vortex"]
-	Class.tornado.UPGRADES_TIER_3 = ["megaTornado", "tempest", "thunderbolt"]
-	Class.hurricane.UPGRADES_TIER_3 = ["typhoon", "blizzard"]
-	Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl")
-	Class.auto3.UPGRADES_TIER_3.push("whirl3")
-	Class.underseer.UPGRADES_TIER_3.push("prophet")
-	Class.artillery.UPGRADES_TIER_3.push("munition")
-	Class.launcher.UPGRADES_TIER_3.push("vortex")
-	Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard")
+Class.whirlwind.UPGRADES_TIER_2 = ["tornado", "hurricane"];
+	Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "prophet", "vortex"];
+	Class.tornado.UPGRADES_TIER_3 = ["megaTornado", "tempest", "thunderbolt"];
+	Class.hurricane.UPGRADES_TIER_3 = ["typhoon", "blizzard"];
+	Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl");
+	Class.auto3.UPGRADES_TIER_3.push("whirl3");
+	Class.underseer.UPGRADES_TIER_3.push("prophet");
+	Class.artillery.UPGRADES_TIER_3.push("munition");
+	Class.launcher.UPGRADES_TIER_3.push("vortex");
+	Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard");
 
-Class.undertow.UPGRADES_TIER_3 = ["riptide"]
+Class.undertow.UPGRADES_TIER_3 = ["riptide"];
 
 }
