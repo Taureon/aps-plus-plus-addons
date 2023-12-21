@@ -1107,8 +1107,21 @@ Class.dailyTanks = {
 		"literallyAMachineGun",
 		//"literallyATank",
 		"rocketeer",
-		//"jumpSmasher",
+		"jumpSmasher",
 	]
+}
+
+// December 19th-20th - Jump Smasher
+Class.jumpSmasher = {
+    PARENT: "genericSmasher",
+    LABEL: "Jump Smasher",
+    DANGER: 7,
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody"
+        }
+    ]
 }
 
 if (addToMain == true) {
