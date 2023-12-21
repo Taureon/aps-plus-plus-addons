@@ -4,6 +4,8 @@ const g = require('../gunvals.js');
 
 module.exports = ({ Class }) => {
 
+const addToMain = true
+
 // Bullets
 Class.masterBullet = {
     PARENT: "missile",
@@ -805,7 +807,7 @@ Class.tempest = {
         SPEED: 2, 
     }, 
     GUNS: (() => { 
-        let output = [];
+        let output = []
         for (let i = 0; i < 3; i++) { 
             output.push({ 
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
@@ -824,7 +826,7 @@ Class.tempest = {
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.satellite, g.pound]), 
-                    TYPE: ["satellite", { ANGLE: i * 120, CONTROLLERS: [['orbit', {invert: true}]] }], 
+                    TYPE: ["satellite", { ANGLE: i * 120 + 180, CONTROLLERS: [['orbit', {invert: true}]] }], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
                     SYNCS_SKILLS: false,
@@ -832,7 +834,7 @@ Class.tempest = {
                 }
             }) 
         }
-        return output;
+        return output
     })()
 }
 Class.thunderbolt = {
@@ -948,7 +950,7 @@ Class.blizzard = {
                 POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", { ANGLE: i * 72, CONTROLLERS: [['orbit', {invert: true}]] }], 
+                    TYPE: ["satellite", { ANGLE: i * 72 + 180, CONTROLLERS: [['orbit', {invert: true}]] }], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
                     SYNCS_SKILLS: false,
@@ -956,9 +958,15 @@ Class.blizzard = {
                 }
             }) 
         }
-        return output;
+        return output
     })()
 }
+
+// Whirlwind upgrade paths
+Class.whirlwind.UPGRADES_TIER_2 = ["tornado", "hurricane"]
+	Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "prophet", "vortex"]
+	Class.tornado.UPGRADES_TIER_3 = ["megaTornado", "tempest", "thunderbolt"]
+	Class.hurricane.UPGRADES_TIER_3 = ["typhoon", "blizzard"]
 
 // December 14th - Master
 Class.master = {
@@ -1063,6 +1071,7 @@ Class.riptide = {
         }
     ]
 }
+Class.undertow.UPGRADES_TIER_3 = ["riptide"]
 
 // December 16th - Literally a Machine Gun
 Class.literallyAMachineGun = {
@@ -1097,22 +1106,23 @@ Class.dailyTanks = {
 		"undertow",
 		"literallyAMachineGun",
 		//"literallyATank",
+		"rocketeer",
+		//"jumpSmasher",
 	]
 }
-Class.basic.UPGRADES_TIER_3 = ["dailyTanks"];
 
-// Upgrade paths
-Class.whirlwind.UPGRADES_TIER_2 = ["tornado", "hurricane"];
-	Class.whirlwind.UPGRADES_TIER_3 = ["hexaWhirl", "munition", "whirl3", "whirlGuard", "prophet", "vortex"];
-	Class.tornado.UPGRADES_TIER_3 = ["megaTornado", "tempest", "thunderbolt"];
-	Class.hurricane.UPGRADES_TIER_3 = ["typhoon", "blizzard"];
-	Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl");
-	Class.auto3.UPGRADES_TIER_3.push("whirl3");
-	Class.underseer.UPGRADES_TIER_3.push("prophet");
-	Class.artillery.UPGRADES_TIER_3.push("munition");
-	Class.launcher.UPGRADES_TIER_3.push("vortex");
-	Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard");
+if (addToMain == true) {
+Class.basic.UPGRADES_TIER_1.push("whirlwind")
+	Class.desmos.UPGRADES_TIER_2.push("undertow")
 
-Class.undertow.UPGRADES_TIER_3 = ["riptide"];
+Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl")
+Class.artillery.UPGRADES_TIER_3.push("munition")
+Class.auto3.UPGRADES_TIER_3.push("whirl3")
+Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard")
+Class.underseer.UPGRADES_TIER_3.push("prophet")
+Class.launcher.UPGRADES_TIER_3.push("vortex")
+} else {
+Class.basic.UPGRADES_TIER_3 = ["dailyTanks"]
+}
 
 }
