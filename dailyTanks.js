@@ -984,7 +984,7 @@ Class.master = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic]),
                 TYPE: "masterBullet",
-                MAX_CHILDREN: 5,
+                MAX_CHILDREN: 4,
                 DESTROY_OLDEST_CHILD: true,
             },
         },
