@@ -34,149 +34,159 @@ g.plugin_NET_basicToTrap = g.trap.map((x, i) => x / g.basic[i]);
 g.plugin_NET_weakToOver = g.over.map((x, i) => x / g.weak[i]);
 
 const offsets = Object.fromEntries([
-	'artillery' , 'hunter' , 'twin'   , 'multishot', 'tri',
-	'machinegun', 'pound'  , 'sniper' , 'trapper'  , 'director',
-	'launcher'  , 'brid'   , 'cruiser', 'auto'     , 'drive',
-	'shimmer'   , 'smasher', 'aura'   , 'under'    , 'buck'
-].map((_, i) => [_, i * 4]));
+    'artillery' , 'hunter' , 'twin'   , 'multishot', 'tri',
+    'machinegun', 'pound'  , 'sniper' , 'trapper'  , 'director',
+    'launcher'  , 'brid'   , 'cruiser', 'auto'     , 'drive',
+    'shimmer'   , 'smasher', 'aura'   , 'under'    , 'buck'
+].map((_, i) => [_, BigInt(i * 4)])),
+mainTypeMatrix = [
+    ['bullet'   , 'drone'                     , 'minion'                     , 'plugin_NET_twinion'          ],
+    ['trap'     , 'plugin_NET_trap_drone'     , 'plugin_NET_trap_minion'     , 'plugin_NET_trap_twinion'     ],
+    ['block'    , 'plugin_NET_block_drone'    , 'plugin_NET_block_minion'    , 'plugin_NET_block_twinion'    ],
+    ['boomerang', 'plugin_NET_boomerang_drone', 'plugin_NET_boomerang_minion', 'plugin_NET_boomerang_twinion']
+],
+bridTypeArray = ['bullet', ["drone", { INDEPENDENT: true }], 'drone', 'minion'];
+
+function getKeyFromCode(code) {
+    return code.toString(2).split('').reduce((culm, curr, i) => {
+        if (i & 1) return culm.concat(curr);
+        culm[culm.length - 1] = (culm[culm.length - 1] * 4 + curr).toString(16);
+        return culm;
+    }, ['NET_']).join('');
+}
 
 function makeNameFromCode(code) {
-	return code.split('').reduce((culm, curr, i) => {
-		if (i & 1) return culm.concat(curr);
-		culm[culm.length - 1] = (culm[culm.length - 1] * 4 + curr).toString(16);
-		return culm;
-	}, ['NET-']).join('');
+	return getKeyFromCode(code);
+}
+
+function getTierFromCode(code) {
+	return code.toString(4).split('').reduce((culm, curr) => culm + parseInt(curr), 1);
+}
+
+function makeBridGun(angle, bridStats, bridType) {
+    return {
+        POSITION: [6, 12, 1.2, 8, 0, angle, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: bridStats,
+            TYPE: bridType,
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+            STAT_CALCULATOR: gunCalcNames.drone,
+            WAIT_TO_CYCLE: false,
+            MAX_CHILDREN: 3,
+        },
+    };
 }
 
 function makeTankFromCode(code) {
-	let tankCfg = {
-		artillery:  (code >> offsets.artillery ) & 3n, //
-		hunter:     (code >> offsets.hunter    ) & 3n, //
-		twin:       (code >> offsets.twin      ) & 3n, //
-		multishot:  (code >> offsets.multishot ) & 3n, //
-		tri:        (code >> offsets.tri       ) & 3n, //
-		machinegun: (code >> offsets.machinegun) & 3n, //
-		pound:      (code >> offsets.pound     ) & 3n, //
-		sniper:     (code >> offsets.sniper    ) & 3n, //
-		trapper:    (code >> offsets.trapper   ) & 3n, //
-		director:   (code >> offsets.director  ) & 3n, //
-		launcher:   (code >> offsets.launcher  ) & 3n, //
-		brid:       (code >> offsets.brid      ) & 3n, //
-		cruiser:    (code >> offsets.cruiser   ) & 3n, //
-		auto:       (code >> offsets.auto      ) & 3n, //
-		drive:      (code >> offsets.drive     ) & 3n, //
-		shimmer:    (code >> offsets.shimmer   ) & 3n, //
-		smasher:    (code >> offsets.smasher   ) & 3n, //
-		aura:       (code >> offsets.aura      ) & 3n, //
-		under:      (code >> offsets.under     ) & 3n, //
-		buck:       (code >> offsets.buck      ) & 3n, //
-	}, GUNS = [], TURRETS = [];
+    //artillery  : unfinished
+    //hunter     : unfinished
+    //twin       : unfinished
+    //multishot  : unfinished
+    //tri        : unfinished
+    //machinegun : unfinished
+    //pound      : unfinished
+    //sniper     : unfinished
+    //trapper    : unfinished
+    //director   : unfinished
+    //launcher   : unfinished
+    //brid       : unfinished
+    //cruiser    : unfinished
+    //auto       : unfinished
+    //drive      : unfinished
+    //shimmer    : unfinished
+    //smasher    : unfinished
+    //aura       : unfinished
+    //under      : unfinished
+    //buck       : unfinished
+    let tankCfg = {}, GUNS = [], TURRETS = [];
+    for (let key in offsets) {
+    	tankCfg[key] = (code >> offsets[key]) & 3n;
+    }
 
-	let mainStats = [g.basic],
-    	mainType = [
-    		['bullet'   , 'drone'                     , 'minion'                     , 'plugin_NET_twinion'          ],
-    		['trap'     , 'plugin_NET_trap_drone'     , 'plugin_NET_trap_minion'     , 'plugin_NET_trap_twinion'     ],
-    		['block'    , 'plugin_NET_block_drone'    , 'plugin_NET_block_minion'    , 'plugin_NET_block_twinion'    ],
-    		['boomerang', 'plugin_NET_boomerang_drone', 'plugin_NET_boomerang_minion', 'plugin_NET_boomerang_twinion']
-    	][tankCfg.director][tankCfg.trapper];
+    let gunCount = Math.max(1, tankCfg.tri * 3);
+
+    let mainStats = [g.basic],
+        mainType = mainTypeMatrix[tankCfg.director][tankCfg.trapper];
     if (tankCfg.director) {
-    	mainStats.push(g.plugin_NET_basicToDrone);
-    	if (tankCfg.director > 1) {
-    		mainStats.push(g.plugin_NET_droneToFactory);
-    	}
+        mainStats.push(g.plugin_NET_basicToDrone);
+        if (tankCfg.director > 1) {
+            mainStats.push(g.plugin_NET_droneToFactory);
+        }
     }
     if (tankCfg.trapper) {
-    	mainStats.push(g.plugin_NET_basicToTrap);
-    	if (tankCfg.trapper > 1) {
-    		mainStats.push(g.block);
-        	if (tankCfg.trapper > 2) {
-        		mainStats.push(g.boomerang);
-        	}
-    	}
+        mainStats.push(g.plugin_NET_basicToTrap);
+        if (tankCfg.trapper > 1) {
+            mainStats.push(g.block);
+            if (tankCfg.trapper > 2) {
+                mainStats.push(g.boomerang);
+            }
+        }
     }
     mainStats = combineStats(mainStats.concat(Array(tankCfg.tri).fill(g.flank)));
 
-	if (tankCfg.brid) {
-		let bridStats = [g.weak],
-			bridType = ['bullet', ["drone", { INDEPENDENT: true }], 'drone', 'minion'][tankCfg.brid];
-		if (tankCfg.brid > 1) {
-			bridStats.push(g.plugin_NET_weakToOver);
-			if (tankCfg.brid > 2) {
-				bridStats.push(g.plugin_NET_droneToFactory);
-			}
-		}
-		bridStats = combineStats(mainStats.concat(bridStats));
-		for (let i = 0; i < Math.max(1, tankCfg.tri * 3); i++) {
-			let angle = tankCfg.tri ? 180 + 360 * i / tankCfg.tri : 180;
-			if (tankCfg.brid == 1) {
-				GUNS.push({
-			        POSITION: [6, 12, 1.2, 8, 0, angle, 0],
-			        PROPERTIES: {
-			            SHOOT_SETTINGS: bridStats,
-			            TYPE: bridType,
-			            AUTOFIRE: true,
-			            SYNCS_SKILLS: true,
-			            STAT_CALCULATOR: gunCalcNames.drone,
-			            WAIT_TO_CYCLE: false,
-			            MAX_CHILDREN: 3,
-			        },
-			    });
-			} else {
-				GUNS.push({
-			        POSITION: [6, 12, 1.2, 8, 0, angle + 55, 0],
-			        PROPERTIES: {
-			            SHOOT_SETTINGS: bridStats,
-			            TYPE: bridType,
-			            AUTOFIRE: true,
-			            SYNCS_SKILLS: true,
-			            STAT_CALCULATOR: gunCalcNames.drone,
-			            WAIT_TO_CYCLE: false,
-			            MAX_CHILDREN: 3,
-			        },
-			    },{
-			        POSITION: [6, 12, 1.2, 8, 0, angle - 55, 0],
-			        PROPERTIES: {
-			            SHOOT_SETTINGS: bridStats,
-			            TYPE: bridType,
-			            AUTOFIRE: true,
-			            SYNCS_SKILLS: true,
-			            STAT_CALCULATOR: gunCalcNames.drone,
-			            WAIT_TO_CYCLE: false,
-			            MAX_CHILDREN: 3,
-			        },
-			    });
-			}
-		}
-	}
+    if (tankCfg.brid) {
+        let bridStats = [g.weak],
+            bridType = bridTypeArray[tankCfg.brid];
+        if (tankCfg.brid > 1) {
+            bridStats.push(g.plugin_NET_weakToOver);
+            if (tankCfg.brid > 2) {
+                bridStats.push(g.plugin_NET_droneToFactory);
+            }
+        }
+        bridStats = combineStats(mainStats.concat(bridStats));
+        for (let i = 0; i < gunCount; i++) {
+            let angle = 180 + 360 * i / gunCount;
+            if (tankCfg.brid == 1) {
+                GUNS.push(makeBridGun(angle, bridStats, bridType));
+            } else {
+                GUNS.push(makeBridGun(angle + 55, bridStats, bridType), makeBridGun(angle - 55, bridStats, bridType));
+            }
+        }
+    }
 
-	for (let i = 0; i < Math.max(1, tankCfg.tri * 3); i++) {
-		let angle = tankCfg.tri ? 360 * i / tankCfg.tri : 0;
+    for (let i = 0; i < gunCount; i++) {
+        let angle = 360 * i / gunCount;
 
-		GUNS.push({
+        GUNS.push({
             POSITION: [16, 8, 1, 0, 0, angle, 0.1],
             PROPERTIES: {
-            	SHOOT_SETTINGS: mainStats,
-            	TYPE: mainType
+                SHOOT_SETTINGS: mainStats,
+                TYPE: mainType
             }
         })
-	}
+    }
 
-	let upgradesListKey = 'UPGRADES_TIER_' + code.toString(4).split('').reduce((culm, curr) => culm + parseInt(curr), 1);
-	return {
-		PARENT: 'genericTank',
-		LABEL: getNameFromCode(code),
-		GUNS, TURRETS,
-		upgradesListKey,
-		[upgradesListKey]: []
+    let upgradesListKey = 'UPGRADES_TIER_' + getTierFromCode(code);
+    return {
+        PARENT: 'genericTank',
+        LABEL: getNameFromCode(code),
+        GUNS, TURRETS,
+        upgradesListKey,
+        [upgradesListKey]: []
+    }
+}
+
+function makeTankTreeRecursively(Class, code, maxTier) {
+	let key = getKeyFromCode(code);
+	if (!(key in Class)) {
+		Class[key] = makeTankFromCode(code);
+		if (getTierFromCode(code) < maxTier) {
+		    for (let offset of offsets) {
+		    	Class[key][Class[key].upgradesListKey].push(makeTankTreeRecursively(Class, code + (1n << offset), maxTier));
+		    }
+		}
 	}
+	return key;
 }
 
 module.exports = ({ Class, Events, Config }) => {
-	let { MAX_UPGRADE_TIER } = Config;
-	Class.plugin_NET_twinion = {
-		PARENT: 'minion',
-    	LABEL: "Twinion",
-	    GUNS: [{
+    let maxTier = Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER ?? Config.MAX_UPGRADE_TIER ?? 4;
+    Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER = Math.max(Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER, Config.MAX_UPGRADE_TIER);
+    Class.plugin_NET_twinion = {
+        PARENT: 'minion',
+        LABEL: "Twinion",
+        GUNS: [{
             POSITION: [17, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.minion, g.twin]),
@@ -189,14 +199,26 @@ module.exports = ({ Class, Events, Config }) => {
                 WAIT_TO_CYCLE: true, TYPE: "bullet"
             }
         }]
-	};
-	Class.plugin_NET_trap_drone = { PARENT: 'drone' };
-	Class.plugin_NET_trap_minion = { PARENT: 'minion' };
-	Class.plugin_NET_trap_twinion = { PARENT: 'twinion' };
-	Class.plugin_NET_block_drone = { PARENT: 'drone' };
-	Class.plugin_NET_block_minion = { PARENT: 'minion' };
-	Class.plugin_NET_block_twinion = { PARENT: 'twinion' };
-	Class.plugin_NET_boomerang_drone = { PARENT: 'drone' };
-	Class.plugin_NET_boomerang_minion = { PARENT: 'minion' };
-	Class.plugin_NET_boomerang_twinion = { PARENT: 'twinion' };
+    };
+
+    // TODO: add an indicator for how many tanks will be added
+    console.log(`maxTier: ${maxTier}\nWARNING: large maxTier leads to exponentially longer loading times!\ngenerating tanks now...`);
+
+	// for now, they are just stronger versions
+	// i wonder what else could be added though, especially boomerang
+    Class.plugin_NET_trap_drone        = { PARENT: 'drone'             , LABEL: "Trap Drone"       , SHAPE: -3 };
+    Class.plugin_NET_trap_minion       = { PARENT: 'minion'            , LABEL: "Trap Minion"      , SHAPE: -3 };
+    Class.plugin_NET_trap_twinion      = { PARENT: 'plugin_NET_twinion', LABEL: "Trap Twinion"     , SHAPE: -3 };
+    Class.plugin_NET_block_drone       = { PARENT: 'drone'             , LABEL: "Block Drone"      , SHAPE: -4 };
+    Class.plugin_NET_block_minion      = { PARENT: 'minion'            , LABEL: "Block Minion"     , SHAPE: -4 };
+    Class.plugin_NET_block_twinion     = { PARENT: 'plugin_NET_twinion', LABEL: "Block Twinion"    , SHAPE: -4 };
+    Class.plugin_NET_boomerang_drone   = { PARENT: 'drone'             , LABEL: "Boomerang Drone"  , SHAPE: -5 };
+    Class.plugin_NET_boomerang_minion  = { PARENT: 'minion'            , LABEL: "Boomerang Minion" , SHAPE: -5 };
+    Class.plugin_NET_boomerang_twinion = { PARENT: 'plugin_NET_twinion', LABEL: "Boomerang Twinion", SHAPE: -5 };
+
+    //fuck it, recursion because why not
+    let start = Date.now();
+    Config.SPAWN_CLASS = makeTankTreeRecursively(Class, 0n, maxTier);
+
+    console.log(`time taken: ${(Date.now() - start) / 1000} seconds`);
 };
