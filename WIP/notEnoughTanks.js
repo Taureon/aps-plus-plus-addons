@@ -109,7 +109,7 @@ function makeTankFromCode(code) {
     let gunCount = Math.max(1, tankCfg.tri * 3);
 
     let mainStats = [g.basic],
-        mainType = mainTypeMatrix[tankCfg.director][tankCfg.trapper];
+        mainType = mainTypeMatrix[tankCfg.director][tankCfg.trapper]; // TODO: add 'launcher' variations
     if (tankCfg.director) {
         mainStats.push(g.plugin_NET_basicToDrone);
         if (tankCfg.director > 1) {
@@ -126,10 +126,18 @@ function makeTankFromCode(code) {
         }
     }
     mainStats = combineStats(mainStats.concat(Array(tankCfg.tri).fill(g.flank)));
+    // TODO: add 'twin' to mainStats
+	// TODO: add 'machinegun' to mainStats
+	// TODO: add 'pound' to mainStats
+	// TODO: add 'sniper' to mainStats
 
     if (tankCfg.brid) {
         let bridStats = [g.weak],
-            bridType = bridTypeArray[tankCfg.brid];
+            bridType = bridTypeArray[tankCfg.brid]
+       // , width = figureOut,
+       // , length = figureOut,
+       // , aspect = figureOut
+        	;
         if (tankCfg.brid > 1) {
             bridStats.push(g.plugin_NET_weakToOver);
             if (tankCfg.brid > 2) {
@@ -148,16 +156,41 @@ function makeTankFromCode(code) {
     }
 
     for (let i = 0; i < gunCount; i++) {
-        let angle = 360 * i / gunCount;
+        let angle = 360 * i / gunCount
+       // , width = figureOut,
+       // , length = figureOut,
+       // , aspect = figureOut
+        	;
 
-        GUNS.push({
-            POSITION: [16, 8, 1, 0, 0, angle, 0.1],
-            PROPERTIES: {
-                SHOOT_SETTINGS: mainStats,
-                TYPE: mainType
-            }
-        })
+        // TODO: add 'artillery' side guns
+
+        // TODO: add 'cruiser' side guns
+
+        // TODO- add 'twin' loop
+	        // TODO: add 'multishot' loop
+		        // TODO: add 'hunter' loop
+		        	// TODO: add 'launcher' decoration
+		        	// TODO: add 'trapper' decoration
+
+	        		// TODO: if 'buck', instead of a single gun, add more smaller guns with the big one being decorative
+			        GUNS.push({
+			            POSITION: [16, 8, 1, 0, 0, angle, 0.1],
+			            PROPERTIES: {
+			                SHOOT_SETTINGS: mainStats,
+			                TYPE: mainType
+			            }
+			        });
+		        // close 'hunter' loop
+			// close 'multishot' loop
+		// close 'twin' loop
+
+	    // TODO: add 'buck' decoration
     }
+
+    // TODO: add 'auto' turret
+	// TODO: add 'aura' turret
+	// TODO: add 'smasher' turrets and effects
+	// TODO: add 'shimmer' effects
 
     let upgradesListKey = 'UPGRADES_TIER_' + getTierFromCode(code);
     return {
@@ -217,6 +250,7 @@ module.exports = ({ Class, Events, Config }) => {
     Class.plugin_NET_boomerang_drone   = { PARENT: 'drone'             , LABEL: "Boomerang Drone"  , SHAPE: -5 };
     Class.plugin_NET_boomerang_minion  = { PARENT: 'minion'            , LABEL: "Boomerang Minion" , SHAPE: -5 };
     Class.plugin_NET_boomerang_twinion = { PARENT: 'plugin_NET_twinion', LABEL: "Boomerang Twinion", SHAPE: -5 };
+    // TODO: add 'launcher' variations
 
     //fuck it, recursion because why not
     let start = Date.now();
