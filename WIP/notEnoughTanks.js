@@ -83,22 +83,24 @@ function makeTankFromCode(code) {
     //hunter     : unfinished
     //twin       : unfinished
     //multishot  : unfinished
-    //tri        : unfinished
+    //tri        : finished (?)
     //machinegun : unfinished
     //pound      : unfinished
     //sniper     : unfinished
-    //trapper    : unfinished
-    //director   : unfinished
+    //trapper    : finished (?) (incomplete crossover projectiles with 'director')
+    //director   : finished (?) (incomplete crossover projectiles with 'trapper')
     //launcher   : unfinished
-    //brid       : unfinished
+    //brid       : finished (?) (assuming 'brid' is different)
     //cruiser    : unfinished
     //auto       : unfinished
-    //drive      : unfinished
+    //drive      : unfinished (potentially has to affect main projectiles instead of just brid projectiles)
     //shimmer    : unfinished
     //smasher    : unfinished
     //aura       : unfinished
-    //under      : unfinished
+    //under      : unfinished (potentially has to affect projectiles instead of just ramming)
     //buck       : unfinished
+    // (?) = i am not sure if it really is that state
+    // (..text..) = description, potentially to add context to '(?)'
     let tankCfg = {}, GUNS = [], TURRETS = [];
     for (let key in offsets) {
     	tankCfg[key] = (code >> offsets[key]) & 3n;
