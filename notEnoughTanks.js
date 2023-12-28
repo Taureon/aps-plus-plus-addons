@@ -1,27 +1,27 @@
 /*
-artillery => mortar => sheller
-hunter => pred => carniv (no sniper stats on branch)
-twin => triplet => quintuplet
-multishot => minigun => streamliner
-tri => hexa => nona
-buck(shot) => shot(gun) => boom(stick)
-launcher => skimmer => hyperskimmer
+artillery            => mortar                          => sheller
+hunter               => pred                            => carniv (no sniper stats on branch)
+twin                 => triplet                         => quintuplet
+multishot            => minigun                         => streamliner
+tri                  => hexa                            => nona
+buck(shot)           => shot(gun)                       => boom(stick)
+launcher             => skimmer                         => hyperskimmer
 
-machinegun => gunner => machine gunner (2 barrels only for machine gunner)
-pound => destroy => anni
-sniper => assassin => ranger
-trapper => builder => boomer
-director => spawner => twinspawner
+machinegun           => gunner                          => machine gunner (2 barrels only for machine gunner)
+pound                => destroy                         => anni
+sniper               => assassin                        => ranger
+trapper              => builder                         => boomer
+director             => spawner                         => twinspawner
 
-brid => over => cap
-cruiser => initiator => twiniator
-auto => twinauto => tripletauto
-drive => twindrive => tripletdrive
+brid                 => over                            => cap
+cruiser              => initiator                       => twiniator
+auto                 => twinauto                        => tripletauto
+drive                => twindrive                       => tripletdrive
 
 shimmer (slow invis) => hider (0.5 alpha, faster invis) => shadow (0.2 alpha, slow invis)
-smasher => spike => thorn
-aura => sphere => bubble
-under (+square) => necro (+triangle) => lich (+egg)
+smasher              => spike                           => thorn
+aura                 => sphere                          => bubble
+under (+square)      => necro (+triangle)               => lich (+egg)
 */
 
 const { combineStats } = require('../facilitators.js');
