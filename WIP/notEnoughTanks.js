@@ -24,6 +24,17 @@ aura                 => sphere                          => bubble
 under (+square)      => necro (+triangle)               => lich (+egg)
 */
 
+/*
+These details make everything more understandable:
+
+'code' refers to a BigInt that is split up into pairs of bits,
+which makes the BigInt an array of 4 bit integers
+it isn't ACTUALLY an array of 4 bit integers,
+but we add bitwise operations to act like that it is
+
+'(code >> someShift) & 3n' => gets an integer in that ""array of 4 bit integers""
+*/
+
 const { combineStats } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
@@ -39,6 +50,8 @@ const offsets = Object.fromEntries([
     'launcher'  , 'brid'   , 'cruiser', 'auto'     , 'drive',
     'shimmer'   , 'smasher', 'aura'   , 'under'    , 'buck'
 ].map((_, i) => [_, BigInt(i * 4)])),
+offsetsLength = Object.keys(offsets).length,
+
 mainTypeMatrix = [
     ['bullet'   , 'drone'                     , 'minion'                     , 'plugin_NET_twinion'          ],
     ['trap'     , 'plugin_NET_trap_drone'     , 'plugin_NET_trap_minion'     , 'plugin_NET_trap_twinion'     ],
@@ -46,6 +59,14 @@ mainTypeMatrix = [
     ['boomerang', 'plugin_NET_boomerang_drone', 'plugin_NET_boomerang_minion', 'plugin_NET_boomerang_twinion']
 ],
 bridTypeArray = ['bullet', ["drone", { INDEPENDENT: true }], 'drone', 'minion'];
+
+function getTankConfigFromCode(code) {
+    let tankConfig = {};
+    for (let key in offsets) {
+        tankConfig[key] = parseInt((code >> offsets[key]) & 3n);
+    }
+    return tankConfig;
+}
 
 function getKeyFromCode(code) {
     return code.toString(2).split('').reduce((culm, curr, i) => {
@@ -55,27 +76,44 @@ function getKeyFromCode(code) {
     }, ['NET_']).join('');
 }
 
-function makeNameFromCode(code) {
+function getLabelFromCode(code) {
+    // optionally, you can parse the code with getTankConfigFromCode(code)
+    // and then make a name out of that,
+    // but while the tanks themselves havent been tested enough,
+    // we simply set the label to the key
 	return getKeyFromCode(code);
 }
 
 function getTierFromCode(code) {
-	return code.toString(4).split('').reduce((culm, curr) => culm + parseInt(curr), 1);
+    let accumulator = 0n,
+        shift = BigInt(offsetsLength * 2);
+    while (shift) {
+        shift -= 2n;
+        accumulator += (code >> shift) & 3n;
+    }
+	return parseInt(accumulator);
 }
 
-function makeBridGun(angle, bridStats, bridType) {
-    return {
-        POSITION: [6, 12, 1.2, 8, 0, angle, 0],
-        PROPERTIES: {
-            SHOOT_SETTINGS: bridStats,
-            TYPE: bridType,
-            AUTOFIRE: true,
-            SYNCS_SKILLS: true,
-            STAT_CALCULATOR: gunCalcNames.drone,
-            WAIT_TO_CYCLE: false,
-            MAX_CHILDREN: 3,
-        },
-    };
+function makeBridGun(width, length, aspect, angle, stats, type) {
+    return [{
+        POSITION: [6 + length, 12 + width, 1.2 + aspect / 10, 8, 0, angle, 0],
+        PROPERTIES: { SHOOT_SETTINGS: stats, TYPE: type, AUTOFIRE: true, SYNCS_SKILLS: true, STAT_CALCULATOR: gunCalcNames.drone, WAIT_TO_CYCLE: false, MAX_CHILDREN: 3 }
+    }]
+}
+
+function makeCapGun(width, length, aspect, angle, stats, type) {
+    // TODO: finish this tomrorow
+    let factor1 = 1 - (10 + width) / (15 + length),
+        factor2 = (10 + width) / (15 + length),
+        factor3 = (10 + width) / (15 + length);
+    return [{
+        POSITION: [4.5, 10 + width, 1 + (aspect / 10) * factor1, 10.5 + length, 0, angle, 0]
+    },{
+        POSITION: [1, 12 + width, 1 + aspect / 10, 15 + length, 0, angle, 0],
+        PROPERTIES: { SHOOT_SETTINGS: stats, TYPE: type, AUTOFIRE: true, SYNCS_SKILLS: true, STAT_CALCULATOR: gunCalcNames.drone, WAIT_TO_CYCLE: false, MAX_CHILDREN: 3 
+    },{
+        POSITION: [11.5 + length, 12 + width, 1 + aspect / 10, 0, 0, angle, 0]
+    }];
 }
 
 function makeTankFromCode(code) {
@@ -101,12 +139,13 @@ function makeTankFromCode(code) {
     //buck       : unfinished
     // (?) = i am not sure if it really is that state
     // (..text..) = description, potentially to add context to '(?)'
-    let tankCfg = {}, GUNS = [], TURRETS = [], BODY = {};
-    for (let key in offsets) {
-    	tankCfg[key] = (code >> offsets[key]) & 3n;
-    }
 
-    let gunCount = Math.max(1, tankCfg.tri * 3);
+    let tankCfg = getTankConfigFromCode(code), GUNS = [], TURRETS = [], BODY = {};
+
+    let gunCount = Math.max(1, tankCfg.tri * 3),
+        mainWidth = figureOut,
+        mainLength = figureOut,
+        mainAspect = figureOut;
 
     let mainStats = [g.basic],
         mainType = mainTypeMatrix[tankCfg.director][tankCfg.trapper]; // TODO: add 'launcher' variations
@@ -133,11 +172,10 @@ function makeTankFromCode(code) {
 
     if (tankCfg.brid) {
         let bridStats = [g.weak],
-            bridType = bridTypeArray[tankCfg.brid]
-       // , width = 8 * figureOut
-       // , length = 18 * figureOut
-       // , aspect = 1 * figureOut
-        	;
+            bridType = bridTypeArray[tankCfg.brid],
+            bridWidth = figureOut,
+            bridLength = figureOut,
+            bridAspect = figureOut;
         if (tankCfg.brid > 1) {
             bridStats.push(g.plugin_NET_weakToOver);
             if (tankCfg.brid > 2) {
@@ -147,20 +185,21 @@ function makeTankFromCode(code) {
         bridStats = combineStats(mainStats.concat(bridStats));
         for (let i = 0; i < gunCount; i++) {
             let angle = 180 + 360 * i / gunCount;
+            switch (tankCfg.brid) {
+                case 1: GUNS.push(...makeBridGun(bridWidth, bridLength, bridAspect, angle, bridStats, bridType)); break;
+                case 2: GUNS.push(...makeBridGun(bridWidth, bridLength, bridAspect, angle + 55, bridStats, bridType), ...makeBridGun(angle - 55, bridStats, bridType)); break;
+                case 3: GUNS.push(...makeCapGun(bridWidth, bridLength, bridAspect, angle + 55, bridStats, bridType), ...makeCapGun(angle - 55, bridStats, bridType)); break;
+            }
             if (tankCfg.brid == 1) {
-                GUNS.push(makeBridGun(angle, bridStats, bridType));
+                
             } else {
-                GUNS.push(makeBridGun(angle + 55, bridStats, bridType), makeBridGun(angle - 55, bridStats, bridType));
+                
             }
         }
     }
 
- // let width = 8 * figureOut,
- //     length = 18 * figureOut,
- //     aspect = 1 * figureOut;
     for (let i = 0; i < gunCount; i++) {
-        let angle = 360 * i / gunCount
-        	;
+        let angle = 360 * i / gunCount;
 
         // TODO: add 'artillery' side guns
 
@@ -195,7 +234,7 @@ function makeTankFromCode(code) {
     let upgradesListKey = 'UPGRADES_TIER_' + getTierFromCode(code);
     return {
         PARENT: 'genericTank',
-        LABEL: getNameFromCode(code),
+        LABEL: getLabelFromCode(code),
         BODY, GUNS, TURRETS,
         upgradesListKey,
         [upgradesListKey]: []
@@ -208,7 +247,10 @@ function makeTankTreeRecursively(Class, code, maxTier) {
 		Class[key] = makeTankFromCode(code);
 		if (getTierFromCode(code) < maxTier) {
 		    for (let offset of offsets) {
-		    	Class[key][Class[key].upgradesListKey].push(makeTankTreeRecursively(Class, code + (1n << offset), maxTier));
+                let upgradeCode = code + (1n << offset);
+                if ((upgradeCode >> offset) & 3n) {
+		    	    Class[key][Class[key].upgradesListKey].push(makeTankTreeRecursively(Class, upgradeCode, maxTier));
+                }
 		    }
 		}
 	}
