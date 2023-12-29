@@ -101,7 +101,7 @@ function makeTankFromCode(code) {
     //buck       : unfinished
     // (?) = i am not sure if it really is that state
     // (..text..) = description, potentially to add context to '(?)'
-    let tankCfg = {}, GUNS = [], TURRETS = [];
+    let tankCfg = {}, GUNS = [], TURRETS = [], BODY = {};
     for (let key in offsets) {
     	tankCfg[key] = (code >> offsets[key]) & 3n;
     }
@@ -134,9 +134,9 @@ function makeTankFromCode(code) {
     if (tankCfg.brid) {
         let bridStats = [g.weak],
             bridType = bridTypeArray[tankCfg.brid]
-       // , width = figureOut,
-       // , length = figureOut,
-       // , aspect = figureOut
+       // , width = 8 * figureOut
+       // , length = 18 * figureOut
+       // , aspect = 1 * figureOut
         	;
         if (tankCfg.brid > 1) {
             bridStats.push(g.plugin_NET_weakToOver);
@@ -155,11 +155,11 @@ function makeTankFromCode(code) {
         }
     }
 
+ // let width = 8 * figureOut,
+ //     length = 18 * figureOut,
+ //     aspect = 1 * figureOut;
     for (let i = 0; i < gunCount; i++) {
         let angle = 360 * i / gunCount
-       // , width = figureOut,
-       // , length = figureOut,
-       // , aspect = figureOut
         	;
 
         // TODO: add 'artillery' side guns
@@ -196,7 +196,7 @@ function makeTankFromCode(code) {
     return {
         PARENT: 'genericTank',
         LABEL: getNameFromCode(code),
-        GUNS, TURRETS,
+        BODY, GUNS, TURRETS,
         upgradesListKey,
         [upgradesListKey]: []
     }
