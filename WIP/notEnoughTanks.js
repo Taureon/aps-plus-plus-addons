@@ -113,21 +113,18 @@ function lerpReverse(min, step, max) {
     return (step - min) / (max - min);
 }
 
-function makeCapGun(width, length, aspect, angle, stats, type) {
-    let fullBarrelAspect = 1 + aspect / 10,
-        fullBarrelLength = 16 + length,
-        fullBarrelWidth = 12 + width,
-        fullBarrelWidthEnd = fullBarrelWidth * fullBarrelAspect,
+function makeAspectedSpawnerGun(fullBarrelWidth, fullBarrelLength, fullBarrelAspect, angle, stats, type) {
+    let fullBarrelWidthEnd = fullBarrelWidth * fullBarrelAspect,
 
         lowerBarrelWidth = fullBarrelWidth,
-        lowerBarrelLength = 11.5 + length,
+        lowerBarrelLength = fullBarrelLength - 4.5,
         lowerBarrelAspect = precisionRound(lerp(1, lerpReverse(0, lowerBarrelLength, fullBarrelLength), fullBarrelAspect), 20),
 
-        upperBarrelX = 15 + length,
+        upperBarrelX = fullBarrelLength - 1,
         upperBarrelWidth = precisionRound(lerp(lowerBarrelWidth, lerpReverse(0, upperBarrelX, fullBarrelLength), fullBarrelWidthEnd), 2),
         upperBarrelAspect = precisionRound(lerp(lowerBarrelWidth, lerpReverse(fullBarrelLength, upperBarrelX, 0), fullBarrelWidthEnd), 20),
 
-        backgroundBarrelX = 10.5 + length,
+        backgroundBarrelX = fullBarrelLength - 5.5,
         backgroundBarrelLength = 4.5,
         backgroundBarrelWidth = precisionRound(lerp(lowerBarrelWidth, lerpReverse(0, backgroundBarrelX, fullBarrelLength), fullBarrelWidthEnd), 2) - 2,
         //this here is more of a guess than a thought out theory
@@ -141,6 +138,10 @@ function makeCapGun(width, length, aspect, angle, stats, type) {
     },{
         POSITION: [lowerBarrelLength, lowerBarrelWidth, lowerBarrelAspect, 0, 0, angle, 0]
     }];
+}
+
+function makeCapGun(width, length, aspect, angle, stats, type) {
+    return makeAspectedSpawnerGun(12 + width, 16 + length, 1 + aspect / 10, angle, stats, type);
 }
 
 function makeTankFromCode(code) {
