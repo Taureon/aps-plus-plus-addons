@@ -101,18 +101,45 @@ function makeBridGun(width, length, aspect, angle, stats, type) {
     }]
 }
 
+function precisionRound(number, precision) {
+    return Math.round(number * precision) / precision;
+}
+
+function lerp(min, step, max) {
+    return min + (max - min) * step;
+}
+
+function lerpReverse(min, step, max) {
+    return (step - min) / (max - min);
+}
+
 function makeCapGun(width, length, aspect, angle, stats, type) {
-    // TODO: finish this tomrorow
-    let factor1 = 1 - (10 + width) / (15 + length),
-        factor2 = (10 + width) / (15 + length),
-        factor3 = (10 + width) / (15 + length);
+    let fullBarrelAspect = 1 + aspect / 10,
+        fullBarrelLength = 16 + length,
+        fullBarrelWidth = 12 + width,
+        fullBarrelWidthEnd = fullBarrelWidth * fullBarrelAspect,
+
+        lowerBarrelWidth = fullBarrelWidth,
+        lowerBarrelLength = 11.5 + length,
+        lowerBarrelAspect = precisionRound(lerp(1, lerpReverse(0, lowerBarrelLength, fullBarrelLength), fullBarrelAspect), 20),
+
+        upperBarrelX = 15 + length,
+        upperBarrelWidth = precisionRound(lerp(lowerBarrelWidth, lerpReverse(0, upperBarrelX, fullBarrelLength), fullBarrelWidthEnd), 2),
+        upperBarrelAspect = precisionRound(lerp(lowerBarrelWidth, lerpReverse(fullBarrelLength, upperBarrelX, 0), fullBarrelWidthEnd), 20),
+
+        backgroundBarrelX = 10.5 + length,
+        backgroundBarrelLength = 4.5,
+        backgroundBarrelWidth = precisionRound(lerp(lowerBarrelWidth, lerpReverse(0, backgroundBarrelX, fullBarrelLength), fullBarrelWidthEnd), 2) - 2,
+        //this here is more of a guess than a thought out theory
+        backgroundBarrelAspect = precisionRound(lerp(lowerBarrelWidth, lerpReverse(fullBarrelLength, backgroundBarrelX, 0), fullBarrelWidthEnd) / lerpReverse(0, backgroundBarrelX + backgroundBarrelLength, fullBarrelLength), 20);
+
     return [{
-        POSITION: [4.5, 10 + width, 1 + (aspect / 10) * factor1, 10.5 + length, 0, angle, 0]
+        POSITION: [backgroundBarrelLength, backgroundBarrelWidth, backgroundBarrelAspect, backgroundBarrelX, 0, angle, 0]
     },{
-        POSITION: [1, 12 + width, 1 + aspect / 10, 15 + length, 0, angle, 0],
+        POSITION: [1, upperBarrelWidth, upperBarrelAspect, upperBarrelX, 0, angle, 0],
         PROPERTIES: { SHOOT_SETTINGS: stats, TYPE: type, AUTOFIRE: true, SYNCS_SKILLS: true, STAT_CALCULATOR: gunCalcNames.drone, WAIT_TO_CYCLE: false, MAX_CHILDREN: 3 
     },{
-        POSITION: [11.5 + length, 12 + width, 1 + aspect / 10, 0, 0, angle, 0]
+        POSITION: [lowerBarrelLength, lowerBarrelWidth, lowerBarrelAspect, 0, 0, angle, 0]
     }];
 }
 
