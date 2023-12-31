@@ -101,47 +101,64 @@ function makeBridGun(width, length, aspect, angle, stats, type) {
     }]
 }
 
-function precisionRound(number, precision) {
-    return Math.round(number * precision) / precision;
+function getAspectFromSlice(totalLength, totalAspect, startX, endX) {
+    if (startX < 0 || endX > totalLength) return 1;
+
+    let startWidth, endWidth, positiveAspect;
+    if (totalAspect > 0) {
+        startWidth = 1;
+        endWidth = totalAspect;
+        positiveAspect = totalAspect;
+    } else {
+        startWidth = -totalAspect;
+        endWidth = 1;
+        positiveAspect = -1 / totalAspect;
+    }
+    
+    let sectionStartWidth = startWidth * (1 + (positiveAspect - 1) * startX / totalLength),
+        sectionEndWidth = startWidth * (1 + (positiveAspect - 1) * endX / totalLength);
+    return sectionEndWidth / sectionStartWidth;
 }
 
-function lerp(min, step, max) {
-    return min + (max - min) * step;
-}
+function makeAspectedSpawnerGun(baseBarrelWidth, baseBarrelLength, middleBarrelWidth, middleGapLength, endBarrelLength, aspect = 1, angle = 0, x = 0, y = 0, delay = 0, stats = [g.factory], TYPE = 'minion', MAX_CHILDREN = 4) {
+    let middleBarrelLength = baseBarrelLength + middleGapLength;
+    let totalLength = middleBarrelLength + endBarrelLength;
+    let baseStartWidth, baseEndWidth, middleStartWidth, middleEndWidth;
+    if (aspect > 0) {
+        baseStartWidth = baseBarrelWidth;
+        baseEndWidth = baseBarrelWidth * aspect;
+        middleStartWidth = middleBarrelWidth;
+        middleEndWidth = middleBarrelWidth * aspect;
+    } else {
+        baseStartWidth = baseBarrelWidth * aspect * -1;
+        baseEndWidth = baseBarrelWidth;
+        middleStartWidth = middleBarrelWidth * aspect * -1;
+        middleEndWidth = middleBarrelWidth;
+    }
 
-function lerpReverse(min, step, max) {
-    return (step - min) / (max - min);
-}
+    let baseBarrelAspect = getAspectFromSlice(totalLength, aspect, 0, baseBarrelLength);
+    let baseBarrelFinal = { POSITION: [baseBarrelLength, baseStartWidth, baseBarrelAspect, x, y, angle, delay] };
+    let middleBarrelAspect = getAspectFromSlice(totalLength, aspect, 0, middleBarrelLength);
+    let middleBarrelFinal = { POSITION: [middleBarrelLength, middleStartWidth, middleBarrelAspect, x, y, angle, delay] };
+    let endBarrelAspect = getAspectFromSlice(totalLength, aspect, middleBarrelLength, totalLength);
+    let endBarrelFinal = {
+        POSITION: [endBarrelLength, baseStartWidth * middleBarrelAspect, endBarrelAspect, x + middleBarrelLength, y, angle, delay],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([...stats, {size: 1 / middleBarrelAspect}]),
+            TYPE, 
+            MAX_CHILDREN,
+            STAT_CALCULATOR: gunCalcNames.drone,
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+        }
+    };
 
-function makeAspectedSpawnerGun(fullBarrelWidth, fullBarrelLength, fullBarrelAspect, angle, stats, type) {
-    let fullBarrelWidthEnd = fullBarrelWidth * fullBarrelAspect,
-
-        lowerBarrelWidth = fullBarrelWidth,
-        lowerBarrelLength = fullBarrelLength - 4.5,
-        lowerBarrelAspect = precisionRound(lerp(1, lerpReverse(0, lowerBarrelLength, fullBarrelLength), fullBarrelAspect), 20),
-
-        upperBarrelX = fullBarrelLength - 1,
-        upperBarrelWidth = precisionRound(lerp(lowerBarrelWidth, lerpReverse(0, upperBarrelX, fullBarrelLength), fullBarrelWidthEnd), 2),
-        upperBarrelAspect = precisionRound(lerp(lowerBarrelWidth, lerpReverse(fullBarrelLength, upperBarrelX, 0), fullBarrelWidthEnd), 20),
-
-        backgroundBarrelX = fullBarrelLength - 5.5,
-        backgroundBarrelLength = 4.5,
-        backgroundBarrelWidth = precisionRound(lerp(lowerBarrelWidth, lerpReverse(0, backgroundBarrelX, fullBarrelLength), fullBarrelWidthEnd), 2) - 2,
-        //this here is more of a guess than a thought out theory
-        backgroundBarrelAspect = precisionRound(lerp(lowerBarrelWidth, lerpReverse(fullBarrelLength, backgroundBarrelX, 0), fullBarrelWidthEnd) / lerpReverse(0, backgroundBarrelX + backgroundBarrelLength, fullBarrelLength), 20);
-
-    return [{
-        POSITION: [backgroundBarrelLength, backgroundBarrelWidth, backgroundBarrelAspect, backgroundBarrelX, 0, angle, 0]
-    },{
-        POSITION: [1, upperBarrelWidth, upperBarrelAspect, upperBarrelX, 0, angle, 0],
-        PROPERTIES: { SHOOT_SETTINGS: stats, TYPE: type, AUTOFIRE: true, SYNCS_SKILLS: true, STAT_CALCULATOR: gunCalcNames.drone, WAIT_TO_CYCLE: false, MAX_CHILDREN: 3 
-    },{
-        POSITION: [lowerBarrelLength, lowerBarrelWidth, lowerBarrelAspect, 0, 0, angle, 0]
-    }];
+    return [middleBarrelFinal, endBarrelFinal, baseBarrelFinal];
 }
 
 function makeCapGun(width, length, aspect, angle, stats, type) {
-    return makeAspectedSpawnerGun(12 + width, 16 + length, 1 + aspect / 10, angle, stats, type);
+    // TODO: update inputted values to match function
+    // return makeAspectedSpawnerGun(12 + width, 16 + length, 1 + aspect / 10, angle, stats, type);
 }
 
 function makeTankFromCode(code) {
