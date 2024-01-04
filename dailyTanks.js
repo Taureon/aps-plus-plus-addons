@@ -1105,7 +1105,7 @@ Class.dailyTanks = {
 		"master",
 		"undertow",
 		"literallyAMachineGun",
-		//"literallyATank",
+		"literallyATank",
 		"rocketeer",
 		"jumpSmasher",
 	]
@@ -1124,6 +1124,234 @@ Class.jumpSmasher = {
     ]
 }
 
+// *InsertCorrectDateHereCuzIdk* - Literally A Tank
+class io_turretWithMotion extends IO {
+    constructor(b, opts = {}) {
+        super(b)
+    }
+    think(input) {
+        return {
+            target: this.body.master.velocity,
+            main: true,
+        };
+    }
+}
+ioTypes.turretWithMotion = io_turretWithMotion
+Class.latTop = makeDeco(0)
+Class.latDeco1 = {
+    PARENT: "genericTank",
+    LABEL: "Tank Deco",
+	FACING_TYPE: ["turnWithSpeed"],
+    COLOR: "#5C533F",
+    SHAPE: "M -1 -2 C -1 -2 -1 -3 0 -3 C 1 -3 1 -2 1 -2 V 2 C 1 2 1 3 0 3 C -1 3 -1 2 -1 2 V -2",
+	MIRROR_MASTER_ANGLE: true,
+}
+Class.latDeco2 = {
+    PARENT: "genericTank",
+    LABEL: "Tank Deco",
+	FACING_TYPE: ["turnWithSpeed"],
+    COLOR: "#5C533F",
+    SHAPE: "M -2 0 H 2 L 0 1 L -2 0",
+	MIRROR_MASTER_ANGLE: true,
+}
+Class.latDeco3 = {
+    PARENT: "genericTank",
+    LABEL: "Tank Deco",
+	FACING_TYPE: ["turnWithSpeed"],
+    COLOR: "#3F3B2D",
+    SHAPE: "M -10 -1 L 10 -1 L 10 1 L -10 1 L -10 -1",
+	MIRROR_MASTER_ANGLE: true,
+}
+Class.latRight = {
+    PARENT: "genericTank",
+    LABEL: "Tank Side",
+	FACING_TYPE: ["turnWithSpeed"],
+    COLOR: "#96794E",
+    SHAPE: "M -6 0 H 5 V 1 C 5 2 4 2 4 2 H -5 C -6 2 -6 1 -6 1 V 0",
+	MIRROR_MASTER_ANGLE: true,
+    TURRETS: [
+        {
+            POSITION: [4.8, 31, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, 24, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, 17, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, -42, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, -35, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, -28, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [18, -5, 0, 0, 0, 1],
+            TYPE: "latDeco2",
+        },
+    ]
+}
+Class.latLeft = {
+    PARENT: "genericTank",
+    LABEL: "Tank Side",
+	FACING_TYPE: ["turnWithSpeed"],
+    COLOR: "#96794E",
+    SHAPE: "M -5 0 H 6 V 1 C 6 2 5 2 5 2 H -4 C -5 2 -5 1 -5 1 V 0",
+	MIRROR_MASTER_ANGLE: true,
+    TURRETS: [
+        {
+            POSITION: [4.8, -31, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, -24, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, -17, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, 42, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, 35, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [4.8, 28, 10, 0, 0, 1],
+            TYPE: "latDeco1",
+        },
+        {
+            POSITION: [18, 5, 0, 0, 0, 1],
+            TYPE: "latDeco2",
+        },
+    ]
+}
+Class.latBase = {
+    PARENT: "genericTank",
+    LABEL: "Tank Base",
+	CONTROLLERS: ["turretWithMotion"],
+    COLOR: "#96794E",
+    SHAPE: [
+        [1.1, 1],
+		[1.4, 0],
+		[1.1, -1],
+		[-1.1, -1],
+		[-0.8, 0],
+		[-1.1, 1]
+    ],
+    GUNS: [
+        {
+            POSITION: [16, 5.5, 1, 1, 6.5, 0, 0]
+        },
+        {
+            POSITION: [14.5, 5.5, 1, 1, 6.5, 0, 0]
+        },
+        {
+            POSITION: [13, 5.5, 1, 1, 6.5, 0, 0]
+        },
+        {
+            POSITION: [16, 5.5, 1, 1, -6.5, 0, 0]
+        },
+        {
+            POSITION: [14.5, 5.5, 1, 1, -6.5, 0, 0]
+        },
+        {
+            POSITION: [13, 5.5, 1, 1, -6.5, 0, 0]
+        },
+        {
+            POSITION: [13, 5.5, 1, 1, 6.5, 180, 0]
+        },
+        {
+            POSITION: [11.5, 5.5, 1, 1, 6.5, 180, 0]
+        },
+        {
+            POSITION: [10, 5.5, 1, 1, 6.5, 180, 0]
+        },
+        {
+            POSITION: [8.5, 5.5, 1, 1, 6.5, 180, 0]
+        },
+        {
+            POSITION: [13, 5.5, 1, 1, -6.5, 180, 0]
+        },
+        {
+            POSITION: [11.5, 5.5, 1, 1, -6.5, 180, 0]
+        },
+        {
+            POSITION: [10, 5.5, 1, 1, -6.5, 180, 0]
+        },
+        {
+            POSITION: [8.5, 5.5, 1, 1, -6.5, 180, 0]
+        },
+    ],
+    TURRETS: [
+        {
+            POSITION: [5.3, 0, -10, 0, 0, 1],
+            TYPE: "latLeft",
+        },
+        {
+            POSITION: [5.3, 0, -10, 180, 0, 1],
+            TYPE: "latRight",
+        },
+        {
+            POSITION: [2, 0, -1.4, 90, 0, 1],
+            TYPE: "latDeco3",
+        },
+    ]
+}
+Class.literallyATank = {
+    PARENT: "genericTank",
+    DANGER: 6,
+	BODY: {
+		HEALTH: base.HEALTH * 1.2,
+	},
+    LABEL: "Literally a Tank",
+    SHAPE: "M -1 -1 H 0 C 1 -1 1 0 1 0 C 1 0 1 1 0 1 H -1 V -1",
+    GUNS: [
+        {
+            POSITION: [30, 8, 1, 0, 0, 0, 0]
+        },
+        {
+            POSITION: [4, 8, -1.4, 8, 0, 0, 0]
+        },
+        {
+            POSITION: [12, 8, 1.3, 30, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.halfreload, g.halfreload]),
+                TYPE: "developerBullet"
+            }
+        },
+        {
+            POSITION: [2, 11, 1, 34, 0, 0, 0]
+        }
+    ],
+    TURRETS: [
+        {
+            POSITION: [15, 0, 0, 0, 360, 1],
+            TYPE: [ "latTop", { COLOR: "#5C533F" } ],
+        },
+        {
+            POSITION: [10, 0, 0, 0, 360, 1],
+            TYPE: [ "latTop", { COLOR: "#736245" } ],
+        },
+        {
+            POSITION: [35, 0, 0, 0, 360, 0],
+            TYPE: [ "latBase", { COLOR: "#96794E" } ],
+        },
+    ]
+}
+	
 if (addToMain == true) {
 Class.basic.UPGRADES_TIER_1.push("whirlwind")
 	Class.desmos.UPGRADES_TIER_2.push("undertow")
