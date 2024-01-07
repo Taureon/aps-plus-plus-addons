@@ -17,7 +17,7 @@ Class.masterBullet = {
         {
             POSITION: [18, 8, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.trifront, g.tonsmorrecoil]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.triAngleFront]),
                 TYPE: "bullet",
                 LABEL: "Front",
                 AUTOFIRE: true,
@@ -26,7 +26,7 @@ Class.masterBullet = {
         {
             POSITION: [13, 8, 1, 0, -1, 140, 0.6],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: "Thruster",
                 AUTOFIRE: true,
@@ -35,7 +35,7 @@ Class.masterBullet = {
         {
             POSITION: [13, 8, 1, 0, 1, 220, 0.6],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: "Thruster",
                 AUTOFIRE: true,
@@ -44,7 +44,7 @@ Class.masterBullet = {
         {
             POSITION: [16, 8, 1, 0, 0, 150, 0.1],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: "Thruster",
                 AUTOFIRE: true,
@@ -53,7 +53,7 @@ Class.masterBullet = {
         {
             POSITION: [16, 8, 1, 0, 0, 210, 0.1],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: "Thruster",
                 AUTOFIRE: true,
