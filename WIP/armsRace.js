@@ -572,6 +572,25 @@ Class.znpAR_current = {
         },
     ],
 }
+Class.znpAR_dieselTrapper = {
+    PARENT: "genericTank",
+    LABEL: "Diesel Trapper",
+    DANGER: 7,
+    STAT_NAMES: statnames.trap,
+    GUNS: [
+        {
+            POSITION: [17, 11, 1.5, 0, 0, 0, 0],
+        },
+        {
+            POSITION: [3, 17, 1.3, 17, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, { reload: 0.375, recoil: 0.8, shudder: 1.2, size: 0.625, health: 0.95, damage: 0.9, maxSpeed: 0.8, spray: 1.3 }, {reload: 0.625, size: 0.625, spray: 0.75}]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+    ],
+}
 Class.znpAR_doubleGunner = makeMulti('gunner', 2)
 Class.znpAR_doubleHelix = makeMulti('helix', 2)
 Class.znpAR_encircler = {
@@ -599,6 +618,27 @@ Class.znpAR_encircler = {
             },
         },
     ],
+}
+Class.znpAR_foamer = {
+    PARENT: "genericTank",
+    LABEL: "Foamer",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [25, 9, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.lowPower, g.pelleter, { recoil: 1.15 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [14, 12, 1.6, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { reload: 0.375, recoil: 0.8, shudder: 1.2, size: 0.625, health: 0.95, damage: 0.9, maxSpeed: 0.8, spray: 1.3 }]),
+                TYPE: "bullet",
+            },
+        }
+    ]
 }
 Class.znpAR_forger = {
     PARENT: "genericTank",
@@ -902,6 +942,7 @@ Class.znpAR_heaver = makeHybrid('launcher', "Heaver")
 Class.znpAR_hitman = makeHybrid('assassin', "Hitman")
 Class.znpAR_integrator = makeHybrid('triAngle', "Integrator")
 Class.znpAR_interner = makeHybrid('znpAR_pen', "Interner")
+Class.znpAR_polluter = makeAuto('znpAR_diesel', "Polluter")
 Class.znpAR_shower = makeHybrid('sprayer', "Shower")
 Class.znpAR_spiral = makeHybrid('helix', "Spiral")
 
@@ -909,6 +950,7 @@ Class.znpAR_spiral = makeHybrid('helix', "Spiral")
 Class.znpAR_autoAuto3 = makeAuto('auto3')
 Class.znpAR_autoArtillery = makeAuto('artillery')
 Class.znpAR_autoDestroyer = makeAuto('destroyer')
+Class.znpAR_autoDiesel = makeAuto('znpAR_diesel')
 Class.znpAR_autoHelix = makeAuto('helix')
 Class.znpAR_autoHexaTank = makeAuto('hexaTank')
 Class.znpAR_autoHunter = makeAuto('hunter')
@@ -983,16 +1025,20 @@ Class.gunner.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_equalizer",
 )
 Class.sprayer.UPGRADES_TIER_3.push(
+	//"znpAR_frother",
+	"znpAR_foamer",
+	//"znpAR_faucet",
 	"znpAR_shower",
 	"znpAR_autoSprayer",
+	//"znpAR_stormer",
 )
 Class.znpAR_diesel.UPGRADES_TIER_3 = [
 	"znpAR_placeholder",//"znpAR_jalopy",
 	"machineGunner",
-	"znpAR_placeholder",//"znpAR_dieselTrapper",
-	"znpAR_placeholder",//"znpAR_polluter",
-	"znpAR_placeholder",//"znpAR_autoDiesel",
-	"znpAR_placeholder",//"znpAR_foamer",
+	"znpAR_dieselTrapper",
+	"znpAR_polluter",
+	"znpAR_autoDiesel",
+	"znpAR_foamer",
 ]
 
 Class.hexaTank.UPGRADES_TIER_3.push(
@@ -1150,7 +1196,7 @@ Class.znpAR_mech.UPGRADES_TIER_3 = [
 	"znpAR_autoMech",
 ]
 Class.znpAR_machineTrapper.UPGRADES_TIER_3 = [
-	"znpAR_placeholder",//"znpAR_dieselTrapper",
+	"znpAR_dieselTrapper",
 	"barricade",
 	"znpAR_placeholder",//"znpAR_equalizer",
 	"znpAR_machineGuard",
