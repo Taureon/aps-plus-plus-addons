@@ -1,4 +1,4 @@
-const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeHybrid, makeMulti, makeSwarming, addBackGunner } = require('../facilitators.js');
+const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeMulti, makeSwarming, addBackGunner } = require('../facilitators.js');
 const { base, gunCalcNames, statnames, dfltskl, smshskl } = require('../constants.js');
 const g = require('../gunvals.js');
 Class.znpAR_placeholder = {
@@ -150,6 +150,27 @@ const makeMachineGuard = (type, name = -1) => {
     return output;
 }
 
+// Spawner Functions
+const makeHybrid = (type, name = -1) => {
+    type = ensureIsClass(type);
+    let output = dereference(type);
+    let spawner = {
+        POSITION: [6, 12, 1.2, 8, 0, 180, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.drone, g.weak]),
+            TYPE: ["drone", { INDEPENDENT: true }],
+            AUTOFIRE: true,
+            SYNCS_SKILLS: true,
+            STAT_CALCULATOR: gunCalcNames.drone,
+            WAIT_TO_CYCLE: false,
+            MAX_CHILDREN: 3,
+        },
+    };
+    output.GUNS = type.GUNS == null ? [spawner] : [spawner, ...type.GUNS];
+    output.LABEL = name == -1 ? "Hybrid " + type.LABEL : name;
+    return output;
+}
+
 // Auto-Functions
 const makeMegaAuto = (type, name = -1, options = {}) => {
     type = ensureIsClass(type);
@@ -284,6 +305,9 @@ const makeFast = (type, mult = 1.2, name = -1) => {
 
 // Drones
 Class.znpAR_fastDrone = makeFast('drone')
+Class.znpAR_fastSwarm = makeFast('swarm')
+Class.znpAR_fastMinion = makeFast('minion')
+Class.znpAR_turretedFastDrone = makeAuto('znpAR_fastDrone', "Auto-Swarm", {type: 'droneAutoTurret'})
 Class.znpAR_turretedSwarm = makeAuto('swarm', "Auto-Swarm", {type: 'droneAutoTurret'})
 Class.znpAR_turretedSunchip = makeAuto('sunchip', "Auto-Sunchip", {type: 'droneAutoTurret'})
 Class.znpAR_turretedMinion = makeAuto('minion', "Auto-Minion", {type: 'droneAutoTurret'})
@@ -346,6 +370,10 @@ Class.znpAR_crowbarGun = {
             },
         },
     ],
+}
+Class.znpAR_driveAutoTurret = {
+	PARENT: "autoTurret",
+	SHAPE: 4
 }
 
 // Tier 2 tanks
@@ -663,6 +691,7 @@ Class.znpAR_bentMinigun = {
 };
 Class.znpAR_buttbuttin = addBackGunner('assassin', "Buttbuttin")
 Class.znpAR_blower = addBackGunner('destroyer', "Blower")
+Class.znpAR_captain = makeMulti('spawner', 2, "Captain", 90)
 Class.znpAR_cog = {
     PARENT: "genericTank",
     LABEL: "Cog",
@@ -884,6 +913,55 @@ Class.znpAR_dieselTrapper = {
         },
     ],
 }
+Class.znpAR_doperdrive = {
+  PARENT: "genericTank",
+  LABEL: "Doperdrive",
+  DANGER: 7,
+  STAT_NAMES: statnames.drone,
+  BODY: {
+    FOV: base.FOV * 1.1
+  },
+    TURRETS: [
+        {
+            POSITION: [9, 0, 0, 0, 360, 1],
+            TYPE: "overdriveDeco",
+        },
+    ],
+  GUNS: [{
+    POSITION: [6, 11, 1.3, 7, 0, 0, 0],
+    PROPERTIES: {
+      SHOOT_SETTINGS: combineStats([g.drone]),
+      TYPE: "znpAR_turretedFastDrone",
+      AUTOFIRE: true,
+      SYNCS_SKILLS: true,
+      STAT_CALCULATOR: gunCalcNames.drone,
+      MAX_CHILDREN: 6
+    }
+  }, {
+    POSITION: [3, 3, 0.35, 11, 0, 0, 0]
+  }]
+}
+Class.znpAR_dopeseer = makeMulti({
+  PARENT: "genericTank",
+  DANGER: 7,
+  STAT_NAMES: statnames.drone,
+  BODY: {
+    FOV: base.FOV * 1.1
+  },
+  MAX_CHILDREN: 8,
+  GUNS: [{
+    POSITION: [6, 12, 1.2, 8, 0, 0, 0],
+    PROPERTIES: {
+      SHOOT_SETTINGS: combineStats([g.drone, g.overseer]),
+      TYPE: "znpAR_fastDrone",
+      AUTOFIRE: true,
+      SYNCS_SKILLS: true,
+      STAT_CALCULATOR: gunCalcNames.drone,
+    }
+  }, {
+    POSITION: [4, 3, 0.35, 11, 0, 0, 0]
+  }]
+}, 2, "Dopeseer", 90)
 Class.znpAR_doubleGunner = makeMulti('gunner', 2)
 Class.znpAR_doubleHelix = makeMulti('helix', 2)
 Class.znpAR_encircler = {
@@ -968,6 +1046,32 @@ Class.znpAR_forger = {
         },
     ],
 }
+Class.znpAR_honchodrive = {
+  PARENT: "genericTank",
+  LABEL: "Honchodrive",
+  DANGER: 7,
+  STAT_NAMES: statnames.drone,
+  BODY: {
+    FOV: base.FOV * 1.1
+  },
+    TURRETS: [
+        {
+            POSITION: [9, 0, 0, 0, 360, 1],
+            TYPE: "overdriveDeco",
+        },
+    ],
+  GUNS: [{
+    POSITION: [13, 13, 1.4, 0, 0, 0, 0],
+    PROPERTIES: {
+      SHOOT_SETTINGS: combineStats([g.drone, { size: 1.35, health: 1.75, speed: 1.125 }]),
+      TYPE: "turretedDrone",
+      AUTOFIRE: true,
+      SYNCS_SKILLS: true,
+      STAT_CALCULATOR: gunCalcNames.drone,
+      MAX_CHILDREN: 3
+    }
+  }]
+}
 Class.znpAR_hutch = {
     PARENT: "genericTank",
     LABEL: "Hutch",
@@ -1019,6 +1123,55 @@ Class.znpAR_incarcerator = makePenGuard({
         }
     ]
 }, "Incarcerator")
+Class.znpAR_issuer = {
+  PARENT: "genericTank",
+  LABEL: "Issuer",
+  DANGER: 7,
+  STAT_NAMES: statnames.drone,
+  BODY: {
+    SPEED: base.SPEED * 0.8,
+    FOV: 1.1
+  },
+  GUNS: [{
+    POSITION: [4.5, 10, 1, 10.5, 0, 0, 0]
+  }, {
+    POSITION: [1, 12, 1, 15, 0, 0, 0],
+    PROPERTIES: {
+      MAX_CHILDREN: 4,
+      SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
+      TYPE: "znpAR_fastMinion",
+      STAT_CALCULATOR: gunCalcNames.drone,
+      AUTOFIRE: true,
+      SYNCS_SKILLS: true
+    }
+  }, {
+    POSITION: [11.5, 12, 1, 0, 0, 0, 0]
+  }, {
+    POSITION: [3, 3, 0.35, 11, 0, 0, 0]
+  }]
+}
+Class.znpAR_junkie = {
+  PARENT: "genericTank",
+  LABEL: "Junkie",
+  DANGER: 7,
+  STAT_NAMES: statnames.drone,
+  BODY: {
+    FOV: base.FOV * 1.1
+  },
+  GUNS: [{
+    POSITION: [13, 13, 1.4, 0, 0, 0, 0],
+    PROPERTIES: {
+      SHOOT_SETTINGS: combineStats([g.drone, { size: 1.35, health: 1.75, speed: 1.125 }]),
+      TYPE: "znpAR_fastDrone",
+      AUTOFIRE: true,
+      SYNCS_SKILLS: true,
+      STAT_CALCULATOR: gunCalcNames.drone,
+      MAX_CHILDREN: 3
+    }
+  }, {
+    POSITION: [3, 3, 0.35, 11, 0, 0, 0]
+  }]
+}
 Class.znpAR_machineGuard = makeMachineGuard({
     PARENT: "genericTank",
     LABEL: "Machine",
@@ -1122,6 +1275,38 @@ Class.znpAR_mingler = makeMulti({
         }
     ]
 }, 3, "Mingler")
+Class.znpAR_mosey = {
+    PARENT: "genericTank",
+    LABEL: "Mosey",
+    DANGER: 7,
+    FACING_TYPE: "locksFacing",
+    STAT_NAMES: statnames.swarm,
+    BODY: {
+        FOV: 1.2 * base.FOV,
+    },
+    GUNS: [
+        {
+            POSITION: [7, 7.5, 0.6, 7, 4, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.swarm]),
+                TYPE: "znpAR_fastSwarm",
+                STAT_CALCULATOR: gunCalcNames.swarm,
+            },
+        },
+        {
+            POSITION: [7, 7.5, 0.6, 7, -4, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.swarm]),
+                TYPE: "znpAR_fastSwarm",
+                STAT_CALCULATOR: gunCalcNames.swarm,
+            },
+        },{
+    POSITION: [8, 3, 0.35, 7, -4, 0, 0]
+  }, {
+    POSITION: [8, 3, 0.35, 7, 4, 0, 0]
+  },
+    ], 
+}
 Class.znpAR_operator = {
     PARENT: "genericTank",
     LABEL: "Operator",
@@ -1482,8 +1667,31 @@ Class.znpAR_autoAuto3 = makeAuto('auto3')
 Class.znpAR_autoArtillery = makeAuto('artillery')
 Class.znpAR_autoDestroyer = makeAuto('destroyer')
 Class.znpAR_autoDiesel = makeAuto('znpAR_diesel')
+Class.znpAR_autoDirectordrive = makeAuto({
+    PARENT: "genericTank",
+    DANGER: 6,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        FOV: base.FOV * 1.1,
+    },
+    GUNS: [
+        {
+            POSITION: [6, 11, 1.3, 7, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone]),
+                TYPE: "turretedDrone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: gunCalcNames.drone,
+                MAX_CHILDREN: 6,
+            },
+        },
+    ],
+}, "Auto-Directordrive", { type: "znpAR_driveAutoTurret", size: 9 });
+Class.znpAR_autoDoper = makeAuto('znpAR_doper')
 Class.znpAR_autoHelix = makeAuto('helix')
 Class.znpAR_autoHexaTank = makeAuto('hexaTank')
+Class.znpAR_autoHoncho = makeAuto('znpAR_honcho')
 Class.znpAR_autoHunter = makeAuto('hunter')
 Class.znpAR_autoLauncher = makeAuto('launcher')
 Class.znpAR_autoMachineTrapper = makeAuto('znpAR_machineTrapper')
@@ -1556,12 +1764,12 @@ Class.gunner.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_equalizer",
 )
 Class.sprayer.UPGRADES_TIER_3.push(
-	//"znpAR_frother",
+	"znpAR_placeholder",//"znpAR_frother",
 	"znpAR_foamer",
-	//"znpAR_faucet",
+	"znpAR_placeholder",//"znpAR_faucet",
 	"znpAR_shower",
 	"znpAR_autoSprayer",
-	//"znpAR_stormer",
+	"znpAR_placeholder",//"znpAR_stormer",
 )
 Class.znpAR_diesel.UPGRADES_TIER_3 = [
 	"znpAR_placeholder",//"znpAR_jalopy",
@@ -1595,9 +1803,9 @@ Class.director.UPGRADES_TIER_3.splice(1, 1) // remove big cheese
 Class.overseer.UPGRADES_TIER_3.splice(2, 1) // remove overgunner
 Class.overseer.UPGRADES_TIER_3.splice(1, 1) // remove overtrapper
 Class.overseer.UPGRADES_TIER_3.push(
-	"znpAR_placeholder",//"znpAR_captain",
+	"znpAR_captain",
 	"znpAR_placeholder",//"znpAR_foreman",
-	"znpAR_placeholder",//"znpAR_dopeseer",
+	"znpAR_dopeseer",
 )
 Class.cruiser.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_productionist",
@@ -1605,7 +1813,7 @@ Class.cruiser.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_hangar",
 	"znpAR_zipper",
 	"znpAR_placeholder",//"znpAR_baltimore",
-	"znpAR_placeholder",//"znpAR_mosey",
+	"znpAR_mosey",
 )
 Class.underseer.UPGRADES_TIER_3.push(
 	"znpAR_autoUnderseer",
@@ -1616,11 +1824,11 @@ Class.spawner.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_megaSpawner",
 	"znpAR_placeholder",//"znpAR_productionist",
 	"znpAR_spawnerdrive",
-	"znpAR_placeholder",//"znpAR_captain",
+	"znpAR_captain",
 	"znpAR_placeholder",//"znpAR_hangar",
 	"znpAR_placeholder",//"znpAR_laborer",
 	"znpAR_placeholder",//"znpAR_foundry",
-	"znpAR_placeholder",//"znpAR_issuer",
+	"znpAR_issuer",
 )
 Class.znpAR_directordrive.UPGRADES_TIER_3 = [
 	"znpAR_placeholder",//"znpAR_directorstorm",
@@ -1628,27 +1836,27 @@ Class.znpAR_directordrive.UPGRADES_TIER_3 = [
 	"znpAR_cruiserdrive",
 	"znpAR_underdrive",
 	"znpAR_spawnerdrive",
-	"znpAR_placeholder",//"znpAR_autoDirectordrive",
-	"znpAR_placeholder",//"znpAR_honchodrive",
-	"znpAR_placeholder",//"znpAR_doperdrive",
+	"znpAR_autoDirectordrive",
+	"znpAR_honchodrive",
+	"znpAR_doperdrive",
 ]
 Class.znpAR_honcho.UPGRADES_TIER_3 = [
 	"znpAR_placeholder",//"znpAR_foreman",
 	"znpAR_placeholder",//"znpAR_baltimore",
 	"znpAR_placeholder",//"znpAR_foundry",
 	"bigCheese",
-	"znpAR_placeholder",//"znpAR_autoHoncho",
-	"znpAR_placeholder",//"znpAR_honchodrive",
-	"znpAR_placeholder",//"znpAR_junkie",
+	"znpAR_autoHoncho",
+	"znpAR_honchodrive",
+	"znpAR_junkie",
 ]
 Class.znpAR_doper.UPGRADES_TIER_3 = [
 	"znpAR_placeholder",//"znpAR_brisker",
-	"znpAR_placeholder",//"znpAR_dopeseer",
-	"znpAR_placeholder",//"znpAR_mosey",
-	"znpAR_placeholder",//"znpAR_issuer",
-	"znpAR_placeholder",//"znpAR_junkie",
-	"znpAR_placeholder",//"znpAR_doperdrive",
-	"znpAR_placeholder",//"znpAR_autoDoper",
+	"znpAR_dopeseer",
+	"znpAR_mosey",
+	"znpAR_issuer",
+	"znpAR_junkie",
+	"znpAR_doperdrive",
+	"znpAR_autoDoper",
 ]
 
 Class.pounder.UPGRADES_TIER_3.push(
