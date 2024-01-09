@@ -2,8 +2,6 @@ const { dereference, combineStats, makeMulti, makeDeco } = require('../facilitat
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
-module.exports = ({ Class }) => {
-
 const addToMain = true
 
 // Bullets
@@ -1364,6 +1362,4 @@ Class.underseer.UPGRADES_TIER_3.push("prophet")
 Class.launcher.UPGRADES_TIER_3.push("vortex")
 } else {
 Class.basic.UPGRADES_TIER_3 = ["dailyTanks"]
-}
-
 }
