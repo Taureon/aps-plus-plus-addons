@@ -3,8 +3,6 @@ const { base, gunCalcNames, statnames, smshskl } = require('../constants.js');
 const tanks = require('../groups/tanks.js');
 const g = require('../gunvals.js');
 
-module.exports = ({ Class }) => {
-
 // t2 tris
 Class.znpSniper3 = makeMulti(Class.sniper, 3, "Ringer");
 Class.znpSniper3.UPGRADES_TIER_3 = ["znpAssassin3", "znpHunter3", "znpMinigun3", "znpRifle3", "znpSniper6"];
@@ -65,5 +63,3 @@ Class.hexaTank.UPGRADES_TIER_3.push("znpMachineGun6");
 
 Class.znpPounder6 = makeMulti(Class.pounder, 6, "Death Star");
 Class.hexaTank.UPGRADES_TIER_3.push("znpPounder6");
-
-};
