@@ -2,8 +2,6 @@ const { combineStats } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
-module.exports = ({ Class }) => {
-
 Class.shaman2 = {
     PARENT: ["shaman"],
     UPGRADE_LABEL: "Shaman (OD)",
@@ -33,7 +31,7 @@ Class.sangoma = {
     GUNS: Array(7).fill().map((_, i) => ({
         POSITION: [3.5, 8, 1.2, 8, 0, i * 360/7, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroy, { size: 1.2 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, { size: 1.2 }]),
             TYPE: "somachip",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -66,7 +64,7 @@ Class.preacher = {
     GUNS: Array(8).fill().map((_, i) => ({
         POSITION: [3.5, 7, 1.2, 8, 0, i * 45, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroy, g.anni, { size: 1.4 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, g.annihilator, { size: 1.4 }]),
             TYPE: "ballchip",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -99,7 +97,7 @@ Class.herbalist = {
     GUNS: Array(9).fill().map((_, i) => ({
         POSITION: [3.5, 6.125, 1.2, 8, 0, i * 360/9, 0],
         PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroy, g.anni, { size: 1.7 }]),
+            SHOOT_SETTINGS: combineStats([g.drone, g.summoner, g.destroyer, g.annihilator, { size: 1.7 }]),
             TYPE: "enachip",
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
@@ -109,5 +107,3 @@ Class.herbalist = {
     }))
 };
 Class.mysticals.UPGRADES_TIER_0.push("shaman2", "sangoma", "preacher", "herbalist");
-
-};
