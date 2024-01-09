@@ -3,8 +3,6 @@ const { base, gunCalcNames, statnames, smshskl } = require('../constants.js');
 const tanks = require('../groups/tanks.js');
 const g = require('../gunvals.js');
 
-module.exports = ({ Class }) => {
-
 Class.znpAutoBasic = makeAuto(Class.basic);
 Class.basic.UPGRADES_TIER_1.push("znpAutoBasic");
     Class.znpAutoBasic.UPGRADES_TIER_2 = ["znpAutoTwin", "znpAutoSniper", "znpAutoMachineGun", "znpAutoFlankGuard", "znpAutoDirector", "znpAutoPounder", "znpAutoTrapper", "znpAutoDesmos", "znpCeptBasic"];
@@ -87,18 +85,16 @@ Class.volute.UPGRADES_TIER_3.push("znpAutoVolute");
 Class.znpCeptBasic = makeCeption(Class.basic, "Inception");
     Class.znpCeptBasic.UPGRADES_TIER_3 = ["znpCeptTwin", "znpCeptSniper", "znpCeptMachineGun", "znpCeptFlankGuard", "znpCeptDirector", "znpCeptPounder", "znpCeptTrapper", "znpCeptDesmos", "znpCept2Basic"];
 
-Class.znpCeptTwin = makeCeption(Class.twin, "Twinception");
-Class.znpCeptSniper = makeCeption(Class.sniper, "Snipeception");
-Class.znpCeptMachineGun = makeCeption(Class.machineGun, "Machineception");
-Class.znpCeptFlankGuard = makeCeption(Class.flankGuard, "Flankception");
-Class.znpCeptDirector = makeCeption(Class.director, "Direction");
-Class.znpCeptPounder = makeCeption(Class.pounder, "Poundception");
-Class.znpCeptTrapper = makeCeption(Class.trapper, "Trapception");
-Class.znpCeptDesmos = makeCeption(Class.desmos, "Deception");
+Class.znpCeptTwin = makeCeption(Class.twin, "Twinception")
+Class.znpCeptSniper = makeCeption(Class.sniper, "Snipeception")
+Class.znpCeptMachineGun = makeCeption(Class.machineGun, "Machineception")
+Class.znpCeptFlankGuard = makeCeption(Class.flankGuard, "Flankception")
+Class.znpCeptDirector = makeCeption(Class.director, "Direction")
+Class.znpCeptPounder = makeCeption(Class.pounder, "Poundception")
+Class.znpCeptTrapper = makeCeption(Class.trapper, "Trapception")
+Class.znpCeptDesmos = makeCeption(Class.desmos, "Deception")
 
 Class.znpCept2Basic = makeAuto(Class.basic, "Recursion", {
     type: "znpCeptBasic",
     size: 12,
-});
-
-};
+})
