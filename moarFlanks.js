@@ -1,7 +1,6 @@
 const { combineStats, makeMulti } = require('../facilitators.js');
 const { base, gunCalcNames, statnames, smshskl } = require('../constants.js');
 const tanks = require('../groups/tanks.js');
-const g = require('../gunvals.js');
 
 // t2 tris
 Class.znpSniper3 = makeMulti(Class.sniper, 3, "Ringer");
