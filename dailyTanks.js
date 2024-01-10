@@ -379,7 +379,7 @@ Class.munition = {
         {
             POSITION: [19, 12, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.artillery]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery]),
                 TYPE: "bullet",
                 LABEL: "Heavy",
             },
@@ -691,7 +691,7 @@ Class.vortex = {
         {
             POSITION: [17, 13, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.artillery, g.artillery]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery]),
                 TYPE: "minimissile",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
@@ -1326,7 +1326,7 @@ Class.literallyATank = {
         {
             POSITION: [12, 8, 1.3, 30, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.halfreload, g.halfreload]),
+                SHOOT_SETTINGS: combineStats([g.basic]),
                 TYPE: "developerBullet"
             }
         },
@@ -1352,7 +1352,7 @@ Class.literallyATank = {
 	
 if (addToMain == true) {
 Class.basic.UPGRADES_TIER_1.push("whirlwind")
-Class.basic.UPGRADES_TIER_3.push("literallyATank")
+Class.basic.UPGRADES_TIER_2.push("literallyATank")
 Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl")
 Class.artillery.UPGRADES_TIER_3.push("munition")
 Class.auto3.UPGRADES_TIER_3.push("whirl3")
@@ -1363,3 +1363,4 @@ Class.desmos.UPGRADES_TIER_2.push("undertow")
 } else {
 Class.basic.UPGRADES_TIER_3 = ["dailyTanks"]
 }
+
