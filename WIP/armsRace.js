@@ -307,16 +307,47 @@ const makeFast = (type, mult = 1.2, name = -1) => {
 Class.znpAR_fastDrone = makeFast('drone')
 Class.znpAR_fastSwarm = makeFast('swarm')
 Class.znpAR_fastMinion = makeFast('minion')
-Class.znpAR_turretedFastDrone = makeAuto('znpAR_fastDrone', "Auto-Swarm", {type: 'droneAutoTurret'})
+Class.znpAR_turretedFastDrone = makeAuto('znpAR_fastDrone', "Auto-Drone", {type: 'droneAutoTurret'})
+Class.znpAR_swarmingDrone = makeAuto('drone', "Swarm Auto-Swarm", {type: 'znpAR_swarmDroneTurret'})
 Class.znpAR_turretedSwarm = makeAuto('swarm', "Auto-Swarm", {type: 'droneAutoTurret'})
 Class.znpAR_turretedSunchip = makeAuto('sunchip', "Auto-Sunchip", {type: 'droneAutoTurret'})
 Class.znpAR_turretedMinion = makeAuto('minion', "Auto-Minion", {type: 'droneAutoTurret'})
 
 // Traps
 Class.znpAR_autoTrap = makeAuto('trap')
+Class.znpAR_chargerSetTrap = makeMulti({
+	PARENT: "setTrap",
+    INDEPENDENT: true,
+    TURRETS: [
+        {
+            POSITION: [8, 0, 0, 0, 360, 1],
+            TYPE: "znpAR_chargerSetTrapDeco",
+        },
+    ],
+    GUNS: [
+        {
+            POSITION: [4, 4, 1, 0, 0, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap]),
+                TYPE: ["trap", { PERSISTS_AFTER_DEATH: true }],
+    			SHOOT_ON_DEATH: true,
+                STAT_CALCULATOR: gunCalcNames.trap
+            }
+        }
+    ]
+}, 5, "Set Trap")
 
 // Decorations
+Class.znpAR_directorstormDeco = makeMulti({
+	SHAPE: 4,
+    GUNS: [
+        {
+            POSITION: [7, 7.5, 0.6, 7, 0, 0, 0],
+        }
+    ]
+}, 2, "", 90)
 Class.znpAR_cruiserdriveDeco = makeDeco(3.5);
+Class.znpAR_chargerSetTrapDeco = makeDeco(5);
 
 // Turrets
 Class.znpAR_sniper3Gun = {
@@ -375,6 +406,26 @@ Class.znpAR_driveAutoTurret = {
 	PARENT: "autoTurret",
 	SHAPE: 4
 }
+Class.znpAR_swarmDroneTurret = makeMulti({
+    PARENT: "genericTank",
+    LABEL: "Swarm Turret",
+    COLOR: "grey",
+    INDEPENDENT: true,
+    CONTROLLERS: ['nearestDifferentMaster'],
+    BODY: {
+        FOV: 0.8,
+    },
+    GUNS: [
+        {
+            POSITION: [7, 7.5, 0.6, 7, 4, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.swarm]),
+                TYPE: "swarm",
+                STAT_CALCULATOR: gunCalcNames.swarm,
+            }
+        }
+    ]
+}, 2)
 
 // Tier 2 tanks
 Class.znpAR_diesel = {
@@ -528,6 +579,52 @@ Class.znpAR_pen = {
     	}
     ]
 }
+Class.znpAR_repeater = {
+    PARENT: "genericTank",
+    LABEL: "Repeater",
+    GUNS: [
+        {
+            POSITION: [20, 10, 0.8, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.desmos]),
+                TYPE: ["bullet", {MOTION_TYPE: "desmos"}]
+            }
+        },
+        {
+            POSITION: [4.625, 9.5, 2, 0.375, -8, 91.5, 0]
+        },
+        {
+            POSITION: [4.625, 9.5, 2, 0.375, 8, -91.5, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, 0, -4.75, 50, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, 0, 4.75, -50, 0]
+        }
+    ]
+}
+Class.znpAR_undertow = {
+    PARENT: "genericTank",
+    LABEL: "Undertow",
+    DANGER: 6,
+    TOOLTIP: "[DEV NOTE] The Undertow does not function as intended yet!",
+    GUNS: [
+        {
+            POSITION: [14, 12, 0.8, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.desmos, { reload: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [11.25, 8, 0.15, 4.25, 4, 13.5, 0]
+        },
+        {
+            POSITION: [11.25, 8, 0.15, 4.25, -4, -13.5, 0]
+        }
+    ]
+}
 Class.znpAR_wark = {
     PARENT: "genericTank",
     LABEL: "Wark",
@@ -578,9 +675,83 @@ Class.trapper.UPGRADES_TIER_2.push(
 	"znpAR_machineTrapper",
 	"znpAR_wark",
 )
+Class.desmos.UPGRADES_TIER_2.push(
+	"znpAR_undertow",
+	"znpAR_repeater",
+)
 
 
 // Tier 3 tanks
+Class.znpAR_baltimore = {
+    PARENT: "genericTank",
+    LABEL: "Baltimore",
+    DANGER: 7,
+    FACING_TYPE: "locksFacing",
+    STAT_NAMES: statnames.swarm,
+    BODY: {
+        FOV: 1.2 * base.FOV,
+    },
+    GUNS: [
+        {
+            POSITION: [11, 8.5, 0.8, 4, 4.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.swarm, { size: 1.35, health: 1.75, speed: 1.125 }]),
+                TYPE: "swarm",
+                STAT_CALCULATOR: gunCalcNames.swarm,
+            },
+        },
+        {
+            POSITION: [11, 8.5, 0.8, 4, -4.5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.swarm, { size: 1.35, health: 1.75, speed: 1.125 }]),
+                TYPE: "swarm",
+                STAT_CALCULATOR: gunCalcNames.swarm,
+            },
+        },
+    ], 
+}
+Class.znpAR_battery = {
+    PARENT: "genericTank",
+    LABEL: "Battery",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.6],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.8],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, 3.75, 0, 0.2],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [20, 3.5, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+    ]
+}
 Class.znpAR_bentGunner = {
     PARENT: "genericTank",
     LABEL: "Bent Gunner",
@@ -692,6 +863,36 @@ Class.znpAR_bentMinigun = {
 Class.znpAR_buttbuttin = addBackGunner('assassin', "Buttbuttin")
 Class.znpAR_blower = addBackGunner('destroyer', "Blower")
 Class.znpAR_captain = makeMulti('spawner', 2, "Captain", 90)
+Class.znpAR_charger = {
+    PARENT: "genericTank",
+    LABEL: "Charger",
+    DANGER: 7,
+    STAT_NAMES: statnames.trap,
+    BODY: {
+        SPEED: 0.8 * base.SPEED,
+        FOV: 1.15 * base.FOV
+    },
+    GUNS: [
+        {
+            POSITION: [18, 12, 1, 0, 0, 0, 0],
+        },
+        {
+            POSITION: [2, 12, 1.1, 18, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap]),
+                TYPE: "znpAR_chargerSetTrap",
+                STAT_CALCULATOR: gunCalcNames.block
+            }
+        },
+        {
+            POSITION: [2, 4, 0.125, 18, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.setTrap, g.fake]),
+                TYPE: "bullet",
+            }
+        }
+    ]
+}
 Class.znpAR_cog = {
     PARENT: "genericTank",
     LABEL: "Cog",
@@ -772,6 +973,36 @@ Class.znpAR_combo = {
       INDEPENDENT: true,
     },
   ],
+}
+Class.znpAR_courser = {
+    PARENT: "genericTank",
+    LABEL: "Courser",
+    DANGER: 7,
+    BODY: {
+        SPEED: 0.85 * base.SPEED,
+        FOV: 1.4 * base.FOV
+    },
+    CONTROLLERS: ["zoom"],
+    TOOLTIP: "Hold right click to zoom.",
+    GUNS: [
+        {
+            POSITION: [27, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.hunter, g.hunterSecondary]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [24, 11, 1, 0, 0, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.hunter]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [10, 11, -1.4, 3, 0, 0, 0],
+        }
+    ]
 }
 Class.znpAR_crowbar = {
     PARENT: "genericTank",
@@ -913,6 +1144,34 @@ Class.znpAR_dieselTrapper = {
         },
     ],
 }
+Class.znpAR_directorstorm = {
+    PARENT: "genericTank",
+    LABEL: "Directorstorm",
+    DANGER: 6,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        FOV: base.FOV * 1.1,
+    },
+    TURRETS: [
+        {
+            POSITION: [9, 0, 0, 0, 360, 1],
+            TYPE: "znpAR_directorstormDeco",
+        },
+    ],
+    GUNS: [
+        {
+            POSITION: [6, 11, 1.3, 7, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone]),
+                TYPE: "znpAR_swarmingDrone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: gunCalcNames.drone,
+                MAX_CHILDREN: 6,
+            },
+        },
+    ],
+}
 Class.znpAR_doperdrive = {
   PARENT: "genericTank",
   LABEL: "Doperdrive",
@@ -962,8 +1221,73 @@ Class.znpAR_dopeseer = makeMulti({
     POSITION: [4, 3, 0.35, 11, 0, 0, 0]
   }]
 }, 2, "Dopeseer", 90)
+Class.znpAR_doubleFlankTwin = makeMulti({
+    PARENT: "genericTank",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [20, 8, 1, 0, 0, 90, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+}, 2, "Double Flank Twin")
 Class.znpAR_doubleGunner = makeMulti('gunner', 2)
 Class.znpAR_doubleHelix = makeMulti('helix', 2)
+Class.znpAR_duplicator = {
+    PARENT: "genericTank",
+    LABEL: "Duplicator",
+    DANGER: 7,
+    STAT_NAMES: statnames.desmos,
+    TOOLTIP: "[DEV NOTE] The Duplicator is not finished yet. This tank is currently just a mockup.",
+    GUNS: [
+        {
+            POSITION: [20, 10, 0.8, 0, 0, 20, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.desmos]),
+                TYPE: ["bullet", {MOTION_TYPE: ["desmos", {invert: false}]}]
+            }
+        },
+        {
+            POSITION: [20, 10, 0.8, 0, 0, -20, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.desmos]),
+                TYPE: ["bullet", {MOTION_TYPE: ["desmos", {invert: true}]}]
+            }
+        },
+        {
+            POSITION: [5.625, 9.5, 2, 0.375-1, -8, 111.5, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, 0, 4.75, -30, 0]
+        },
+        {
+            POSITION: [5.625, 9.5, 2, 0.375-1, 8, -111.5, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, 0, -4.75, 30, 0]
+        },
+        {
+            POSITION: [18, 8, 0.65, 0, 0, 0, 0]
+        },
+    ]
+}
 Class.znpAR_encircler = {
     PARENT: "genericTank",
     LABEL: "Encircler",
@@ -990,6 +1314,107 @@ Class.znpAR_encircler = {
         },
     ],
 }
+Class.znpAR_enforcer = {
+    PARENT: "genericTank",
+    LABEL: "Enforcer",
+    DANGER: 7,
+    BODY: {
+        SPEED: 0.85 * base.SPEED,
+        FOV: 1.4 * base.FOV
+    },
+    GUNS: [
+        {
+            POSITION: [23, 12, 1, 0, 0, 0, 0]
+        },
+        {
+            POSITION: [27, 7, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin, g.rifle]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [5, 7, -1.4, 8, 0, 0, 0]
+        }
+    ]
+}
+Class.znpAR_equalizer = {
+    PARENT: "genericTank",
+    LABEL: "Equalizer",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [12, 3.5, 1, 0, 7.25, 0, 0],
+        },
+        {
+            POSITION: [2, 4, 1.5, 12, 7.25, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "trap"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -7.25, 0, 0],
+        },
+        {
+            POSITION: [2, 4, 1.5, 12, -7.25, 0, 0.75],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "trap"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
+        },
+        {
+            POSITION: [2, 4, 1.5, 16, 3.75, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "trap"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, -3.75, 0, 0],
+        },
+        {
+            POSITION: [2, 4, 1.5, 16, -3.75, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "trap"
+            }
+        }
+    ]
+}
+Class.znpAR_expeller = {
+    PARENT: "genericTank",
+    LABEL: "Expeller",
+    DANGER: 7,
+    STAT_NAMES: statnames.trap,
+    GUNS: [
+        {
+            POSITION: [14, 8, 1.5, 0, 5.75, 5, 0],
+        },
+        {
+            POSITION: [3.5, 12, 1.3, 14, 5.75, 5, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [14, 8, 1.5, 0, -5.75, -5, 0.5],
+        },
+        {
+            POSITION: [3.5, 12, 1.3, 14, -5.75, -5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+    ]
+}
 Class.znpAR_foamer = {
     PARENT: "genericTank",
     LABEL: "Foamer",
@@ -1011,6 +1436,25 @@ Class.znpAR_foamer = {
         }
     ]
 }
+Class.znpAR_foreman = makeMulti({
+  PARENT: "genericTank",
+  DANGER: 7,
+  STAT_NAMES: statnames.drone,
+  BODY: {
+    FOV: base.FOV * 1.1
+  },
+  GUNS: [{
+    POSITION: [14, 14, 1.3, 0, 0, 0, 0],
+    PROPERTIES: {
+      SHOOT_SETTINGS: combineStats([g.drone, { size: 1.35, health: 1.75, speed: 1.125 }]),
+      TYPE: "drone",
+      AUTOFIRE: true,
+      SYNCS_SKILLS: true,
+      STAT_CALCULATOR: gunCalcNames.drone,
+      MAX_CHILDREN: 3
+    }
+  }]
+}, 2, "Foreman", 90)
 Class.znpAR_forger = {
     PARENT: "genericTank",
     LABEL: "Forger",
@@ -1150,6 +1594,53 @@ Class.znpAR_issuer = {
     POSITION: [3, 3, 0.35, 11, 0, 0, 0]
   }]
 }
+Class.znpAR_iterator = {
+    PARENT: "genericTank",
+    LABEL: "Iterator",
+    DANGER: 7,
+    STAT_NAMES: statnames.desmos,
+    GUNS: [
+        {
+            POSITION: [22, 10, 0.8, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.desmos]),
+                TYPE: ["bullet", {MOTION_TYPE: "desmos"}]
+            }
+        },
+        {
+            POSITION: [4.625, 10.5, 2.75, 0.375, -7, 91.5, 0]
+        },
+        {
+            POSITION: [4.625, 10.5, 2.75, 0.375, 7, -91.5, 0]
+        },
+        {
+            POSITION: [4, 9, 3, 1.5, -5, 95, 0]
+        },
+        {
+            POSITION: [4, 9, 3, 1.5, 5, -95, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, -1.5, -5.25, 50, 0]
+        },
+        {
+            POSITION: [3.75, 10, 2.125, -1.5, 5.25, -50, 0]
+        }
+    ]
+}
+Class.znpAR_jalopy = {
+    PARENT: "genericTank",
+    LABEL: "Jalopy",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [16, 13, 1.65, 8, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, { reload: 0.375, recoil: 0.8, shudder: 1.2, size: 0.625, health: 0.95, damage: 0.9, maxSpeed: 0.8, spray: 1.3 }, { reload: 0.5, recoil: 0.5, size: 0.95, spray: 1.25 }]),
+                TYPE: "bullet",
+            },
+        },
+    ],
+}
 Class.znpAR_junkie = {
   PARENT: "genericTank",
   LABEL: "Junkie",
@@ -1222,6 +1713,33 @@ Class.znpAR_mechGuard = makeMechGuard({
         }
     ]
 })
+Class.znpAR_megaHunter = {
+    PARENT: "genericTank",
+    LABEL: "Mega Hunter",
+    DANGER: 7,
+    BODY: {
+        SPEED: base.SPEED * 0.9,
+        FOV: base.FOV * 1.25
+    },
+    CONTROLLERS: ["zoom"],
+    TOOLTIP: "Hold right click to zoom.",
+    GUNS: [
+        {
+            POSITION: [24, 12, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.sniper, g.hunter, g.hunterSecondary]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [21, 16, 1, 0, 0, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.sniper, g.hunter]),
+                TYPE: "bullet"
+            }
+        }
+    ]
+}
 Class.znpAR_megaTrapper = {
     PARENT: "genericTank",
     LABEL: "Mega Trapper",
@@ -1367,6 +1885,34 @@ Class.znpAR_pentaseer = {
         },
     ],
 }
+Class.znpAR_prober = {
+    PARENT: "genericTank",
+    LABEL: "Prober",
+    DANGER: 7,
+    BODY: {
+        SPEED: base.SPEED * 0.9,
+        FOV: base.FOV * 1.25
+    },
+    GUNS: [
+        {
+            POSITION: [20, 12, 1, 0, 0, 0, 0]
+        },
+        {
+            POSITION: [26, 5, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.hunterSecondary, g.rifle]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [24, 7, 1, 0, 0, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.rifle]),
+                TYPE: "bullet"
+            }
+        }
+    ]
+}
 Class.znpAR_quadAngle = {
     PARENT: "genericTank",
     LABEL: "Quad-Angle",
@@ -1404,6 +1950,54 @@ Class.znpAR_quadAngle = {
             },
         },
     ],
+}
+Class.znpAR_railgun = {
+  PARENT: "genericTank",
+  LABEL: "Railgun",
+  DANGER: 7,
+  BODY: {
+    SPEED: base.SPEED * 0.85,
+    FOV: base.FOV * 1.3
+  },
+  GUNS: [
+    {
+      POSITION: [20, 8, 1, 0, 0, 0, 0]
+    },
+    {
+      POSITION: [24, 5, 1, 0, 0, 0, 0],
+      PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.basic, g.sniper, { reload: 5, size: 0.9, health: 0.9, damage: 1.35, pen: 1.25, speed: 1.5, maxSpeed: 1.04, density: 3.5 }]),
+        TYPE: "bullet"
+      },
+    },
+    {
+      POSITION: [4, 8, -1.5, 8, 0, 0, 0]
+    }
+  ]
+}
+Class.znpAR_riptide = {
+    PARENT: "genericTank",
+    LABEL: "Riptide",
+    DANGER: 7,
+    TOOLTIP: "[DEV NOTE] The Riptide does not function as intended yet!",
+    GUNS: [
+        {
+            POSITION: [6.5, 23.5, 0.25, 3, 0, 180, 0],
+        },
+        {
+            POSITION: [18, 16, 0.75, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.desmos, { size: 0.9, reload: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [17, 16, 0.1, 0.25, 4, 13.5, 0]
+        },
+        {
+            POSITION: [17, 16, 0.1, 0.25, -4, -13.5, 0]
+        }
+    ]
 }
 Class.znpAR_sniper3 = {
   PARENT: "genericTank",
@@ -1566,6 +2160,46 @@ Class.znpAR_underdrive = makeMulti({
         }
     ]
 }, 2, "Underdrive", 90)
+Class.znpAR_waarrk = {
+    PARENT: "genericTank",
+    LABEL: "Waarrk",
+    DANGER: 7,
+    GUNS: [
+        {
+            POSITION: [16, 8, 1, 0, -2, -17.5, 0.5],
+        },
+        {
+            POSITION: [3.5, 9, 1.6, 16, -2, -17.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.tripleShot]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [16, 8, 1, 0, 2, 17.5, 0.5],
+        },
+        {
+            POSITION: [3.5, 9, 1.6, 16, 2, 17.5, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.tripleShot]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        },
+        {
+            POSITION: [18, 8, 1, 0, 0, 0, 0],
+        },
+        {
+            POSITION: [3.5, 9, 1.6, 18, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.tripleShot]),
+                TYPE: "trap",
+                STAT_CALCULATOR: gunCalcNames.trap,
+            },
+        }
+    ]
+}
 Class.znpAR_warkwark = makeMulti({
     PARENT: "genericTank",
     STAT_NAMES: statnames.mixed,
@@ -1710,7 +2344,7 @@ Class.znpAR_autoWark = makeAuto('znpAR_wark')
 // Tier 3 upgrade paths
 Class.twin.UPGRADES_TIER_3.splice(1, 1) // remove bulwark
 Class.doubleTwin.UPGRADES_TIER_3.push(
-	"znpAR_placeholder",//"znpAR_doubleFlankTwin",
+	"znpAR_doubleFlankTwin",
 	"znpAR_doubleGunner",
 	"znpAR_doubleHelix",
 	"znpAR_warkwark",
@@ -1721,29 +2355,29 @@ Class.tripleShot.UPGRADES_TIER_3.push(
 	"znpAR_bentGunner",
 	"znpAR_bentMinigun",
 	"znpAR_defect",
-	"znpAR_placeholder",//"znpAR_waarrk",
+	"znpAR_waarrk",
 )
 
 Class.sniper.UPGRADES_TIER_3.push(
-	"znpAR_placeholder",//"znpAR_railgun",
+	"znpAR_railgun",
 )
 Class.assassin.UPGRADES_TIER_3.push(
 	"znpAR_buttbuttin",
 	"znpAR_hitman",
 	"znpAR_sniper3",
-	"znpAR_placeholder",//"znpAR_enforcer",
-	"znpAR_placeholder",//"znpAR_courser",
+	"znpAR_enforcer",
+	"znpAR_courser",
 )
 Class.hunter.UPGRADES_TIER_3.push(
 	"znpAR_autoHunter",
-	"znpAR_placeholder",//"znpAR_megaHunter",
-	"znpAR_placeholder",//"znpAR_prober",
-	"znpAR_placeholder",//"znpAR_courser",
+	"znpAR_megaHunter",
+	"znpAR_prober",
+	"znpAR_courser",
 )
 Class.rifle.UPGRADES_TIER_3.push(
 	"znpAR_autoRifle",
-	"znpAR_placeholder",//"znpAR_enforcer",
-	"znpAR_placeholder",//"znpAR_prober",
+	"znpAR_enforcer",
+	"znpAR_prober",
 )
 
 Class.minigun.UPGRADES_TIER_3.push(
@@ -1754,14 +2388,14 @@ Class.minigun.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_widget",
 )
 Class.gunner.UPGRADES_TIER_3.push(
-	"znpAR_placeholder",//"znpAR_battery",
+	"znpAR_battery",
 	"znpAR_buttbuttin",
 	"znpAR_blower",
 	"znpAR_placeholder",//"znpAR_rimfire",
 	"znpAR_placeholder",//"znpAR_volley",
 	"znpAR_doubleGunner",
 	"znpAR_bentGunner",
-	"znpAR_placeholder",//"znpAR_equalizer",
+	"znpAR_equalizer",
 )
 Class.sprayer.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_frother",
@@ -1772,7 +2406,7 @@ Class.sprayer.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_stormer",
 )
 Class.znpAR_diesel.UPGRADES_TIER_3 = [
-	"znpAR_placeholder",//"znpAR_jalopy",
+	"znpAR_jalopy",
 	"machineGunner",
 	"znpAR_dieselTrapper",
 	"znpAR_polluter",
@@ -1804,7 +2438,7 @@ Class.overseer.UPGRADES_TIER_3.splice(2, 1) // remove overgunner
 Class.overseer.UPGRADES_TIER_3.splice(1, 1) // remove overtrapper
 Class.overseer.UPGRADES_TIER_3.push(
 	"znpAR_captain",
-	"znpAR_placeholder",//"znpAR_foreman",
+	"znpAR_foreman",
 	"znpAR_dopeseer",
 )
 Class.cruiser.UPGRADES_TIER_3.push(
@@ -1812,7 +2446,7 @@ Class.cruiser.UPGRADES_TIER_3.push(
 	"znpAR_cruiserdrive",
 	"znpAR_placeholder",//"znpAR_hangar",
 	"znpAR_zipper",
-	"znpAR_placeholder",//"znpAR_baltimore",
+	"znpAR_baltimore",
 	"znpAR_mosey",
 )
 Class.underseer.UPGRADES_TIER_3.push(
@@ -1831,7 +2465,7 @@ Class.spawner.UPGRADES_TIER_3.push(
 	"znpAR_issuer",
 )
 Class.znpAR_directordrive.UPGRADES_TIER_3 = [
-	"znpAR_placeholder",//"znpAR_directorstorm",
+	"znpAR_directorstorm",
 	"overdrive",
 	"znpAR_cruiserdrive",
 	"znpAR_underdrive",
@@ -1841,8 +2475,8 @@ Class.znpAR_directordrive.UPGRADES_TIER_3 = [
 	"znpAR_doperdrive",
 ]
 Class.znpAR_honcho.UPGRADES_TIER_3 = [
-	"znpAR_placeholder",//"znpAR_foreman",
-	"znpAR_placeholder",//"znpAR_baltimore",
+	"znpAR_foreman",
+	"znpAR_baltimore",
 	"znpAR_placeholder",//"znpAR_foundry",
 	"bigCheese",
 	"znpAR_autoHoncho",
@@ -1897,7 +2531,7 @@ Class.builder.UPGRADES_TIER_3.push(
 	"znpAR_forger",
 	"znpAR_stall",
 	"znpAR_fashioner",
-	"znpAR_placeholder",//"znpAR_charger",
+	"znpAR_charger",
 )
 Class.triTrapper.UPGRADES_TIER_3.push(
 	"znpAR_triPen",
@@ -1937,38 +2571,47 @@ Class.znpAR_mech.UPGRADES_TIER_3 = [
 Class.znpAR_machineTrapper.UPGRADES_TIER_3 = [
 	"znpAR_dieselTrapper",
 	"barricade",
-	"znpAR_placeholder",//"znpAR_equalizer",
+	"znpAR_equalizer",
 	"znpAR_machineGuard",
 	"znpAR_encircler",
 	"znpAR_machineMech",
 	"znpAR_triMachine",
-	"znpAR_placeholder",//"znpAR_expeller",
+	"znpAR_expeller",
 	"znpAR_autoMachineTrapper",
 	"znpAR_deviation",
 ]
 Class.znpAR_wark.UPGRADES_TIER_3 = [
 	"znpAR_warkwark",
-	"znpAR_placeholder",//"znpAR_waarrk",
-	"znpAR_placeholder",//"znpAR_equalizer",
+	"znpAR_waarrk",
+	"znpAR_equalizer",
 	"hexaTrapper",
 	"znpAR_hutch",
 	"znpAR_cog",
-	"znpAR_placeholder",//"znpAR_expeller",
+	"znpAR_expeller",
 	"bulwark",
 	"znpAR_coalesce",
 	"znpAR_autoWark"
 ]
 
 Class.volute.UPGRADES_TIER_3.push(
+	"znpAR_riptide",
 	"znpAR_current",
 	"znpAR_coil",
 	"znpAR_autoVolute",
 )
 Class.helix.UPGRADES_TIER_3.push(
+	"znpAR_duplicator",
 	"znpAR_doubleHelix",
 	"znpAR_spiral",
 	"znpAR_autoHelix",
 )
+Class.znpAR_undertow.UPGRADES_TIER_3 = [
+	"znpAR_riptide",
+]
+Class.znpAR_repeater.UPGRADES_TIER_3 = [
+	"znpAR_iterator",
+	"znpAR_duplicator",
+]
 
 Class.smasher.UPGRADES_TIER_3.push(
 	"znpAR_placeholder",//"znpAR_bonker",
