@@ -2,7 +2,7 @@ const { dereference, combineStats, makeMulti, makeDeco } = require('../facilitat
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
-const addToMain = true
+const addToMain = false // you may change it, NOTE: these tanks are OP
 
 // Bullets
 Class.masterBullet = {
