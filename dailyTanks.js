@@ -185,7 +185,7 @@ Class.tornado = {
             output.push({ 
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pound]), 
+                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
                     TYPE: ["satellite", {ANGLE: i * 90}], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
@@ -253,42 +253,42 @@ Class.hexaWhirl = {
         {
             POSITION: [18, 8, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [18, 8, 1, 0, 0, 120, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [18, 8, 1, 0, 0, 240, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [18, 8, 1, 0, 0, 60, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [18, 8, 1, 0, 0, 180, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [18, 8, 1, 0, 0, 300, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
@@ -363,7 +363,7 @@ Class.munition = {
         {
             POSITION: [17, 3, 1, 0, -6, -7, 0.25],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.artillery]),
                 TYPE: "bullet",
                 LABEL: "Secondary",
             },
@@ -371,7 +371,7 @@ Class.munition = {
         {
             POSITION: [17, 3, 1, 0, 6, 7, 0.75],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.arty]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.gunner, g.artillery]),
                 TYPE: "bullet",
                 LABEL: "Secondary",
             },
@@ -379,7 +379,7 @@ Class.munition = {
         {
             POSITION: [19, 12, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.artillery]),
                 TYPE: "bullet",
                 LABEL: "Heavy",
             },
@@ -504,7 +504,7 @@ Class.whirlGuard = {
         {
             POSITION: [20, 8, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
@@ -691,7 +691,7 @@ Class.vortex = {
         {
             POSITION: [17, 13, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.arty, g.arty]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.pound, g.artillery, g.artillery]),
                 TYPE: "minimissile",
                 STAT_CALCULATOR: gunCalcNames.sustained,
             },
@@ -771,7 +771,7 @@ Class.megaTornado = {
             output.push({ 
                 POSITION: {WIDTH: 16, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pound, g.destroy]), 
+                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder, g.destroyer]), 
                     TYPE: ["satellite", {ANGLE: i * 180}], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
@@ -810,7 +810,7 @@ Class.tempest = {
             output.push({ 
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pound]), 
+                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
                     TYPE: ["satellite", {ANGLE: i * 120}], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
@@ -823,7 +823,7 @@ Class.tempest = {
             output.push({ 
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pound]), 
+                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
                     TYPE: ["satellite", { ANGLE: i * 120, CONTROLLERS: [['orbit', {invert: true}]] }], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
@@ -858,7 +858,7 @@ Class.thunderbolt = {
             output.push({ 
                 POSITION: {WIDTH: 12, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite, g.pound]), 
+                    SHOOT_SETTINGS: combineStats([g.satellite, g.pounder]), 
                     TYPE: ["satellite", {ANGLE: i * 90}], 
                     MAX_CHILDREN: 1,   
                     AUTOFIRE: true,  
@@ -989,7 +989,7 @@ Class.master = {
         {
             POSITION: [13, 8, 1, 0, -1, 140, 0.6],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: gunCalcNames.thruster,
             },
@@ -997,7 +997,7 @@ Class.master = {
         {
             POSITION: [13, 8, 1, 0, 1, 220, 0.6],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: gunCalcNames.thruster,
             },
@@ -1005,7 +1005,7 @@ Class.master = {
         {
             POSITION: [16, 8, 1, 0, 0, 150, 0.1],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: gunCalcNames.thruster,
             },
@@ -1013,7 +1013,7 @@ Class.master = {
         {
             POSITION: [16, 8, 1, 0, 0, 210, 0.1],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank, g.tri, g.thruster]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
                 LABEL: gunCalcNames.thruster,
             },
@@ -1352,14 +1352,14 @@ Class.literallyATank = {
 	
 if (addToMain == true) {
 Class.basic.UPGRADES_TIER_1.push("whirlwind")
-	Class.desmos.UPGRADES_TIER_2.push("undertow")
-
+Class.basic.UPGRADES_TIER_3.push("literallyATank")
 Class.hexaTank.UPGRADES_TIER_3.push("hexaWhirl")
 Class.artillery.UPGRADES_TIER_3.push("munition")
 Class.auto3.UPGRADES_TIER_3.push("whirl3")
 Class.trapGuard.UPGRADES_TIER_3.push("whirlGuard")
 Class.underseer.UPGRADES_TIER_3.push("prophet")
 Class.launcher.UPGRADES_TIER_3.push("vortex")
+Class.desmos.UPGRADES_TIER_2.push("undertow")
 } else {
 Class.basic.UPGRADES_TIER_3 = ["dailyTanks"]
 }
