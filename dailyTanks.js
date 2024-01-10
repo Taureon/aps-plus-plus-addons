@@ -1089,6 +1089,10 @@ Class.literallyAMachineGun = {
     GUNS: [
         {
             POSITION: [22, 8, 1, 0, 0, 0, 0]
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic]),
+                TYPE: "bullet"
+            }
         }
     ]
 }
