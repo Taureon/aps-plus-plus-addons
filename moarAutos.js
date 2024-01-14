@@ -1,99 +1,61 @@
-const { combineStats, makeAuto, makeCeption } = require('../facilitators.js');
-const { base, gunCalcNames, statnames } = require('../constants.js');
-const tanks = require('../groups/tanks.js');
+const { combineStats, makeAuto } = require('../facilitators.js')
+const { base, gunCalcNames, statnames } = require('../constants.js')
+const tanks = require('../groups/tanks.js')
 
-Class.znpAutoBasic = makeAuto('basic');
-Class.basic.UPGRADES_TIER_1.push("znpAutoBasic");
-    Class.znpAutoBasic.UPGRADES_TIER_2 = ["znpAutoTwin", "znpAutoSniper", "znpAutoMachineGun", "znpAutoFlankGuard", "znpAutoDirector", "znpAutoPounder", "znpAutoTrapper", "znpAutoDesmos", "znpCeptBasic"];
-    Class.znpAutoBasic.UPGRADES_TIER_3 = ["autoSmasher"];
+Class.znp_autoBasic = makeAuto('basic')
+    Class.znp_autoTwin = makeAuto('twin')
+        Class.znp_autoTripleShot = makeAuto('tripleShot')
+    Class.znp_autoSniper = makeAuto('sniper')
+        Class.znp_autoHunter = makeAuto('hunter')
+        Class.znp_autoRifle = makeAuto('rifle')
+    Class.znp_autoMachineGun = makeAuto('machineGun')
+        Class.znp_autoMinigun = makeAuto('minigun')
+        Class.znp_autoSprayer = makeAuto('sprayer')
+    Class.znp_autoFlankGuard = makeAuto('flankGuard')
+        Class.znp_autoHexaTank = makeAuto('hexaTank')
+        Class.znp_autoAuto3 = makeAuto('auto3')
+    Class.znp_autoDirector = makeAuto('director')
+        Class.znp_autoUnderseer = makeAuto('underseer')
+    Class.znp_autoPounder = makeAuto('pounder')
+        Class.znp_autoDestroyer = makeAuto('destroyer')
+        Class.znp_autoArtillery = makeAuto('artillery')
+        Class.znp_autoLauncher = makeAuto('launcher')
+    Class.znp_autoTrapper = makeAuto('trapper')
+        Class.znp_autoTrapGuard = makeAuto('trapGuard')
+    Class.znp_autoDesmos = makeAuto('desmos')
+        Class.znp_autoHelix = makeAuto('helix')
+        Class.znp_autoVolute = makeAuto('volute')
 
-Class.znpAutoTwin = makeAuto('twin');
-Class.twin.UPGRADES_TIER_2.push("znpAutoTwin");
-    Class.znpAutoTwin.UPGRADES_TIER_3 = ["autoDouble", "znpAutoTripleShot", "autoGunner", "znpAutoHexaTank", "znpAutoHelix", "znpCeptTwin"];
-
-Class.znpAutoSniper = makeAuto('sniper');
-Class.sniper.UPGRADES_TIER_2.push("znpAutoSniper");
-    Class.znpAutoSniper.UPGRADES_TIER_3 = ["autoAssassin", "znpAutoHunter", "znpAutoMinigun", "znpAutoRifle", "znpCeptSniper"];
-
-Class.znpAutoMachineGun = makeAuto('machineGun');
-Class.machineGun.UPGRADES_TIER_2.push("znpAutoMachineGun");
-    Class.znpAutoMachineGun.UPGRADES_TIER_3 = ["znpAutoArtillery", "znpAutoMinigun", "autoGunner", "znpAutoSprayer", "znpCeptMachineGun"];
-
-Class.znpAutoFlankGuard = makeAuto('flankGuard');
-Class.flankGuard.UPGRADES_TIER_2.push("znpAutoFlankGuard");
-    Class.znpAutoFlankGuard.UPGRADES_TIER_3 = ["znpAutoHexaTank", "autoTriAngle", "znpAutoAuto3", "znpAutoTrapGuard", "hexaTrapper", "znpCeptFlankGuard"];
-
-Class.znpAutoDirector = makeAuto('director');
-Class.director.UPGRADES_TIER_2.push("znpAutoDirector");
-    Class.znpAutoDirector.UPGRADES_TIER_3 = ["autoOverseer", "autoCruiser", "znpAutoUnderseer", "autoSpawner", "znpCeptDirector"];
-
-Class.znpAutoPounder = makeAuto('pounder');
-Class.pounder.UPGRADES_TIER_2.push("znpAutoPounder");
-    Class.znpAutoPounder.UPGRADES_TIER_3 = ["znpAutoDestroyer", "autoBuilder", "znpAutoArtillery", "znpAutoLauncher", "znpAutoVolute", "znpCeptPounder"];
-
-Class.znpAutoTrapper = makeAuto('trapper');
-Class.trapper.UPGRADES_TIER_2.push("znpAutoTrapper");
-    Class.znpAutoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper", "znpAutoTrapGuard", "znpCeptTrapper"];
-
-Class.znpAutoDesmos = makeAuto('desmos');
-Class.desmos.UPGRADES_TIER_2.push("znpAutoDesmos");
-    Class.znpAutoDesmos.UPGRADES_TIER_3 = ["znpAutoVolute", "znpAutoHelix", "znpCeptDesmos"];
-
-Class.znpAutoTripleShot = makeAuto(Class.tripleShot);
-Class.tripleShot.UPGRADES_TIER_3.push("znpAutoTripleShot");
-
-Class.znpAutoHunter = makeAuto(Class.hunter);
-Class.hunter.UPGRADES_TIER_3.push("znpAutoHunter");
-
-Class.znpAutoRifle = makeAuto(Class.rifle);
-Class.rifle.UPGRADES_TIER_3.push("znpAutoRifle");
-
-Class.znpAutoMinigun = makeAuto(Class.minigun);
-Class.minigun.UPGRADES_TIER_3.push("znpAutoMinigun");
-
-Class.znpAutoSprayer = makeAuto(Class.sprayer);
-Class.sprayer.UPGRADES_TIER_3.push("znpAutoSprayer");
-
-Class.znpAutoHexaTank = makeAuto(Class.hexaTank);
-Class.hexaTank.UPGRADES_TIER_3.push("znpAutoHexaTank");
-
-Class.znpAutoAuto3 = makeAuto(Class.auto3);
-Class.auto3.UPGRADES_TIER_3.push("znpAutoAuto3");
-
-Class.znpAutoUnderseer = makeAuto(Class.underseer);
-Class.underseer.UPGRADES_TIER_3.push("znpAutoUnderseer");
-
-Class.znpAutoDestroyer = makeAuto(Class.destroyer);
-Class.destroyer.UPGRADES_TIER_3.push("znpAutoDestroyer");
-
-Class.znpAutoArtillery = makeAuto(Class.artillery);
-Class.artillery.UPGRADES_TIER_3.push("znpAutoArtillery");
-
-Class.znpAutoLauncher = makeAuto(Class.launcher);
-Class.launcher.UPGRADES_TIER_3.push("znpAutoLauncher");
-
-Class.znpAutoTrapGuard = makeAuto(Class.trapGuard);
-Class.trapGuard.UPGRADES_TIER_3.push("znpAutoTrapGuard");
-
-Class.znpAutoHelix = makeAuto(Class.helix);
-Class.helix.UPGRADES_TIER_3.push("znpAutoHelix");
-
-Class.znpAutoVolute = makeAuto(Class.volute);
-Class.volute.UPGRADES_TIER_3.push("znpAutoVolute");
-
-Class.znpCeptBasic = makeCeption(Class.basic, "Inception");
-    Class.znpCeptBasic.UPGRADES_TIER_3 = ["znpCeptTwin", "znpCeptSniper", "znpCeptMachineGun", "znpCeptFlankGuard", "znpCeptDirector", "znpCeptPounder", "znpCeptTrapper", "znpCeptDesmos", "znpCept2Basic"];
-
-Class.znpCeptTwin = makeCeption(Class.twin, "Twinception")
-Class.znpCeptSniper = makeCeption(Class.sniper, "Snipeception")
-Class.znpCeptMachineGun = makeCeption(Class.machineGun, "Machineception")
-Class.znpCeptFlankGuard = makeCeption(Class.flankGuard, "Flankception")
-Class.znpCeptDirector = makeCeption(Class.director, "Direction")
-Class.znpCeptPounder = makeCeption(Class.pounder, "Poundception")
-Class.znpCeptTrapper = makeCeption(Class.trapper, "Trapception")
-Class.znpCeptDesmos = makeCeption(Class.desmos, "Deception")
-
-Class.znpCept2Basic = makeAuto(Class.basic, "Recursion", {
-    type: "znpCeptBasic",
-    size: 12,
-})
+Class.basic.UPGRADES_TIER_1.push("znp_autoBasic")
+    Class.twin.UPGRADES_TIER_2.push("znp_autoTwin")
+        Class.tripleShot.UPGRADES_TIER_3.push("znp_autoTripleShot")
+        Class.znp_autoTwin.UPGRADES_TIER_3 = ["autoDouble", "znp_autoTripleShot", "autoGunner", "znp_autoHexaTank", "znp_autoHelix"]
+    Class.sniper.UPGRADES_TIER_2.push("znp_autoSniper")
+        Class.hunter.UPGRADES_TIER_3.push("znp_autoHunter")
+        Class.rifle.UPGRADES_TIER_3.push("znp_autoRifle")
+        Class.znp_autoSniper.UPGRADES_TIER_3 = ["autoAssassin", "znp_autoHunter", "znp_autoMinigun", "znp_autoRifle"]
+    Class.machineGun.UPGRADES_TIER_2.push("znp_autoMachineGun")
+        Class.minigun.UPGRADES_TIER_3.push("znp_autoMinigun")
+        Class.sprayer.UPGRADES_TIER_3.push("znp_autoSprayer")
+        Class.znp_autoMachineGun.UPGRADES_TIER_3 = ["znp_autoArtillery", "znp_autoMinigun", "autoGunner", "znp_autoSprayer"]
+    Class.flankGuard.UPGRADES_TIER_2.push("znp_autoFlankGuard")
+        Class.hexaTank.UPGRADES_TIER_3.push("znp_autoHexaTank")
+        Class.auto3.UPGRADES_TIER_3.push("znp_autoAuto3")
+        Class.znp_autoFlankGuard.UPGRADES_TIER_3 = ["znp_autoHexaTank", "autoTriAngle", "znp_autoAuto3", "znp_autoTrapGuard", "hexaTrapper"]
+    Class.director.UPGRADES_TIER_2.push("znp_autoDirector")
+        Class.underseer.UPGRADES_TIER_3.push("znp_autoUnderseer")
+        Class.znp_autoDirector.UPGRADES_TIER_3 = ["autoOverseer", "autoCruiser", "znp_autoUnderseer", "autoSpawner"]
+    Class.pounder.UPGRADES_TIER_2.push("znp_autoPounder")
+        Class.destroyer.UPGRADES_TIER_3.push("znp_autoDestroyer")
+        Class.artillery.UPGRADES_TIER_3.push("znp_autoArtillery")
+        Class.launcher.UPGRADES_TIER_3.push("znp_autoLauncher")
+        Class.znp_autoPounder.UPGRADES_TIER_3 = ["znp_autoDestroyer", "autoBuilder", "znp_autoArtillery", "znp_autoLauncher", "znp_autoVolute"]
+    Class.trapper.UPGRADES_TIER_2.push("znp_autoTrapper")
+        Class.trapGuard.UPGRADES_TIER_3.push("znp_autoTrapGuard")
+        Class.znp_autoTrapper.UPGRADES_TIER_3 = ["autoBuilder", "hexaTrapper", "znp_autoTrapGuard"]
+    Class.desmos.UPGRADES_TIER_2.push("znp_autoDesmos")
+        Class.helix.UPGRADES_TIER_3.push("znp_autoHelix")
+        Class.volute.UPGRADES_TIER_3.push("znp_autoVolute")
+        Class.znp_autoDesmos.UPGRADES_TIER_3 = ["znp_autoVolute", "znp_autoHelix"]
+    Class.znp_autoBasic.UPGRADES_TIER_2 = ["znp_autoTwin", "znp_autoSniper", "znp_autoMachineGun", "znp_autoFlankGuard", "znp_autoDirector", "znp_autoPounder", "znp_autoTrapper", "znp_autoDesmos"]
+        Class.znp_autoBasic.UPGRADES_TIER_3 = ["autoSmasher"]
