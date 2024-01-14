@@ -1,5 +1,4 @@
-const { combineStats, makeAuto } = require('../facilitators.js')
-const { base, gunCalcNames, statnames } = require('../constants.js')
+const { makeAuto } = require('../facilitators.js')
 const tanks = require('../groups/tanks.js')
 
 Class.znp_autoBasic = makeAuto('basic')
