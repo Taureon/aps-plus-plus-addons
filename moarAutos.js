@@ -102,6 +102,45 @@ const makeTripleMegaAuto = (type, name = -1, options = {}) => {
     output.DANGER = type.DANGER + 2;
     return output;
 }
+const makePentaAuto = (type, name = -1, options = {}) => {
+    type = ensureIsClass(type);
+    let turret = {
+        type: "autoTurret",
+        size: 6,
+        independent: true,
+        color: 16,
+        angle: 180,
+    };
+    if (options.type != null) turret.type = options.type;
+    if (options.independent != null) turret.independent = options.independent;
+    if (options.color != null) turret.color = options.color;
+    let output = dereference(type);
+    let autogun = {
+        POSITION: [turret.size, 6.25, 0, 0, 120, 1],
+        TYPE: [ turret.type, { CONTROLLERS: ["nearestDifferentMaster"], INDEPENDENT: turret.independent, COLOR: turret.color } ]
+    };
+    let autogun1 = {
+        POSITION: [turret.size, 6.25, 0, 72, 120, 1],
+        TYPE: [ turret.type, { CONTROLLERS: ["nearestDifferentMaster"], INDEPENDENT: turret.independent, COLOR: turret.color } ]
+    };
+    let autogun2 = {
+        POSITION: [turret.size, 6.25, 0, 144, 120, 1],
+        TYPE: [ turret.type, { CONTROLLERS: ["nearestDifferentMaster"], INDEPENDENT: turret.independent, COLOR: turret.color } ],
+    };
+    let autogun3 = {
+        POSITION: [turret.size, 6.25, 0, -144, 120, 1],
+        TYPE: [ turret.type, { CONTROLLERS: ["nearestDifferentMaster"], INDEPENDENT: turret.independent, COLOR: turret.color } ]
+    };
+    let autogun4 = {
+        POSITION: [turret.size, 6.25, 0, -72, 120, 1],
+        TYPE: [ turret.type, { CONTROLLERS: ["nearestDifferentMaster"], INDEPENDENT: turret.independent, COLOR: turret.color } ],
+    };
+    if (type.GUNS != null) output.GUNS = type.GUNS;
+    output.TURRETS = type.TURRETS == null ? [autogun, autogun1, autogun2, autogun3, autogun4] : [...type.TURRETS, autogun, autogun1, autogun2, autogun3, autogun4];
+    output.LABEL = name == -1 ? "Penta Auto-" + type.LABEL : name;
+    output.DANGER = type.DANGER + 2;
+    return output;
+}
 
 Class.znp_ultraAutoTurret = {
     PARENT: "autoTurret",
@@ -157,6 +196,7 @@ Class.znp_megaAutoBasic = makeMegaAuto('basic')
     Class.znp_megaAutoDesmos = makeMegaAuto('desmos')
 
 Class.znp_tripleAutoBasic = makeTripleAuto('basic')
+    Class.znp_pentaAutoBasic = makePentaAuto('basic')
     Class.znp_tripleMegaAutoBasic = makeTripleMegaAuto('basic')
     Class.znp_tripleAutoTwin = makeTripleAuto('twin')
     Class.znp_tripleAutoSniper = makeTripleAuto('sniper')
@@ -193,7 +233,7 @@ Class.basic.UPGRADES_TIER_1.push("znp_autoBasic")
     Class.znp_autoBasic.UPGRADES_TIER_2 = ["znp_megaAutoBasic", "znp_tripleAutoBasic", "znp_autoTwin", "znp_autoSniper", "znp_autoMachineGun", "znp_autoFlankGuard", "znp_autoDirector", "znp_autoPounder", "znp_autoTrapper", "znp_autoDesmos"]
         Class.znp_autoBasic.UPGRADES_TIER_3 = ["autoSmasher"]
         Class.znp_megaAutoBasic.UPGRADES_TIER_3 = ["znp_ultraAutoBasic", "znp_tripleMegaAutoBasic", "znp_megaAutoTwin", "znp_megaAutoSniper", "znp_megaAutoMachineGun", "znp_megaAutoFlankGuard", "znp_megaAutoDirector", "znp_megaAutoPounder", "znp_megaAutoTrapper", "znp_megaAutoDesmos"]
-        Class.znp_tripleAutoBasic.UPGRADES_TIER_3 = ["znp_tripleMegaAutoBasic", "znp_tripleAutoTwin", "znp_tripleAutoSniper", "znp_tripleAutoMachineGun", "znp_tripleAutoFlankGuard", "znp_tripleAutoDirector", "znp_tripleAutoPounder", "znp_tripleAutoTrapper", "znp_tripleAutoDesmos"]
+        Class.znp_tripleAutoBasic.UPGRADES_TIER_3 = ["znp_tripleMegaAutoBasic", "znp_pentaAutoBasic", "znp_tripleAutoTwin", "znp_tripleAutoSniper", "znp_tripleAutoMachineGun", "znp_tripleAutoFlankGuard", "znp_tripleAutoDirector", "znp_tripleAutoPounder", "znp_tripleAutoTrapper", "znp_tripleAutoDesmos"]
         Class.znp_autoTwin.UPGRADES_TIER_3 = ["znp_megaAutoTwin", "znp_tripleAutoTwin", "autoDouble", "znp_autoTripleShot", "autoGunner", "znp_autoHexaTank", "znp_autoHelix"]
         Class.znp_autoSniper.UPGRADES_TIER_3 = ["znp_megaAutoSniper", "znp_tripleAutoSniper", "autoAssassin", "znp_autoHunter", "znp_autoMinigun", "znp_autoRifle"]
         Class.znp_autoMachineGun.UPGRADES_TIER_3 = ["znp_megaAutoMachineGun", "znp_tripleAutoMachineGun", "znp_autoArtillery", "znp_autoMinigun", "autoGunner", "znp_autoSprayer"]
