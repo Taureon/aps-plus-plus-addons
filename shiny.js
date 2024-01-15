@@ -39,7 +39,7 @@ Class.dreadnoughts = {
 Class.ShinyMenu = {
     PARENT: "menu",
     LABEL: "Shiny Member Menu",
-    UPGRADES_TIER_0: ["dreadnoughts", "tracker3"],
+    UPGRADES_TIER_0: ["bosses", "dreadnoughts", "tracker3"],
 }
 console.log("[INFO] Loaded shiny member menu!")
 
