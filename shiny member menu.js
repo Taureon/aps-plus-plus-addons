@@ -56,7 +56,7 @@ Class.DominatorBlank = {
 Class.DominatorMenu = {
     PARENT: "menu",
     LABEL: "Dominator Menu",
-    UPGRADES_TIER_0: ["SpecialTanksMenu", "DominatorBlank", "DestroyerDominatorOld", "GunnerDominatorOld", "TrapperDominatorOld"],
+    UPGRADES_TIER_0: ["SpecialTanksMenu", "DominatorBlank", "DestroyerDominatorOld", "GunnerDominatorOld", "TrapperDominatorOld", "antiTankMachineGun"],
 }
 Class.SpecialTanksMenu = {
     PARENT: "menu",
