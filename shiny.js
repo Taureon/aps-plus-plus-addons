@@ -31,9 +31,17 @@ Class.menu = {
         },
     ],
 };
+Class.dreadnoughts = {
+    PARENT: "menu",
+    LABEL: "Dreadnoughts",
+    UPGRADES_TIER_1: ["dreadV1", "dreadV2"],
+}
 Class.ShinyMenu = {
     PARENT: "menu",
     LABEL: "Shiny Member Menu",
 }
 console.log("[INFO] Loaded shiny member menu!")
 
+//Class.ShinyMenu.UPGRADES_TIER_0 = ["dreadnoughts", "tracker3"];
+//Class.dreadnoughts.UPGRADES_TIER_1 = ["dreadV1", "DreadV2"];
+console.log("[INFO] Loaded shiny member menu!");
