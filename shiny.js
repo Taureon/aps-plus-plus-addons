@@ -41,8 +41,4 @@ Class.ShinyMenu = {
     LABEL: "Shiny Member Menu",
     UPGRADES_TIER_0: ["bosses", "dreadnoughts", "tracker3"],
 }
-console.log("[INFO] Loaded shiny member menu!")
-
-//Class.ShinyMenu.UPGRADES_TIER_0 = ["dreadnoughts", "tracker3"];
-//Class.dreadnoughts.UPGRADES_TIER_1 = ["dreadV1", "DreadV2"];
 console.log("[INFO] Loaded shiny member menu!");
