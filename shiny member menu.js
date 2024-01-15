@@ -92,11 +92,15 @@ Class.SpecialTanksMenu = {
 Class.MemesMenu = {
     PARENT: "menu",
     LABEL: "Memes",
-    UPGRADES_TIER_0: ["AdminTanksMenu"],
+    UPGRADES_TIER_0: ["DiepTanksMenu", "AdminTanksMenu"],
 }
 Class.AdminTanksMenu = {
     PARENT: "menu",
     LABEL: "Admin Tanks",
+}
+Class.DiepTanksMenu = {
+    PARENT: "menu",
+    LABEL: "Diep Tanks",
 }
 Class.DreadnoughtsMenu = {
     PARENT: "menu",
