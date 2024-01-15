@@ -65,6 +65,10 @@ Class.SpecialMenu = {
     PARENT: "menu",
     LABEL: "Special Menu",
 }
+Class.NostalgiaMenu = {
+    PARENT: "menu",
+    LABEL: "Nostalgia Menu",
+}
 Class.DominatorMenu = {
     PARENT: "menu",
     LABEL: "Dominator Menu",
@@ -83,6 +87,6 @@ Class.Dreadnoughts = {
 Class.ShinyMenu = {
     PARENT: "menu",
     LABEL: "Shiny Member Menu",
-    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","bosses", "Dreadnoughts", "tracker3"],
+    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","bosses", "NostalgiaMenu", "Dreadnoughts", "tracker3"],
 }
 console.log("[INFO] Loaded shiny member menu!");
