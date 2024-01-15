@@ -69,7 +69,7 @@ Class.BossesMenuOld = {
 Class.SpecialMenu = {
     PARENT: "menu",
     LABEL: "Special Menu",
-    UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "MemesMenu", "Dreadnoughts"],
+    UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "MemesMenu", "DreadnoughtsMenu"],
 }
 Class.NostalgiaMenu = {
     PARENT: "menu",
@@ -93,7 +93,7 @@ Class.MemesMenu = {
     PARENT: "menu",
     LABEL: "Memes",
 }
-Class.Dreadnoughts = {
+Class.DreadnoughtsMenu = {
     PARENT: "menu",
     LABEL: "Dreadnoughts",
     UPGRADES_TIER_1: ["dreadOfficialV1", "dreadOfficialV2"],
@@ -101,6 +101,6 @@ Class.Dreadnoughts = {
 Class.ShinyMenu = {
     PARENT: "menu",
     LABEL: "Shiny Member Menu",
-    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "Dreadnoughts", "tracker3"],
+    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "DreadnoughtsMenu", "tracker3"],
 }
 console.log("[INFO] Loaded shiny member menu!");
