@@ -69,7 +69,7 @@ Class.BossesMenuOld = {
 Class.SpecialMenu = {
     PARENT: "menu",
     LABEL: "Special Menu",
-    UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu"],
+    UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "MemesMenu"],
 }
 Class.NostalgiaMenu = {
     PARENT: "menu",
@@ -88,6 +88,10 @@ Class.SpecialTanksMenu = {
     PARENT: "menu",
     LABEL: "Special Tanks Menu",
     UPGRADES_TIER_0: ["SpecialMenu", "HealerMenuOld", "DominatorMenu", "arenaCloser"],
+}
+Class.MemesMenu = {
+    PARENT: "menu",
+    LABEL: "Memes",
 }
 Class.Dreadnoughts = {
     PARENT: "menu",
