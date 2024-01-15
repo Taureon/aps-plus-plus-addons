@@ -79,6 +79,10 @@ Class.DominatorMenu = {
     LABEL: "Dominator Menu",
     UPGRADES_TIER_0: ["SpecialTanksMenu", "DominatorBlank", "DestroyerDominatorOld", "GunnerDominatorOld", "TrapperDominatorOld", "antiTankMachineGun", "BaseProtectorOld"],
 }
+Class.ScrappedMenu = {
+    PARENT: "menu",
+    LABEL: "Scrapped Menu",
+}
 Class.SpecialTanksMenu = {
     PARENT: "menu",
     LABEL: "Special Tanks Menu",
@@ -92,6 +96,6 @@ Class.Dreadnoughts = {
 Class.ShinyMenu = {
     PARENT: "menu",
     LABEL: "Shiny Member Menu",
-    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","BossesMenuOld", "NostalgiaMenu", "Dreadnoughts", "tracker3"],
+    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "Dreadnoughts", "tracker3"],
 }
 console.log("[INFO] Loaded shiny member menu!");
