@@ -43,6 +43,10 @@ Class.TrapperDominatorOld = {
     PARENT: "gunnerDominator",
     UPGRADE_LABEL: "Dominator",
 }
+Class.BaseProtectorOld = {
+    PARENT: "baseProtector",
+    UPGRADE_LABEL: "Base",
+}
 Class.DominatorBlank = {
     PARENT: "genericTank",
     LABEL: "Dominator",
@@ -56,7 +60,7 @@ Class.DominatorBlank = {
 Class.DominatorMenu = {
     PARENT: "menu",
     LABEL: "Dominator Menu",
-    UPGRADES_TIER_0: ["SpecialTanksMenu", "DominatorBlank", "DestroyerDominatorOld", "GunnerDominatorOld", "TrapperDominatorOld", "antiTankMachineGun"],
+    UPGRADES_TIER_0: ["SpecialTanksMenu", "DominatorBlank", "DestroyerDominatorOld", "GunnerDominatorOld", "TrapperDominatorOld", "antiTankMachineGun", "BaseProtectorOld"],
 }
 Class.SpecialTanksMenu = {
     PARENT: "menu",
