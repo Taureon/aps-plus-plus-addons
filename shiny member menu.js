@@ -1,3 +1,4 @@
+// Credits: Zyrafaq and damocleas for the idea and to APS ++ for the framework
 const { combineStats, addAura, makeDeco } = require('../facilitators.js');
 const { base, gunCalcNames, basePolygonDamage, basePolygonHealth, dfltskl, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
