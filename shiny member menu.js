@@ -69,7 +69,7 @@ Class.DominatorMenu = {
 Class.SpecialTanksMenu = {
     PARENT: "menu",
     LABEL: "Special Tanks Menu",
-    UPGRADES_TIER_0: ["SpecialMenu", "healer", "DominatorMenu"],
+    UPGRADES_TIER_0: ["SpecialMenu", "healer", "DominatorMenu", "arenaCloser"],
 }
 Class.Dreadnoughts = {
     PARENT: "menu",
