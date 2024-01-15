@@ -34,7 +34,7 @@ Class.menu = {
 Class.dreadnoughts = {
     PARENT: "menu",
     LABEL: "Dreadnoughts",
-    UPGRADES_TIER_1: ["dreadV1", "dreadV2"],
+    UPGRADES_TIER_1: ["dreadOfficialV1", "dreadOfficialV2"],
 }
 Class.ShinyMenu = {
     PARENT: "menu",
