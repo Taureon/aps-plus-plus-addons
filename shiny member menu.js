@@ -31,6 +31,10 @@ Class.menu = {
         },
     ],
 };
+Class.DestroyerDominatorOld = {
+    PARENT: "destroyerDominator",
+    UPGRADE_LABEL: "Dominator",
+}
 Class.DominatorBlank = {
     PARENT: "genericTank",
     LABEL: "Dominator",
@@ -49,7 +53,7 @@ Class.DominatorMenu = {
 Class.SpecialTanksMenu = {
     PARENT: "menu",
     LABEL: "Special Tanks Menu",
-    UPGRADES_TIER_0: ["healer"],
+    UPGRADES_TIER_0: ["healer", "DominatorMenu"],
 }
 Class.Dreadnoughts = {
     PARENT: "menu",
