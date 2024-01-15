@@ -31,6 +31,11 @@ Class.menu = {
         },
     ],
 };
+Class.SpecialTanksMenu = {
+    PARENT: "menu",
+    LABEL: "Special Tanks Menu",
+    UPGRADES_TIER_0: ["healer"],
+}
 Class.Dreadnoughts = {
     PARENT: "menu",
     LABEL: "Dreadnoughts",
@@ -39,6 +44,6 @@ Class.Dreadnoughts = {
 Class.ShinyMenu = {
     PARENT: "menu",
     LABEL: "Shiny Member Menu",
-    UPGRADES_TIER_0: ["eggGenerator", "bosses", "Dreadnoughts", "tracker3"],
+    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","bosses", "Dreadnoughts", "tracker3"],
 }
 console.log("[INFO] Loaded shiny member menu!");
