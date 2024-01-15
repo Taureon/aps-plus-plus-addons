@@ -31,10 +31,20 @@ Class.menu = {
         },
     ],
 };
+Class.DominatorBlank = {
+    PARENT: "genericTank",
+    LABEL: "Dominator",
+    TURRETS: [
+        {
+            POSITION: [22, 0, 0, 0, 360, 0],
+            TYPE: "dominationBody",
+        },
+    ],
+}
 Class.DominatorMenu = {
     PARENT: "menu",
     LABEL: "Dominator Menu",
-    UPGRADES_TIER_0: [""],
+    UPGRADES_TIER_0: ["SpecialTanksMenu", "DominatorBlank", "DestroyerDominatorOld"],
 }
 Class.SpecialTanksMenu = {
     PARENT: "menu",
