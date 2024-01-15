@@ -31,6 +31,11 @@ Class.menu = {
         },
     ],
 };
+Class.DominatorMenu = {
+    PARENT: "menu",
+    LABEL: "Dominator Menu",
+    UPGRADES_TIER_0: [""],
+}
 Class.SpecialTanksMenu = {
     PARENT: "menu",
     LABEL: "Special Tanks Menu",
