@@ -68,6 +68,7 @@ Class.BossesMenuOld = {
 Class.SpecialMenu = {
     PARENT: "menu",
     LABEL: "Special Menu",
+    UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu"],
 }
 Class.NostalgiaMenu = {
     PARENT: "menu",
