@@ -65,13 +65,21 @@ Class.HealerMenuOld = {
 Class.BossesMenuOld = {
     PARENT: "bosses",
     LABEL: "Bosses Menu",
-    UPGRADES_TIER_0: ["sentries", "elites", "mysticals", "nesters", "rogues", "rammers", "terrestrials", "celestials", "eternals", "devBosses"],
 }
-Class.SpecialMenu = {
-    PARENT: "menu",
-    LABEL: "Special Menu",
-    UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "MemesMenu", "DreadnoughtsMenu", "ShinyMenu"],
+if ('dreadOfficialV1' in Class && 'dreadOfficialV2' in Class) {
+    Class.SpecialMenu = {
+        PARENT: "menu",
+        LABEL: "Special Menu",
+        UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "MemesMenu", "DreadnoughtsMenu", "ShinyMenu"],
+    };
+} else {
+    Class.SpecialMenu = {
+        PARENT: "menu",
+        LABEL: "Special Menu",
+        UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "MemesMenu", "ShinyMenu"],
+    };
 }
+
 Class.NostalgiaMenu = {
     PARENT: "menu",
     LABEL: "Nostalgia Menu",
@@ -107,14 +115,26 @@ Class.MiscTanksMenu = {
     PARENT: "menu",
     LABEL: "Misc",
 }
-Class.DreadnoughtsMenu = {
-    PARENT: "menu",
-    LABEL: "Dreadnoughts",
-    UPGRADES_TIER_1: ["dreadOfficialV1", "dreadOfficialV2"],
+if ('dreadOfficialV1' in Class && 'dreadOfficialV2' in Class) {
+    Class.DreadnoughtsMenu = {
+        PARENT: "menu",
+        LABEL: "Dreadnoughts",
+        UPGRADES_TIER_1: ["dreadOfficialV1", "dreadOfficialV2"],
+    };
 }
-Class.ShinyMenu = {
-    PARENT: "menu",
-    LABEL: "Shiny Member Menu",
-    UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "DreadnoughtsMenu", "tracker3"],
+
+if ('dreadOfficialV1' in Class && 'dreadOfficialV2' in Class) {
+    Class.ShinyMenu = {
+        PARENT: "menu",
+        LABEL: "Shiny Member Menu",
+        UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "DreadnoughtsMenu", "tracker3"],
+    };
+} else {
+    Class.ShinyMenu = {
+        PARENT: "menu",
+        LABEL: "Shiny Member Menu",
+        UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "tracker3"],
+    };
 }
+
 console.log("[INFO] Loaded shiny member menu!");
