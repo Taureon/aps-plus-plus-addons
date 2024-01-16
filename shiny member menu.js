@@ -65,6 +65,7 @@ Class.HealerMenuOld = {
 Class.BossesMenuOld = {
     PARENT: "bosses",
     LABEL: "Bosses Menu",
+    UPGRADES_TIER_0: ["sentries", "elites", "mysticals", "nesters", "rogues", "rammers", "terrestrials", "celestials", "eternals", "devBosses"],
 }
 Class.SpecialMenu = {
     PARENT: "menu",
