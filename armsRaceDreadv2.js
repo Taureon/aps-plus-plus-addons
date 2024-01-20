@@ -1453,24 +1453,24 @@ Class.jumboARDreadV2 = {
 		},
 	],
 }
-Class.colossalTopARDreadV2 = {
+Class.colossusTopARDreadV2 = {
 	PARENT: ["genericSquarenought"],
 	GUNS: [],
 }
 for (let i = 0; i < 4; i++) {
-	Class.colossalTopARDreadV2.GUNS.push(
+	Class.colossusTopARDreadV2.GUNS.push(
 		{
 			POSITION: [3.5, 17.5, 0.001, 9, 0, 90*i, 0],
 			PROPERTIES: {COLOR: 9},
 		},
 	)
 }
-Class.colossalBottomARDreadV2 = {
+Class.colossusBottomARDreadV2 = {
 	PARENT: ["genericSquarenought"],
 	GUNS: [],
 }
 for (let i = 0; i < 4; i++) {
-	Class.colossalTopARDreadV2.GUNS.push(
+	Class.colossusTopARDreadV2.GUNS.push(
 		{
 			POSITION: [3.5, 17.5, 0.001, 9, 0, 90*i, 0],
 			PROPERTIES: {COLOR: 9},
@@ -1478,26 +1478,26 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 for (let i = 0; i < 4; i++) {
-	Class.colossalBottomARDreadV2.GUNS.push(
+	Class.colossusBottomARDreadV2.GUNS.push(
 		{
 			POSITION: [4, 17.5, 0.001, 9, 0, 90*i, 0],
 			PROPERTIES: {COLOR: 9},
 		},
 	)
 }
-Class.colossalARDreadV2 = {
+Class.colossusARDreadV2 = {
 	PARENT: ["genericSquarenought"],
-	LABEL: "Colossal",
+	LABEL: "colossus",
 	BODY: speedBuffBodyStats[0],
 	GUNS: [],
 	TURRETS: [
 		{
 			POSITION: [13, 0, 0, 0, 0, 1],
-			TYPE: ['colossalTopARDreadV2', {MIRROR_MASTER_ANGLE: true}]
+			TYPE: ['colossusTopARDreadV2', {MIRROR_MASTER_ANGLE: true}]
 		},
 		{
 			POSITION: [20, 0, 0, 0, 0, -1],
-			TYPE: ['colossalBottomARDreadV2', {MIRROR_MASTER_ANGLE: true}]
+			TYPE: ['colossusBottomARDreadV2', {MIRROR_MASTER_ANGLE: true}]
 		},
 	],
 }
@@ -5301,7 +5301,7 @@ Class.addons.UPGRADES_TIER_0.push("dreadARDreadV2");
 				Class.creatureARDreadV2.UPGRADES_TIER_0 = ["beastARDreadV2"];
 					Class.beastARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("beastARDreadV2")];
 
-		Class.juggernautARDreadV2.UPGRADES_TIER_0 = ["jumboARDreadV2", "colossalARDreadV2", "cottonARDreadV2", "ironARDreadV2"];
+		Class.juggernautARDreadV2.UPGRADES_TIER_0 = ["jumboARDreadV2", "colossusARDreadV2", "cottonARDreadV2", "ironARDreadV2"];
 
 			Class.jumboARDreadV2.UPGRADES_TIER_0 = ["goliathARDreadV2", "planetARDreadV2", "moonARDreadV2", "burgARDreadV2", "siloARDreadV2", "armadaARDreadV2"];
 				Class.goliathARDreadV2.UPGRADES_TIER_0 = ["behemothARDreadV2"];
@@ -5313,7 +5313,7 @@ Class.addons.UPGRADES_TIER_0.push("dreadARDreadV2");
 				Class.armadaARDreadV2.UPGRADES_TIER_0 = ["battalionARDreadV2"];
 					Class.battalionARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("battalionARDreadV2")];
 
-			Class.colossalARDreadV2.UPGRADES_TIER_0 = ["titanARDreadV2", "sirenARDreadV2", "harpyARDreadV2", "batonARDreadV2", "fireworkARDreadV2", "armadaARDreadV2"];
+			Class.colossusARDreadV2.UPGRADES_TIER_0 = ["titanARDreadV2", "sirenARDreadV2", "harpyARDreadV2", "batonARDreadV2", "fireworkARDreadV2", "armadaARDreadV2"];
 				Class.titanARDreadV2.UPGRADES_TIER_0 = ["leviathanARDreadV2"];
 					Class.leviathanARDreadV2.UPGRADES_TIER_0 = [makeHexnoughtBodyV2("leviathanARDreadV2")];
 				// Class.sirenARDreadV2.UPGRADES_TIER_0 = ["valrayvnARDreadV2"];
