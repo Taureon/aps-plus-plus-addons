@@ -369,7 +369,7 @@ Class.diepFlankGuard = {
     REROOT_UPGRADE_TREE: "diepTank",
 };
 Class.diepSmasher = {
-    PARENT: ["genericTank"],
+    PARENT: ["genericSmasher"],
     LABEL: "Smasher",
     DANGER: 6,
     BODY: {
@@ -2051,7 +2051,7 @@ Class.diepLandmine = {
 Class.diepAutoSmasher = makeAuto(Class.diepSmasher);
 Class.diepAutoSmasher.SKILL_CAP = [smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl, smshskl];
 Class.diepSpike = {
-    PARENT: ["genericTank"],
+    PARENT: ["genericSmasher"],
     LABEL: "Spike",
     DANGER: 7,
     BODY: {
@@ -2085,7 +2085,7 @@ Class.diepSpike = {
     REROOT_UPGRADE_TREE: "diepTank",
 };
 Class.diepOldLandmine = {
-    PARENT: ["genericTank"],
+    PARENT: ["genericSmasher"],
     LABEL: "Landmine",
     INVISIBLE: [0.12, 0.01],
     DANGER: 7,
@@ -2106,7 +2106,7 @@ Class.diepOldLandmine = {
     REROOT_UPGRADE_TREE: "diepTank",
 };
 Class.diepMegaSmasher = {
-    PARENT: ["genericTank"],
+    PARENT: ["genericSmasher"],
     LABEL: "Mega Smasher",
     DANGER: 7,
     BODY: {
