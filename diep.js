@@ -24,7 +24,7 @@ const g = {
     twin: { recoil: 0.5, shudder: 0.9, health: 0.9, damage: 0.7, spray: 1.2 },
     doubleTwin: { damage: 0.9 },
     hewnDouble: { reload: 1.25, recoil: 1.5, health: 0.9, damage: 0.85, maxSpeed: 0.9 },
-    bentDouble: { reload: 1.1, shudder: 0.8, health: 0.9, pen: 0.8, density: 0.8, spray: 0.5 },
+    tripleShot: { reload: 1.1, shudder: 0.8, health: 0.9, pen: 0.8, density: 0.8, spray: 0.5 },
     spreadShotMain: { reload: 0.781, recoil: 0.25, shudder: 0.5, health: 0.5, speed: 1.923, maxSpeed: 2.436 },
     spreadshot: { reload: 1.5, shudder: 0.25, speed: 0.7, maxSpeed: 0.7, spray: 0.25 },
     triplet: { reload: 1.2, recoil: 0.667, shudder: 0.9, health: 0.85, damage: 0.85, pen: 0.9, density: 1.1, spray: 0.9, resist: 0.95 },
@@ -66,7 +66,7 @@ const g = {
     // Autos
     auto: { reload: 0.9, recoil: 0.75, shudder: 0.5, size: 0.8, health: 0.9, damage: 0.6, pen: 1.2, speed: 1.1, range: 0.8, density: 1.3, resist: 1.25 },
     autoFive: { reload: 1.15, speed: 1.05, maxSpeed: 1.05, range: 1.1, density: 2 },
-    autosniper: { size: 1.4, health: 2 },
+    autoSniper: { size: 1.4, health: 2 },
 
     // Drones
     overseer: { reload: 1.25, size: 0.85, health: 0.7, damage: 0.8, maxSpeed: 0.9, density: 2 },
@@ -162,7 +162,7 @@ Class.diepMissile = {
                 COLOR: -1,
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
-                    g.skim,
+                    g.skimmer,
                     g.doublereload,
                     g.lowpower,
                     g.muchmorerecoil,
@@ -185,7 +185,7 @@ Class.diepMissile = {
                 COLOR: -1,
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
-                    g.skim,
+                    g.skimmer,
                     g.doublereload,
                     g.lowpower,
                     g.muchmorerecoil,
@@ -213,7 +213,7 @@ Class.diepSpinMissile = {
                 COLOR: -1,
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
-                    g.skim,
+                    g.skimmer,
                     g.doublereload,
                     g.lowpower,
                     g.morereload,
@@ -235,7 +235,7 @@ Class.diepSpinMissile = {
                 COLOR: -1,
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
-                    g.skim,
+                    g.skimmer,
                     g.doublereload,
                     g.lowpower,
                     g.morereload,
@@ -337,7 +337,7 @@ Class.diepMachineGun = {
         {
             POSITION: [12, 10, 1.4, 8, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun]),
                 TYPE: "bullet",
             },
         },
@@ -354,14 +354,14 @@ Class.diepFlankGuard = {
         {
             POSITION: [19, 7.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [16, 7.5, 1, 0, 0, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.flank]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
                 TYPE: "bullet",
             },
         },
@@ -401,21 +401,21 @@ Class.diepTripleShot = {
             /*** LENGTH    WIDTH     ASPECT        X             Y         ANGLE     DELAY */
             POSITION: [19, 7.5, 1, 0, 0, -45, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [19, 7.5, 1, 0, 0, 45, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [19, 7.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
@@ -430,28 +430,28 @@ Class.diepTwinFlank = {
         {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
                 TYPE: exports.bullet,
             },
         },
         {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
                 TYPE: exports.bullet,
             },
         },
         {
             POSITION: [20, 8, 1, 0, 5.5, 180, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
                 TYPE: exports.bullet,
             },
         },
         {
             POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
                 TYPE: exports.bullet,
             },
         },
@@ -471,21 +471,21 @@ Class.diepTriplet = {
         {
             POSITION: [16.5, 7.5, 1, 0, 5.5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triple, g.morereload]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triplet, g.morereload]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [16.5, 7.5, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triple, g.morereload]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triplet, g.morereload]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [19.5, 7.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triple, g.morereload]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.triplet, g.morereload]),
                 TYPE: "bullet",
             },
         },
@@ -503,35 +503,35 @@ Class.diepPentaShot = {
         {
             POSITION: [16, 8, 1, 0, -3, -30, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [16, 8, 1, 0, 3, 30, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [19, 8, 1, 0, -2, -15, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [19, 8, 1, 0, 2, 15, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [22, 8, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.bent]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet",
             },
         },
@@ -550,9 +550,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -564,9 +564,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -578,9 +578,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -592,9 +592,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -606,9 +606,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -620,9 +620,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -634,9 +634,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -648,9 +648,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -662,9 +662,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -676,9 +676,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShot,
                 ]),
                 TYPE: "bullet",
                 LABEL: "Spread",
@@ -691,9 +691,9 @@ Class.diepSpreadShot = {
                 SHOOT_SETTINGS: combineStats([
                     g.basic,
                     g.gunner,
-                    g.arty,
+                    g.artillery,
                     g.twin,
-                    g.spread,
+                    g.spreadShotMain,
                 ]),
                 TYPE: "bullet",
             },
@@ -711,42 +711,42 @@ Class.diepTripleTwin = {
         {
             POSITION: [20, 8, 1, 0, 5.5, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [20, 8, 1, 0, 5.5, 120, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [20, 8, 1, 0, -5.5, 120, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [20, 8, 1, 0, 5.5, 240, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [20, 8, 1, 0, -5.5, 240, 0.5],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.double]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.spam, g.doubleTwin]),
                 TYPE: "bullet",
             },
         },
@@ -767,7 +767,7 @@ Class.diepAssassin = {
         {
             POSITION: [25.5, 7.5, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assass]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.assassin]),
                 TYPE: "bullet",
             },
         },
@@ -787,7 +787,7 @@ Class.diepHunter = {
             /*** LENGTH    WIDTH     ASPECT        X             Y         ANGLE     DELAY */
             POSITION: [24, 8, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.hunter2]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.sniper, g.hunter, g.hunterSecondary]),
                 TYPE: "bullet",
             },
         },
@@ -809,63 +809,63 @@ Class.diepOldHunter = {
         {
             POSITION: [4, 3, 1, 11, -3, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [4, 3, 1, 11, 3, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [4, 4, 1, 13, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "casing",
             },
         },
         {
             POSITION: [1, 4, 1, 12, -1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "casing",
             },
         },
         {
             POSITION: [1, 4, 1, 11, 1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "casing",
             },
         },
         {
             POSITION: [1, 3, 1, 13, -1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [1, 3, 1, 13, 1, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "bullet",
             },
         },
         {
             POSITION: [1, 2, 1, 13, 2, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "casing",
             },
         },
         {
             POSITION: [1, 2, 1, 13, -2, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun]),
                 TYPE: "casing",
             },
         },
@@ -876,7 +876,7 @@ Class.diepOldHunter = {
         {
             POSITION: [21, 12, 1, 0, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.mach, g.shotgun, g.fake]),
+                SHOOT_SETTINGS: combineStats([g.basic, g.machineGun, g.shotgun, g.fake]),
                 TYPE: "bullet",
             },
         },
