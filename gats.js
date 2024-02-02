@@ -12,7 +12,7 @@ const g = {
     smg: { reload: 0.15, recoil: 0.1, damage: 0.2, spray: 25, range: 0.4 },
     shotgun: { reload: 2.5, recoil: 0.8, damage: 0.3, spray: 15, size: 0.5 , range: 0.6},
     assault: { reload: 0.25, recoil: 0.2, damage: 0.1, spray: 5, range: 0.6 },
-    sniper: { reload: 3, recoil: 1, damage: 0.5, spray: 0.1, speed: 2 },
+    sniper: { reload: 3, recoil: 1, damage: 0.5, spray: 0.1, speed: 1.7 },
     lmg: { reload: 0.3, recoil: 0.2, damage: 0.1, spray: 10, range: 0.8, },
     bulletCase: { range: 0.2, speed: 0.3, recoil: 0 },
 };
