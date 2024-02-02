@@ -224,7 +224,7 @@ const guns = {
         {
             POSITION: [20, 0.7, 1, 18, -7, 0, 0],
 			PROPERTIES: {
-				COLOR: "black",
+				COLOR: "yellow",
 				SHOOT_SETTINGS: combineStats([ g.gun, g.sniper ]),
                 TYPE: "gatsBullet",
 			},
