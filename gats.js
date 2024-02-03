@@ -7,7 +7,7 @@ const { combineStats } = require('../facilitators.js');
 const { base, statnames, gunCalcNames, dfltskl, smshskl } = require('../constants.js');
 const g = {
 // Bases
-    gun: { reload: 18, recoil: 1.4, shudder: 0.01, damage: 0.75, speed: 9, spray: 15, size: 0.4, range: 0.5 },
+	gun: { reload: 18, recoil: 1.4, shudder: 0.01, damage: 0.75, speed: 9, spray: 15, size: 0.4, range: 0.5 },
     pistol: { reload: 0.8, recoil: 0.1, damage: 0.4, spray: 0.9, size: 0.5, range: 0.8 },
     smg: { reload: 0.15, recoil: 0.1, damage: 0.2, spray: 25, range: 0.4 },
     shotgun: { reload: 2.5, recoil: 0.8, damage: 0.3, spray: 15, size: 0.5 , range: 0.6},
@@ -17,9 +17,9 @@ const g = {
     bulletCase: { range: 0.2, speed: 0.3, recoil: 0 },
 };
 Class.gatsBullet = {
-    PARENT: ["bullet"],
+	PARENT: ["bullet"],
     COLOR: 'black',
-    SHAPE: [
+	SHAPE: [
 		[1, 1],
 		[1, -1],
 		[-5, -1],
@@ -310,37 +310,37 @@ Class.gatsBody = {
 		FOV: 1.2,
 	},
 };
-Class.pistol = {
+Class.gatsPistol = {
     PARENT: "gatsBody",
     LABEL: "Pistol",
     DANGER: 6,
 	GUNS: guns.pistol,
 };
-Class.smg = {
+Class.gatsSMG = {
     PARENT: "gatsBody",
     LABEL: "SMG",
     DANGER: 6,
 	GUNS: guns.smg,
 };
-Class.shotgun = {
+Class.gatsShotgun = {
     PARENT: "gatsBody",
     LABEL: "Shotgun",
     DANGER: 6,
 	GUNS: guns.shotgun,
 };
-Class.assault = {
+Class.gatsAssault = {
     PARENT: "gatsBody",
     LABEL: "Assault",
     DANGER: 6,
 	GUNS: guns.assault,
 };
-Class.sniper = {
+Class.gatsSniper = {
     PARENT: "gatsBody",
     LABEL: "Sniper",
     DANGER: 6,
 	GUNS: guns.sniper,
 };
-Class.lmg = {
+Class.gatsLMG = {
     PARENT: "gatsBody",
     LABEL: "LMG",
     DANGER: 6,
@@ -348,5 +348,5 @@ Class.lmg = {
 };
 
 Class.addons.UPGRADES_TIER_0.push("gatsBody");
-	Class.gatsBody.UPGRADES_TIER_0 = [ "pistol", "smg", "shotgun", "assault", "sniper", "lmg" ];
+	Class.gatsBody.UPGRADES_TIER_0 = [ "gatsPistol", "gatsSMG", "gatsShotgun", "gatsAssault", "gatsSniper", "gatsLMG" ];
 
