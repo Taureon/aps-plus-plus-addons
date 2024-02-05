@@ -147,7 +147,7 @@ Class.genericDreadnoughtARDreadV2 = {
 	SKILL_CAP: Array(10).fill(smshskl),
 	REROOT_UPGRADE_TREE: ["dreadWeaponARDreadV2", "dreadBodyARDreadV2"],
 }
-Class.genericEggnought = {
+Class.genericEggnoughtAR = {
 	PARENT: ["genericDreadnoughtARDreadV2"],
 	BODY: eggnoughtBody,
 	SHAPE: 0,
@@ -155,7 +155,7 @@ Class.genericEggnought = {
 	SIZE: 16,
 	DANGER: 8,
 }
-Class.genericSquarenought = {
+Class.genericSquarenoughtAR = {
 	PARENT: ["genericDreadnoughtARDreadV2"],
 	BODY: squarenoughtBody,
 	SHAPE: 4,
@@ -163,7 +163,7 @@ Class.genericSquarenought = {
 	SIZE: 20,
 	DANGER: 9,
 }
-Class.genericTrinought = {
+Class.genericTrinoughtAR = {
 	PARENT: ["genericDreadnoughtARDreadV2"],
 	BODY: trinoughtBody,
 	SHAPE: 3.5,
@@ -171,7 +171,7 @@ Class.genericTrinought = {
 	SIZE: 23,
 	DANGER: 10,
 }
-Class.genericPentanought = {
+Class.genericPentanoughtAR = {
 	PARENT: ["genericDreadnoughtARDreadV2"],
 	BODY: pentanoughtBody,
 	SHAPE: 5.5,
@@ -179,11 +179,11 @@ Class.genericPentanought = {
 	SIZE: 25,
 	DANGER: 11,
 }
-Class.genericHexnought = {
+Class.genericHexnoughtAR = {
 	PARENT: ["genericDreadnoughtARDreadV2"],
 	BODY: hexnoughtBody,
 	SHAPE: 6,
-	COLOR: 0,
+	COLOR: 'magenta',
 	SIZE: 26,
 	DANGER: 12,
 }
@@ -249,7 +249,7 @@ Class.betadrone = {
 
 // T0
 Class.dreadARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Dreadnought",
 	UPGRADE_LABEL: "Arms Race Dreads V2",
 	UPGRADE_TOOLTIP: "Let the chaos flow.",
@@ -269,7 +269,7 @@ Class.dreadBodyARDreadV2 = {
 
 // T1 Weapons
 Class.swordARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Sword",
 	GUNS: [],
 }
@@ -289,7 +289,7 @@ Class.sword2ARDreadV2 = {
 	BATCH_UPGRADES: true,
 }
 Class.pacifierARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Pacifier",
 	GUNS: [],
 }
@@ -309,7 +309,7 @@ Class.pacifier2ARDreadV2 = {
 	BATCH_UPGRADES: true,
 }
 Class.peacekeeperARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Peacekeeper",
 	GUNS: [],
 }
@@ -329,7 +329,7 @@ Class.peacekeeper2ARDreadV2 = {
 	BATCH_UPGRADES: true,
 }
 Class.invaderARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Invader",
 	GUNS: [],
 }
@@ -354,7 +354,7 @@ Class.invader2ARDreadV2 = {
 	BATCH_UPGRADES: true,
 }
 Class.centaurARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Centaur",
 	GUNS: [],
 }
@@ -393,7 +393,7 @@ Class.byteTurretARDreadV2 = {
 	],
 }
 Class.byteARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Byte",
 	TURRETS: [
 		{
@@ -431,7 +431,7 @@ Class.showerTurretARDreadV2 = {
 	],
 }
 Class.showerARDreadV2 = { // Drones
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Shower",
 	BODY: {
 		SPEED: 0.93,
@@ -450,7 +450,7 @@ Class.showerARDreadV2 = { // Drones
 }
 Class.atmosphereAuraARDreadV2 = addAura();
 Class.atmosphereARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Atmosphere",
 	TURRETS: [
 		{
@@ -464,7 +464,7 @@ Class.atmosphereARDreadV2 = {
 	],
 }
 Class.juggernautARDreadV2 = {
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Juggernaut",
 	BODY: {
 		HEALTH: 1.6,
@@ -484,7 +484,7 @@ Class.juggernautARDreadV2 = {
 	],
 }
 Class.stomperARDreadV2 = { // Size increase
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Stomper",
 	SIZE: 1.2,
 	BODY: {
@@ -520,7 +520,7 @@ Class.dropperTurretARDreadV2 = {
 	],
 }
 Class.dropperARDreadV2 = { // Minelayer
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Dropper",
 	GUNS: [
 		{
@@ -557,7 +557,7 @@ Class.spotterRadarARDreadV2 = {
 	]
 };
 Class.spotterARDreadV2 = { // FOV
-	PARENT: ["genericEggnought"],
+	PARENT: ["genericEggnoughtAR"],
 	LABEL: "Spotter",
 	BODY: {
 		FOV: 1.1,
@@ -580,7 +580,7 @@ Class.spotterARDreadV2 = { // FOV
 
 // T2 Weapons
 Class.sabreARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Sabre",
 	GUNS: [],
 }
@@ -599,7 +599,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.gladiusARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Gladius",
 	GUNS: [],
 }
@@ -618,7 +618,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.slingARDreadV2 = { // hunter
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Sling",
 	CONTROLLERS: [["zoom", { distance: 300 }]],
 	TOOLTIP: "Hold right click to zoom.",
@@ -643,7 +643,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.catapultARDreadV2 = { // mega-sniper
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Catapult",
 	GUNS: [],
 }
@@ -666,7 +666,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.dartARDreadV2 = { // railgun
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Dart",
 	GUNS: [],
 }
@@ -688,7 +688,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.mediatorARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Mediator",
 	GUNS: [],
 }
@@ -711,7 +711,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.negotiatorARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Negotiator",
 	GUNS: [],
 }
@@ -739,7 +739,7 @@ Class.melderAutoARDreadV2 = {
 	],
 }
 Class.melderARDreadV2 = { // all auto
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Melder",
 	TURRETS: [],
 }
@@ -752,7 +752,7 @@ for(let i = 0; i < 4; i++) {
 	)
 	}
 Class.crackerARDreadV2 = { // ultra bullet spam
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Cracker",
 	GUNS: [],
 }
@@ -795,7 +795,7 @@ Class.grabberTurretARDreadV2 = {
 	],
 };
 Class.grabberARDreadV2 = { // crowbar
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Grabber",
 	GUNS: [],
 	TURRETS: [],
@@ -821,7 +821,7 @@ for(let i = 0; i < 4; i++) {
 	)
 }
 Class.enforcerARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Enforcer",
 	GUNS: [],
 }
@@ -837,7 +837,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.executorARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Executor",
 	GUNS: [],
 }
@@ -857,7 +857,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.doserARDreadV2 = { // shotgun
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Doser",
 	GUNS: [],
 }
@@ -934,7 +934,7 @@ Class.swirlMissileARDreadV2 = {
 	],
 }
 Class.swirlARDreadV2 = { // twister
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Swirl",
 	GUNS: [],
 }
@@ -954,7 +954,7 @@ for(let i = 0; i < 4; i++) {
 	)
 }
 Class.pelterARDreadV2 = { // artillery
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Pelter",
 	GUNS: [],
 }
@@ -987,7 +987,7 @@ for(let i = 0; i < 4; i++) {
 	)
 }
 Class.inquisitorARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Inquisitor",
 	GUNS: [],
 }
@@ -1029,7 +1029,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.assailantARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Assailant",
 	GUNS: [],
 }
@@ -1056,7 +1056,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.radiationARDreadV2 = { // auto-drones
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Radiation",
 	GUNS: [],
 }
@@ -1080,7 +1080,7 @@ for(let i = 0; i < 4; i++) {
 	)
 };
 Class.boxerARDreadV2 = { // honcho
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Boxer",
 	GUNS: [],
 }
@@ -1101,7 +1101,7 @@ for(let i = 0; i < 4; i++) {
 	)
 };
 Class.disablerARDreadV2 = { // swarms
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Disabler",
 	GUNS: [],
 }
@@ -1126,7 +1126,7 @@ for(let i = 0; i < 4; i++) {
 	)
 };
 Class.daemonARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Daemon",
 	GUNS: [],
 }
@@ -1157,7 +1157,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.minotaurARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Minotaur",
 	GUNS: [],
 }
@@ -1185,7 +1185,7 @@ Class.autoTrap = {
 	],
 }
 Class.cleanerARDreadV2 = { // auto-traps
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Cleaner",
 	GUNS: [],
 }
@@ -1211,7 +1211,7 @@ for(let i = 0; i < 4; i++) {
 Class.auraTrapAura = addAura(1/3, 2, 0.15);
 Class.auraTrap = makeAuto(Class.trap, "", {type: 'auraTrapAura'});
 Class.shadeARDreadV2 = { // aura-traps
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Shade",
 	GUNS: [],
 }
@@ -1239,7 +1239,7 @@ for(let i = 0; i < 4; i++) {
 	)
 }
 Class.screwdriverARDreadV2 = { // trap + gun
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Screwdriver",
 	GUNS: [],
 }
@@ -1269,7 +1269,7 @@ for(let i = 0; i < 4; i++) {
 
 // T2 Bodies
 Class.automationARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Automation",
 	TURRETS: [
 		{
@@ -1300,7 +1300,7 @@ Class.kilobyteTurretARDreadV2 = {
 	],
 }
 Class.kilobyteARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Kilobyte",
 	TURRETS: [
 		{
@@ -1342,7 +1342,7 @@ Class.lighterTurretARDreadV2 = {
 	],
 };
 Class.lighterARDreadV2 = { // Flamethrower
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Lighter",
 	TURRETS: [
 		{
@@ -1391,7 +1391,7 @@ Class.stormTurretARDreadV2 = {
 	],
 };
 Class.stormARDreadV2 = { // Drones
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Storm",
 	BODY: {
 		SPEED: 0.93,
@@ -1410,7 +1410,7 @@ Class.stormARDreadV2 = { // Drones
 }
 Class.coronaAuraARDreadV2 = addAura(1.5, 0.8);
 Class.coronaARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Corona",
 	TURRETS: [
 		{
@@ -1425,7 +1425,7 @@ Class.coronaARDreadV2 = {
 }
 Class.thermosphereAuraARDreadV2 = addAura(-1, 1.5);
 Class.thermosphereARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Thermosphere",
 	TURRETS: [
 		{
@@ -1439,7 +1439,7 @@ Class.thermosphereARDreadV2 = {
 	],
 }
 Class.jumboARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Jumbo",
 	BODY: hpBuffBodyStats[0],
 	TURRETS: [
@@ -1454,7 +1454,7 @@ Class.jumboARDreadV2 = {
 	],
 }
 Class.colossusTopARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	GUNS: [],
 }
 for (let i = 0; i < 4; i++) {
@@ -1466,7 +1466,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.colossusBottomARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	GUNS: [],
 }
 for (let i = 0; i < 4; i++) {
@@ -1486,7 +1486,7 @@ for (let i = 0; i < 4; i++) {
 	)
 }
 Class.colossusARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "colossus",
 	BODY: speedBuffBodyStats[0],
 	GUNS: [],
@@ -1502,7 +1502,7 @@ Class.colossusARDreadV2 = {
 	],
 }
 Class.cottonTurretARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	SHAPE: [[1, 0], [0, 1], [-1, 0], [0, -1]],
 	GUNS: [],
@@ -1516,7 +1516,7 @@ for(let i = 0; i < 4; i++) {
 	)
 }
 Class.cottonARDreadV2 = { // Drifter
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Cotton",
 	BODY: {
 		SPEED: 1.9,
@@ -1530,7 +1530,7 @@ Class.cottonARDreadV2 = { // Drifter
 	],
 }
 Class.ironTopARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	SHAPE: 0,
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -1548,7 +1548,7 @@ for(let i = 0; i < 8; i++) {
 	)
 }
 Class.ironBottomARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -1565,7 +1565,7 @@ for(let i = 0; i < 4; i++) {
 	)
 }
 Class.ironARDreadV2 = { // Body damage increase
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Iron",
 	BODY: {
 		DAMAGE: 2,
@@ -1584,7 +1584,7 @@ Class.ironARDreadV2 = { // Body damage increase
 	],
 }
 Class.rollerTurretARDreadV2 = {
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -1597,7 +1597,7 @@ for(let i = 0; i < 4; i++) {
 	)
 }
 Class.rollerARDreadV2 = { // Size increase
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Roller",
 	SIZE: 1.3,
 	BODY: sizeBuffBodyStats[0],
@@ -1609,7 +1609,7 @@ Class.rollerARDreadV2 = { // Size increase
 	],
 }
 Class.owlARDreadV2 = { // Size decrease
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Owl",
 	SIZE: 0.85,
 	BODY: {
@@ -1650,7 +1650,7 @@ Class.baiterTurretARDreadV2 = {
 	]
 }
 Class.baiterARDreadV2 = { // Minelayer
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Baiter",
 	GUNS: [
 		{
@@ -1687,7 +1687,7 @@ Class.spyRadarARDreadV2 = {
 	]
 }
 Class.spyARDreadV2 = { // FOV
-	PARENT: ["genericSquarenought"],
+	PARENT: ["genericSquarenoughtAR"],
 	LABEL: "Spy",
 	BODY: {
 		FOV: 1.2,
@@ -1715,7 +1715,7 @@ Class.spyARDreadV2 = { // FOV
 
 // T3 Weapons
 Class.bayonetARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Bayonet",
 	GUNS: [],
 }
@@ -1734,7 +1734,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.bladeARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Blade",
 	GUNS: [],
 }
@@ -1763,7 +1763,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.atlatlARDreadV2 = { // hunter
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Atlatl",
 	CONTROLLERS: [["zoom", { distance: 500 }]],
 	TOOLTIP: "Hold right click to zoom.",
@@ -1791,7 +1791,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.ballistaARDreadV2 = { // mega-sniper
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Ballista",
 	GUNS: [],
 }
@@ -1814,7 +1814,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.barbARDreadV2 = { // railgun
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Barb",
 	GUNS: [],
 }
@@ -1836,7 +1836,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.mitigatorARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Mitigator",
 	GUNS: [],
 }
@@ -1859,7 +1859,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.appeaserARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Appeaser",
 	GUNS: [],
 }
@@ -1909,7 +1909,7 @@ Class.amalgamAutoARDreadV2 = {
 	],
 }
 Class.amalgamARDreadV2 = { // all auto
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Amalgam",
 	TOOLTIP: "Reverse tank to focus more fire.",
 	TURRETS: [],
@@ -1923,7 +1923,7 @@ for(let i = 0; i < 3; i++) {
 	)
 };
 Class.breakerARDreadV2 = { // ultra bullet spam
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Breaker",
 	GUNS: [],
 }
@@ -1976,7 +1976,7 @@ Class.clasperTurretARDreadV2 = {
 	],
 };
 Class.clasperARDreadV2 = { // crowbar
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Clasper",
 	GUNS: [],
 	TURRETS: [],
@@ -2006,7 +2006,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.suppressorARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Suppressor",
 	GUNS: [],
 }
@@ -2022,7 +2022,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.inhibitorARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Inhibitor",
 	GUNS: [],
 }
@@ -2042,7 +2042,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.tranquilizerARDreadV2 = { // shotgun
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Tranquilizer",
 	GUNS: [],
 }
@@ -2126,7 +2126,7 @@ Class.spiralMissileARDreadV2 = {
 	],
 }
 Class.spiralARDreadV2 = { // twister
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Spiral",
 	GUNS: [],
 }
@@ -2146,7 +2146,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.shellerARDreadV2 = { // artillery
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Sheller",
 	GUNS: [],
 }
@@ -2195,7 +2195,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.infiltratorARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Infiltrator",
 	GUNS: [],
 }
@@ -2261,7 +2261,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.aggressorARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Aggressor",
 	GUNS: [],
 }
@@ -2288,7 +2288,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.haloARDreadV2 = { // auto-drones
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Halo",
 	GUNS: [],
 }
@@ -2312,7 +2312,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.sluggerARDreadV2 = { // honcho
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Slugger",
 	GUNS: [],
 }
@@ -2333,7 +2333,7 @@ for(let i = 0; i < 3; i++) {
 	)
 };
 Class.debilitatorARDreadV2 = { // swarms
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Debilitator",
 	GUNS: [],
 }
@@ -2358,7 +2358,7 @@ for(let i = 0; i < 3; i++) {
 	)
 };
 Class.hydraARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Hydra",
 	GUNS: [],
 }
@@ -2399,7 +2399,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.beelzebubARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Beelzebub",
 	GUNS: [],
 }
@@ -2418,7 +2418,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.sweeperARDreadV2 = { // auto-traps
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Sweeper",
 	GUNS: [],
 }
@@ -2449,7 +2449,7 @@ for(let i = 0; i < 3; i++) {
 Class.auraBlockAura = addAura(1/3, 1.6, 0.15);
 Class.auraBlock = makeAuto(Class.unsetTrap, "", {type: 'auraBlockAura'});
 Class.aegisARDreadV2 = { // aura-traps
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Aegis",
 	GUNS: [],
 }
@@ -2480,7 +2480,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.drillARDreadV2 = { // trap + gun
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Drill",
 	GUNS: [],
 }
@@ -2510,7 +2510,7 @@ for(let i = 0; i < 3; i++) {
 
 // T3 Bodies
 Class.mechanismARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Mechanism",
 	TURRETS: [
 		{
@@ -2533,7 +2533,7 @@ for (let i = 0; i < 3; i++) {
 }
 Class.trinoughtBigAura = addAura(2, 1.5);
 Class.fusionARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Fusion",
 	TURRETS: [
 		{
@@ -2548,7 +2548,7 @@ Class.fusionARDreadV2 = {
 	],
 }
 Class.binaryARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Binary",
 	TURRETS: [
 		{
@@ -2564,7 +2564,7 @@ Class.binaryARDreadV2 = {
 }
 Class.trinoughtBigHealAura = addAura(-1.5, 1.5);
 Class.exosphereARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Exosphere",
 	TURRETS: [
 		{
@@ -2592,7 +2592,7 @@ Class.megabyteTurretARDreadV2 = {
 	],
 }
 Class.megabyteARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Megabyte",
 	TURRETS: [
 		{
@@ -2607,7 +2607,7 @@ Class.megabyteARDreadV2 = {
 }
 Class.trinoughtSmallAura = addAura(1, 2.1, 0.15);
 Class.trojanARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Trojan",
 	TURRETS: [
 		{
@@ -2623,7 +2623,7 @@ Class.trojanARDreadV2 = {
 }
 Class.trinoughtSmallHealAura = addAura(-2/3, 2.1, 0.15);
 Class.hardwareARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Hardware",
 	TURRETS: [
 		{
@@ -2679,7 +2679,7 @@ Class.burnerTurretARDreadV2 = {
 	]
 };
 Class.burnerARDreadV2 = { // Flamethrower
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Burner",
 	TURRETS: [
 		{
@@ -2720,7 +2720,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.tempestARDreadV2 = { // Drones
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Tempest",
 	BODY: {
 		SPEED: 0.93,
@@ -2738,7 +2738,7 @@ Class.tempestARDreadV2 = { // Drones
 	]
 }
 Class.chromosphereARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Chromosphere",
 	TURRETS: [
 		{
@@ -2753,7 +2753,7 @@ Class.chromosphereARDreadV2 = {
 	],
 }
 Class.mesosphereARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Mesosphere",
 	TURRETS: [
 		{
@@ -2768,7 +2768,7 @@ Class.mesosphereARDreadV2 = {
 	],
 }
 Class.goliathARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Goliath",
 	BODY: hpBuffBodyStats[1],
 	TURRETS: [
@@ -2783,7 +2783,7 @@ Class.goliathARDreadV2 = {
 	],
 }
 Class.planetARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Planet",
 	BODY: hpBuffBodyStats[0],
 	TURRETS: [
@@ -2799,7 +2799,7 @@ Class.planetARDreadV2 = {
 	],
 }
 Class.moonARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Moon",
 	BODY: hpBuffBodyStats[0],
 	TURRETS: [
@@ -2815,7 +2815,7 @@ Class.moonARDreadV2 = {
 	],
 }
 Class.burgARDreadV2 = { // HP + auto spam
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Burg",
 	BODY: hpBuffBodyStats[0],
 	TURRETS: [
@@ -2831,7 +2831,7 @@ Class.burgARDreadV2 = { // HP + auto spam
 	],
 }
 Class.siloARDreadV2 = { // HP + big auto
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Silo",
 	BODY: hpBuffBodyStats[0],
 	TURRETS: [
@@ -2850,7 +2850,7 @@ Class.siloARDreadV2 = { // HP + big auto
 	],
 }
 Class.titanTopARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	GUNS: [],
 }
 for (let i = 0; i < 3; i++) {
@@ -2862,7 +2862,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.titanARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Titan",
 	BODY: speedBuffBodyStats[1],
 	GUNS: [],
@@ -2878,7 +2878,7 @@ Class.titanARDreadV2 = {
 	],
 }
 Class.sirenARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Siren",
 	BODY: speedBuffBodyStats[0],
 	GUNS: [],
@@ -2895,7 +2895,7 @@ Class.sirenARDreadV2 = {
 	],
 }
 Class.harpyARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Harpy",
 	BODY: speedBuffBodyStats[0],
 	GUNS: [],
@@ -2912,7 +2912,7 @@ Class.harpyARDreadV2 = {
 	],
 }
 Class.batonARDreadV2 = { // Speed + auto spam
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Baton",
 	BODY: speedBuffBodyStats[0],
 	TURRETS: [
@@ -2928,7 +2928,7 @@ Class.batonARDreadV2 = { // Speed + auto spam
 	],
 }
 Class.fireworkARDreadV2 = { // Speed + big auto
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Firework",
 	BODY: speedBuffBodyStats[0],
 	TURRETS: [
@@ -2947,7 +2947,7 @@ Class.fireworkARDreadV2 = { // Speed + big auto
 	],
 }
 Class.armadaARDreadV2 = { // Speed + HP
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Armada",
 	BODY: {
 		HEALTH: 1.8, 
@@ -2967,7 +2967,7 @@ Class.armadaARDreadV2 = { // Speed + HP
 	],
 }
 Class.featherTurretARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -2980,7 +2980,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.featherARDreadV2 = { // Drifter
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Feather",
 	BODY: {
 		SPEED: 2.05,
@@ -2994,7 +2994,7 @@ Class.featherARDreadV2 = { // Drifter
 	],
 }
 Class.steelTopARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	SHAPE: 0,
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -3012,7 +3012,7 @@ for(let i = 0; i < 9; i++) {
 	)
 }
 Class.steelBottomARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -3033,7 +3033,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.steelARDreadV2 = { // Body damage increase
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Steel",
 	BODY: {
 		DAMAGE: 3,
@@ -3052,12 +3052,12 @@ Class.steelARDreadV2 = { // Body damage increase
 	],
 }
 Class.flattenerTurretARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
 Class.flattenerTurret2ARDreadV2 = {
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -3076,7 +3076,7 @@ for(let i = 0; i < 3; i++) {
 	)
 }
 Class.flattenerARDreadV2 = { // Size increase
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Flattener",
 	SIZE: 1.4,
 	BODY: sizeBuffBodyStats[1],
@@ -3088,7 +3088,7 @@ Class.flattenerARDreadV2 = { // Size increase
 	],
 }
 Class.towerARDreadV2 = { // Size increase + auras
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Tower",
 	SIZE: 1.3,
 	BODY: sizeBuffBodyStats[0],
@@ -3101,7 +3101,7 @@ Class.towerARDreadV2 = { // Size increase + auras
 	],
 }
 Class.creatureARDreadV2 = { // Size increase + heal auras
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Creature",
 	SIZE: 1.3,
 	BODY: sizeBuffBodyStats[0],
@@ -3114,7 +3114,7 @@ Class.creatureARDreadV2 = { // Size increase + heal auras
 	],
 }
 Class.spotlightARDreadV2 = { // Size increase + big aura
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Spotlight",
 	SIZE: 1.3,
 	BODY: sizeBuffBodyStats[0],
@@ -3130,7 +3130,7 @@ Class.spotlightARDreadV2 = { // Size increase + big aura
 	],
 }
 Class.furnaceARDreadV2 = { // Size increase + big heal aura
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Furnace",
 	SIZE: 1.3,
 	BODY: sizeBuffBodyStats[0],
@@ -3146,7 +3146,7 @@ Class.furnaceARDreadV2 = { // Size increase + big heal aura
 	],
 }
 Class.asteroidARDreadV2 = { // Size increase + big auto
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Asteroid",
 	SIZE: 1.3,
 	BODY: sizeBuffBodyStats[0],
@@ -3162,7 +3162,7 @@ Class.asteroidARDreadV2 = { // Size increase + big auto
 	],
 }
 Class.cardinalARDreadV2 = { // Size decrease
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Cardinal",
 	SIZE: 0.75,
 	BODY: {
@@ -3206,7 +3206,7 @@ Class.cagerTurretARDreadV2 = {
 	]
 };
 Class.cagerARDreadV2 = { // Minelayer
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Cager",
 	GUNS: [
 		{
@@ -3246,7 +3246,7 @@ Class.monitorRadarARDreadV2 = {
 	]
 };
 Class.monitorARDreadV2 = { // FOV
-	PARENT: ["genericTrinought"],
+	PARENT: ["genericTrinoughtAR"],
 	LABEL: "Monitor",
 	BODY: {
 		FOV: 1.3,
@@ -3274,7 +3274,7 @@ Class.monitorARDreadV2 = { // FOV
 
 // T4 Weapons
 Class.javelinARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Javelin",
 	GUNS: [],
 }
@@ -3293,7 +3293,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.rapierARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Rapier",
 	GUNS: [],
 }
@@ -3322,7 +3322,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.woomeraARDreadV2 = { // hunter
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Woomera",
 	CONTROLLERS: [["zoom", { distance: 450 }]],
 	GUNS: [],
@@ -3356,7 +3356,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.trebuchetARDreadV2 = { // mega-sniper
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Trebuchet",
 	GUNS: [],
 }
@@ -3379,7 +3379,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.boltARDreadV2 = { // railgun
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Bolt",
 	GUNS: [],
 }
@@ -3401,7 +3401,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.diplomatARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Diplomat",
 	GUNS: [],
 }
@@ -3431,7 +3431,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.arbitratorARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Arbitrator",
 	GUNS: [],
 }
@@ -3484,7 +3484,7 @@ Class.dissolverAutoARDreadV2 = {
 	]
 }
 Class.dissolverARDreadV2 = { // all auto
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Dissolver",
 	TURRETS: [],
 }
@@ -3497,7 +3497,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.eroderARDreadV2 = { // ultra bullet spam
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Eroder",
 	GUNS: [],
 }
@@ -3564,7 +3564,7 @@ Class.gripperTurretARDreadV2 = {
 	],
 };
 Class.gripperARDreadV2 = { // crowbar
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Gripper",
 	GUNS: [],
 	TURRETS: [],
@@ -3590,7 +3590,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.retardantARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Retardant",
 	GUNS: [],
 }
@@ -3606,7 +3606,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.tyrantARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Tyrant",
 	GUNS: [],
 }
@@ -3626,7 +3626,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.anesthesiologistARDreadV2 = { // shotgun
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Anesthesiologist",
 	GUNS: [],
 }
@@ -3701,7 +3701,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.helixARDreadV2 = { // twister
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Helix",
 	GUNS: [],
 }
@@ -3721,7 +3721,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.bombardmentARDreadV2 = { // artillery
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Bombardment",
 	GUNS: [],
 }
@@ -3770,7 +3770,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.raiderARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Raider",
 	GUNS: [],
 }
@@ -3894,7 +3894,7 @@ for (let i = 0; i < 3; i++) {
 	);
 }
 Class.gladiatorARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Gladiator",
 	GUNS: [],
 }
@@ -3926,7 +3926,7 @@ Class.gladiatorARDreadV2.GUNS[7].PROPERTIES.TYPE = "gladiatorTriswarmMinionARDre
 Class.gladiatorARDreadV2.GUNS[10].PROPERTIES.TYPE = "gladiatorAutoMinionARDreadV2";
 Class.gladiatorARDreadV2.GUNS[13].PROPERTIES.TYPE = "gladiatorAuraMinionARDreadV2";
 Class.starlightARDreadV2 = { // auto-drones
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Starlight",
 	GUNS: [],
 }
@@ -3950,7 +3950,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.bruiserARDreadV2 = { // honcho
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Bruiser",
 	GUNS: [],
 }
@@ -3971,7 +3971,7 @@ for(let i = 0; i < 5; i++) {
 	)
 };
 Class.incapacitatorARDreadV2 = { // swarms
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Incapacitator",
 	GUNS: [],
 }
@@ -3996,7 +3996,7 @@ for(let i = 0; i < 5; i++) {
 	)
 };
 Class.cerberusARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Cerberus",
 	GUNS: [],
 }
@@ -4037,7 +4037,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.luciferARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Lucifer",
 	GUNS: [],
 }
@@ -4056,7 +4056,7 @@ for (let i = 0; i < 5; i++) {
 	)
 }
 Class.sterilizerARDreadV2 = { // auto-traps
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Sterilizer",
 	GUNS: [],
 }
@@ -4085,7 +4085,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.hielamanARDreadV2 = { // aura-traps
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Hielaman",
 	GUNS: [],
 }
@@ -4116,7 +4116,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.jackhammerARDreadV2 = { // trap + gun
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Jackhammer",
 	GUNS: [],
 }
@@ -4146,7 +4146,7 @@ for(let i = 0; i < 5; i++) {
 
 // T4 Bodies
 Class.skynetARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Skynet",
 	TURRETS: [
 		{
@@ -4173,7 +4173,7 @@ for (let i = 0; i < 5; i++) {
 }
 Class.pentanoughtBigAura = addAura(2.5, 1.45);
 Class.supernovaARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Supernova",
 	TURRETS: [
 		{
@@ -4188,7 +4188,7 @@ Class.supernovaARDreadV2 = {
 	],
 }
 Class.cipherARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Cipher",
 	TURRETS: [
 		{
@@ -4204,7 +4204,7 @@ Class.cipherARDreadV2 = {
 }
 Class.pentanoughtBigHealAura = addAura(-2, 1.45);
 Class.interstellarARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Interstellar",
 	TURRETS: [
 		{
@@ -4232,7 +4232,7 @@ Class.gigabyteTurretARDreadV2 = {
 	],
 }
 Class.gigabyteARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Gigabyte",
 	TURRETS: [
 		{
@@ -4247,7 +4247,7 @@ Class.gigabyteARDreadV2 = {
 }
 Class.pentanoughtSmallAura = addAura(1, 1.6, 0.15);
 Class.malwareARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Malware",
 	TURRETS: [
 		{
@@ -4263,7 +4263,7 @@ Class.malwareARDreadV2 = {
 }
 Class.pentanoughtSmallHealAura = addAura(-2/3, 1.6, 0.15);
 Class.softwareARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Software",
 	TURRETS: [
 		{
@@ -4319,7 +4319,7 @@ Class.roasterTurretARDreadV2 = {
 	]
 };
 Class.roasterARDreadV2 = { // Flamethrower
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Roaster",
 	TURRETS: [
 		{
@@ -4360,7 +4360,7 @@ for (let i = 0; i < 3; i++) {
 	)
 }
 Class.monsoonARDreadV2 = { // Drones
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Monsoon",
 	BODY: {
 		SPEED: 0.93,
@@ -4382,7 +4382,7 @@ if (useOldPhotosphere) {
 	Class.photosphereBigAuraARV2 = addAura(1.5, 4);
 }
 Class.photosphereARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Photosphere",
 	TURRETS: [
 		{
@@ -4425,7 +4425,7 @@ if (useOldPhotosphere) {
 	)
 }
 Class.stratosphereARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Stratosphere",
 	TURRETS: [
 		{
@@ -4440,7 +4440,7 @@ Class.stratosphereARDreadV2 = {
 	],
 }
 Class.behemothARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Behemoth",
 	BODY: hpBuffBodyStats[2],
 	TURRETS: [
@@ -4455,7 +4455,7 @@ Class.behemothARDreadV2 = {
 	],
 }
 Class.astronomicARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Astronomic",
 	BODY: hpBuffBodyStats[1],
 	TURRETS: [
@@ -4471,7 +4471,7 @@ Class.astronomicARDreadV2 = {
 	],
 }
 Class.grandioseARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Grandiose",
 	BODY: hpBuffBodyStats[1],
 	TURRETS: [
@@ -4487,7 +4487,7 @@ Class.grandioseARDreadV2 = {
 	],
 }
 Class.bunkerARDreadV2 = { // HP + auto spam
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Bunker",
 	BODY: hpBuffBodyStats[1],
 	TURRETS: [
@@ -4503,7 +4503,7 @@ Class.bunkerARDreadV2 = { // HP + auto spam
 	],
 }
 Class.arsenalARDreadV2 = { // HP + big auto
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Arsenal",
 	BODY: hpBuffBodyStats[1],
 	TURRETS: [
@@ -4522,13 +4522,13 @@ Class.arsenalARDreadV2 = { // HP + big auto
 	],
 }
 Class.pentagonLeviathanTopARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Leviathan",
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
 Class.pentagonLeviathanBottomARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Leviathan",
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -4548,13 +4548,13 @@ for (let i = 0; i < 5; i++) {
 	);
 }
 Class.hexagonLeviathanTopARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	LABEL: "Leviathan",
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
 Class.hexagonLeviathanBottomARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	LABEL: "Leviathan",
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -4574,7 +4574,7 @@ for (let i = 0; i < 6; i++) {
 	)
 }
 Class.leviathanARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Leviathan",
 	BODY: speedBuffBodyStats[2],
 	TURRETS: [
@@ -4589,7 +4589,7 @@ Class.leviathanARDreadV2 = {
 	],
 }
 Class.valrayvnARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Valrayvn",
 	BODY: speedBuffBodyStats[1],
 	TURRETS: [
@@ -4605,7 +4605,7 @@ Class.valrayvnARDreadV2 = {
 	],
 }
 Class.pegasusARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Pegasus",
 	BODY: speedBuffBodyStats[1],
 	TURRETS: [
@@ -4621,7 +4621,7 @@ Class.pegasusARDreadV2 = {
 	],
 }
 Class.maceARDreadV2 = { // Speed + auto spam
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Mace",
 	BODY: speedBuffBodyStats[1],
 	TURRETS: [
@@ -4637,7 +4637,7 @@ Class.maceARDreadV2 = { // Speed + auto spam
 	],
 }
 Class.missileARDreadV2 = { // Speed + big auto
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Missile",
 	BODY: speedBuffBodyStats[1],
 	TURRETS: [
@@ -4656,7 +4656,7 @@ Class.missileARDreadV2 = { // Speed + big auto
 	],
 }
 Class.battalionARDreadV2 = { // Speed + HP
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Battalion",
 	BODY: {
 		HEALTH: 2.8, 
@@ -4676,7 +4676,7 @@ Class.battalionARDreadV2 = { // Speed + HP
 	],
 }
 Class.pentagonWispTurretARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	SHAPE: 5,
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -4690,7 +4690,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.hexagonWispTurretARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	SHAPE: 6,
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -4704,7 +4704,7 @@ for(let i = 0; i < 6; i++) {
 	)
 }
 Class.wispARDreadV2 = { // Drifter
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Wisp",
 	BODY: {
 		SPEED: 2.2,
@@ -4718,7 +4718,7 @@ Class.wispARDreadV2 = { // Drifter
 	],
 }
 Class.pentagonTitaniumTopARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	SHAPE: 0,
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -4736,7 +4736,7 @@ for(let i = 0; i < 10; i++) {
 	)
 }
 Class.pentagonTitaniumBottomARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -4753,7 +4753,7 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.hexagonTitaniumTopARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	SHAPE: 0,
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
@@ -4771,7 +4771,7 @@ for(let i = 0; i < 12; i++) {
 	)
 }
 Class.hexagonTitaniumBottomARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -4788,7 +4788,7 @@ for(let i = 0; i < 6; i++) {
 	)
 }
 Class.titaniumARDreadV2 = { // Body damage increase
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Titanium",
 	BODY: {
 		DAMAGE: 3.7,
@@ -4806,17 +4806,17 @@ Class.titaniumARDreadV2 = { // Body damage increase
 	],
 }
 Class.pentagonCrusherTurretARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
 Class.pentagonCrusherTurret2ARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
 Class.pentagonCrusherTurret3ARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -4841,17 +4841,17 @@ for(let i = 0; i < 5; i++) {
 	)
 }
 Class.hexagonCrusherTurretARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
 Class.hexagonCrusherTurret2ARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
 Class.hexagonCrusherTurret3ARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	GUNS: [],
 }
@@ -4876,7 +4876,7 @@ for(let i = 0; i < 6; i++) {
 	)
 }
 Class.crusherARDreadV2 = { // Size increase
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Crusher",
 	SIZE: 1.5,
 	BODY: sizeBuffBodyStats[2],
@@ -4888,7 +4888,7 @@ Class.crusherARDreadV2 = { // Size increase
 	],
 }
 Class.mountainARDreadV2 = { // Size increase + auras
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Mountain",
 	SIZE: 1.4,
 	BODY: sizeBuffBodyStats[1],
@@ -4901,7 +4901,7 @@ Class.mountainARDreadV2 = { // Size increase + auras
 	],
 }
 Class.beastARDreadV2 = { // Size increase + heal auras
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Beast",
 	SIZE: 1.4,
 	BODY: sizeBuffBodyStats[1],
@@ -4914,7 +4914,7 @@ Class.beastARDreadV2 = { // Size increase + heal auras
 	],
 }
 Class.luminanceARDreadV2 = { // Size increase + big aura
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Luminance",
 	SIZE: 1.4,
 	BODY: sizeBuffBodyStats[1],
@@ -4930,7 +4930,7 @@ Class.luminanceARDreadV2 = { // Size increase + big aura
 	],
 }
 Class.foundryARDreadV2 = { // Size increase + big heal aura
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Foundry",
 	SIZE: 1.4,
 	BODY: sizeBuffBodyStats[1],
@@ -4946,7 +4946,7 @@ Class.foundryARDreadV2 = { // Size increase + big heal aura
 	],
 }
 Class.planetoidARDreadV2 = { // Size increase + big auto
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Planetoid",
 	SIZE: 1.4,
 	BODY: sizeBuffBodyStats[1],
@@ -4962,7 +4962,7 @@ Class.planetoidARDreadV2 = { // Size increase + big auto
 	],
 }
 Class.pentagonFinchTurretARDreadV2 = {
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	COLOR: 9,
 	TURRETS: [
@@ -4973,7 +4973,7 @@ Class.pentagonFinchTurretARDreadV2 = {
 	]
 }
 Class.hexagonFinchTurretARDreadV2 = {
-	PARENT: ["genericHexnought"],
+	PARENT: ["genericHexnoughtAR"],
 	MIRROR_MASTER_ANGLE: true,
 	COLOR: 9,
 	TURRETS: [
@@ -4984,7 +4984,7 @@ Class.hexagonFinchTurretARDreadV2 = {
 	]
 }
 Class.finchARDreadV2 = { // Size decrease
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Finch",
 	SIZE: 0.65,
 	BODY: {
@@ -5050,7 +5050,7 @@ for(let i = 0; i < 6; i++) {
 	)
 }
 Class.hoarderARDreadV2 = { // Minelayer
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Hoarder",
 	GUNS: [
 		{
@@ -5107,7 +5107,7 @@ Class.trackerRadarARDreadV2 = {
 	]
 };
 Class.trackerARDreadV2 = { // FOV
-	PARENT: ["genericPentanought"],
+	PARENT: ["genericPentanoughtAR"],
 	LABEL: "Tracker",
 	BODY: {
 		FOV: 1.4,
@@ -5740,7 +5740,7 @@ function mergeHexnoughtWeaponV2(weapon1, weapon2) {
 	weapon1 = ensureIsClass(Class, weapon1);
 	weapon2 = ensureIsClass(Class, weapon2);
 
-	let PARENT = Class.genericHexnought,
+	let PARENT = Class.genericHexnoughtAR,
 		BODY = JSON.parse(JSON.stringify(PARENT.BODY)),
 		GUNS = [],
 		gunsOnOneSide = [],
@@ -5845,7 +5845,7 @@ function makeHexnoughtBodyV2(body) {
 	
 	body = ensureIsClass(Class, body);
 
-	let PARENT = Class.genericHexnought,
+	let PARENT = Class.genericHexnoughtAR,
 		SIZE = body.SIZE ?? 1,
 		BODY = {},
 		GUNS = body.GUNS ?? [],
