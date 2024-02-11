@@ -72,7 +72,6 @@ Class.SpecialMenu = {
     LABEL: "Special Menu",
     UPGRADES_TIER_0: ["basic", "eggGenerator", "SpecialTanksMenu", "BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "MemesMenu", "DreadnoughtsMenu", "ShinyMenu"],
 }
-
 Class.NostalgiaMenu = {
     PARENT: "menu",
     LABEL: "Nostalgia Menu",
@@ -115,5 +114,4 @@ Class.ShinyMenu = {
     LABEL: "Shiny Member Menu",
     UPGRADES_TIER_0: ["eggGenerator", "SpecialTanksMenu","BossesMenuOld", "NostalgiaMenu", "ScrappedMenu", "DreadnoughtsMenu", "tracker3"],
 }
-
 console.log("[INFO] Loaded shiny member menu!");
