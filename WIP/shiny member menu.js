@@ -107,6 +107,10 @@ Class.MiscTanksMenu = {
     PARENT: "menu",
     LABEL: "Misc",
 }
+Class.DreadnoughtsMenu = {
+    PARENT: "menu",
+    LABEL: "Dreadnoughts",
+    UPGRADES_TIER_1: ["dreadOfficialV1", "dreadOfficialV2"],
 }
 Class.ShinyMenu = {
     PARENT: "menu",
