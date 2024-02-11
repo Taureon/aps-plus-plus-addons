@@ -88,7 +88,7 @@ Class.ScrappedMenu = {
 Class.SpecialTanksMenu = {
     PARENT: "menu",
     LABEL: "Special Tanks Menu",
-    UPGRADES_TIER_0: ["SpecialMenu", "HealerMenuOld", "DominatorMenu", "arenaCloser"],
+    UPGRADES_TIER_0: ["SpecialMenu", "HealerMenuOld", "DominatorMenu", "dominators", "arenaCloser"],
 }
 Class.MemesMenu = {
     PARENT: "menu",
