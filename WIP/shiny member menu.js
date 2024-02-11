@@ -104,7 +104,6 @@ Class.MiscTanksMenu = {
     PARENT: "menu",
     LABEL: "Misc",
 }
-if ('dreadOfficialV1' in Class && 'dreadOfficialV2' in Class) {
 }
 Class.ShinyMenu = {
     PARENT: "menu",
