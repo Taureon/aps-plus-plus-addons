@@ -3,7 +3,7 @@ const { statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
 // This addon is disabled by default.
-// return console.log('[florr-flower.js] Addon disabled by default');
+return console.log('[florr-flower.js] Addon disabled by default');
 
 class petals extends IO {
     constructor(body, opts = {}) {
