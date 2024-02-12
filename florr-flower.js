@@ -40,16 +40,76 @@ class petals extends IO {
         this.setStage();
     }
 }
-ioTypes.petals = petals;
+class orbitPetal extends IO {
+    constructor(body, opts = {}) {
+        super(body);
+        this.realDist = 0;
+        this.invert = opts.invert ?? false;
+    }
+  
+    think(input) {
+        let invertFactor = this.invert ? -1 : 1,
+            master = this.body.master.master,
+            dist = this.invert ? master.inverseDist : master.dist,
+            angle = (this.body.angle * Math.PI / 180 + master.angle) * invertFactor;
+        
+        if(this.realDist > dist){
+            this.realDist -= Math.min(10, Math.abs(this.realDist - dist));
+        }
+        else if(this.realDist < dist){
+            this.realDist += Math.min(10, Math.abs(dist - this.realDist));
+        }
+        this.body.x = master.x + Math.cos(angle) * this.realDist;
+        this.body.y = master.y + Math.sin(angle) * this.realDist;
+        
+        this.body.facing = angle;
+    }
+}
 
-// based on whirlwind code
+ioTypes.petals = petals;
+ioTypes.orbitPetal = orbitPetal;
+
+Class.petal = {
+    LABEL: "Petal",
+    TYPE: "satellite",
+    ACCEPTS_SCORE: false,
+    DANGER: 2,
+    SHAPE: 0,
+    LAYER: 13,
+    CONTROLLERS: ['orbitPetal'],
+    FACING_TYPE: "spin",
+    BODY: {
+        PENETRATION: 1.2,
+        PUSHABILITY: 0.6,
+        ACCELERATION: 0.75,
+        HEALTH: 0.3,
+        DAMAGE: 3.375,
+        SPEED: 10,
+        RANGE: 200,
+        DENSITY: 0.03,
+        RESIST: 1.5,
+        FOV: 0.5,
+    },
+    COLOR: 'mirror',
+    DRAW_HEALTH: false,
+    CLEAR_ON_MASTER_UPGRADE: true,
+    BUFF_VS_FOOD: true,
+    MOTION_TYPE: 'motor'
+}
+
 Class.flower = {
     PARENT: "genericTank",
     LABEL: "flower",
     ANGLE: 60,
     CONTROLLERS: ["petals"],
     HAS_NO_RECOIL: true,
-    STAT_NAMES: statnames.whirlwind,
+    STAT_NAMES: {
+        BULLET_SPEED: 'Petal Speed',
+        BULLET_HEALTH: 'Petal Health',
+        BULLET_PEN: 'Petal Penetration',
+        BULLET_DAMAGE: 'Petal Damage',
+        RELOAD: 'Respawn Rate',
+    },
     AI: {
         SPEED: 2, 
     }, 
@@ -59,8 +119,8 @@ Class.flower = {
             output.push({ 
                 POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([g.satellite]), 
-                    TYPE: ["satellite", {ANGLE: i * 60}],
+                    SHOOT_SETTINGS: combineStats([{ size: 0.8, reload: 3, damage: 2 }]),
+                    TYPE: ["petal", {ANGLE: i * 60}],
                     MAX_CHILDREN: 1,
                     AUTOFIRE: true,
                     SYNCS_SKILLS: false,
