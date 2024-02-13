@@ -40,266 +40,266 @@ Class.gatsCase = {
 	],
 };
 const guns = {
-pistol: [
-        {
-        	POSITION: [0, 3, 1, 8, 17, -90, 0],
-        	PROPERTIES: {
-        		SHOOT_SETTINGS: combineStats([ g.gun, g.pistol, g.bulletCase ]),
-        		TYPE: "gatsCase",
-		},
-        },
-        {
-            	POSITION: [13, 1, 1, 11, -8, 0, 0],
-	    	PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-		POSITION: [13, 3, 1, 11, -8, 0, 0],
-		PROPERTIES: {
-                	SHOOT_SETTINGS: combineStats([ g.gun, g.pistol ]),
-                	TYPE: "gatsBullet",
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [3, 1, 1, 16, -8, 0, 0],
-	    	PROPERTIES: {
-			COLOR: "darkGrey",
-		},
-        },
+	pistol: [
+	        {
+	        	POSITION: [0, 3, 1, 8, 17, -90, 0],
+	        	PROPERTIES: {
+	        		SHOOT_SETTINGS: combineStats([ g.gun, g.pistol, g.bulletCase ]),
+	        		TYPE: "gatsCase",
+			},
+	        },
+	        {
+	            	POSITION: [13, 1, 1, 11, -8, 0, 0],
+		    	PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+			POSITION: [13, 3, 1, 11, -8, 0, 0],
+			PROPERTIES: {
+	                	SHOOT_SETTINGS: combineStats([ g.gun, g.pistol ]),
+	                	TYPE: "gatsBullet",
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [3, 1, 1, 16, -8, 0, 0],
+		    	PROPERTIES: {
+				COLOR: "darkGrey",
+			},
+	        },
 	],
-smg: [
-        {
-	        POSITION: [25, 3, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "grey",
-		},
-        },
-        {
-        	POSITION: [29, 0.7, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.smg ]),
-        		TYPE: "gatsBullet",
-		},
-        },
-        {
-                POSITION: [29, 0.7, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-                POSITION: [17, 3, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-        	POSITION: [0.5, 3, 1, 23, -8.5, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
+	smg: [
+	        {
+		        POSITION: [25, 3, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "grey",
+			},
+	        },
+	        {
+	        	POSITION: [29, 0.7, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.smg ]),
+	        		TYPE: "gatsBullet",
+			},
+	        },
+	        {
+	                POSITION: [29, 0.7, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	                POSITION: [17, 3, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	        	POSITION: [0.5, 3, 1, 23, -8.5, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
 	],
     	shotgun: [
-        {
-        	POSITION: [0, 1, 1, 30, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-	{
-        	POSITION: [0, 1, 1, 30, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-	{
-        	POSITION: [0, 1, 1, 30, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-	{
-            	POSITION: [0, 1, 1, 30, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-	{
-            	POSITION: [0, 1, 1, 30, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-	{
-            	POSITION: [0, 1, 1, 30, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-	{
-            	POSITION: [0, 1, 1, 30, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-        {
-        	POSITION: [6, 3, 1, 16, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [30, 1, 1, 0, -7, 0, 0],
+	        {
+	        	POSITION: [0, 1, 1, 30, -7, 0, 0],
 			PROPERTIES: {
-			COLOR: "grey",
-		},
-        },
-        {
-           	POSITION: [11, 3, 1, 0, -7, 0, 0],
-			PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-	],
-assault: [
-        {
-            	POSITION: [0, 0.7, 1, 7, 14, -90, 0],
-            	PROPERTIES: {
-                	SHOOT_SETTINGS: combineStats([ g.gun, g.assault, g.bulletCase ]),
-                	TYPE: "gatsCase",
-		},
-        },
-        {
-            	POSITION: [32, 0.7, 1, 0, -7, 0, 0],
-		PROPERTIES: {
 				COLOR: "black",
-				SHOOT_SETTINGS: combineStats([ g.gun, g.assault ]),
-                		TYPE: "gatsBullet",
-		},
-        },
-        {
-            	POSITION: [32, 0.7, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [25, 3, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "orange",
-		},
-        },
-        {
-            	POSITION: [7, 3, 1, 12, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
+				SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+		{
+	        	POSITION: [0, 1, 1, 30, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+		{
+	        	POSITION: [0, 1, 1, 30, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+		{
+	            	POSITION: [0, 1, 1, 30, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+		{
+	            	POSITION: [0, 1, 1, 30, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+		{
+	            	POSITION: [0, 1, 1, 30, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+		{
+	            	POSITION: [0, 1, 1, 30, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.shotgun ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+	        {
+	        	POSITION: [6, 3, 1, 16, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [30, 1, 1, 0, -7, 0, 0],
+				PROPERTIES: {
+				COLOR: "grey",
+			},
+	        },
+	        {
+	           	POSITION: [11, 3, 1, 0, -7, 0, 0],
+				PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
 	],
-sniper: [
-        {
-            	POSITION: [25, 2.5, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "grey",
-		},
-        },
-        {
-            	POSITION: [20, 0.7, 1, 18, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "yellow",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.sniper ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-        {
-            	POSITION: [20, 0.7, 1, 18, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [2, 0.7, 1, 12, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
+	assault: [
+	        {
+	            	POSITION: [0, 0.7, 1, 7, 14, -90, 0],
+	            	PROPERTIES: {
+	                	SHOOT_SETTINGS: combineStats([ g.gun, g.assault, g.bulletCase ]),
+	                	TYPE: "gatsCase",
+			},
+	        },
+	        {
+	            	POSITION: [32, 0.7, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+					COLOR: "black",
+					SHOOT_SETTINGS: combineStats([ g.gun, g.assault ]),
+	                		TYPE: "gatsBullet",
+			},
+	        },
+	        {
+	            	POSITION: [32, 0.7, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [25, 3, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "orange",
+			},
+	        },
+	        {
+	            	POSITION: [7, 3, 1, 12, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
 	],
-lmg: [
-        {
-            	POSITION: [0, 0.7, 1, -3, -20, 90, 0],
-            	PROPERTIES: {
-                	SHOOT_SETTINGS: combineStats([ g.gun, g.lmg, g.bulletCase ]),
-                	TYPE: "gatsCase",
-		},
-        },
-        {
-            	POSITION: [4, 10, 1, 17, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "green",
-		},
-        },
-        {
-            	POSITION: [40, 0.7, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [40, 0.7, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-			SHOOT_SETTINGS: combineStats([ g.gun, g.lmg ]),
-                	TYPE: "gatsBullet",
-		},
-        },
-        {
-            	POSITION: [0, 3, 1, 28, -4, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [3, 0, 1, 25, -2.5, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [25, 2, 1, 0, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "darkGrey",
-		},
-        },
-        {
-            	POSITION: [20, 2.8, 1, 13, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "black",
-		},
-        },
-        {
-            	POSITION: [8, 3, 1, 26, -7, 0, 0],
-		PROPERTIES: {
-			COLOR: "grey",
-		},
-        },
+	sniper: [
+	        {
+	            	POSITION: [25, 2.5, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "grey",
+			},
+	        },
+	        {
+	            	POSITION: [20, 0.7, 1, 18, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "yellow",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.sniper ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+	        {
+	            	POSITION: [20, 0.7, 1, 18, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [2, 0.7, 1, 12, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	],
+	lmg: [
+	        {
+	            	POSITION: [0, 0.7, 1, -3, -20, 90, 0],
+	            	PROPERTIES: {
+	                	SHOOT_SETTINGS: combineStats([ g.gun, g.lmg, g.bulletCase ]),
+	                	TYPE: "gatsCase",
+			},
+	        },
+	        {
+	            	POSITION: [4, 10, 1, 17, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "green",
+			},
+	        },
+	        {
+	            	POSITION: [40, 0.7, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [40, 0.7, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+				SHOOT_SETTINGS: combineStats([ g.gun, g.lmg ]),
+	                	TYPE: "gatsBullet",
+			},
+	        },
+	        {
+	            	POSITION: [0, 3, 1, 28, -4, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [3, 0, 1, 25, -2.5, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [25, 2, 1, 0, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "darkGrey",
+			},
+	        },
+	        {
+	            	POSITION: [20, 2.8, 1, 13, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "black",
+			},
+	        },
+	        {
+	            	POSITION: [8, 3, 1, 26, -7, 0, 0],
+			PROPERTIES: {
+				COLOR: "grey",
+			},
+	        },
 	],
 };
 Class.gatsBody = {
