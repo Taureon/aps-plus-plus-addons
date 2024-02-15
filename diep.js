@@ -2,10 +2,6 @@ const { combineStats, makeAuto, makeHybrid, makeOver, makeMulti } = require('../
 const { base, gunCalcNames, statnames, smshskl } = require('../constants.js');
 const g = {
     // Misc
-    blank: { },
-    small: { size: 0.8 },
-    micro: { size: 0.4 },
-    weak: { reload: 2, health: 0.6, damage: 0.6, pen: 0.8, speed: 0.5, maxSpeed: 0.7, range: 0.25, density: 0.3 },
     power: { shudder: 0.6, size: 1.2, pen: 1.25, speed: 2, maxSpeed: 1.7, density: 2, spray: 0.5, resist: 1.5 },
     fake: { recoil: 0.00001, size: 0.00001, health: 0.0001, speed: 0.00001, maxSpeed: 2, range: 0 },
     op: { reload: 0.5, recoil: 1.3, health: 4, damage: 4, pen: 4, speed: 3, maxSpeed: 2, density: 5, spray: 2 },
