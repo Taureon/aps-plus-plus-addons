@@ -6,7 +6,7 @@
 // Cooldown of 30 seconds after rolling.
 // Cooldown bypass requires 'infiniteRolls' permission.
 
-// NOTE: you need to verify that ALL of them work.
+// NOTE: if they have no :'s, then they dont exist or arent finished
 
 // ID | name                    | description
 
