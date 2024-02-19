@@ -41,8 +41,8 @@
 // 25 : Turtle                  : Makes you 5x as healthy, but also makes your max speed 80% slower.
 // 26 : Gamer Neck              : Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
 // 27 : Random Barrel Positions : Randomises each of your barrels' angle and direction.
-// 38   Random Tank               Sets you to a random tank available from c.SPAWN_CLASS
-// 29   Random Projectiles        Gives you the projectiles of some other tank.
+// 38 ? Random Tank             ? Sets you to a random tank available from c.SPAWN_CLASS
+// 29 ? Random Projectiles      ? Gives you the projectiles of some other tank.
 // 20   Orb                       Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
 // 31   Pumpkin                   Gives you the pumpkin curse: invis, orange, 0.0001 hp
 // 32   Downgrade to Basic        Sets you to c.SPAWN_CLASS
@@ -72,16 +72,16 @@
 // 54 : Forced spin             : Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting and moving.
 // 55 : Earthquake              : Every game tick, changes your position by a maximum value of 5 in a random direction..
 // 56 : Backpetal               : Inverts movement directions.
-// 57   Death Mark                Puts you on the minimap for everyone, spawns a large pulse around you.
-// 58   Introverted Projectiles   Projectiles get slightly repelled by enemy entities.
+// 57 ? Bounty                  ? Puts you on the minimap for everyone, spawns a large pulse around you.
+// 58 ? Introverted Projectiles ? Projectiles get slightly repelled by enemy entities.
 // 59   Time Bomb                 Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
 
 let { combineStats } = require('../facilitators.js'),
     { gunCalcNames } = require('../constants.js'),
     g = require('../gunvals.js'),
-/*
+
 tanksInTree = [],
-projectilesInTree = [],*/
+projectilesInTree = [],
 
 effects = [
 // Effect Blueprint
@@ -627,7 +627,7 @@ effects = [
     }
 },
 
-/*{
+{
     name: 'Random Tank',
     splash: "I'm finally switching off of my main and trying something new!",
     duration: 20,
@@ -675,7 +675,7 @@ effects = [
             }
         }, 20 * 30);
     }
-},*/
+},
 
 
 
@@ -919,75 +919,14 @@ effects = [
 },
 
 {
-    name: 'Death Mark',
+    name: 'Bounty',
     splash: "EVERYOOOONE! I'M RIGHT HEEERE!!",
     duration: 20,
-    run: body => {},
-    statusEffect: new StatusEffect(0 * 30)
-},
-
-{
-    name: 'Antisocial Projectiles',
-    splash: 'The things you shoot can also have anxiety.',
-    duration: 20,
-    run: body => {},
-    statusEffect: new StatusEffect(0 * 30)
-},
-
-{
-    name: 'Time Bomb',
-    splash: 'You will explode in a moment, now go kill people with that information.',
-    noEndNotification: true,
     run: body => {
-        let o = new Entity(body, body.master);
-        o.define("plugin_effectRoller_bomb");
-        o.bindToMaster({ SIZE: 15, ANGLE: 225, LAYER: 1 }, body);
-        setSyncedTimeout(() => {
-            if (body.isDead()) return;
-
-            let sizeSqrd = 16 + Math.ceil(Math.sqrt(o.size)),
-                sizeSqrdPI = sizeSqrd * Math.PI,
-                angleShift = 32400 / sizeSqrdPI, // ((360 / sizeSqrt) / (180 / Math.PI)) / 2
-                BODY = {
-                    HEALTH: Math.sqrt(o.health.max),
-                    DAMAGE: Math.sqrt(o.damage),
-                    RANGE: sizeSqrd
-                };
-            console.log(sizeSqrd);
-            for (let i = sizeSqrd; i--;) {
-                let angle1 = i * 180 / sizeSqrdPI,
-                    angle2 = i * 180 / sizeSqrdPI + angleShift,
-                o1 = new Entity({
-                    x: body.x + o.size * Math.cos(angle1),
-                    y: body.y + o.size * Math.sin(angle1)
-                }),
-                o2 = new Entity({
-                    x: body.x + o.size * Math.cos(angle2),
-                    y: body.y + o.size * Math.sin(angle2)
-                }),
-                point1 = ran.pointInUnitCircle(),
-                point2 = ran.pointInUnitCircle();
-                o1.facing = angle1;
-                o2.facing = -angle2;
-
-                o1.define("growBullet", false);
-                o2.define("growBullet", false);
-                o1.define({ BODY }, false);
-                o2.define({ BODY }, false);
-                o1.velocity.x = -sizeSqrd * Math.cos(angle1) + point1.x;
-                o1.velocity.y = -sizeSqrd * Math.sin(angle1) + point1.y;
-                sizeSqrd *= Math.log(sizeSqrd);
-                o2.velocity.x = sizeSqrd * Math.cos(angle1) + point2.x;
-                o2.velocity.y = sizeSqrd * Math.sin(angle1) + point2.y;
-                o1.team = body.team;
-                o2.team = body.team;
-                o1.life();
-                o2.life();
-            }
-
-            body.kill();
-        }, 15 * 30);
-        setSyncedTimeout(() => o.define({ COLOR: 17 }), 10 * 30);
+        let mark = new Entity(body, body),
+            continuePulsing = true;
+        mark.define({ PARENT: "plugin_effectRoller_bountyMark", SIZE: body.SIZE });
+        setSyncedTimeout(() => { mark.kill(); continuePulsing = false; }, 20 * 30);
     }
 }, 
 
@@ -996,19 +935,19 @@ effects = [
     splash: 'Asocial Ammunition.',
     duration: 20,
     statusEffect: new StatusEffect(20 * 30, undefined, body => {
-        let hotPeople = [],
-            hornyPeople = [];
+        let extroverts = [],
+            introverts = [];
         for (let i = 0; i < entities.length; i++) {
             if (entities[i].team != body.team && entities[i].team != TEAM_ROOM) {
-                hotPeople.push(entities[i]);
+                extroverts.push(entities[i]);
             } else if (entities[i].id != body.id && entities[i].master.master.id == body.id) {
-                hornyPeople.push(entities[i]);
+                introverts.push(entities[i]);
             }
         }
-        for (let i = 0; i < hornyPeople.length; i++) {
-            let projectile = hornyPeople[i];
-            for (let j = 0; j < hotPeople.length; j++) {
-                let entity = hotPeople[j],
+        for (let i = 0; i < introverts.length; i++) {
+            let projectile = introverts[i];
+            for (let j = 0; j < extroverts.length; j++) {
+                let entity = extroverts[j],
                     diffX = projectile.x - entity.x,
                     diffY = projectile.y - entity.y,
                     dist2 = diffX ** 2 + diffY ** 2;
@@ -1025,6 +964,58 @@ effects = [
             }
         }
     })
+},
+
+{
+    name: 'Time Bomb',
+    splash: 'You will explode in a moment, now go kill people with that information.',
+    noEndNotification: true,
+    run: body => {
+        let o = new Entity(body, body);
+        o.define("plugin_effectRoller_bomb");
+        o.bindToMaster({ SIZE: 15, ANGLE: 225, LAYER: 1 }, body);
+        setSyncedTimeout(() => o.define({ COLOR: 17 }), 10 * 30);
+        setSyncedTimeout(() => {
+            if (body.isDead()) return;
+
+            let sizeSqrd = 16 + Math.ceil(Math.sqrt(o.size)),
+                sizeSqrdTimesSelfLog = sizeSqrd * Math.log(sizeSqrd),
+                sizeSqrdPI = sizeSqrd * Math.PI,
+                angleShift = 32400 / sizeSqrdPI, // ((360 / sizeSqrt) / (180 / Math.PI)) / 2
+                BODY = {
+                    HEALTH: Math.sqrt(o.health.max),
+                    DAMAGE: Math.sqrt(o.damage),
+                    RANGE: sizeSqrd
+                };
+            for (let i = 0; i < sizeSqrd; i++) {
+                let angle1 = i * 180 / sizeSqrdPI,
+                    angle2 = i * 180 / sizeSqrdPI + angleShift,
+                o1 = new Entity({
+                    x: body.x + o.size * Math.cos(angle1),
+                    y: body.y + o.size * Math.sin(angle1)
+                }, body),
+                o2 = new Entity({
+                    x: body.x + o.size * Math.cos(angle2),
+                    y: body.y + o.size * Math.sin(angle2)
+                }, body);
+
+                o1.define("growBullet", false);
+                o2.define("growBullet", false);
+                o1.define({ BODY }, false);
+                o2.define({ BODY }, false);
+                o1.velocity.x = -sizeSqrd * Math.cos(angle1);
+                o1.velocity.y = -sizeSqrd * Math.sin(angle1);
+                o2.velocity.x = sizeSqrdTimesSelfLog * Math.cos(angle2);
+                o2.velocity.y = sizeSqrdTimesSelfLog * Math.sin(angle2);
+                o1.team = body.team;
+                o2.team = body.team;
+                o1.life();
+                o2.life();
+            }
+
+            body.kill();
+        }, 15 * 30);
+    }
 }];
 
 class io_plugin_effectRoller_lookAtEntity extends IO {
@@ -1065,7 +1056,7 @@ ioTypes.plugin_effectRoller_lookAtEntity = io_plugin_effectRoller_lookAtEntity;
 ioTypes.plugin_effectRoller_forcedSpin = io_plugin_effectRoller_forcedSpin;
 
 Class.plugin_effectRoller_strongerGrowthAnnihilator = {
-    PARENT: ["genericTank"],
+    PARENT: "genericTank",
     LABEL: "Annihilator",
     SKILL_CAP: Array(10).fill(15),
     SKILL: Array(10).fill(15),
@@ -1075,11 +1066,7 @@ Class.plugin_effectRoller_strongerGrowthAnnihilator = {
     TEAM: TEAM_ROOM,
     COLOR: getTeamColor(TEAM_ROOM),
     GUNS: [{
-        POSITION: {
-            LENGTH: 20.5,
-            WIDTH: 19.5,
-            DELAY: 0.75
-        },
+        POSITION: { LENGTH: 20.5, WIDTH: 19.5, DELAY: 0.75 },
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.annihilator]),
             TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
@@ -1090,6 +1077,8 @@ Class.plugin_effectRoller_strongerGrowthAnnihilator = {
 
 Class.plugin_effectRoller_bomb = {
     PARENT: 'genericTank',
+    FACING_TYPE: "bound",
+    MOTION_TYPE: "bound",
     COLOR: 17,
     GUNS: [{
         POSITION: { WIDTH: 5, LENGTH: 15 },
@@ -1100,6 +1089,14 @@ Class.plugin_effectRoller_bomb = {
             AUTOFIRE: true
         }
     }]
+};
+
+Class.plugin_effectRoller_bountyMark = {
+    PARENT: 'genericEntity',
+    COLOR: '#ff0000',
+    MOTION_TYPE: 'withMaster',
+    SHAPE: 'M 1 0 A 1 1 0 0 0 -1 0 A 1 1 0 0 0 1 0 L 0.8 0 A 0.81 1 0 0 1 -0.8 0 A 0.81 1 0 0 1 0.8 0 M -1.2 -0.1 L -0.6 -0.1 L -0.6 0.1 L -1.2 0.1 L -1.2 -0.1 M -0.1 -0.6 L -0.1 -1.2 L 0.1 -1.2 L 0.1 -0.6 L -0.1 -0.6 M 1.2 0.1 L 0.6 0.1 L 0.6 -0.1 L 1.2 -0.1 L 1.2 0.1 M 0.1 0.6 L 0.1 1.2 L -0.1 1.2 L -0.1 0.6 L 0.1 0.6',
+    CONTROLLERS: [['spin', { speed: 0.1, independent: true }]]
 };
 
 setTimeout(() => console.log(effects.map((x, i) => i + ': ' + x.name).join('\n')));
@@ -1161,7 +1158,7 @@ module.exports = ({ Events }) => {
         }
     });
 
-    /*let alreadySeen = [],
+    let alreadySeen = [],
     next = [Config.SPAWN_CLASS].flat(),
     limit = 1000;
     while (next.length && limit--) {
@@ -1185,5 +1182,5 @@ module.exports = ({ Events }) => {
 
             for (let key of Object.keys(now)) if (key.startsWith('UPGRADES_TIER_')) next.push(...now[key]);
         }
-    };*/
+    };
 };
