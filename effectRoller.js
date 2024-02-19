@@ -635,8 +635,8 @@ effects = [
         let oldDef = body.def;
 
         for (let gun of body.guns) {
-            body.define(Array.isArray(Config.SPAWN_CLASS) ?
-                Config.SPAWN_CLASS.map(x => tanksInTree[Math.floor(Math.random() * tanksInTree.length)])
+            body.define(Array.isArray(c.SPAWN_CLASS) ?
+                c.SPAWN_CLASS.map(x => tanksInTree[Math.floor(Math.random() * tanksInTree.length)])
             :
                 tanksInTree[Math.floor(Math.random() * tanksInTree.length)]
             );
@@ -1159,7 +1159,7 @@ module.exports = ({ Events }) => {
     });
 
     let alreadySeen = [],
-    next = [Config.SPAWN_CLASS].flat(),
+    next = [c.SPAWN_CLASS].flat(),
     limit = 1000;
     while (next.length && limit--) {
         let current = next;
