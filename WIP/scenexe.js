@@ -202,7 +202,7 @@ const baseScenexe = {
  * @param {Object} params
  * @param {import("../../../..").Tanks} params.Class
  */
-module.exports = ({ Class, Config }) => {
+module.exports = ({ Config }) => {
 
     //return console.log('Addon [scenexe.js] is disabled')
     

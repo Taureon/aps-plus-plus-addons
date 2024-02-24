@@ -1,7 +1,7 @@
 const { dereference, combineStats, makeMulti, makeAuto } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 
-module.exports = ({ Class, Config }) => {
+module.exports = ({ Config }) => {
 
 // Comment out the line below to enable this addon, uncomment it to disable this addon.
 //return console.log('--- Woomy-Arras addon [woomy.js] is disabled. See lines 6-7 to enable it. ---');

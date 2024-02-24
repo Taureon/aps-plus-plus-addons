@@ -302,7 +302,7 @@ function makeTankTreeRecursively(Class, code, maxTier) {
 	return key;
 }
 
-module.exports = ({ Class, Events, Config }) => {
+module.exports = ({ Events, Config }) => {
     let maxTier = Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER ?? Config.MAX_UPGRADE_TIER ?? 4;
     Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER = Math.max(Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER, Config.MAX_UPGRADE_TIER);
     Class.plugin_NET_twinion = {

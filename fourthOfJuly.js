@@ -1,4 +1,4 @@
-module.exports = ({ Class, Events }) => {
+module.exports = ({ Events }) => {
     return console.log('\u001b[31mADDON 4th_of_july.js IS STILL IN BETA, DO NOT USE IN PRODUCTION\u001b[0m');
 
     let explosions = [];

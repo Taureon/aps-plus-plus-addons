@@ -40,13 +40,9 @@ makeBird = (type, name = -1, color) => {
     return output;
 };
 
-module.exports = ({ Class }) => {
+// Comment out the line below to enable this addon, uncomment it to disable this addon (WARNING: Increases load time by approximately 1.5x).
+//return console.log('--- Too ManyTanks addon [too-Many-Tanks.js] is disabled. See lines 48-49 to enable it. ---');
 
-
-
-
-    // Comment out the line below to enable this addon, uncomment it to disable this addon (WARNING: Increases load time by approximately 1.5x).
-	//return console.log('--- Too ManyTanks addon [too-Many-Tanks.js] is disabled. See lines 48-49 to enable it. ---');
 //bullets
 Class.laser = {
 PARENT: ["bullet"],
