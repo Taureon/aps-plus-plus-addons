@@ -1,8 +1,8 @@
-const { dereference, combineStats, makeMulti, makeDeco } = require('../facilitators.js');
+const { dereference, combineStats, makeMulti, makeDeco, menu } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
-const addToMain = true
+const addToMain = false
 
 // Bullets
 Class.masterBullet = {
@@ -1093,22 +1093,6 @@ Class.literallyAMachineGun = {
     ]
 }
 
-// Dev shit
-Class.dailyTanks = {
-	PARENT: "menu",
-	LABEL: "Daily Tanks!",
-	UPGRADE_COLOR: "rainbow",
-	UPGRADES_TIER_0: [
-		"whirlwind",
-		"master",
-		"undertow",
-		"literallyAMachineGun",
-		"literallyATank",
-		"rocketeer",
-		"jumpSmasher",
-	]
-}
-
 // December 19th-20th - Jump Smasher
 Class.jumpSmasher = {
     PARENT: "genericSmasher",
@@ -1326,7 +1310,7 @@ Class.literallyATank = {
         {
             POSITION: [12, 8, 1.3, 30, 0, 0, 0],
             PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic]),
+                SHOOT_SETTINGS: combineStats([g.basic, { reload: 3, damage: 1.2, shudder: 0.5 }]),
                 TYPE: "developerBullet"
             }
         },
@@ -1349,6 +1333,12 @@ Class.literallyATank = {
         },
     ]
 }
+
+// Dev shit
+Class.dailyTanks = menu( "Daily Tanks!" )
+Class.dailyTanks.UPGRADE_COLOR = "rainbow"
+Class.dailyTanks.UPGRADES_TIER_0 = ["whirlwind", "master", "undertow", "literallyAMachineGun", "literallyATank", "rocketeer", "jumpSmasher"]
+
 	
 if (addToMain == true) {
 Class.basic.UPGRADES_TIER_1.push("whirlwind")
