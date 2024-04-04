@@ -1,5 +1,4 @@
-const { combineStats, makeDeco } = require('../facilitators.js');
-const { statnames } = require('../constants.js');
+const { combineStats } = require('../facilitators.js');
 const g = require('../gunvals.js');
 
 // This addon is disabled by default.
@@ -31,7 +30,7 @@ class petals extends IO {
     think(input) {
         this.body.angle += (this.body.skill.spd * 2 + this.body.aiSettings.SPEED) * Math.PI / 180;
 
-        // 1 - nor
+        // 1 - normal
         // 2 - max
         // 3 - min
         this.stage = 1;
@@ -65,7 +64,6 @@ class orbitPetal extends IO {
         this.body.facing = angle;
     }
 }
-
 ioTypes.petals = petals;
 ioTypes.orbitPetal = orbitPetal;
 
@@ -119,7 +117,7 @@ Class.flower = {
             output.push({ 
                 POSITION: {WIDTH: 8, LENGTH: 1, DELAY: i * 0.25},
                 PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([{ size: 0.8, reload: 3, damage: 2 }]),
+                    SHOOT_SETTINGS: combineStats([g.satellite]),
                     TYPE: ["petal", {ANGLE: i * 60}],
                     MAX_CHILDREN: 1,
                     AUTOFIRE: true,
@@ -131,6 +129,6 @@ Class.flower = {
         return output
     })()
 };
-
 Class.addons.UPGRADES_TIER_0.push("flower");
+
 console.log('[florr-flower] has been loaded.');
