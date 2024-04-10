@@ -183,7 +183,7 @@ Class.genericHexnoughtAR = {
 	PARENT: ["genericDreadnoughtARDreadV2"],
 	BODY: hexnoughtBody,
 	SHAPE: 6,
-	COLOR: 'magenta',
+	COLOR: 'hexagon',
 	SIZE: 26,
 	DANGER: 12,
 }
