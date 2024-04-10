@@ -1487,7 +1487,7 @@ for (let i = 0; i < 4; i++) {
 }
 Class.colossusARDreadV2 = {
 	PARENT: ["genericSquarenoughtAR"],
-	LABEL: "colossus",
+	LABEL: "Colossus",
 	BODY: speedBuffBodyStats[0],
 	GUNS: [],
 	TURRETS: [
