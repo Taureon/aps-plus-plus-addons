@@ -526,3 +526,4 @@ Class.rifle.UPGRADES_TIER_3.push ("twinRifle", "rifleBushwhacker")
 Class.bushwhacker.UPGRADES_TIER_3 = ["assassinBushwhacker", "hunterBushwhacker", "minigunBushwhacker", "rifleBushwhacker", "twinBushwhacker"]
 Class.twinSniper.UPGRADES_TIER_3 = ["twinAssassin", "twinHunter", "twinMinigun", "twinRifle", "twinBushwhacker", "tetraSniper", "doubleTwinSniper"]
 Class.blaster.UPGRADES_TIER_3 = ["blazer", "bloomer", "blocker"]
+};
