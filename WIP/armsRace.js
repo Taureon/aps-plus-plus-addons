@@ -95,6 +95,26 @@ const makeSuperbird = (type, name = -1, frontRecoilFactor = 1, backRecoilFactor 
     output.LABEL = name == -1 ? "Bird " + type.LABEL : name;
     return output;
 }
+const makeSplit = (type, name = -1) => {
+    type = ensureIsClass(type);
+    let output = dereference(type);
+    let cannons = [{
+        POSITION: [18, 8, 1, 0, 0, 90, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
+            TYPE: "bullet",
+        },
+    }, {
+        POSITION: [18, 8, 1, 0, 0, 270, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard]),
+            TYPE: "bullet",
+        },
+    }];
+    output.GUNS = type.GUNS == null ? cannons : type.GUNS.concat(cannons);
+    output.LABEL = name == -1 ? "Split " + type.LABEL : name;
+    return output;
+}
 const makeTriGuard = (type, name = -1) => {
     type = ensureIsClass(type);
     let output = dereference(type),
