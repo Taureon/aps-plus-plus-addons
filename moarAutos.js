@@ -1,6 +1,5 @@
 const { dereference, combineStats, makeAuto } = require('../facilitators.js')
-const tanks = require('../groups/tanks.js')
-const g = require('../gunvals.js');
+const g = require('../gunvals.js')
 
 const makeMegaAuto = (type, name = -1, options = {}) => {
     type = ensureIsClass(type);
