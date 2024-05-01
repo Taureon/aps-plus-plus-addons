@@ -1,4 +1,4 @@
-const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeMulti, makeOver, makeSwarming, addBackGunner } = require('../facilitators.js');
+const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeMulti, makeOver, addBackGunner } = require('../facilitators.js');
 const { base, gunCalcNames, statnames, dfltskl, smshskl } = require('../constants.js');
 const g = require('../gunvals.js');
 Class.znpAR_placeholder = { LABEL: "PLACEHOLDER", COLOR: "black", UPGRADE_COLOR: "black"}
@@ -229,6 +229,32 @@ const makeHybrid = (type, name = -1) => {
     };
     output.GUNS = type.GUNS == null ? [spawner] : [spawner, ...type.GUNS];
     output.LABEL = name == -1 ? "Hybrid " + type.LABEL : name;
+    return output;
+}
+const makeSwarming = (type, name = -1) => {
+    type = ensureIsClass(type);
+    let output = dereference(type);
+    let spawner = {
+        POSITION: [7, 7.5, 0.6, 7, 0, 0, 0],
+        PROPERTIES: {
+            SHOOT_SETTINGS: combineStats([g.swarm]),
+            TYPE: "autoswarm",
+            STAT_CALCULATOR: gunCalcNames.swarm,
+        },
+    };
+    if (type.TURRETS != null) {
+        output.TURRETS = type.TURRETS;
+    }
+    if (type.GUNS == null) {
+        output.GUNS = [spawner];
+    } else {
+        output.GUNS = [...type.GUNS, spawner];
+    }
+    if (name == -1) {
+        output.LABEL = "Swarming " + type.LABEL;
+    } else {
+        output.LABEL = name;
+    }
     return output;
 }
 
@@ -3037,19 +3063,19 @@ Class.znpAR_defect = makeBird('tripleShot', "Defect")
 Class.znpAR_cockatiel = makeBird('znpAR_pen', "Cockatiel")
 
 // Tier 3 hybrid tanks
-Class.znpAR_coalesce = makeHybrid('znpAR_wark', "Coalesce")
-Class.znpAR_cobbler = makeHybrid('znpAR_mech', "Cobbler")
-Class.znpAR_current = makeHybrid('volute', "Current")
-Class.znpAR_deviation = makeHybrid('znpAR_machineTrapper', "Deviation")
-Class.znpAR_fashioner = makeHybrid('builder', "Fashioner")
-Class.znpAR_force = makeHybrid('artillery', "Force")
-Class.znpAR_heaver = makeHybrid('launcher', "Heaver")
-Class.znpAR_hitman = makeHybrid('assassin', "Hitman")
-Class.znpAR_integrator = makeHybrid('triAngle', "Integrator")
-Class.znpAR_interner = makeHybrid('znpAR_pen', "Interner")
-Class.znpAR_polluter = makeAuto('znpAR_diesel', "Polluter")
-Class.znpAR_shower = makeHybrid('sprayer', "Shower")
-Class.znpAR_spiral = makeHybrid('helix', "Spiral")
+Class.znpAR_coalesce = makeOver('znpAR_wark', "Coalesce", {count: 1, independent: true, cycle: false})
+Class.znpAR_cobbler = makeOver('znpAR_mech', "Cobbler", {count: 1, independent: true, cycle: false})
+Class.znpAR_current = makeOver('volute', "Current", {count: 1, independent: true, cycle: false})
+Class.znpAR_deviation = makeOver('znpAR_machineTrapper', "Deviation", {count: 1, independent: true, cycle: false})
+Class.znpAR_fashioner = makeOver('builder', "Fashioner", {count: 1, independent: true, cycle: false})
+Class.znpAR_force = makeOver('artillery', "Force", {count: 1, independent: true, cycle: false})
+Class.znpAR_heaver = makeOver('launcher', "Heaver", {count: 1, independent: true, cycle: false})
+Class.znpAR_hitman = makeOver('assassin', "Hitman", {count: 1, independent: true, cycle: false})
+Class.znpAR_integrator = makeOver('triAngle', "Integrator", {count: 1, independent: true, cycle: false})
+Class.znpAR_interner = makeOver('znpAR_pen', "Interner", {count: 1, independent: true, cycle: false})
+Class.znpAR_polluter = makeOver('znpAR_diesel', "Polluter", {count: 1, independent: true, cycle: false})
+Class.znpAR_shower = makeOver('sprayer', "Shower", {count: 1, independent: true, cycle: false})
+Class.znpAR_spiral = makeOver('helix', "Spiral", {count: 1, independent: true, cycle: false})
 
 // Tier 3 auto tanks
 Class.znpAR_autoAuto3 = makeAuto('auto3')
@@ -3302,7 +3328,7 @@ Class.znpAR_hewnTriple = {
     ]
 }
 Class.znpAR_mangle = makeFighter('znpAR_defect', "Mangle")
-Class.znpAR_pug = makeHybrid('fighter', "Pug")
+Class.znpAR_pug = makeOver('fighter', "Pug", {count: 1, independent: true, cycle: false})
 Class.znpAR_quadTwin = makeMulti({
     PARENT: "genericTank",
     LABEL: "Twin",
@@ -3491,12 +3517,12 @@ Class.znpAR_warkwarkwark = makeMulti({
 }, 2, "Warkwarkwark")
 
 // Tier 4 hybrid tanks
-Class.znpAR_abberation = makeHybrid('znpAR_frother', "Abberation")
-Class.znpAR_gusher = makeHybrid('znpAR_foamer', "Gusher")
-Class.znpAR_hose = makeHybrid('redistributor', "Hose")
-Class.znpAR_pressureWasher = makeHybrid('focal', "Pressure Washer")
-Class.znpAR_raincloud = makeHybrid('znpAR_faucet', "Raincloud")
-Class.znpAR_sprinkler = makeHybrid('atomizer', "Sprinkler")
+Class.znpAR_abberation = makeOver('znpAR_frother', "Abberation", {count: 1, independent: true, cycle: false})
+Class.znpAR_gusher = makeOver('znpAR_foamer', "Gusher", {count: 1, independent: true, cycle: false})
+Class.znpAR_hose = makeOver('redistributor', "Hose", {count: 1, independent: true, cycle: false})
+Class.znpAR_pressureWasher = makeOver('focal', "Pressure Washer", {count: 1, independent: true, cycle: false})
+Class.znpAR_raincloud = makeOver('znpAR_faucet', "Raincloud", {count: 1, independent: true, cycle: false})
+Class.znpAR_sprinkler = makeOver('atomizer', "Sprinkler", {count: 1, independent: true, cycle: false})
 
 // Tier 4 over tanks
 Class.znpAR_oversprayer = makeOver('sprayer')
