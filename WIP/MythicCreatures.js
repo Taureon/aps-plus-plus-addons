@@ -1,4 +1,4 @@
-const { combineStats, weaponArray, menu } = require('../facilitators.js');
+const { combineStats, dereference, menu } = require('../facilitators.js');
 const { smshskl, base } = require('../constants.js');
 const g = require('../gunvals.js');
 
@@ -16,7 +16,7 @@ const MC_definitions = {
         HTTYD: 4.6,
         TITANS: 14,
     },
-    HTTYD_ticks: 100,
+    ticks: 200,
     HTTYD_charges: [6, 8],
     HTTYD_welcome: [
         "Night Fury! Get down!",
@@ -35,11 +35,16 @@ const MC_base = {
     DENSITY: 1.2 * base.DENSITY,
 };
 const MC_functions = {
-    enableGuns: body => body.guns.forEach(gun => gun.charged = true),
-    disableGuns: body => body.guns.forEach(gun => gun.charged = false),
-    isGunsDisabled: body => body.guns.filter(gun => gun.charged).length == 0,
-    initGuns: body => {
-        body.guns.forEach(gun => {
+    enableGuns: (guns, tag) => guns.filter(gun => gun.tag == tag).length
+        ? guns.filter(gun => gun.tag == tag).forEach(gun => gun.charged = true)
+        : 0,
+    disableGuns: (guns, tag) => guns.filter(gun => gun.tag == tag).length
+        ? guns.filter(gun => gun.tag == tag).forEach(gun => gun.charged = false)
+        : 0,
+    isGunsDisabled: (guns, tag) => guns.filter(gun => gun.charged && gun.tag == tag).length == 0,
+    initGuns: (guns, tags = []) => {
+        guns.forEach(gun => {
+            if (tags.length) gun.tag = tags[guns.indexOf(gun)] ? tags[guns.indexOf(gun)] : tags[tags.length - 1];
             gun.charged = true;
             gun.spawnBullets = (useWhile, shootPermission) => {
                 if (!gun.charged) return;
@@ -74,21 +79,37 @@ const MC_functions = {
         }
         return number == 1;
     },
+    gunArray: (callback, count) => {
+        if (typeof callback != "function") throw new Error(`${callback} isn't type of function`);
+        let output = [];
+
+        for (let i = 0; i < count; i++) {
+            let angle = 360 / count * i,
+                weapon = dereference(callback(angle));
+
+            if (!Array.isArray(weapon)) weapon = [weapon];
+            output.push(...weapon);
+        }
+
+        return output;
+    },
 };
 const MC_stats = {
     statMain: g.basic,
     statPounder: g.pounder,
     statPower: g.power,
-    statMoreReload: { reload: 0.2 },
     statHealth: { health: 1e6 },
+    statNoRecoil: { recoil: 0 },
     statNoRange: { range: 0.2 },
+    statNoReload: { reload: 2 },
+    statReload: { reload: 0.2 },
     statNoSpray: {
         spray: 0.2,
         shudder: 0.2,
     },
     statSpray: {
-        spray: 3,
-        shudder: 3,
+        spray: 2,
+        shudder: 2,
     },
     speedStat: (speed) => {
         return {
@@ -101,39 +122,41 @@ const MC_stats = {
 // Class parts
 Class.MC_HTTYD_firework = {
     PARENT: "genericEntity",
-    COLOR: "#112557",
+    COLOR: "#c994f7",
     ALPHA: 0.4,
     BODY: {
         HEALTH: 1e6,
         DAMAGE: 0,
     },
-    GUNS: weaponArray([{
-        POSITION: [1, 18, 1, 0, 0, 0, 0],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([
-                MC_stats.statMain,
-                MC_stats.statPounder,
-                MC_stats.statPower,
-                MC_stats.statHealth,
-                MC_stats.speedStat(1.2),
-            ]),
-            TYPE: "bullet",
-            AUTOFIRE: true,
-        },
-    }, {
-        POSITION: [1, 18, 1, 0, 0, 0, 2],
-        PROPERTIES: {
-            SHOOT_SETTINGS: combineStats([
-                MC_stats.statMain,
-                MC_stats.statPounder,
-                MC_stats.statPower,
-                MC_stats.statHealth,
-                MC_stats.speedStat(0.8),
-            ]),
-            TYPE: "bullet",
-            AUTOFIRE: true,
-        },
-    }], 18),
+    GUNS: MC_functions.gunArray(angle => {
+        return [{
+            POSITION: [1, 18, 1, 0, 0, angle, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    MC_stats.statMain,
+                    MC_stats.statPounder,
+                    MC_stats.statPower,
+                    MC_stats.statHealth,
+                    MC_stats.speedStat(1.2),
+                ]),
+                TYPE: "bullet",
+                AUTOFIRE: true,
+            },
+        }, {
+            POSITION: [1, 18, 1, 0, 0, angle, 2],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    MC_stats.statMain,
+                    MC_stats.statPounder,
+                    MC_stats.statPower,
+                    MC_stats.statHealth,
+                    MC_stats.speedStat(0.8),
+                ]),
+                TYPE: "bullet",
+                AUTOFIRE: true,
+            },
+        }];
+    }, 18),
 };
 Class.MC_HTTYD_nightFuryBlast = {
     PARENT: "bullet",
@@ -144,7 +167,7 @@ Class.MC_HTTYD_nightFuryBlast = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([
                     MC_stats.statMain,
-                    MC_stats.statMoreReload,
+                    MC_stats.statReload,
                 ]),
                 TYPE: ["bullet", { COLOR: "purple" }],
                 AUTOFIRE: true,
@@ -192,7 +215,7 @@ Class.MC_HTTYD_stormflyFire = {
                     MC_stats.statMain,
                     MC_stats.statPounder,
                     MC_stats.statPower,
-                    MC_stats.statMoreReload,
+                    MC_stats.statReload,
                     MC_stats.statSpray,
                 ]),
                 TYPE: ["bullet", {
@@ -203,7 +226,7 @@ Class.MC_HTTYD_stormflyFire = {
                             PROPERTIES: {
                                 SHOOT_SETTINGS: combineStats([
                                     MC_stats.statMain,
-                                    MC_stats.statMoreReload,
+                                    MC_stats.statReload,
                                 ]),
                                 TYPE: ["bullet", { COLOR: "#fff242" }],
                                 AUTOFIRE: true,
@@ -219,19 +242,14 @@ Class.MC_HTTYD_stormflyFire = {
 Class.MC_TITANS_godzillaBlast = {
     PARENT: "bullet",
     COLOR: "#cb42f5",
-    GUNS: [
-        {
-            POSITION: [1, 18, 1, 0, 0, 180, 3],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([
-                    MC_stats.statMain,
-                    MC_stats.statMoreReload,
-                ]),
-                TYPE: ["bullet", { COLOR: "#cb42f5" }],
-                AUTOFIRE: true,
-            },
-        }
-    ],
+    SHAPE: "M -4.5 1 C -6 1 -6 1 -6 0 C -6 -1 -6 -1 -4.5 -1 H 4 C 4 -1 5 -1 5 0 C 5 1 4 1 4 1 H -4.5",
+    BORDERLESS: true,
+    ON: [{
+        event: "tick",
+        handler: ({ body }) => {
+            body.SIZE += 0.2;
+        },
+    }],
 };
 
 // Classes
@@ -290,19 +308,40 @@ Class[MC_names.TITANS[0]] = {
     COLOR: "purple",
     GUNS: [
         {
-            POSITION: [1, 3, 1, 0, 0, 0, 0],
+            POSITION: [1, 2.6, 1, 1, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([
                     MC_stats.statMain,
-                    MC_stats.statMoreReload,
+                    MC_stats.statReload,
                     MC_stats.statNoRange,
                     MC_stats.statNoSpray,
-                    MC_stats.statHealth,
+                    MC_stats.statNoRecoil,
                     MC_stats.speedStat(6),
                 ]),
                 TYPE: "MC_TITANS_godzillaBlast",
             },
         },
+        ...MC_functions.gunArray(angle => {
+            return {
+                POSITION: [1, 1.3, 1, -8, 0, angle, 0],
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([
+                        MC_stats.statMain,
+                        MC_stats.statNoRange,
+                        MC_stats.statNoRecoil,
+                        MC_stats.statNoSpray,
+                        MC_stats.statNoReload,
+                        MC_stats.statHealth,
+                        MC_stats.speedStat(Math.random() * 0.3 + 0.2),
+                    ]),
+                    ALPHA: 0,
+                    TYPE: ["bullet", {
+                        COLOR: "#cb42f5",
+                        ALPHA: 0.2,
+                    }],
+                },
+            };
+        }, 16),
     ],
 }
 
@@ -348,16 +387,16 @@ for (let i = 0; i < MC_names.HTTYD.length; i++) {
         event: "fire",
         handler: ({ body }) => {
             body.charges--;
-            if (!body.charges) MC_functions.disableGuns(body);
+            if (!body.charges) MC_functions.disableGuns(body.guns);
         },
     }, {
         event: "tick",
         handler: ({ body }) => {
-            if (MC_functions.isGunsDisabled(body)) {
+            if (MC_functions.isGunsDisabled(body.guns)) {
                 if (body.charges < body.maxCharges && !body.tickTime) {
-                    body.tickTime = MC_definitions.HTTYD_ticks;
+                    body.tickTime = MC_definitions.ticks;
                     body.charges++;
-                    if (body.charges == body.maxCharges) MC_functions.enableGuns(body);
+                    if (body.charges == body.maxCharges) MC_functions.enableGuns(body.guns);
                 }
                 if (body.tickTime) body.tickTime--;
             }
@@ -366,10 +405,40 @@ for (let i = 0; i < MC_names.HTTYD.length; i++) {
         event: "define",
         handler: ({ body }) => {
             body.maxCharges = MC_definitions.HTTYD_charges[i];
-            body.tickTime = MC_definitions.HTTYD_ticks;
+            body.tickTime = MC_definitions.ticks;
             body.charges = body.maxCharges;
-            MC_functions.initGuns(body);
+            MC_functions.initGuns(body.guns);
             sockets.broadcast(MC_definitions.HTTYD_welcome[i] || `A ${name} arrived!`);
+        },
+    });
+}
+for (let i = 0; i < MC_names.TITANS.length; i++) {
+    let name = MC_names.TITANS[i],
+        e = Class[name];
+
+    e.ON.push({
+        event: "fire",
+        handler: ({ body }) => {
+            if (MC_functions.isGunsDisabled(body.guns, "secondary") || MC_functions.isGunsDisabled(body.guns, "main"))
+                body.tickTime--;
+            if (!body.tickTime) {
+                body.tickTime = MC_definitions.ticks;
+                if (MC_functions.isGunsDisabled(body.guns, "main")) {
+                    MC_functions.disableGuns(body.guns, "secondary");
+                    MC_functions.enableGuns(body.guns, "main");
+                } else {
+                    MC_functions.enableGuns(body.guns, "secondary");
+                    MC_functions.disableGuns(body.guns, "main");
+                }
+            }
+        },
+    }, {
+        event: "define",
+        handler: ({ body }) => {
+            body.tickTime = MC_definitions.ticks;
+            MC_functions.initGuns(body.guns, ["main", "secondary"]);
+            MC_functions.disableGuns(body.guns, "main");
+            sockets.broadcast(`A ${name} arrived!`);
         },
     });
 }
