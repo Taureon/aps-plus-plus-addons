@@ -6,6 +6,7 @@ const g = require('../gunvals.js');
 // return console.log('Mythic Creatures [MC] addon is disabled. See lines 5-6 to enable it.');
 
 // Either use or not different team for classes, not completely working.
+// Art by Felyn_de_fens
 const MC_different_team = false;
 const MC_existingCodes = [];
 const MC_codeLength = 8;
@@ -67,21 +68,16 @@ const MC_stats = {
     },
 };
 const MC_functions = {
-    deepCopy(obj) {
-        if (obj === null || typeof obj !== 'object') return obj;
-        if (obj instanceof Date) return new Date(obj);
+    deepCopy: obj => {
+        if (obj == null || typeof obj != "object") return obj;
+        let objCopy = {},
+            arrCopy = [];
         if (Array.isArray(obj)) {
-            const arrCopy = [];
             for (let i = 0; i < obj.length; i++) {
-                arrCopy[i] = MC_functions.deepCopy(obj[i]);
+                arrCopy.push(MC_functions.deepCopy(obj[i]));
             }
             return arrCopy;
         }
-        if (typeof obj === 'function') {
-            const funcCopy = obj.bind({});
-            return funcCopy;
-        }
-        const objCopy = Object.create(Object.getPrototypeOf(obj));
         for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
                 objCopy[key] = MC_functions.deepCopy(obj[key]);
@@ -131,12 +127,10 @@ const MC_functions = {
                 let angle1 = gun.direction + gun.angle + gun.body.facing,
                     angle2 = gun.angle + gun.body.facing,
                     gunlength = gun.length - gun.width * gun.settings.size / 2,
-
                     offsetBaseX = gun.offset * Math.cos(angle1),
                     offsetBaseY = gun.offset * Math.sin(angle1),
                     offsetEndX = gunlength * Math.cos(angle2),
                     offsetEndY = gunlength * Math.sin(angle2),
-
                     offsetFinalX = offsetBaseX + offsetEndX,
                     offsetFinalY = offsetBaseY + offsetEndY,
                     skill = gun.bulletStats === "master" ? gun.body.skill : gun.bulletStats;
@@ -146,7 +140,7 @@ const MC_functions = {
                     gun.cycle--;
                     shootPermission = gun.countsOwnKids ? gun.countsOwnKids > gun.children.length : gun.body.maxChildren
                         ? gun.body.maxChildren > gun.body.children.length
-                        : gun;
+                        : true;
                 } while (useWhile && shootPermission && gun.cycle-1 >= 1);
             };
         });
@@ -265,7 +259,7 @@ const MC_functions = {
             }, 18),
         };
     },
-    createFireRange: (color, timeout)=> {
+    createFireRange: (color, timeout) => {
         return {
             PARENT: "bullet",
             COLOR: color,
@@ -564,7 +558,7 @@ Class[MC_names.TITANS[1]] = {
                 ]),
                 TYPE: MC_functions.create(MC_functions.createLaser, {
                     POISON: 20,
-                    DAMAGE: 0.6,
+                    DAMAGE: 1.2,
                 }, "#b0ceff"),
             },
         },
@@ -602,7 +596,7 @@ for (let key in MC_names) {
 
             if (!MC_functions.isCompatible(e.BODY)) throw new Error(`BODY in ${name} class isn't compatible`);
 
-            e.UPGRADE_TOOLTIP += " Art by felyn_de_fens";
+            e.UPGRADE_TOOLTIP += " Art by Felyn_de_fens";
             e.PARENT = "genericTank";
             e.SHAPE = `${name}.png`;
             e.LABEL = name;
