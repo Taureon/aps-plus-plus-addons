@@ -15,6 +15,10 @@ const MC_names = {
     HTTYD: ["Toothless", "Stormfly"],
     TITANS: ["Godzilla", "Shimu"],
 };
+const MC_assets = {
+    HTTYD: ["https://i.imgur.com/DDUkBx4.png", "https://i.imgur.com/GngZSo6.png"],
+    TITANS: ["https://i.imgur.com/iFzD9Iw.png", "https://i.imgur.com/nhA6jas.png"],
+};
 const MC_definitions = {
     bodyScale: {
         HTTYD: 4.6,
@@ -72,6 +76,7 @@ const MC_functions = {
         if (obj == null || typeof obj != "object") return obj;
         let objCopy = {},
             arrCopy = [];
+
         if (Array.isArray(obj)) {
             for (let i = 0; i < obj.length; i++) {
                 arrCopy.push(MC_functions.deepCopy(obj[i]));
@@ -114,34 +119,18 @@ const MC_functions = {
         MC_existingCodes.push(newCode);
         return newCode;
     },
-    enableGuns: (guns, tag) => guns.filter(gun => gun.tag == tag).forEach(gun => gun.charged = true),
-    disableGuns: (guns, tag) => guns.filter(gun => gun.tag == tag).forEach(gun => gun.charged = false),
-    isGunsDisabled: (guns, tag) => guns.filter(gun => gun.charged && gun.tag == tag).length == 0,
+    enableGuns: (guns, tag) => guns.filter(gun => gun._tag == tag).forEach(gun => gun._charged = true),
+    disableGuns: (guns, tag) => guns.filter(gun => gun._tag == tag).forEach(gun => gun._charged = false),
+    isGunsDisabled: (guns, tag) => guns.filter(gun => gun._charged && gun._tag == tag).length == 0,
     initGuns: (guns, tags = []) => {
         guns.forEach(gun => {
-            if (tags.length) gun.tag = tags[guns.indexOf(gun)] || tags[tags.length - 1];
-            gun.charged = true;
+            if (tags.length) gun._tag = tags[guns.indexOf(gun)] || tags[tags.length - 1];
+            gun._spawnBullets = gun.spawnBullets;
+            gun._charged = true;
+
             gun.spawnBullets = (useWhile, shootPermission) => {
-                if (!gun.charged) return;
-
-                let angle1 = gun.direction + gun.angle + gun.body.facing,
-                    angle2 = gun.angle + gun.body.facing,
-                    gunlength = gun.length - gun.width * gun.settings.size / 2,
-                    offsetBaseX = gun.offset * Math.cos(angle1),
-                    offsetBaseY = gun.offset * Math.sin(angle1),
-                    offsetEndX = gunlength * Math.cos(angle2),
-                    offsetEndY = gunlength * Math.sin(angle2),
-                    offsetFinalX = offsetBaseX + offsetEndX,
-                    offsetFinalY = offsetBaseY + offsetEndY,
-                    skill = gun.bulletStats === "master" ? gun.body.skill : gun.bulletStats;
-
-                do {
-                    gun.fire(offsetFinalX, offsetFinalY, skill);
-                    gun.cycle--;
-                    shootPermission = gun.countsOwnKids ? gun.countsOwnKids > gun.children.length : gun.body.maxChildren
-                        ? gun.body.maxChildren > gun.body.children.length
-                        : true;
-                } while (useWhile && shootPermission && gun.cycle-1 >= 1);
+                if (!gun._charged) return;
+                gun._spawnBullets(useWhile, shootPermission);
             };
         });
     },
@@ -193,9 +182,9 @@ const MC_functions = {
         return output;
     },
     createBlast: (color, timeout, deathHandler, tickHandler) => {
-        if (typeof deathHandler != "function") throw new Error(`${deathHandler} isn't type of function`);
-        if (typeof tickHandler != "function") throw new Error(`${tickHandler} isn't type of function`);
-        return {
+        if (deathHandler && typeof deathHandler != "function") throw new Error(`${deathHandler} isn't type of function`);
+        if (tickHandler && typeof tickHandler != "function") throw new Error(`${tickHandler} isn't type of function`);
+        const output = {
             PARENT: "bullet",
             GUNS: [
                 {
@@ -210,14 +199,19 @@ const MC_functions = {
                     },
                 },
             ],
-            ON: [{
-                event: "death",
-                handler: deathHandler,
-            }, {
-                event: "tick",
-                handler: tickHandler,
-            }],
+            ON: [],
         };
+
+        if (tickHandler) output.ON.push({
+            event: "tick",
+            handler: tickHandler,
+        });
+        if (deathHandler) output.ON.push({
+            event: "death",
+            handler: deathHandler,
+        });
+
+        return output;
     },
     createFirework: (color, alpha) => {
         return {
@@ -351,6 +345,9 @@ const MC_functions = {
             });
         }
         return name;
+    },
+    handler: name => {
+        sockets.broadcast(`A ${name} has arrived!`);
     },
 };
 
@@ -557,7 +554,7 @@ Class[MC_names.TITANS[1]] = {
                     MC_stats.speedStat(6),
                 ]),
                 TYPE: MC_functions.create(MC_functions.createLaser, {
-                    POISON: 20,
+                    POISON: 40,
                     DAMAGE: 1.2,
                 }, "#b0ceff"),
             },
@@ -591,14 +588,15 @@ Class[MC_names.TITANS[1]] = {
 for (let key in MC_names) {
     if (MC_names.hasOwnProperty(key)) {
         for (let i = 0; i < MC_names[key].length; i++) {
-            let name = MC_names[key][i],
+            let asset = MC_assets[key][i],
+                name = MC_names[key][i],
                 e = Class[name];
 
             if (!MC_functions.isCompatible(e.BODY)) throw new Error(`BODY in ${name} class isn't compatible`);
 
             e.UPGRADE_TOOLTIP += " Art by Felyn_de_fens";
             e.PARENT = "genericTank";
-            e.SHAPE = `${name}.png`;
+            e.SHAPE = asset;
             e.LABEL = name;
             e.LEVEL_CAP = 120;
             e.LEVEL = 120;
@@ -635,22 +633,23 @@ for (let i = 0; i < MC_names.HTTYD.length; i++) {
         event: "tick",
         handler: ({ body }) => {
             if (MC_functions.isGunsDisabled(body.guns)) {
-                if (body.charges < body.maxCharges && !body.tickTime) {
-                    body.tickTime = MC_definitions.ticks;
-                    body.charges++;
-                    if (body.charges == body.maxCharges) MC_functions.enableGuns(body.guns);
+                if (body._charges < body._maxCharges && !body._tickTime) {
+                    body._tickTime = MC_definitions.ticks;
+                    body._charges++;
+                    if (body._charges == body._maxCharges) MC_functions.enableGuns(body.guns);
                 }
-                if (body.tickTime) body.tickTime--;
+                if (body._tickTime) body._tickTime--;
             }
         },
     }, {
         event: "define",
         handler: ({ body }) => {
-            body.maxCharges = MC_definitions.HTTYD_charges[i];
-            body.tickTime = MC_definitions.ticks;
-            body.charges = body.maxCharges;
+            body._maxCharges = MC_definitions.HTTYD_charges[i];
+            body._tickTime = MC_definitions.ticks;
+            body._charges = body._maxCharges;
             MC_functions.initGuns(body.guns);
-            sockets.broadcast(MC_definitions.HTTYD_welcome[i] || `A ${name} arrived!`);
+            MC_functions.handler(name);
+            if (MC_definitions.HTTYD_welcome[i]) sockets.broadcast(MC_definitions.HTTYD_welcome[i]);
         },
     });
 }
@@ -661,14 +660,14 @@ for (let i = 0; i < MC_names.TITANS.length; i++) {
     e.ON.push({
         event: "fire",
         handler: ({ body }) => {
-            if (MC_functions.isGunsDisabled(body.guns, "secondary")) body.tickTime--;
+            if (MC_functions.isGunsDisabled(body.guns, "secondary")) body._tickTime--;
         },
     }, {
         event: "tick",
         handler: ({ body }) => {
-            if (MC_functions.isGunsDisabled(body.guns, "main")) body.tickTime--;
-            if (!body.tickTime) {
-                body.tickTime = MC_definitions.ticks;
+            if (MC_functions.isGunsDisabled(body.guns, "main")) body._tickTime--;
+            if (!body._tickTime) {
+                body._tickTime = MC_definitions.ticks;
                 if (MC_functions.isGunsDisabled(body.guns, "main")) {
                     MC_functions.disableGuns(body.guns, "secondary");
                     MC_functions.enableGuns(body.guns, "main");
@@ -681,17 +680,17 @@ for (let i = 0; i < MC_names.TITANS.length; i++) {
     }, {
         event: "define",
         handler: ({ body }) => {
-            body.tickTime = MC_definitions.ticks;
+            body._tickTime = MC_definitions.ticks;
             MC_functions.initGuns(body.guns, ["main", "secondary"]);
             MC_functions.disableGuns(body.guns, "main");
-            sockets.broadcast(`A ${name} arrived!`);
+            MC_functions.handler(name);
         },
     });
 }
 
 Class.MC = menu("Mythic Creatures", "black", 0);
 Class.MC_developer = menu("MC Developer Edition", "black", 0);
-Class.MC.UPGRADES_TIER_0 = [];
+Class.MC.UPGRADES_TIER_0 = ["MC_developer"];
 Class.MC_developer.UPGRADES_TIER_0 = [];
 
 for (let i = 0; i < MC_petals.length; i++) {
@@ -710,6 +709,6 @@ for (let key in MC_names) {
         MC_names[key].forEach(object => Class.MC_developer.UPGRADES_TIER_0.push(`${object}_developer`));
     }
 }
-Class.addons.UPGRADES_TIER_0.push("MC", "MC_developer");
+Class.addons.UPGRADES_TIER_0.push("MC");
 
 console.log('Mythic Creatures [MC] addon has been registered.');
