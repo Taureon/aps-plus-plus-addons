@@ -11,21 +11,22 @@ const MC_different_team = false;
 const MC_existingCodes = [];
 const MC_codeLength = 8;
 const MC_petals = ["Power", "Space", "Reality", "Soul", "Time", "Mind"];
-const MC_names = {
-    HTTYD: ["Toothless", "Stormfly"],
-    TITANS: ["Godzilla", "Shimu"],
+const MC_assets = "https://raw.githubusercontent.com/ClashTest311/MC-addon/main/assets";
+const MC_animation = {
+    INSIDE: "inside",
+    OUT: "out",
 };
-const MC_assets = {
-    HTTYD: ["https://i.imgur.com/DDUkBx4.png", "https://i.imgur.com/GngZSo6.png"],
-    TITANS: ["https://i.imgur.com/iFzD9Iw.png", "https://i.imgur.com/nhA6jas.png"],
+const MC_names = {
+    HTTYD: ["Toothless", "Stormfly", "Hookfang", "Meatlug", "Skrill"],
+    TITANS: ["Godzilla", "Shimu"],
 };
 const MC_definitions = {
     bodyScale: {
         HTTYD: 4.6,
         TITANS: 14,
     },
-    ticks: 200,
-    HTTYD_charges: [6, 8],
+    ticks: 100,
+    HTTYD_charges: [6, 8, 4, 6, 5],
     HTTYD_welcome: [
         "Night Fury! Get down!",
     ],
@@ -119,20 +120,33 @@ const MC_functions = {
         MC_existingCodes.push(newCode);
         return newCode;
     },
-    enableGuns: (guns, tag) => guns.filter(gun => gun._tag == tag).forEach(gun => gun._charged = true),
-    disableGuns: (guns, tag) => guns.filter(gun => gun._tag == tag).forEach(gun => gun._charged = false),
-    isGunsDisabled: (guns, tag) => guns.filter(gun => gun._charged && gun._tag == tag).length == 0,
-    initGuns: (guns, tags = []) => {
-        guns.forEach(gun => {
+    enableGuns: (guns, tag = false) => tag
+        ? guns.filter(gun => gun._tag == tag).forEach(gun => gun._charged = true)
+        : guns.forEach(gun => gun._charged = true),
+    disableGuns: (guns, tag = false) => tag
+        ? guns.filter(gun => gun._tag == tag).forEach(gun => gun._charged = false)
+        : guns.forEach(gun => gun._charged = false),
+    isGunsDisabled: (guns, tag = false) => guns.filter(gun => gun._charged && (tag ? gun._tag == tag : true)).length == 0,
+    initGuns: (guns, ...tags) => {
+        for (let i = 0; i < tags.length; i++) {
+            const tag = tags[i];
+            if (Array.isArray(tag)) {
+                let array = [];
+                for (let i = 0; i < tag[1]; i++) array.push(tag[0]);
+                tags.splice(tags.indexOf(tag), 1, ...array);
+            }
+        }
+        for (let i = 0; i < guns.length; i++) {
+            const gun = guns[i];
             if (tags.length) gun._tag = tags[guns.indexOf(gun)] || tags[tags.length - 1];
-            gun._spawnBullets = gun.spawnBullets;
+            gun._fire = gun.fire;
             gun._charged = true;
 
-            gun.spawnBullets = (useWhile, shootPermission) => {
+            gun.fire = (gx, gy, sk) => {
                 if (!gun._charged) return;
-                gun._spawnBullets(useWhile, shootPermission);
+                gun._fire(gx, gy, sk);
             };
-        });
+        }
     },
     isCompatible: body => {
         let number = 0;
@@ -213,6 +227,43 @@ const MC_functions = {
 
         return output;
     },
+    createFireRange: (color, timeout) => {
+        return {
+            PARENT: "bullet",
+            COLOR: color,
+            GUNS: [
+                {
+                    POSITION: [1, 18, 1, 0, 0, 0, 0],
+                    PROPERTIES: {
+                        SHOOT_SETTINGS: combineStats([
+                            MC_stats.statMain,
+                            MC_stats.statPounder,
+                            MC_stats.statPower,
+                            MC_stats.statReload,
+                            MC_stats.statSpray,
+                        ]),
+                        TYPE: ["bullet", {
+                            COLOR: color,
+                            GUNS: [
+                                {
+                                    POSITION: [1, 18, 1, 0, 0, 180, timeout],
+                                    PROPERTIES: {
+                                        SHOOT_SETTINGS: combineStats([
+                                            MC_stats.statMain,
+                                            MC_stats.statReload,
+                                        ]),
+                                        TYPE: ["bullet", { COLOR: color }],
+                                        AUTOFIRE: true,
+                                    },
+                                },
+                            ],
+                        }],
+                        AUTOFIRE: true,
+                    },
+                },
+            ],
+        };
+    },
     createFirework: (color, alpha) => {
         return {
             PARENT: "genericEntity",
@@ -251,43 +302,6 @@ const MC_functions = {
                     },
                 }];
             }, 18),
-        };
-    },
-    createFireRange: (color, timeout) => {
-        return {
-            PARENT: "bullet",
-            COLOR: color,
-            GUNS: [
-                {
-                    POSITION: [1, 18, 1, 0, 0, 0, 0],
-                    PROPERTIES: {
-                        SHOOT_SETTINGS: combineStats([
-                            MC_stats.statMain,
-                            MC_stats.statPounder,
-                            MC_stats.statPower,
-                            MC_stats.statReload,
-                            MC_stats.statSpray,
-                        ]),
-                        TYPE: ["bullet", {
-                            COLOR: color,
-                            GUNS: [
-                                {
-                                    POSITION: [1, 18, 1, 0, 0, 180, timeout],
-                                    PROPERTIES: {
-                                        SHOOT_SETTINGS: combineStats([
-                                            MC_stats.statMain,
-                                            MC_stats.statReload,
-                                        ]),
-                                        TYPE: ["bullet", { COLOR: color }],
-                                        AUTOFIRE: true,
-                                    },
-                                },
-                            ],
-                        }],
-                        AUTOFIRE: true,
-                    },
-                },
-            ],
         };
     },
     createLaser: color => {
@@ -348,6 +362,33 @@ const MC_functions = {
     },
     handler: name => {
         sockets.broadcast(`A ${name} has arrived!`);
+    },
+    animation: (def, color, alpha, number, type, autofire) => {
+        let pos;
+        if (type == MC_animation.INSIDE) pos = -8;
+        if (type == MC_animation.OUT) pos = 0;
+        def.GUNS.push(...MC_functions.gunArray(angle => {
+            return {
+                POSITION: [1, 1.3, 1, pos, 0, angle, Math.random()],
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([
+                        MC_stats.statMain,
+                        MC_stats.statNoRange,
+                        MC_stats.statNoRecoil,
+                        MC_stats.statNoSpray,
+                        MC_stats.statNoReload,
+                        MC_stats.statHealth,
+                        MC_stats.speedStat(0.5),
+                    ]),
+                    ALPHA: 0,
+                    TYPE: ["bullet", {
+                        COLOR: color,
+                        ALPHA: alpha,
+                    }],
+                    AUTOFIRE: autofire,
+                },
+            };
+        }, number));
     },
 };
 
@@ -477,10 +518,78 @@ Class[MC_names.HTTYD[1]] = {
                 SHOOT_SETTINGS: combineStats([
                     MC_stats.statMain,
                     MC_stats.statPounder,
-                    MC_stats.statPower,
                     MC_stats.statNoRange,
                 ]),
                 TYPE: MC_functions.create(MC_functions.createFireRange, "#fff242", 4),
+            },
+        },
+    ],
+}
+Class[MC_names.HTTYD[2]] = {
+    UPGRADE_TOOLTIP: "Five-thousand pounds of flaming muscle coming through!",
+    BODY: {
+        DAMAGE: 0.6,
+        HEALTH: 0.4,
+    },
+    COLOR: "red",
+    GUNS: [
+        {
+            POSITION: [1, 3, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    MC_stats.statMain,
+                    MC_stats.statPounder,
+                    MC_stats.statPower,
+                    MC_stats.statNoRange,
+                ]),
+                TYPE: MC_functions.create(MC_functions.createFireRange, "red", 4),
+            },
+        },
+    ],
+}
+Class[MC_names.HTTYD[3]] = {
+    UPGRADE_TOOLTIP: "Who's my little princess?",
+    BODY: {
+        DAMAGE: 0.5,
+        HEALTH: 0.5,
+    },
+    COLOR: "brown",
+    GUNS: [
+        {
+            POSITION: [1, 4, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    MC_stats.statMain,
+                    MC_stats.statPounder,
+                    MC_stats.statPower,
+                ]),
+                TYPE: MC_functions.create(MC_functions.createBlast, "orange", 28),
+            },
+        },
+    ],
+}
+Class[MC_names.HTTYD[4]] = {
+    UPGRADE_TOOLTIP: "I would never torture that dragon.",
+    BODY: {
+        DAMAGE: 0.4,
+        HEALTH: 0.4,
+        SPEED: 0.2,
+    },
+    COLOR: "purple",
+    GUNS: [
+        {
+            POSITION: [1, 4, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([
+                    MC_stats.statMain,
+                    MC_stats.statPounder,
+                    MC_stats.statPower,
+                    MC_stats.statNoRange,
+                    MC_stats.statNoSpray,
+                    MC_stats.statNoRecoil,
+                    MC_stats.speedStat(5.8),
+                ]),
+                TYPE: MC_functions.create(MC_functions.createLaser, "blue"),
             },
         },
     ],
@@ -492,7 +601,7 @@ Class[MC_names.TITANS[0]] = {
         DAMAGE: 0.2,
     },
     SIZE: 38,
-    COLOR: "purple",
+    COLOR: "#cb42f5",
     GUNS: [
         {
             POSITION: [1, 2.6, 1, 1, 0, 0, 0],
@@ -508,38 +617,16 @@ Class[MC_names.TITANS[0]] = {
                 TYPE: MC_functions.create(MC_functions.createLaser, "#cb42f5"),
             },
         },
-        ...MC_functions.gunArray(angle => {
-            return {
-                POSITION: [1, 1.3, 1, -8, 0, angle, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([
-                        MC_stats.statMain,
-                        MC_stats.statNoRange,
-                        MC_stats.statNoRecoil,
-                        MC_stats.statNoSpray,
-                        MC_stats.statNoReload,
-                        MC_stats.statHealth,
-                        MC_stats.speedStat(Math.random() * 0.3 + 0.2),
-                    ]),
-                    ALPHA: 0,
-                    TYPE: ["bullet", {
-                        COLOR: "#cb42f5",
-                        ALPHA: 0.2,
-                    }],
-                    AUTOFIRE: true,
-                },
-            };
-        }, 16),
     ],
 }
 Class[MC_names.TITANS[1]] = {
-    UPGRADE_TOOLTIP: "Isn't a deadly weapon...",
+    UPGRADE_TOOLTIP: "She isn't as strong as you might think, and no, not outside...",
     BODY: {
         HEALTH: 0.6,
         DAMAGE: 0.4,
     },
     SIZE: 38,
-    COLOR: "white",
+    COLOR: "#b0ceff",
     GUNS: [
         {
             POSITION: [1, 2.6, 1, 1, 0, 0, 0],
@@ -559,28 +646,6 @@ Class[MC_names.TITANS[1]] = {
                 }, "#b0ceff"),
             },
         },
-        ...MC_functions.gunArray(angle => {
-            return {
-                POSITION: [1, 1.3, 1, -8, 0, angle, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats([
-                        MC_stats.statMain,
-                        MC_stats.statNoRange,
-                        MC_stats.statNoRecoil,
-                        MC_stats.statNoSpray,
-                        MC_stats.statNoReload,
-                        MC_stats.statHealth,
-                        MC_stats.speedStat(Math.random() * 0.3 + 0.2),
-                    ]),
-                    ALPHA: 0,
-                    TYPE: ["bullet", {
-                        COLOR: "#b0ceff",
-                        ALPHA: 0.2,
-                    }],
-                    AUTOFIRE: true,
-                },
-            };
-        }, 16),
     ],
 }
 
@@ -588,15 +653,14 @@ Class[MC_names.TITANS[1]] = {
 for (let key in MC_names) {
     if (MC_names.hasOwnProperty(key)) {
         for (let i = 0; i < MC_names[key].length; i++) {
-            let asset = MC_assets[key][i],
-                name = MC_names[key][i],
+            let name = MC_names[key][i],
                 e = Class[name];
 
             if (!MC_functions.isCompatible(e.BODY)) throw new Error(`BODY in ${name} class isn't compatible`);
 
             e.UPGRADE_TOOLTIP += " Art by Felyn_de_fens";
+            e.SHAPE = MC_assets + `/${name}.png`;
             e.PARENT = "genericTank";
-            e.SHAPE = asset;
             e.LABEL = name;
             e.LEVEL_CAP = 120;
             e.LEVEL = 120;
@@ -626,8 +690,8 @@ for (let i = 0; i < MC_names.HTTYD.length; i++) {
     e.ON.push({
         event: "fire",
         handler: ({ body }) => {
-            body.charges--;
-            if (!body.charges) MC_functions.disableGuns(body.guns);
+            body._charges--;
+            if (!body._charges) MC_functions.disableGuns(body.guns);
         },
     }, {
         event: "tick",
@@ -636,7 +700,7 @@ for (let i = 0; i < MC_names.HTTYD.length; i++) {
                 if (body._charges < body._maxCharges && !body._tickTime) {
                     body._tickTime = MC_definitions.ticks;
                     body._charges++;
-                    if (body._charges == body._maxCharges) MC_functions.enableGuns(body.guns);
+                    if (body._charges >= body._maxCharges) MC_functions.enableGuns(body.guns);
                 }
                 if (body._tickTime) body._tickTime--;
             }
@@ -657,15 +721,21 @@ for (let i = 0; i < MC_names.TITANS.length; i++) {
     let name = MC_names.TITANS[i],
         e = Class[name];
 
+    MC_functions.animation(e, e.COLOR, 0.6, 16, MC_animation.OUT, false);
+    MC_functions.animation(e, e.COLOR, 0.6, 16, MC_animation.INSIDE, true);
     e.ON.push({
         event: "fire",
         handler: ({ body }) => {
-            if (MC_functions.isGunsDisabled(body.guns, "secondary")) body._tickTime--;
+            if (MC_functions.isGunsDisabled(body.guns, "secondary") && body._tickTime) {
+                body._tickTime--;
+            }
         },
     }, {
         event: "tick",
         handler: ({ body }) => {
-            if (MC_functions.isGunsDisabled(body.guns, "main")) body._tickTime--;
+            if (MC_functions.isGunsDisabled(body.guns, "main") && body._tickTime) {
+                body._tickTime--;
+            }
             if (!body._tickTime) {
                 body._tickTime = MC_definitions.ticks;
                 if (MC_functions.isGunsDisabled(body.guns, "main")) {
@@ -681,7 +751,7 @@ for (let i = 0; i < MC_names.TITANS.length; i++) {
         event: "define",
         handler: ({ body }) => {
             body._tickTime = MC_definitions.ticks;
-            MC_functions.initGuns(body.guns, ["main", "secondary"]);
+            MC_functions.initGuns(body.guns, ["main", 1 + 16], "secondary");
             MC_functions.disableGuns(body.guns, "main");
             MC_functions.handler(name);
         },
