@@ -6,6 +6,59 @@ const g = require('../gunvals.js');
 // Comment out the line below to enable this addon, uncomment it to disable this addon.
 // return console.log('Mythic Creatures [MC] addon is disabled. See lines 6-7 to enable it.');
 
+const MC_onComponent = charge => {
+    let output = charge > 0
+        ? {
+            fire: body => {
+                body._charges--;
+                if (!body._charges) MC_functions.disableGuns(body.guns);
+            },
+            tick: body => {
+                if (MC_functions.isGunsDisabled(body.guns)) {
+                    if (body._charges < body._maxCharges && !body._tickTime) {
+                        body._tickTime = MC_names.ticks;
+                        body._charges++;
+                        if (body._charges >= body._maxCharges) MC_functions.enableGuns(body.guns);
+                    }
+                    if (body._tickTime) body._tickTime--;
+                }
+            },
+            define: body => {
+                body._tickTime = MC_names.ticks;
+                body._maxCharges = charge;
+                body._charges = body._maxCharges;
+                MC_functions.initGuns(body.guns);
+            },
+        }
+        : {
+            fire: body => {
+                if (MC_functions.isGunsDisabled(body.guns, "secondary") && body._tickTime) {
+                    body._tickTime--;
+                }
+            },
+            tick: body => {
+                if (MC_functions.isGunsDisabled(body.guns, "main") && body._tickTime) {
+                    body._tickTime--;
+                }
+                if (!body._tickTime) {
+                    body._tickTime = MC_names.ticks;
+                    if (MC_functions.isGunsDisabled(body.guns, "main")) {
+                        MC_functions.disableGuns(body.guns, "secondary");
+                        MC_functions.enableGuns(body.guns, "main");
+                    } else {
+                        MC_functions.enableGuns(body.guns, "secondary");
+                        MC_functions.disableGuns(body.guns, "main");
+                    }
+                }
+            },
+            define: body => {
+                body._tickTime = MC_names.ticks;
+                MC_functions.initGuns(body.guns, "main", ["secondary", MC_names.gunsCount], "main");
+                MC_functions.disableGuns(body.guns, "main");
+            },
+        };
+    return output;
+};
 const MC_definitions = {
     Toothless: {
         UPGRADE_TOOLTIP: "The unholy offspring of lightning and death itself.",
@@ -13,19 +66,18 @@ const MC_definitions = {
             {
                 gun: "Tail",
                 event: null,
-                killNearEnemy: true,
             },
             {
                 gun: "Firework",
                 event: "death",
-                killNearEnemy: false,
             },
         ],
         TYPE: "Blast",
+        KILLNEARENEMY: true,
         BODY: {
             SPEED: 1,
         },
-        ON: MC_functions.onComponent(6),
+        ON: MC_onComponent(6),
         COLOR: "purple",
         ANIMATION: [],
         POISON: false,
@@ -38,15 +90,15 @@ const MC_definitions = {
             {
                 gun: "FireRange",
                 event: null,
-                killNearEnemy: false,
             },
         ],
         TYPE: "Short",
+        KILLNEARENEMY: false,
         BODY: {
             HEALTH: 0.6,
             DAMAGE: 0.4,
         },
-        ON: MC_functions.onComponent(8),
+        ON: MC_onComponent(8),
         COLOR: "#fff242",
         ANIMATION: [],
         POISON: false,
@@ -59,15 +111,15 @@ const MC_definitions = {
             {
                 gun: "FireRange",
                 event: null,
-                killNearEnemy: false,
             },
         ],
         TYPE: "Short",
+        KILLNEARENEMY: false,
         BODY: {
             HEALTH: 0.4,
             DAMAGE: 0.6,
         },
-        ON: MC_functions.onComponent(5),
+        ON: MC_onComponent(8),
         COLOR: "red",
         ANIMATION: [],
         POISON: false,
@@ -76,28 +128,56 @@ const MC_definitions = {
     },
     Meatlug: {
         UPGRADE_TOOLTIP: "Who's my little princess?",
-        GUNS: [],
+        GUNS: [
+            {
+                gun: "Tail",
+                event: null,
+            },
+        ],
         TYPE: "BigBlast",
+        KILLNEARENEMY: false,
         BODY: {
             HEALTH: 0.5,
             DAMAGE: 0.5,
         },
-        ON: MC_functions.onComponent(6),
-        COLOR: "orange",
+        ON: MC_onComponent(6),
+        COLOR: "brown",
         ANIMATION: [],
         POISON: false,
-        TIMEOUT: 0,
+        TIMEOUT: 20,
+        SIZE: 20,
+    },
+    Phoenix: {
+        UPGRADE_TOOLTIP: "You haven't seen anything like this before...",
+        GUNS: [
+            {
+                gun: "Tail",
+                event: null,
+            },
+        ],
+        TYPE: "BigBlast",
+        KILLNEARENEMY: true,
+        BODY: {
+            HEALTH: 0.6,
+            DAMAGE: 0.4,
+        },
+        ON: MC_onComponent(8),
+        COLOR: "#ff6200",
+        ANIMATION: [],
+        POISON: false,
+        TIMEOUT: 20,
         SIZE: 20,
     },
     Yeti: {
         UPGRADE_TOOLTIP: "The Yeti?",
         GUNS: [],
         TYPE: "BigBlast",
+        KILLNEARENEMY: false,
         BODY: {
-            HEALTH: 0.7,
-            DAMAGE: 0.3,
+            HEALTH: 0.6,
+            DAMAGE: 0.4,
         },
-        ON: MC_functions.onComponent(7),
+        ON: MC_onComponent(8),
         COLOR: "gray",
         ANIMATION: [],
         POISON: true,
@@ -110,16 +190,16 @@ const MC_definitions = {
             {
                 gun: "Laser",
                 event: null,
-                killNearEnemy: false,
             },
         ],
         TYPE: "Blast",
+        KILLNEARENEMY: false,
         BODY: {
             DAMAGE: 0.4,
             HEALTH: 0.4,
             SPEED: 0.2,
         },
-        ON: MC_functions.onComponent(10),
+        ON: MC_onComponent(10),
         COLOR: "blue",
         ANIMATION: [],
         POISON: false,
@@ -132,15 +212,15 @@ const MC_definitions = {
             {
                 gun: "Laser",
                 event: null,
-                killNearEnemy: false,
             },
         ],
         TYPE: "Long",
+        KILLNEARENEMY: false,
         BODY: {
-            HEALTH: 1.4,
-            DAMAGE: 0.6,
+            HEALTH: 1.2,
+            DAMAGE: 0.8,
         },
-        ON: MC_functions.onComponent(0),
+        ON: MC_onComponent(0),
         COLOR: "#cb42f5",
         ANIMATION: [{
             TYPE: "INSIDE",
@@ -159,15 +239,15 @@ const MC_definitions = {
             {
                 gun: "Laser",
                 event: null,
-                killNearEnemy: false,
             },
         ],
         TYPE: "Long",
+        KILLNEARENEMY: false,
         BODY: {
-            HEALTH: 1.2,
-            DAMAGE: 0.8,
+            HEALTH: 1.4,
+            DAMAGE: 0.6,
         },
-        ON: MC_functions.onComponent(0),
+        ON: MC_onComponent(0),
         COLOR: "#b0ceff",
         ANIMATION: [{
             TYPE: "INSIDE",
@@ -230,7 +310,16 @@ const MC_stats = {
     },
 };
 const MC_names = {
-    assets: "https://raw.githubusercontent.com/ClashTest311/MC-addon/main/assets",
+    assets: {
+        Toothless: "",
+        Stormfly: "",
+        Hookfang: "",
+        Meatlug: "",
+        Yeti: "",
+        Skrill: "",
+        Godzilla: "",
+        Shimu: "",
+    },
     petals: ["Power", "Space", "Reality", "Soul", "Time", "Mind"],
     types: {
         Blast: [
@@ -571,7 +660,7 @@ const MC_functions = {
             }],
         };
     },
-    create: (poison = false, args, funcs) => {
+    create: (poison = false, args, funcs, kill) => {
         let name = MC_functions.generateCode();
         Class[name] = {
             PARENT: "bullet",
@@ -581,8 +670,7 @@ const MC_functions = {
         for (let i = 0; i < funcs.length; i++) {
             let array = funcs[i],
                 func = array.gun,
-                event = array.event,
-                kill = array.killNearEnemy;
+                event = array.event;
             if (typeof func != "function") throw new Error(`${func} isn't type of function`);
             if (event != "death" && event != "tick" && event != "define" && event != null) {
                 throw new Error(`Unsupported event ${event}`);
@@ -660,7 +748,7 @@ const MC_functions = {
                     for (let i = 1; i < poison.POISON; i += 10) {
                         setSyncedTimeout(() => {
                             instances.forEach(e => {
-                                if (i == Math.round(poison.POISON)) e.poisoned = false;
+                                if (i + 10 >= Math.round(poison.POISON)) e.poisoned = false;
                                 e.damageReceived += poison.DAMAGE * 3;
                             });
                         }, i);
@@ -701,7 +789,9 @@ const MC_functions = {
         Class[name] = {
             PARENT: "genericTank",
             UPGRADE_TOOLTIP: `${def.UPGRADE_TOOLTIP} Art by Felyn_de_fens`,
-            SHAPE: MC_names.assets + `/${name}.png`,
+            SHAPE: MC_names.assets[name] && MC_names.assets[name] != ""
+                ? `data:image/png;base64,${MC_names.assets[name]}`
+                : `https://raw.githubusercontent.com/ClashTest311/MC-addon/main/assets/${name}.png`,
             COLOR: def.COLOR,
             SIZE: def.SIZE,
             BODY: def.BODY,
@@ -720,11 +810,7 @@ const MC_functions = {
 
         for (let i = 0; i < def.GUNS.length; i++) {
             let gun = def.GUNS[i];
-            if (
-                gun.killNearEnemy === undefined ||
-                gun.event === undefined ||
-                !gun.gun
-            ) throw new Error(`Unsupported gun type ${gun}`);
+            if (gun.event === undefined || !gun.gun) throw new Error(`Unsupported gun type ${gun}`);
             gun.gun = MC_functions[`create${gun.gun}`];
         }
         Class[name].GUNS.push({
@@ -733,7 +819,7 @@ const MC_functions = {
                 SHOOT_SETTINGS: combineStats(stats),
                 TYPE: MC_functions.create(
                     def.POISON ? {
-                        POISON: 40,
+                        POISON: 60,
                         DAMAGE: MC_names.bodyScale,
                     } : false,
                     {
@@ -741,6 +827,7 @@ const MC_functions = {
                         TIMEOUT: def.TIMEOUT,
                     },
                     def.GUNS,
+                    def.KILLNEARENEMY,
                 ),
             },
         });
@@ -772,59 +859,6 @@ const MC_functions = {
                 });
             }
         }
-    },
-    onComponent: (charge) => {
-        let output = charge > 0
-            ? {
-                fire: body => {
-                    body._charges--;
-                    if (!body._charges) MC_functions.disableGuns(body.guns);
-                },
-                tick: body => {
-                    if (MC_functions.isGunsDisabled(body.guns)) {
-                        if (body._charges < body._maxCharges && !body._tickTime) {
-                            body._tickTime = MC_names.ticks;
-                            body._charges++;
-                            if (body._charges >= body._maxCharges) MC_functions.enableGuns(body.guns);
-                        }
-                        if (body._tickTime) body._tickTime--;
-                    }
-                },
-                define: body => {
-                    body._tickTime = MC_names.ticks;
-                    body._maxCharges = charge;
-                    body._charges = body._maxCharges;
-                    MC_functions.initGuns(body.guns);
-                },
-            }
-            : {
-                fire: body => {
-                    if (MC_functions.isGunsDisabled(body.guns, "secondary") && body._tickTime) {
-                        body._tickTime--;
-                    }
-                },
-                tick: body => {
-                    if (MC_functions.isGunsDisabled(body.guns, "main") && body._tickTime) {
-                        body._tickTime--;
-                    }
-                    if (!body._tickTime) {
-                        body._tickTime = MC_names.ticks;
-                        if (MC_functions.isGunsDisabled(body.guns, "main")) {
-                            MC_functions.disableGuns(body.guns, "secondary");
-                            MC_functions.enableGuns(body.guns, "main");
-                        } else {
-                            MC_functions.enableGuns(body.guns, "secondary");
-                            MC_functions.disableGuns(body.guns, "main");
-                        }
-                    }
-                },
-                define: body => {
-                    body._tickTime = MC_names.ticks;
-                    MC_functions.initGuns(body.guns, "main", ["secondary", MC_names.gunsCount], "main");
-                    MC_functions.disableGuns(body.guns, "main");
-                },
-            };
-        return output;
     },
 };
 
