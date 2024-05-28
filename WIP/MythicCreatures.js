@@ -520,16 +520,22 @@ const MC_functions = {
                         !instance.invuln &&
                         instance.id != body.id &&
                         instance.team != body.team &&
-                        dist2 <= (body.size / 12 * 100) ** 2 &&
+                        dist2 <= (body.size / 12 * 20) ** 2 &&
                         (
                             instance.type == "miniboss" ||
                             instance.type == "tank" ||
                             instance.type == "food"
                         )
                     ) {
-                        console.log(instance.team, body.team);
-                        instance.velocity.x -= diffX * Config.ROOM_BOUND_FORCE * 2_000 / dist2;
-                        instance.velocity.y -= diffY * Config.ROOM_BOUND_FORCE * 2_000 / dist2;
+                        let force = (1 - (1 / (15_000 / dist2 ** (1 / 20)))) + 0.001;
+                        instance.velocity.x +=
+                            util.clamp(body.x - instance.x, -90, 90) *
+                            instance.damp *
+                            force;
+                        instance.velocity.y +=
+                            util.clamp(body.y - instance.y, -90, 90) *
+                            instance.damp *
+                            force;
                     }
                 }
             },
