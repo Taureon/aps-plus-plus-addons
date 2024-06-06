@@ -1,4 +1,4 @@
-const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeMulti, makeOver, addBackGunner } = require('../facilitators.js');
+const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeOver, addBackGunner } = require('../facilitators.js');
 const { base, gunCalcNames, statnames, dfltskl, smshskl } = require('../constants.js');
 const g = require('../gunvals.js');
 Class.znpAR_placeholder = { LABEL: "PLACEHOLDER", COLOR: "black", UPGRADE_COLOR: "black"}
