@@ -4,9 +4,7 @@ const g = require('../gunvals.js');
 
 // Comment out the line below to enable this addon, uncomment it to disable this addon.
 // return console.log('Mythic Creatures [MC] addon is disabled. See line 6 to enable it.');
-/*
-* Art by @felyn_de_fens
-*/
+// Art by @felyn_de_fens
 
 const MC_base = {
     ACCEL: 0.0001 * base.ACCEL,
@@ -58,31 +56,90 @@ const MC_stats = {
     },
 };
 const MC_names = {
-    assets: {
-        Toothless: "",
-        Stormfly: "",
-        Hookfang: "",
-        Meatlug: "",
-        Yeti: "",
-        Skrill: "",
-        Godzilla: "",
-        Shimu: "",
-    },
+    // Image assets stored in the public forlder of your project with class name and image name.
+    // If leaved empty, default assets shall be used.
+    assets: {},
+    // Make creatures stay on different team.
+    differentTeam: true,
+    // Make creatures accessible to the basic upgrade tree.
+    addonAsBase: false,
+    // Default color used for almost everything.
+    color: "black",
+    // Scale between creatures.
+    bodyScale: 5.4,
+    // Make them charge slow enough.
+    ticks: 100,
+    // Do not touch these, you are likely to break stuff.
+    petals: ["Power", "Space", "Reality", "Soul", "Time", "Mind"],
+    existingCodes: [],
+    codeLength: 8,
+    poisonLength: 60,
+    posionDamage: 1,
+    defaultSize: 20,
+    maxSize: 60,
+    gunsCount: 16,
+    timeout: 4,
     animation: {
         INSIDE: -8,
         OUT: 0,
     },
-    petals: ["Power", "Space", "Reality", "Soul", "Time", "Mind"],
-    differentTeam: false,
-    existingCodes: [],
-    color: "black",
-    bodyScale: 5.4,
-    gunsCount: 16,
-    codeLength: 8,
-    ticks: 100,
-    timeout: 4,
 };
 const MC_functions = {
+    clamp: (value, min, max) => {
+        return Math.min(Math.max(value, min), max);
+    },
+    define: (object, definition) => {
+        if (typeof definition == "string" && definition in Class) {
+            definition = Class[definition];
+        }
+        if (typeof definition != "object") throw new Error(`${definition} doesn't exist`);
+        if (typeof object != "object" || !object.define) throw new Error(`${object} property suppose to be an entity`);
+        let output = {};
+
+        if (definition.PARENT) {
+            if (!Array.isArray(definition.PARENT)) {
+                MC_functions.define(object, definition.PARENT);
+            } else for (let parent in definition.PARENT) {
+                if (definition.PARENT.hasOwnProperty(parent)) {
+                    MC_functions.define(object, definition.PARENT[parent]);
+                }
+            }
+        }
+
+        for (let key in definition) {
+            if (definition.hasOwnProperty(key) && key != "PARENT") {
+                output[key] = definition[key];
+            }
+        }
+
+        object.define(output);
+    },
+    gunArray: (callback, count) => {
+        if (typeof callback != "function") throw new Error(`${callback} isn't type of function`);
+        let output = [];
+
+        for (let i = 0; i < count; i++) {
+            let weapon = callback(i);
+            if (!Array.isArray(weapon)) weapon = [weapon];
+            output.push(...weapon);
+        }
+
+        return output;
+    },
+    isCompatible: def => {
+        let number = 0;
+
+        for (let key in def.BODY) {
+            if (def.BODY.hasOwnProperty(key)) {
+                number += def.BODY[key];
+            }
+        }
+
+        return number >= 1 && number <= MC_names.maxSize / MC_names.defaultSize ? number : false;
+    },
+    handler: name => {
+        sockets.broadcast(`A ${name} has arrived!`);
+    },
     deepCopy: obj => {
         if (obj == null || typeof obj != "object") return obj;
         let objCopy = {},
@@ -101,18 +158,6 @@ const MC_functions = {
         }
         return objCopy;
     },
-    gunArray: (callback, count) => {
-        if (typeof callback != "function") throw new Error(`${callback} isn't type of function`);
-        let output = [];
-
-        for (let i = 0; i < count; i++) {
-            let weapon = callback(i);
-            if (!Array.isArray(weapon)) weapon = [weapon];
-            output.push(...weapon);
-        }
-
-        return output;
-    },
     generateCode: () => {
         let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
             newCode;
@@ -126,20 +171,6 @@ const MC_functions = {
 
         MC_names.existingCodes.push(newCode);
         return newCode;
-    },
-    isCompatible: body => {
-        let number = 0;
-
-        for (let key in body) {
-            if (body.hasOwnProperty(key)) {
-                number += body[key];
-            }
-        }
-
-        return number == 1 || number == 2;
-    },
-    handler: name => {
-        sockets.broadcast(`A ${name} has arrived!`);
     },
     enableGuns: (guns, tag = false) => tag
         ? guns.filter(gun => gun._tag == tag).forEach(gun => gun._charged = true)
@@ -274,6 +305,7 @@ const MC_functions = {
             output = Object.assign(MC_functions.deepCopy(Class[name]), {
                 CONTROLLERS: ["MC_orbitEntity"],
                 HAS_NO_RECOIL: true,
+                LEVEL: 120,
                 AI: {
                     SPEED: 2,
                 },
@@ -307,6 +339,57 @@ const MC_functions = {
                     body.SIZE += 1.2;
                 },
             }],
+        };
+    },
+    createClassPetal: petal => {
+        if (typeof petal != "string") throw new Error(`${petal} property suppose to be a string`);
+        return {
+            TYPE: "satellite",
+            CONTROLLERS: ["MC_orbit"],
+            MOTION_TYPE: "motor",
+            FACING_TYPE: "spin",
+            COLOR: `${petal.toLowerCase()}Stone`,
+            CLEAR_ON_MASTER_UPGRADE: true,
+            ACCEPTS_SCORE: false,
+            DRAW_HEALTH: false,
+            LAYER: 13,
+            SHAPE: 6,
+            BODY: {
+                PUSHABILITY: 0.6,
+                ACCELERATION: 0.75,
+                HEALTH: 1e6,
+                DAMAGE: 0,
+                SPEED: 10,
+                RANGE: 200,
+            },
+        };
+    },
+    createClassBase: base => {
+        if (typeof base != "object") throw new Error(`${base} property suppose to be an object`);
+        return {
+            PARENT: "genericTank",
+            UPGRADE_TOOLTIP: `${base.UPGRADE_TOOLTIP ? base.UPGRADE_TOOLTIP + " " : ""}Art by Felyn_de_fens`,
+            SHAPE: base.name ? MC_names.assets[base.name]
+                ? `${MC_names.assets[base.name]}.png`
+                : `https://raw.githubusercontent.com/ClashTest311/MC-addon/main/assets/${base.name}.png` : 0,
+            SIZE: MC_names.defaultSize * (base.sizeFactor ?? 1),
+            COLOR: base.COLOR ?? MC_names.color,
+            BODY: base.BODY ?? MC_base,
+            LABEL: base.name ?? "",
+            LEVEL_CAP: 120,
+            SKILL_CAP: Array(10).fill(smshskl),
+            LEVEL_SKILL_POINT_FUNCTION: level => {
+                if (level <= 120) return 1;
+                return 0;
+            },
+            GUNS: [{
+                POSITION: [1, 3, 1, 0, 0, 0, 0],
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats(base.stats),
+                    TYPE: base.type,
+                },
+            }],
+            ON: [],
         };
     },
     createGunPetal: petal => {
@@ -357,8 +440,8 @@ const MC_functions = {
                 TYPE: MC_functions.create({
                     gun: "Tail",
                 }, {
-                    TIMEOUT: fireRange.TIMEOUT,
-                    COLOR: fireRange.COLOR,
+                    TIMEOUT: fireRange.TIMEOUT ?? MC_names.timeout,
+                    COLOR: fireRange.COLOR ?? MC_names.color,
                 }, {
                     PARENT: "bullet",
                     COLOR: fireRange.COLOR ?? MC_names.color,
@@ -371,7 +454,7 @@ const MC_functions = {
         if (typeof animation != "object") throw new Error(`${animation} property suppose to be an object`);
         return MC_functions.gunArray(angle => {
             return {
-                POSITION: [1, 1.3, 1, MC_names.animation[animation.TYPE], 0, 360 / MC_names.gunsCount * angle, Math.random()],
+                POSITION: [1, 1.3, 1, MC_names.animation[animation.TYPE ?? 0], 0, 360 / MC_names.gunsCount * angle, Math.random()],
                 PROPERTIES: {
                     SHOOT_SETTINGS: combineStats([
                         MC_stats.statMain,
@@ -387,12 +470,13 @@ const MC_functions = {
                         COLOR: animation.COLOR ?? MC_names.color,
                         ALPHA: 0.6,
                     }],
-                    AUTOFIRE: animation.AUTOFIRE,
+                    AUTOFIRE: animation.AUTOFIRE ?? true,
                 },
             };
         }, MC_names.gunsCount);
     },
     createEventPoison: poison => {
+        if (typeof poison != "object") throw new Error(`${poison} property suppose to be an object`);
         return {
             event: "death",
             handler: ({ body }) => {
@@ -420,11 +504,11 @@ const MC_functions = {
                     }
                 }
                 if (instances.length) {
-                    for (let i = 1; i < poison.POISON; i += 10) {
+                    for (let i = 1; i < poison.POISON ?? MC_names.poisonLength; i += 10) {
                         setSyncedTimeout(() => {
                             instances.forEach(e => {
-                                if (i + 10 >= poison.POISON) e.poisoned = false;
-                                e.damageReceived += poison.DAMAGE * 3;
+                                if (i + 10 >= poison.POISON ?? MC_names.poisonLength) e.poisoned = false;
+                                e.damageReceived += (poison.DAMAGE ?? MC_names.poisonDamage) * 3;
                             });
                         }, i);
                     }
@@ -438,7 +522,7 @@ const MC_functions = {
             event: "death",
             handler: ({ body }) => {
                 let e = new Entity(body);
-                e.define({
+                MC_functions.define(e, {
                     PARENT: "genericEntity",
                     COLOR: firework.COLOR ?? MC_names.color,
                     SIZE: body.SIZE,
@@ -487,7 +571,7 @@ const MC_functions = {
             event: "death",
             handler: ({ body }) => {
                 let e = new Entity(body);
-                e.define(MC_functions.create({
+                MC_functions.define(e, MC_functions.create({
                     event: "Drag",
                 }, false, {
                     PARENT: "genericEntity",
@@ -528,12 +612,10 @@ const MC_functions = {
                         )
                     ) {
                         let force = (1 - (1 / (15_000 / dist2 ** (1 / 20)))) + 0.001;
-                        instance.velocity.x +=
-                            util.clamp(body.x - instance.x, -90, 90) *
+                        instance.velocity.x += MC_functions.clamp(body.x - instance.x, -90, 90) *
                             instance.damp *
                             force;
-                        instance.velocity.y +=
-                            util.clamp(body.y - instance.y, -90, 90) *
+                        instance.velocity.y += MC_functions.clamp(body.y - instance.y, -90, 90) *
                             instance.damp *
                             force;
                     }
@@ -621,7 +703,6 @@ const MC_functions = {
     },
     parse: def => {
         if (typeof def != "object") throw new Error(`${def} isn't type of object`);
-        if (!MC_functions.isCompatible(def.BODY)) throw new Error(`BODY in ${def} class isn't compatible`);
         if (!Array.isArray(def.TYPE)) def.TYPE = [def.TYPE];
         let args = {
                 COLOR: def.COLOR,
@@ -629,10 +710,12 @@ const MC_functions = {
                 POISON: 60,
                 DAMAGE: MC_names.bodyScale,
             },
+            sizeFactor = MC_functions.isCompatible(def),
             type = MC_functions.create(def.TYPE[1] ? def.TYPE[1] : {}, args),
             stats = MC_functions.typeComponent(def.TYPE[0]),
             name = "";
 
+        if (!sizeFactor) throw new Error(`BODY in ${def} class isn't compatible`);
         for (key in MC_definitions) {
             if (MC_definitions.hasOwnProperty(key) && def == MC_definitions[key]) {
                 name = key;
@@ -648,32 +731,17 @@ const MC_functions = {
             }
         }
 
-        Class[name] = {
-            PARENT: "genericTank",
-            UPGRADE_TOOLTIP: `${def.UPGRADE_TOOLTIP} Art by Felyn_de_fens`,
-            SHAPE: MC_names.assets[name] && MC_names.assets[name] != ""
-                ? `${MC_names.assets[name]}.png`
-                : `https://raw.githubusercontent.com/ClashTest311/MC-addon/main/assets/${name}.png`,
+        Class[name] = Class[MC_functions.create({
+            class: "Base",
+        }, {
+            UPGRADE_TOOLTIP: def.UPGRADE_TOOLTIP,
             COLOR: def.COLOR,
-            SIZE: def.SIZE,
             BODY: def.BODY,
-            LABEL: name,
-            LEVEL_CAP: 120,
-            LEVEL: 120,
-            SKILL_CAP: Array(10).fill(smshskl),
-            LEVEL_SKILL_POINT_FUNCTION: level => {
-                if (level <= 120) return 1;
-                return 0;
-            },
-            GUNS: [{
-                POSITION: [1, 3, 1, 0, 0, 0, 0],
-                PROPERTIES: {
-                    SHOOT_SETTINGS: combineStats(stats),
-                    TYPE: type,
-                },
-            }],
-            ON: [],
-        };
+            sizeFactor,
+            stats,
+            name,
+            type,
+        })];
 
         if (MC_names.differentTeam) Class[name].TEAM = -10;
         for (let i = 0; i < def.GUNS.length; i++) {
@@ -706,10 +774,20 @@ const MC_functions = {
         }
     },
     log: (...message) => {
-        util.log(`[MC] ${message.join(', ')}`);
+        console.log(`[MC] ${message.join(', ')}`);
     },
 };
 const MC_definitions = {
+    // <Label>: {
+    //     UPGRADE_TOOLTIP: type <String>,
+    //     GUNS: type <Array>,
+    //     TYPE: type <Array> or <String>,
+    //     BODY: type <Object>,
+    //     ON: MC_functions.onComponent(type <Number>),
+    //     COLOR: type <String>,
+    //     ANIMATION: type <Array>,
+    //     TIMEOUT: type <Number>,
+    // },
     Toothless: {
         UPGRADE_TOOLTIP: "The unholy offspring of lightning and death itself.",
         GUNS: [
@@ -730,7 +808,6 @@ const MC_definitions = {
         COLOR: "purple",
         ANIMATION: [],
         TIMEOUT: 4,
-        SIZE: 20,
     },
     Stormfly: {
         UPGRADE_TOOLTIP: "I don't know what I would do without Stormfly.",
@@ -748,7 +825,6 @@ const MC_definitions = {
         COLOR: "#fff242",
         ANIMATION: [],
         TIMEOUT: 4,
-        SIZE: 20,
     },
     Hookfang: {
         UPGRADE_TOOLTIP: "Five-thousand pounds of flaming muscle coming through!",
@@ -766,7 +842,6 @@ const MC_definitions = {
         COLOR: "red",
         ANIMATION: [],
         TIMEOUT: 4,
-        SIZE: 20,
     },
     Meatlug: {
         UPGRADE_TOOLTIP: "Who's my little princess?",
@@ -784,7 +859,6 @@ const MC_definitions = {
         COLOR: "brown",
         ANIMATION: [],
         TIMEOUT: 15,
-        SIZE: 20,
     },
     Phoenix: {
         UPGRADE_TOOLTIP: "You haven't seen anything like this before...",
@@ -805,7 +879,6 @@ const MC_definitions = {
         COLOR: "#ff6200",
         ANIMATION: [],
         TIMEOUT: 15,
-        SIZE: 20,
     },
     Kraken: {
         UPGRADE_TOOLTIP: "The danger of the seas.",
@@ -821,7 +894,6 @@ const MC_definitions = {
         COLOR: "green",
         ANIMATION: [],
         TIMEOUT: 0,
-        SIZE: 20,
     },
     Yeti: {
         UPGRADE_TOOLTIP: "The Yeti?",
@@ -835,7 +907,6 @@ const MC_definitions = {
         COLOR: "gray",
         ANIMATION: [],
         TIMEOUT: 0,
-        SIZE: 20,
     },
     Skrill: {
         UPGRADE_TOOLTIP: "I would never torture that dragon.",
@@ -852,7 +923,6 @@ const MC_definitions = {
         COLOR: "blue",
         ANIMATION: [],
         TIMEOUT: 0,
-        SIZE: 20,
     },
     Godzilla: {
         UPGRADE_TOOLTIP: "Godzilla have been awakened.",
@@ -861,7 +931,7 @@ const MC_definitions = {
             class: "Laser",
         }],
         BODY: {
-            HEALTH: 1.2,
+            HEALTH: 1,
             DAMAGE: 0.8,
         },
         ON: MC_functions.onComponent(0),
@@ -874,10 +944,9 @@ const MC_definitions = {
             AUTOFIRE: false,
         }],
         TIMEOUT: 0,
-        SIZE: 36,
     },
     Shimu: {
-        UPGRADE_TOOLTIP: "She isn't as strong as you might think, and no, not outside...",
+        UPGRADE_TOOLTIP: "Not as strong as you might think...",
         GUNS: [
             {
                 event: "Poison",
@@ -887,7 +956,7 @@ const MC_definitions = {
             class: "Laser",
         }],
         BODY: {
-            HEALTH: 1.4,
+            HEALTH: 1.2,
             DAMAGE: 0.6,
         },
         ON: MC_functions.onComponent(0),
@@ -900,19 +969,18 @@ const MC_definitions = {
             AUTOFIRE: false,
         }],
         TIMEOUT: 0,
-        SIZE: 36,
     },
 };
 
 // Controllers
 class MC_orbit extends IO {
-    constructor(body, opts = {}) {
+    constructor(body) {
         super(body);
         this.realDist = 0;
-        this.invert = opts.invert ?? false;
+        this.invert = false;
     }
 
-    think(input) {
+    do() {
         let invertFactor = this.invert ? -1 : 1,
             master = this.body.master.master,
             dist = this.invert ? master.inverseDist : master.dist,
@@ -926,61 +994,82 @@ class MC_orbit extends IO {
     }
 }
 class MC_orbitEntity extends IO {
-    constructor(body, opts = {}) {
+    constructor(body) {
         super(body);
-        this.norDistance = opts.norDistance ?? 2;
-        this.body.dist = opts.initialDist || this.norDistance * this.body.size;
+        this.norDistance = 2;
+        this.body.dist = this.norDistance * this.body.size;
         this.body.inverseDist = this.norDistance * this.body.size - this.body.dist + this.norDistance * this.body.size;
         this.body.angle = 0;
     }
 
-    think(input) {
+    do() {
         this.body.angle += (this.body.skill.spd * 2 + this.body.aiSettings.SPEED) * Math.PI / 180;
         this.body.dist = this.norDistance * this.body.size;
     }
 }
-ioTypes["MC_orbit"] = MC_orbit;
-ioTypes["MC_orbitEntity"] = MC_orbitEntity;
+ioTypes["MC_orbit"] = class extends MC_orbit {
+    constructor(body) {
+        super(body);
+    }
+    think(input) {
+        this.do();
+    }
+};
+ioTypes["MC_orbitEntity"] = class extends MC_orbitEntity {
+    constructor(body) {
+        super(body);
+    }
+    think(input) {
+        this.do();
+    }
+};
 
-Class.MC = menu("Mythic Creatures", "black", 0);
 Class.MC_developer = menu("MC Developer Edition", "black", 0);
-Class.MC.UPGRADES_TIER_0 = ["MC_developer"];
 Class.MC_developer.UPGRADES_TIER_0 = [];
+Class.MC = menu("MC", "black", 0);
+Class.MC.UPGRADES_TIER_0 = [];
 
 for (let i = 0; i < MC_names.petals.length; i++) {
     let petal = MC_names.petals[i];
-    Class[`MC_petal${petal}`] = {
-        TYPE: "satellite",
-        CONTROLLERS: ["MC_orbit"],
-        MOTION_TYPE: "motor",
-        FACING_TYPE: "spin",
-        COLOR: `${petal.toLowerCase()}Stone`,
-        CLEAR_ON_MASTER_UPGRADE: true,
-        ACCEPTS_SCORE: false,
-        DRAW_HEALTH: false,
-        LAYER: 13,
-        SHAPE: 6,
-        BODY: {
-            PUSHABILITY: 0.6,
-            ACCELERATION: 0.75,
-            HEALTH: 1e6,
-            DAMAGE: 0,
-            SPEED: 10,
-            RANGE: 200,
-        },
-    };
+    Class[`MC_petal${petal}`] = Class[MC_functions.create({
+        class: "Petal",
+    }, petal)];
 }
-
 for (let key in MC_definitions) {
     if (MC_definitions.hasOwnProperty(key)) {
         MC_functions.parse(MC_definitions[key]);
         Class[`${key}_developer`] = Class[MC_functions.create({
             class: "Developer",
         }, key)];
-        Class.MC.UPGRADES_TIER_0.push(key);
         Class.MC_developer.UPGRADES_TIER_0.push(`${key}_developer`);
+        Class.MC.UPGRADES_TIER_0.push(key);
     }
 }
-Class.addons.UPGRADES_TIER_0.push("MC");
+
+module.exports = ({ Config }) => {
+    let tier = Config.SPAWN_CLASS,
+        sizes = [];
+
+    for (let key in MC_definitions) {
+        if (MC_definitions.hasOwnProperty(key)) {
+            sizes.push(Class[key].SIZE);
+        }
+    }
+    sizes = sizes.filter((e, i) => sizes.indexOf(e) == i);
+    sizes.sort((a, b) => a - b);
+    let addSize = (index, name) => {
+        Class[name][`UPGRADES_TIER_${(index + 1) * 2}`] = [];
+        for (let key in MC_definitions) {
+            if (MC_definitions.hasOwnProperty(key)) {
+                if (Class[key].SIZE == sizes[index]) {
+                    Class[name][`UPGRADES_TIER_${(index + 1) * 2}`].push(key);
+                    addSize(index + 1, key);
+                }
+            }
+        }
+    };
+    if (MC_names.addonAsBase) addSize(0, tier);
+};
+Class.addons.UPGRADES_TIER_0.push("MC_developer");
 
 MC_functions.log('Mythic Creatures addon has been registered.');
