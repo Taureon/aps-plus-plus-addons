@@ -83,15 +83,6 @@ const makeMulti = (type, count, name = -1, startRotation = 0) => {
     output.LABEL = name == -1 ? (greekNumbers[count - 1] || (count + ' ')) + type.LABEL : name;
     return output;
 }
-Class.lamgSpinnerTurret = makeMulti({
-    PARENT: "genericTank",
-    LABEL: "Spinner Turret",
-    GUNS: [
-        {
-            POSITION: [15, 3.5, 1, 0, 0, 0, 0]
-        }
-    ]
-}, 10)
 
 // December 14th - Master
 Class.master = {
