@@ -1039,7 +1039,7 @@ Class.oldRimfire.UPGRADE_LABEL = "Old Rimfire";
 Class.oldSpreadshot.UPGRADE_LABEL = "Old Spreadshot";
 Class.oldCommander.UPGRADE_LABEL = "Old Commander";
 
-Class.basic.UPGRADES_TIER_1.push("flail");
+Class.basic.UPGRADES_TIER_1.push("whirlwind", "flail");
 
     // machine gun
         Class.gunner.UPGRADES_TIER_3.push("tetraGunner");
@@ -1086,7 +1086,7 @@ Class.basic.UPGRADES_TIER_3.push("master");
 Class.unavailable.UPGRADES_TIER_0.push("spreadshot", "crossbow", "commander", "boomer", "spike", "autoTrapper", "prodigy", "mender", "tetraGunner", "corvette", "flail", "repeater");
 
 } else if (enableScrapped == true && enableLegacy == true) {
-Class.basic.UPGRADES_TIER_1.push("flail");
+Class.basic.UPGRADES_TIER_1.push("whirlwind", "flail");
     Class.basic.UPGRADES_TIER_3.push("master");
     Class.smasher.UPGRADES_TIER_3.splice(1, 1, "weirdSpike");
 
