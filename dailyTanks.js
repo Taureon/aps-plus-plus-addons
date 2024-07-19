@@ -3,6 +3,7 @@ const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
 
 const addToMain = false
+// Anything already in vanilla OSA is not included.
 
 // Bullets
 Class.masterBullet = {
@@ -92,9 +93,6 @@ Class.lamgSpinnerTurret = makeMulti({
     ]
 }, 10)
 
-// December 13th - Whirlwind
-//// Whirlwind and its branch are already in vanilla OSA.
-
 // December 14th - Master
 Class.master = {
     PARENT: "genericTank",
@@ -148,30 +146,6 @@ Class.master = {
             },
         },
     ],
-}
-
-// December 15th - Undertow (already in base template!)
-
-// December 16th - Literally a Machine Gun
-Class.literallyAMachineGun = {
-    PARENT: "genericTank",
-    LABEL: "Literally a Machine Gun",
-    DANGER: 7,
-    BODY: {
-        FOV: base.FOV * 1.2
-    },
-    TOOLTIP: "[DEV NOTE] This tank does not function as intended yet!",
-    TURRETS: [
-        {
-            POSITION: [10, 14, 0, 0, 0, 1],
-            TYPE: "lamgSpinnerTurret"
-        }
-    ],
-    GUNS: [
-        {
-            POSITION: [22, 8, 1, 0, 0, 0, 0]
-        }
-    ]
 }
 
 // December 19th-20th - Jump Smasher
