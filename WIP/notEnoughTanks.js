@@ -38,11 +38,21 @@ but we add bitwise operations to act like that it is
 const { combineStats } = require('../facilitators.js');
 const { base, gunCalcNames, statnames } = require('../constants.js');
 const g = require('../gunvals.js');
+const transformGStats = (from, _, to) => Object.keys(from).map(i => from[i] * _[i] / to[i]);
 
-g.plugin_NET_droneToFactory = g.factory.map((x, i) => x * g.babyfactory[i] / g.drone[i]);
-g.plugin_NET_basicToDrone = g.drone.map((x, i) => x / g.basic[i]);
-g.plugin_NET_basicToTrap = g.trap.map((x, i) => x / g.basic[i]);
-g.plugin_NET_weakToOver = g.over.map((x, i) => x / g.weak[i]);
+g.plugin_NET_droneToFactory = transformGStats(g.factory, g.babyfactory, g.drone);
+g.plugin_NET_basicToDrone = transformGStats(g.drone, g.blank, g.basic);
+g.plugin_NET_basicToTrap = transformGStats(g.trap, g.blank, g.basic);
+g.plugin_NET_weakToOver = transformGStats(g.over, g.blank, g.weak);
+
+function makeLauncherAndDriveVersions(item) {
+    return [
+        [''          ,           '_drive1',           '_drive2',           '_drive3'],
+        ['_launcher1', '_launcher1_drive1', '_launcher1_drive2', '_launcher1_drive3'],
+        ['_launcher2', '_launcher2_drive1', '_launcher2_drive2', '_launcher2_drive3'],
+        ['_launcher3', '_launcher3_drive1', '_launcher3_drive2', '_launcher3_drive3']
+    ].map(x => x.map(item + x));
+}
 
 const offsets = Object.fromEntries([
     'artillery' , 'hunter' , 'twin'   , 'multishot', 'tri',
@@ -52,13 +62,14 @@ const offsets = Object.fromEntries([
 ].map((_, i) => [_, BigInt(i * 4)])),
 offsetsLength = Object.keys(offsets).length,
 
+// add launcher and drive
 mainTypeMatrix = [
     ['bullet'   , 'drone'                     , 'minion'                     , 'plugin_NET_twinion'          ],
     ['trap'     , 'plugin_NET_trap_drone'     , 'plugin_NET_trap_minion'     , 'plugin_NET_trap_twinion'     ],
     ['block'    , 'plugin_NET_block_drone'    , 'plugin_NET_block_minion'    , 'plugin_NET_block_twinion'    ],
     ['boomerang', 'plugin_NET_boomerang_drone', 'plugin_NET_boomerang_minion', 'plugin_NET_boomerang_twinion']
-],
-bridTypeArray = ['bullet', ["drone", { INDEPENDENT: true }], 'drone', 'minion'];
+].map(x => x.map(makeLauncherAndDriveVersions)),
+bridTypeArray = ['bullet', "plugin_NET_droneIndependent", 'drone', 'minion'].map(makeLauncherAndDriveVersions);
 
 function getTankConfigFromCode(code) {
     let tankConfig = {};
@@ -193,7 +204,7 @@ function makeTankFromCode(code) {
         mainAspect = figureOut;
 
     let mainStats = [g.basic],
-        mainType = mainTypeMatrix[tankCfg.director][tankCfg.trapper]; // TODO: add 'launcher' variations
+        mainType = mainTypeMatrix[tankCfg.director][tankCfg.trapper][tankCfg.launcher][tankCfg.drive]; // TODO: add 'launcher' variations
     if (tankCfg.director) {
         mainStats.push(g.plugin_NET_basicToDrone);
         if (tankCfg.director > 1) {
@@ -217,7 +228,7 @@ function makeTankFromCode(code) {
 
     if (tankCfg.brid) {
         let bridStats = [g.weak],
-            bridType = bridTypeArray[tankCfg.brid],
+            bridType = bridTypeArray[tankCfg.brid][tankCfg.launcher][tankCfg.drive],
             bridWidth = figureOut,
             bridLength = figureOut,
             bridAspect = figureOut;
@@ -235,20 +246,47 @@ function makeTankFromCode(code) {
                 case 2: GUNS.push(...makeBridGun(bridWidth, bridLength, bridAspect, angle + 55, bridStats, bridType), ...makeBridGun(angle - 55, bridStats, bridType)); break;
                 case 3: GUNS.push(...makeCapGun(bridWidth, bridLength, bridAspect, angle + 55, bridStats, bridType), ...makeCapGun(angle - 55, bridStats, bridType)); break;
             }
-            if (tankCfg.brid == 1) {
-                
-            } else {
-                
-            }
         }
     }
 
     for (let i = 0; i < gunCount; i++) {
-        let angle = 360 * i / gunCount;
+        let angle = 360 * i / gunCount,
+            fullWidthHalf = mainWidth * (1 + !!tankCfg.twin) / 2;
 
         // TODO: add 'artillery' side guns
+        if (tankCfg.artillery) {
+            if (tankCfg.artillery > 1) {
+                if (tankCfg.artillery > 2) {
+                    GUNS.push([{
+                        POSITION: [9, 3, 1, 0, -(fullWidthHalf + 4), angle - 7, 0.6], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]), TYPE: "bullet", LABEL: "Secondary" }
+                    }, {
+                        POSITION: [9, 3, 1, 0, (fullWidthHalf + 4), angle + 7, 0.8], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]), TYPE: "bullet", LABEL: "Secondary" }
+                    }]);
+                }
+                GUNS.push([{
+                    POSITION: [13, 3, 1, 0, -(fullWidthHalf + 2), angle - 7, 0.6], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]), TYPE: "bullet", LABEL: "Secondary" }
+                }, {
+                    POSITION: [13, 3, 1, 0, (fullWidthHalf + 2), angle + 7, 0.8], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]), TYPE: "bullet", LABEL: "Secondary" }
+                }]);
+            }
+            GUNS.push([{
+                POSITION: [17, 3, 1, 0, -fullWidthHalf, angle - 7, 0.2], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]), TYPE: "bullet", LABEL: "Secondary" }
+            }, {
+                POSITION: [17, 3, 1, 0, fullWidthHalf, angle + 7, 0.4], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]), TYPE: "bullet", LABEL: "Secondary" }
+            }]);
+        }
+        fullWidthHalf += tankCfg.artillery;
 
         // TODO: add 'cruiser' side guns
+        switch (tankCfg.cruiser) {
+            case 1:
+                GUNS.push([{
+                    POSITION: [7, 8, 0.6, 7, fullWidthHalf + 2, angle + 30, 0.5], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.swarm, g.battleship, g.carrier]), TYPE: "swarm", STAT_CALCULATOR: gunCalcNames.swarm }
+                }, {
+                    POSITION: [7, 8, 0.6, 7, fullWidthHalf - 2, angle - 30, 0.5], PROPERTIES: { SHOOT_SETTINGS: combineStats([g.swarm, g.battleship, g.carrier]), TYPE: "swarm", STAT_CALCULATOR: gunCalcNames.swarm }
+                }]);
+                break;
+        }
 
         // TODO- add 'twin' loop
 	        // TODO: add 'multishot' loop
@@ -257,13 +295,7 @@ function makeTankFromCode(code) {
 		        	// TODO: add 'trapper' decoration
 
 	        		// TODO: if 'buck', instead of a single gun, add more smaller guns with the big one being decorative
-			        GUNS.push({
-			            POSITION: [16, 8, 1, 0, 0, angle, 0.1],
-			            PROPERTIES: {
-			                SHOOT_SETTINGS: mainStats,
-			                TYPE: mainType
-			            }
-			        });
+			        GUNS.push({ POSITION: [16, 8, 1, 0, 0, angle, 0.1], PROPERTIES: { SHOOT_SETTINGS: mainStats, TYPE: mainType } });
 		        // close 'hunter' loop
 			// close 'multishot' loop
 		// close 'twin' loop
@@ -304,7 +336,6 @@ function makeTankTreeRecursively(Class, code, maxTier) {
 
 module.exports = ({ Events, Config }) => {
     let maxTier = Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER ?? Config.MAX_UPGRADE_TIER ?? 4;
-    Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER = Math.max(Config.NOT_ENOUGH_TANKS_MAX_UPGRADE_TIER, Config.MAX_UPGRADE_TIER);
     Class.plugin_NET_twinion = {
         PARENT: 'minion',
         LABEL: "Twinion",
@@ -326,6 +357,8 @@ module.exports = ({ Events, Config }) => {
     // TODO: add an indicator for how many tanks will be added
     console.log(`maxTier: ${maxTier}\nWARNING: large maxTier leads to exponentially longer loading times!\ngenerating tanks now...`);
 
+    Class.plugin_NET_droneIndependent = { PARENT: "drone", INDEPENDENT: true };
+
 	// for now, they are just stronger versions
 	// i wonder what else could be added though, especially boomerang
     Class.plugin_NET_trap_drone        = { PARENT: 'drone'             , LABEL: "Trap Drone"       , SHAPE: -3 };
@@ -338,6 +371,9 @@ module.exports = ({ Events, Config }) => {
     Class.plugin_NET_boomerang_minion  = { PARENT: 'minion'            , LABEL: "Boomerang Minion" , SHAPE: -5 };
     Class.plugin_NET_boomerang_twinion = { PARENT: 'plugin_NET_twinion', LABEL: "Boomerang Twinion", SHAPE: -5 };
     // TODO: add 'launcher' variations
+
+    for (let parent of [])
+    makeLauncherAndDriveVersions()
 
     //fuck it, recursion because why not
     let start = Date.now();

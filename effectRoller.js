@@ -6,7 +6,7 @@
 // Cooldown of 30 seconds after rolling.
 // Cooldown bypass requires 'infiniteRolls' permission.
 
-// NOTE: if they have no :'s, then they dont exist or arent finished
+// NOTE: you need to verify that ALL of them work.
 
 // ID | name                    | description
 
@@ -31,50 +31,53 @@
 // 17 : Carrot                  : Increase your FOV by 100%
 // 18 : Magnetic Projectiles    : Shot bullets, traps, and drones get pulled to the nearest enemy.
 // 19 : Guided Projectiles      : Makes your projectiles go to your mouse.
+// 20   Fuse Cap                  You explode on death, which can damage nearby enemies.
 
 // Neutral Effects
-// 20 : On The Move             : Forces your velocity to be your top speed.
-// 21 : Mom-doer                : Makes your bullets spawn 500 units further away.
-// 22 : Increased Recoil        : Multiplies your recoil received by 2.
-// 23 : No Effect               : Does NOTHING..
-// 24 : Drugged                 : Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
-// 25 : Turtle                  : Makes you 5x as healthy, but also makes your max speed 80% slower.
-// 26 : Gamer Neck              : Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
-// 27 : Random Barrel Positions : Randomises each of your barrels' angle and direction.
-// 38 ? Random Tank             ? Sets you to a random tank available from c.SPAWN_CLASS
-// 29 ? Random Projectiles      ? Gives you the projectiles of some other tank.
-// 20   Orb                       Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
-// 31   Pumpkin                   Gives you the pumpkin curse: invis, orange, 0.0001 hp
-// 32   Downgrade to Basic        Sets you to c.SPAWN_CLASS
-// 33   Spy                       Changes player color to someone else's team
-// 34   Paper-thin                Makes you 2x as fast, but 4x easier to kill
-// 35   Just walking past         Makes you practically immune to damage, but stops your guns from firing
-// 36   Spawn Rock                Spawns a rock that dies after a minute at where you alt fire
-// 37   Teleport forward          Teleports you in the direction you're looking 1000 units
-// 38   Heavy projectiles         Multiplies your guns' bullet health, reload and recoil by 2 and multiplies bullet size by 1.2
-// 39   Auto-Balance              Makes you join another team
+// 21 : On The Move             : Forces your velocity to be your top speed.
+// 22 : Mom-doer                : Makes your bullets spawn 500 units further away.
+// 23 : Increased Recoil        : Multiplies your recoil received by 2.
+// 24 : No Effect               : Does NOTHING..
+// 25 : Drugged                 : Multiplies your FOV by a value that oscillates between 0.5 and 1.5. Goes from one number to the other in 2 seconds in a Sine-easing curve.
+// 26 : Turtle                  : Makes you 5x as healthy, but also makes your max speed 80% slower.
+// 27 : Gamer Neck              : Applies `CONTROLLER: [['zoom', { distance: 750, dynamic: true, permanent: true }]]` for 20 seconds.
+// 38 : Random Barrel Positions : Randomises each of your barrels' angle and direction.
+// 29 ? Random Tank             ? Sets you to a random tank available from c.SPAWN_CLASS
+// 20 ? Random Projectiles      ? Gives you the projectiles of some other tank.
+// 31 : Orb                     : Places an lvl45-tank-sized orb in front of you that absorbs any entity it touches, follows your tank's rotation.
+// 32 : Pumpkin                 : Gives you the pumpkin curse: invis, orange, 0.0001 hp
+// 33 : Downgrade to Basic      : Sets you to c.SPAWN_CLASS
+// 34 : Spy                     : Disguises you as someone on the enemy team
+// 35 : Paper-thin              : Makes you 2x as fast, but 4x easier to kill
+// 36   Just walking past         Makes you practically immune to damage, but stops your guns from firing
+// 37   Spawn Rock                Spawns a rock that dies after a minute at where you alt fire
+// 38   Teleport forward          Teleports you in the direction you're looking 1000 units
+// 39   Heavy projectiles         Multiplies your guns' bullet health, reload and recoil by 2 and multiplies bullet size by 1.25 and multiplies bullet speed by 0.8
+// 40   Autobalance               Makes you join another team
+// 41   Auto-Player               Makes io_nearestDifferentMaster take control over where your tank aims
 
 // Negative Effects
-// 40 : Growth Annihilator      : Stronger LVL 250 Growth Annihilator, which shoots you once from 10-20 players of distance away and then despawns.
-// 41 : No Health               : Sets your shield to 0 and sets your health to 1% of max health.
-// 42 : Slippery                : Decreases your acceleration by 66% and increases your max speed by 50%.
-// 43 : Vulnerable              : Decreases your Max Health and Shield by 80%.
-// 44 : Black Hole              : Movable entities near you get pulled towards you.
-// 45 : Old Age                 : Kills you in 20 seconds.
-// 46 : Balloon                 : Makes you 300% larger.
-// 47 : Blind                   : Decreases your fov by 80%.
-// 48 : Frozen Camera           : Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
-// 49 : Statue                  : Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
-// 50 : Blast                   : Blasts away nearby entities once, with a lot of force.
-// 51 : Impotence               : Same as WRATH, but it's Machine Gunner bullets instead.
-// 52 : Railgun Reload          : Makes your guns shoot 1/8th as fast as basic.
-// 53 : Alcoholic               : Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
-// 54 : Forced spin             : Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting and moving.
-// 55 : Earthquake              : Every game tick, changes your position by a maximum value of 5 in a random direction..
-// 56 : Backpetal               : Inverts movement directions.
-// 57 ? Bounty                  ? Puts you on the minimap for everyone, spawns a large pulse around you.
-// 58 ? Introverted Projectiles ? Projectiles get slightly repelled by enemy entities.
-// 59   Time Bomb                 Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
+// 42 : Growth Annihilator      : Stronger LVL 250 Growth Annihilator, which shoots you once from 10-20 players of distance away and then despawns.
+// 43 : No Health               : Sets your shield to 0 and sets your health to 1% of max health.
+// 44 : Slippery                : Decreases your acceleration by 66% and increases your max speed by 50%.
+// 45 : Vulnerable              : Decreases your Max Health and Shield by 80%.
+// 46 : Black Hole              : Movable entities near you get pulled towards you.
+// 47 : Old Age                 : Kills you in 20 seconds.
+// 48 : Balloon                 : Makes you 300% larger.
+// 49 : Blind                   : Decreases your fov by 80%.
+// 50 : Frozen Camera           : Applies `CONTROLLER: [['zoom', { distance: 0, permanent: true }]]` for 20 seconds.
+// 51 : Statue                  : Forces you to stand completely still for 10 seconds. Would be called Turret depending or not if you can fire your guns while standing still.
+// 52 : Blast                   : Blasts away nearby entities once, with a lot of force.
+// 53 : Impotence               : Same as WRATH, but it's Machine Gunner bullets instead.
+// 54 : Railgun Reload          : Makes your guns shoot 1/8th as fast as basic.
+// 55 : Alcoholic               : Rotates your velocity vector in a random clockwise direction for a random amount of time up to 2 seconds.
+// 56 : Forced spin             : Every 2 seconds, makes you spin at random speeds and rotations for 1.5 seconds, also prevents you from shooting and moving.
+// 57 : Earthquake              : Every game tick, changes your position by a maximum value of 5 in a random direction..
+// 58 : Backpetal               : Inverts movement directions.
+// 59 ? Bounty                  ? Puts you on the minimap for everyone, spawns a large pulse around you.
+// 60 ? Introverted Projectiles ? Projectiles get slightly repelled by enemy entities.
+// 61   Time Bomb                 Puts a bomb on your head which explodes after 10 seconds, killing you and nearby enemies. Was replaced with Old Age.
+// 62   Rammer Class              Your bullet damage has been multiplied by 0.1
 
 let { combineStats } = require('../facilitators.js'),
     { gunCalcNames } = require('../constants.js'),
@@ -635,8 +638,8 @@ effects = [
         let oldDef = body.def;
 
         for (let gun of body.guns) {
-            body.define(Array.isArray(c.SPAWN_CLASS) ?
-                c.SPAWN_CLASS.map(x => tanksInTree[Math.floor(Math.random() * tanksInTree.length)])
+            body.define(Array.isArray(Config.SPAWN_CLASS) ?
+                Config.SPAWN_CLASS.map(x => tanksInTree[Math.floor(Math.random() * tanksInTree.length)])
             :
                 tanksInTree[Math.floor(Math.random() * tanksInTree.length)]
             );
@@ -675,6 +678,68 @@ effects = [
             }
         }, 20 * 30);
     }
+},
+
+{
+    name: 'Orb',
+    splash: 'Born to mind empty, forced to ponder...',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, undefined, body => {
+        let e = new Entity({
+            x: body.x + Math.cos(body.facing) * body.size * 4,
+            y: body.y + Math.sin(body.facing) * body.size * 4
+        });
+        e.define('plugin_effectRoller_orb');
+        e.velocity.x = body.velocity.x;
+        e.velocity.y = body.velocity.y;
+        e.team = -9472;
+        setSyncedTimeout(() => e.kill(), 3);
+    })
+},
+
+{
+    name: 'Pumpkin',
+    splash: "You have become cursed, don't get hit!",
+    duration: 30,
+    run: body => {
+        let effect = new StatusEffect(30 * 30, { health: 0.001 }),
+            oldColor = body.color,
+            oldAlphaRange = body.alphaRange;
+        body.define({ ALPHA: [0.1, 0.1], COLOR: 'orange' });
+        body.addStatusEffect(effect);
+        body.on('expiredStatusEffect', expired => {
+            if (expired === effect) {
+                body.color = oldColor;
+                body.alphaRange = oldAlphaRange;
+            }
+        });
+    }
+},
+
+{
+    name: 'Downgrade To Basic',
+    splash: 'Play something else for once.',
+    noEndNotification: true,
+    run: body => body.define(Config.SPAWN_CLASS)
+},
+
+{
+    name: 'Spy',
+    splash: "You are disguised as an enemy. Kill them when they aren't suspecting a thing.",
+    noEndNotification: true,
+    run: body => {
+        let toDisguiseAs = ran.choose(sockets.players).body;
+        body.name = toDisguiseAs.name;
+        body.color = toDisguiseAs.color;
+        body.define(toDisguiseAs.defs.length == 1 ? toDisguiseAs.defs[0] : toDisguiseAs.defs);
+    }
+},
+
+{
+    name: 'Paper-thin',
+    splash: 'Fun fact: Being faster makes it easier to dodge.',
+    duration: 20,
+    statusEffect: new StatusEffect(20 * 30, { acceleration: 2, topSpeed: 2, health: 0.25 })
 },
 
 
@@ -1099,6 +1164,20 @@ Class.plugin_effectRoller_bountyMark = {
     CONTROLLERS: [['spin', { speed: 0.1, independent: true }]]
 };
 
+Class.plugin_effectRoller_orb = {
+    PARENT: 'genericEntity',
+    COLOR: 'guiblack',
+    BODY: {
+        REGEN: 1e6,
+        HEALTH: 1e6,
+        DAMAGE: 1e6,
+        PENETRATION: 1e6,
+        FOV: 10,
+        SPEED: 8,
+    },
+    LEVEL: 45
+};
+
 setTimeout(() => console.log(effects.map((x, i) => i + ': ' + x.name).join('\n')));
 
 module.exports = ({ Events }) => {
@@ -1159,7 +1238,7 @@ module.exports = ({ Events }) => {
     });
 
     let alreadySeen = [],
-    next = [c.SPAWN_CLASS].flat(),
+    next = [Config.SPAWN_CLASS].flat(),
     limit = 1000;
     while (next.length && limit--) {
         let current = next;
