@@ -6,6 +6,11 @@ Class.znpHlnAR_placeholder = { LABEL: "PLACEHOLDER", COLOR: "black", UPGRADE_COL
 // YES I KNOW THE LINE COUNT IS RIDICULOUS I'LL IMPROVE IT LATER OK
 // return
 
+// Set this to false to disable desmos branch
+const desmosAllowed = true;
+//Set this to false to enable undertow
+const noUndertow = true;
+
 // Cannon Functions
 const makeMulti = (type, count, name = -1, startRotation = 0) => {
     type = ensureIsClass(type);
@@ -1338,43 +1343,45 @@ Class.znpHlnAR_cruiserdrive = {
         },
     ],
 }
-Class.znpHlnAR_recharger = {
-    PARENT: "genericTank",
-    LABEL: "Recharger",
-    DANGER: 7,
-    STAT_NAMES: statnames.desmos,
-    GUNS: [
-        {
-            POSITION: [17, 3, 1, 0, -6, -7, 0.25],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]),
-                TYPE: "bullet",
-                LABEL: "Secondary",
+if (desmosAllowed) {
+    Class.znpHlnAR_recharger = {
+        PARENT: "genericTank",
+        LABEL: "Recharger",
+        DANGER: 7,
+        STAT_NAMES: statnames.desmos,
+        GUNS: [
+            {
+                POSITION: [17, 3, 1, 0, -6, -7, 0.25],
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]),
+                    TYPE: "bullet",
+                    LABEL: "Secondary",
+                },
             },
-        },
-        {
-            POSITION: [17, 3, 1, 0, 6, 7, 0.75],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]),
-                TYPE: "bullet",
-                LABEL: "Secondary",
+            {
+                POSITION: [17, 3, 1, 0, 6, 7, 0.75],
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, g.pelleter, g.artillery]),
+                    TYPE: "bullet",
+                    LABEL: "Secondary",
+                },
             },
-        },
-        {
-            POSITION: [20, 13, 0.8, 0, 0, 0, 0],
-            PROPERTIES: {
-                SHOOT_SETTINGS: combineStats([g.basic, g.desmos, g.pounder]),
-                TYPE: ["bullet", {CONTROLLERS: ["snake"]}],
-                LABEL: "Heavy",
+            {
+                POSITION: [20, 13, 0.8, 0, 0, 0, 0],
+                PROPERTIES: {
+                    SHOOT_SETTINGS: combineStats([g.basic, g.desmos, g.pounder]),
+                    TYPE: ["bullet", {CONTROLLERS: ["snake"]}],
+                    LABEL: "Heavy",
+                },
             },
-        },
-        {
-            POSITION: [5, 10, 2.125, 1, -6.375, 90, 0],
-        },
-        {
-            POSITION: [5, 10, 2.125, 1, 6.375, -90, 0],
-        },
-    ],
+            {
+                POSITION: [5, 10, 2.125, 1, -6.375, 90, 0],
+            },
+            {
+                POSITION: [5, 10, 2.125, 1, 6.375, -90, 0],
+            },
+        ],
+    }
 }
 Class.znpHlnAR_deathStar = makeMulti({
     PARENT: "genericTank",
@@ -3731,8 +3738,10 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
         Class.znpHlnAR_machineTrapper.UPGRADES_TIER_3 = ["znpHlnAR_dieselTrapper", "barricade", "znpHlnAR_equalizer", "znpHlnAR_machineGuard", "znpHlnAR_encircler", "znpHlnAR_machineMech", "znpHlnAR_triMachine", "znpHlnAR_expeller", "znpHlnAR_autoMachineTrapper", "znpHlnAR_deviation", "znpHlnAR_frother"]
         Class.znpHlnAR_wark.UPGRADES_TIER_3 = ["znpHlnAR_warkwark", "znpHlnAR_waarrk", "znpHlnAR_equalizer", "hexaTrapper", "znpHlnAR_hutch", "znpHlnAR_cog", "znpHlnAR_expeller", "bulwark", "znpHlnAR_coalesce", "znpHlnAR_autoWark"]
     // desmos
+    if (desmosAllowed) {
         Class.volute.UPGRADES_TIER_3.push("znpHlnAR_recharger", "znpHlnAR_current", "znpHlnAR_autoVolute")
         Class.helix.UPGRADES_TIER_3.push("znpHlnAR_doubleHelix", "znpHlnAR_spiral", "znpHlnAR_autoHelix")
+    }
 
 // WIP Upgrade paths
 Class.hewnDouble.UPGRADES_TIER_3 = [
@@ -3886,7 +3895,9 @@ Class.healer.UPGRADES_TIER_3.push(
     "znpHlnAR_placeholder",//"znpHlnAR_psychiatrist",
     "znpHlnAR_placeholder",//"znpHlnAR_soother",
 )
-Class.desmos.UPGRADES_TIER_2.splice(1, 1)
+if (noUndertow) {
+    Class.desmos.UPGRADES_TIER_2.splice(1, 1)
+}
 Class.znpHlnAR_directorstorm.UPGRADES_TIER_3 = ["znpHlnAR_vortex"]
 
 // DEBUG
