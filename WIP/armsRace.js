@@ -628,6 +628,13 @@ Class.znpHlnAR_vortexDeco = makeMulti({
         }
     ]
 }, 4, "", 90)
+Class.bangerBody = {
+    LABEL: "",
+    FACING_TYPE: ["spin", { speed: 0.1 }],
+    COLOR: "black",
+    SHAPE: -8,
+    INDEPENDENT: true
+}
 
 // Turrets
 Class.znpHlnAR_sniper3Gun = {
@@ -3115,6 +3122,34 @@ Class.znpHlnAR_zipper = {
         },
     ],
 }
+Class.znpHlnAR_bonker = {
+    PARENT: "genericSmasher",
+    LABEL: "Bonker",
+    DANGER: 6,
+    SIZE: 0.75 * 12,
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody"
+        }
+    ]
+}
+Class.znpHlnAR_banger = {
+    PARENT: "genericSmasher",
+    LABEL: "Banger",
+    DANGER: 6,
+    SIZE: 1.25 * 12,
+    TURRETS: [
+        {
+            POSITION: [25, 0, 0, 0, 360, 0],
+            TYPE: "bangerBody"
+        },
+        {
+            POSITION: [25, 0, 0, 60, 360, 0],
+            TYPE: "bangerBody"
+        }
+    ]
+}
 
 // Tier 3 bird tanks
 Class.znpHlnAR_defect = makeBird('tripleShot', "Defect")
@@ -3626,6 +3661,184 @@ Class.znpHlnAR_vortex = {
         },
     ],
 }
+Class.znpHlnAR_hewnFlankDouble = {
+    PARENT: "genericTank",
+    DANGER: 7,
+    LABEL: "Hewn Flank Double",
+    GUNS: [
+        {
+            POSITION: [19, 8, 1, 0, 5.5, 205, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [19, 8, 1, 0, -5.5, -205, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.twin, g.doubleTwin, g.hewnDouble, { recoil: 1.15 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [20, 8, 1, 0, 0, 90, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 0, -90, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, 5.5, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        },
+        {
+            POSITION: [20, 8, 1, 0, -5.5, 180, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.doubleTwin]),
+                TYPE: "bullet",
+            },
+        }
+    ],
+}
+Class.znpHlnAR_hewnGunner = {
+    PARENT: "genericTank",
+    LABEL: "Hewn Gunner",
+    DANGER: 6,
+    GUNS: [
+        {
+            POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, -2, 8.25, 205, 0.2],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, -2, -8.25, -205, 0.4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, 5.25, 205, 0.6],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -5.25, -205, 0.8],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, 7.25, 180, 0.5],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [12, 3.5, 1, 0, -7.25, 180, 0.75],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, 3.75, 180, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 3.5, 1, 0, -3.75, 180, 0.25],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.gunner, { speed: 1.2 }]),
+                TYPE: "bullet"
+            }
+        }
+    ]
+}
+Class.znpHlnAR_basher = {
+    PARENT: "genericSmasher",
+    LABEL: "Basher",
+    DANGER: 6,
+    SIZE: 0.475 * 12,
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody"
+        }
+    ]
+}
+Class.znpHlnAR_slammer = {
+    PARENT: "genericSmasher",
+    LABEL: "Slammer",
+    DANGER: 6,
+    SIZE: 1.5 * 12,
+    TURRETS: [
+        {
+            POSITION: [21.5, 0, 0, 0, 360, 0],
+            TYPE: "smasherBody"
+        }
+    ]
+}
 
 // Tier 4 hybrid tanks
 Class.znpHlnAR_abberation = makeOver('znpHlnAR_frother', "Abberation", {count: 1, independent: true, cycle: false})
@@ -3755,14 +3968,16 @@ Class.hewnDouble.UPGRADES_TIER_3 = [
     "znpHlnAR_autoHewnDouble",
     "znpHlnAR_cleft",
     "znpHlnAR_skewnDouble",
-    "znpHlnAR_placeholder",//"znpHlnAR_hewnFlankDouble",
-    "znpHlnAR_placeholder",//"znpHlnAR_hewnGunner",
+    "znpHlnAR_hewnFlankDouble",
+    "znpHlnAR_hewnGunner",
     "znpHlnAR_placeholder",//"znpHlnAR_warkwawarkrk",
 ]
-Class.znpHlnAR_doubleHelix.UPGRADES_TIER_3 = [
-    "znpHlnAR_tripleHelix",
-    "znpHlnAR_autoDoubleHelix",
-]
+if (desmosAllowed) {
+    Class.znpHlnAR_doubleHelix.UPGRADES_TIER_3 = [
+        "znpHlnAR_tripleHelix",
+        "znpHlnAR_autoDoubleHelix",
+    ]
+}
 
 Class.redistributor.UPGRADES_TIER_3 = [
     "znpHlnAR_placeholder",
@@ -3884,10 +4099,19 @@ Class.znpHlnAR_stormer.UPGRADES_TIER_3 = [
 ]
 
 Class.smasher.UPGRADES_TIER_3.push(
-    "znpHlnAR_placeholder",//"znpHlnAR_bonker",
-    "znpHlnAR_placeholder",//"znpHlnAR_banger",
+    "znpHlnAR_bonker",
+    "znpHlnAR_banger",
     "znpHlnAR_placeholder",//"znpHlnAR_drifter",
 )
+Class.znpHlnAR_bonker.UPGRADES_TIER_3 = [
+    "znpHlnAR_placeholder", // znpHlnAR_decoy
+    "znpHlnAR_placeholder", // znpHlnAR_spear
+    "znpHlnAR_placeholder", // znpHlnAR_autoBonker
+    "znpHlnAR_placeholder", // znpHlnAR_megaBonker
+    "znpHlnAR_basher",
+    "znpHlnAR_placeholder", // znpHlnAR_thwacker
+    "znpHlnAR_placeholder" // znpHlnAR_bundler
+]
 
 Class.healer.UPGRADES_TIER_3.splice(3, 1) // remove paramedic
 Class.healer.UPGRADES_TIER_3.splice(2, 1) // remove surgeon
