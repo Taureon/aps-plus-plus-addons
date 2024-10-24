@@ -3725,7 +3725,10 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
         Class.znpHlnAR_doper.UPGRADES_TIER_3 = ["znpHlnAR_brisker", "znpHlnAR_dopeseer", "znpHlnAR_mosey", "znpHlnAR_issuer", "znpHlnAR_junkie", "znpHlnAR_doperdrive", "znpHlnAR_autoDoper"]
     Class.pounder.UPGRADES_TIER_3.push("znpHlnAR_subverter")
         Class.destroyer.UPGRADES_TIER_3.push("znpHlnAR_blower", "znpHlnAR_megaTrapper", "znpHlnAR_queller", "znpHlnAR_autoDestroyer", "znpHlnAR_hurler", "znpHlnAR_slinker")
-        Class.artillery.UPGRADES_TIER_3.push("znpHlnAR_queller", "znpHlnAR_forger", "znpHlnAR_force", "znpHlnAR_autoArtillery", "znpHlnAR_foctillery", "znpHlnAR_discharger", "znpHlnAR_recharger")
+        Class.artillery.UPGRADES_TIER_3.push("znpHlnAR_queller", "znpHlnAR_forger", "znpHlnAR_force", "znpHlnAR_autoArtillery", "znpHlnAR_foctillery", "znpHlnAR_discharger")
+        if (desmosAllowed) {
+          Class.artillery.UPGRADES_TIER_3.push("znpHlnAR_recharger")
+        }
         Class.launcher.UPGRADES_TIER_3.push("znpHlnAR_pitcher", "znpHlnAR_cluster", "znpHlnAR_projector", "znpHlnAR_heaver", "znpHlnAR_autoLauncher", "znpHlnAR_hurler", "znpHlnAR_inception")
     Class.trapper.UPGRADES_TIER_2.push("znpHlnAR_pen", "znpHlnAR_mech", "znpHlnAR_machineTrapper", "znpHlnAR_wark")
         Class.trapper.UPGRADES_TIER_3.splice(0, 1) // remove barricade
@@ -3742,6 +3745,9 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
         Class.volute.UPGRADES_TIER_3.push("znpHlnAR_recharger", "znpHlnAR_current", "znpHlnAR_autoVolute")
         Class.helix.UPGRADES_TIER_3.push("znpHlnAR_doubleHelix", "znpHlnAR_spiral", "znpHlnAR_autoHelix")
     }
+    if (desmosAllowed === false) {
+        Class.basic.UPGRADES_TIER_1.splice(7, 1) // remove desmos
+    }
 
 // WIP Upgrade paths
 Class.hewnDouble.UPGRADES_TIER_3 = [
@@ -3757,7 +3763,6 @@ Class.znpHlnAR_doubleHelix.UPGRADES_TIER_3 = [
     "znpHlnAR_tripleHelix",
     "znpHlnAR_autoDoubleHelix",
 ]
-
 
 Class.redistributor.UPGRADES_TIER_3 = [
     "znpHlnAR_placeholder",
