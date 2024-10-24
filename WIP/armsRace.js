@@ -1,7 +1,7 @@
 const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeOver, addBackGunner } = require('../facilitators.js');
 const { base, gunCalcNames, statnames, dfltskl, smshskl } = require('../constants.js');
 const g = require('../gunvals.js');
-Class.znpAR_placeholder = { LABEL: "PLACEHOLDER", COLOR: "black", UPGRADE_COLOR: "black"}
+Class.znpHlnAR_placeholder = { LABEL: "PLACEHOLDER", COLOR: "black", UPGRADE_COLOR: "black"}
 
 // YES I KNOW THE LINE COUNT IS RIDICULOUS I'LL IMPROVE IT LATER OK
 // return
@@ -58,7 +58,7 @@ const makeSurfer = (type, name = -1) => {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "autoswarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -66,7 +66,7 @@ const makeSurfer = (type, name = -1) => {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "autoswarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         }];
     output.GUNS = type.GUNS == null ? cannons : type.GUNS.concat(cannons);
@@ -78,7 +78,7 @@ const makeSuperbird = (type, name = -1, frontRecoilFactor = 1, backRecoilFactor 
     let output = dereference(type);
     // Thrusters
     let backRecoil = 0.5 * backRecoilFactor;
-    let thrusterProperties = { SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: backRecoil }]), TYPE: "bullet", LABEL: gunCalcNames.thruster };
+    let thrusterProperties = { SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster, { recoil: backRecoil }]), TYPE: "bullet", LABEL: "thruster" };
     let shootyBois = [{
             POSITION: [14, 8, 1, 0, 0, 130, 0.6],
             PROPERTIES: thrusterProperties
@@ -146,7 +146,7 @@ const makeTriGuard = (type, name = -1) => {
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.trap]),
             TYPE: "trap",
-            STAT_CALCULATOR: gunCalcNames.trap,
+            STAT_CALCULATOR: "trap",
         },
     },{
         POSITION: [13, 8, 1, 0, 0, 90, 0],
@@ -155,7 +155,7 @@ const makeTriGuard = (type, name = -1) => {
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.trap]),
             TYPE: "trap",
-            STAT_CALCULATOR: gunCalcNames.trap,
+            STAT_CALCULATOR: "trap",
         },
     },{
         POSITION: [13, 8, 1, 0, 0, 270, 0],
@@ -164,7 +164,7 @@ const makeTriGuard = (type, name = -1) => {
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.trap]),
             TYPE: "trap",
-            STAT_CALCULATOR: gunCalcNames.trap,
+            STAT_CALCULATOR: "trap",
         },
     }];
     output.GUNS = type.GUNS == null ? cannons : type.GUNS.concat(cannons);
@@ -185,7 +185,7 @@ const makePenGuard = (type, name = -1) => {
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.trap]),
             TYPE: "trap",
-            STAT_CALCULATOR: gunCalcNames.trap,
+            STAT_CALCULATOR: "trap",
         },
     }];
     output.GUNS = type.GUNS == null ? cannons : type.GUNS.concat(cannons);
@@ -202,8 +202,8 @@ const makeMechGuard = (type, name = -1) => {
             POSITION: [3, 8, 1.7, 15, 0, 180, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap]),
-                TYPE: "znpAR_autoTrap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                TYPE: "znpHlnAR_autoTrap",
+                STAT_CALCULATOR: "trap"
             }
         },
         {
@@ -224,7 +224,7 @@ const makeMachineGuard = (type, name = -1) => {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         }];
     output.GUNS = type.GUNS == null ? cannons : type.GUNS.concat(cannons);
@@ -243,7 +243,7 @@ const makeHybrid = (type, name = -1) => {
             TYPE: ["drone", { INDEPENDENT: true }],
             AUTOFIRE: true,
             SYNCS_SKILLS: true,
-            STAT_CALCULATOR: gunCalcNames.drone,
+            STAT_CALCULATOR: "drone",
             WAIT_TO_CYCLE: false,
             MAX_CHILDREN: 3,
         },
@@ -260,7 +260,7 @@ const makeSwarming = (type, name = -1) => {
         PROPERTIES: {
             SHOOT_SETTINGS: combineStats([g.swarm]),
             TYPE: "autoswarm",
-            STAT_CALCULATOR: gunCalcNames.swarm,
+            STAT_CALCULATOR: "swarm",
         },
     };
     if (type.TURRETS != null) {
@@ -412,8 +412,8 @@ const makeFast = (type, mult = 1.1, name = -1) => {
 }
 
 // Missiles
-Class.znpAR_autoMiniMissile = makeAuto('minimissile')
-Class.znpAR_clusterMissile = {
+Class.znpHlnAR_autoMiniMissile = makeAuto('minimissile')
+Class.znpHlnAR_clusterMissile = {
     PARENT: "minimissile",
     TURRETS: [
         {
@@ -428,7 +428,7 @@ Class.znpAR_clusterMissile = {
                 AUTOFIRE: true,
                 SHOOT_SETTINGS: combineStats([g.basic, g.skimmer, { reload: 0.5 }, g.lowPower, { recoil: 1.35 }, { speed: 1.3, maxSpeed: 1.3 }]),
                 TYPE: ["bullet", { PERSISTS_AFTER_DEATH: true }],
-                STAT_CALCULATOR: gunCalcNames.thruster,
+                STAT_CALCULATOR: "thruster",
             },
         },
         {
@@ -529,7 +529,7 @@ Class.znpAR_clusterMissile = {
         }
     ]
 }
-Class.znpAR_pitcherMissile = {
+Class.znpHlnAR_pitcherMissile = {
     PARENT: "minimissile",
     GUNS: [
         {
@@ -538,7 +538,7 @@ Class.znpAR_pitcherMissile = {
                 AUTOFIRE: true,
                 SHOOT_SETTINGS: combineStats([g.basic, g.skimmer, { reload: 0.5 }, g.lowPower, { recoil: 1.15 }, { speed: 1.3, maxSpeed: 1.3 }]),
                 TYPE: [ "bullet", { PERSISTS_AFTER_DEATH: true } ],
-                STAT_CALCULATOR: gunCalcNames.thruster
+                STAT_CALCULATOR: "thruster"
             }
         },
         {
@@ -547,24 +547,26 @@ Class.znpAR_pitcherMissile = {
                 AUTOFIRE: true,
                 SHOOT_SETTINGS: combineStats([g.basic, g.skimmer, { reload: 0.5 }, g.lowPower, { recoil: 1.15 }, { speed: 1.3, maxSpeed: 1.3 }]),
                 TYPE: [ "bullet", { PERSISTS_AFTER_DEATH: true } ],
-                STAT_CALCULATOR: gunCalcNames.thruster
+                STAT_CALCULATOR: "thruster"
             }
         }
     ]
 }
-Class.znpAR_projectorMissile = makeMulti('minimissile', 2, "Missile")
+Class.znpHlnAR_projectorMissile = makeMulti('minimissile', 2, "Missile")
 
 // Drones
-Class.znpAR_fastDrone = makeFast('drone')
-Class.znpAR_fasterDrone = makeFast('drone', 1.2)
-Class.znpAR_fastSwarm = makeFast('swarm')
-Class.znpAR_fastMinion = makeFast('minion')
-Class.znpAR_turretedFastDrone = makeAuto('znpAR_fastDrone', "Auto-Drone", {type: 'droneAutoTurret'})
-Class.znpAR_swarmingDrone = makeAuto('drone', "Swarm Auto-Swarm", {type: 'znpAR_swarmDroneTurret'})
-Class.znpAR_turretedSwarm = makeAuto('swarm', "Auto-Swarm", {type: 'droneAutoTurret'})
-Class.znpAR_turretedSunchip = makeAuto('sunchip', "Auto-Sunchip", {type: 'droneAutoTurret'})
-Class.znpAR_turretedMinion = makeAuto('minion', "Auto-Minion", {type: 'droneAutoTurret'})
-Class.znpAR_pounderMinion = {
+Class.znpHlnAR_fastDrone = makeFast('drone')
+Class.znpHlnAR_fasterDrone = makeFast('drone', 1.2)
+Class.znpHlnAR_fastestDrone = makeFast('drone', 1.4)
+Class.znpHlnAR_fastSwarm = makeFast('swarm')
+Class.znpHlnAR_fastMinion = makeFast('minion')
+Class.znpHlnAR_turretedFastDrone = makeAuto('znpHlnAR_fastDrone', "Auto-Drone", {type: 'droneAutoTurret'})
+Class.znpHlnAR_swarmingDrone = makeAuto('drone', "Swarm Auto-Swarm", {type: 'znpHlnAR_swarmDroneTurret'})
+Class.znpHlnAR_superSwarmingDrone = makeAuto('drone', "Swarm Auto-Swarm", {type: 'znpHlnAR_superSwarmDroneTurret'})
+Class.znpHlnAR_turretedSwarm = makeAuto('swarm', "Auto-Swarm", {type: 'droneAutoTurret'})
+Class.znpHlnAR_turretedSunchip = makeAuto('sunchip', "Auto-Sunchip", {type: 'droneAutoTurret'})
+Class.znpHlnAR_turretedMinion = makeAuto('minion', "Auto-Minion", {type: 'droneAutoTurret'})
+Class.znpHlnAR_pounderMinion = {
     PARENT: "minion",
     GUNS: [
         {
@@ -579,14 +581,14 @@ Class.znpAR_pounderMinion = {
 }
 
 // Traps
-Class.znpAR_autoTrap = makeAuto('trap')
-Class.znpAR_chargerSetTrap = makeMulti({
+Class.znpHlnAR_autoTrap = makeAuto('trap')
+Class.znpHlnAR_chargerSetTrap = makeMulti({
 	PARENT: "setTrap",
     INDEPENDENT: true,
     TURRETS: [
         {
             POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: "znpAR_chargerSetTrapDeco",
+            TYPE: "znpHlnAR_chargerSetTrapDeco",
         },
     ],
     GUNS: [
@@ -596,14 +598,14 @@ Class.znpAR_chargerSetTrap = makeMulti({
                 SHOOT_SETTINGS: combineStats([g.trap]),
                 TYPE: ["trap", { PERSISTS_AFTER_DEATH: true }],
     			SHOOT_ON_DEATH: true,
-                STAT_CALCULATOR: gunCalcNames.trap
+                STAT_CALCULATOR: "trap"
             }
         }
     ]
 }, 5, "Set Trap")
 
 // Decorations
-Class.znpAR_directorstormDeco = makeMulti({
+Class.znpHlnAR_directorstormDeco = makeMulti({
 	SHAPE: 4,
     GUNS: [
         {
@@ -611,11 +613,19 @@ Class.znpAR_directorstormDeco = makeMulti({
         }
     ]
 }, 2, "", 90)
-Class.znpAR_cruiserdriveDeco = makeDeco(3.5);
-Class.znpAR_chargerSetTrapDeco = makeDeco(5);
+Class.znpHlnAR_cruiserdriveDeco = makeDeco(3.5);
+Class.znpHlnAR_chargerSetTrapDeco = makeDeco(5);
+Class.znpHlnAR_vortexDeco = makeMulti({
+	SHAPE: 4,
+    GUNS: [
+        {
+            POSITION: [7, 7.5, 0.6, 7, 0, 0, 0],
+        }
+    ]
+}, 4, "", 90)
 
 // Turrets
-Class.znpAR_sniper3Gun = {
+Class.znpHlnAR_sniper3Gun = {
   PARENT: "genericTank",
   LABEL: "",
   BODY: {
@@ -647,7 +657,7 @@ Class.znpAR_sniper3Gun = {
     },
   ],
 }
-Class.znpAR_crowbarGun = {
+Class.znpHlnAR_crowbarGun = {
     PARENT: "genericTank",
     LABEL: "",
     BODY: {
@@ -667,11 +677,11 @@ Class.znpAR_crowbarGun = {
         },
     ],
 }
-Class.znpAR_driveAutoTurret = {
+Class.znpHlnAR_driveAutoTurret = {
 	PARENT: "autoTurret",
 	SHAPE: 4
 }
-Class.znpAR_swarmDroneTurret = makeMulti({
+Class.znpHlnAR_swarmDroneTurret = makeMulti({
     PARENT: "genericTank",
     LABEL: "Swarm Turret",
     COLOR: "grey",
@@ -686,14 +696,34 @@ Class.znpAR_swarmDroneTurret = makeMulti({
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             }
         }
     ]
 }, 2)
+Class.znpHlnAR_superSwarmDroneTurret = makeMulti({
+    PARENT: "genericTank",
+    LABEL: "Swarm Turret",
+    COLOR: "grey",
+    INDEPENDENT: true,
+    CONTROLLERS: ['nearestDifferentMaster'],
+    BODY: {
+        FOV: 0.8,
+    },
+    GUNS: [
+        {
+            POSITION: [7, 7.5, 0.6, 7, 4, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.swarm]),
+                TYPE: "swarm",
+                STAT_CALCULATOR: "swarm",
+            }
+        }
+    ]
+}, 4)
 
 // Tier 2 tanks
-Class.znpAR_diesel = {
+Class.znpHlnAR_diesel = {
     PARENT: "genericTank",
     LABEL: "Diesel",
     DANGER: 6,
@@ -707,7 +737,7 @@ Class.znpAR_diesel = {
         },
     ],
 }
-Class.znpAR_directordrive = {
+Class.znpHlnAR_directordrive = {
     PARENT: "genericTank",
     LABEL: "Directordrive",
     DANGER: 6,
@@ -729,13 +759,13 @@ Class.znpAR_directordrive = {
                 TYPE: "turretedDrone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 MAX_CHILDREN: 6,
             },
         },
     ],
 }
-Class.znpAR_doper = {
+Class.znpHlnAR_doper = {
 	PARENT: "genericTank",
 	LABEL: "Doper",
 	DANGER: 6,
@@ -748,10 +778,10 @@ Class.znpAR_doper = {
     		POSITION: [6, 11, 1.3, 7, 0, 0, 0],
     		PROPERTIES: {
       			SHOOT_SETTINGS: combineStats([g.drone]),
-      			TYPE: "znpAR_fastDrone",
+      			TYPE: "znpHlnAR_fastDrone",
       			AUTOFIRE: true,
       			SYNCS_SKILLS: true,
-      			STAT_CALCULATOR: gunCalcNames.drone,
+      			STAT_CALCULATOR: "drone",
       			MAX_CHILDREN: 6
     		}
   		},
@@ -760,7 +790,7 @@ Class.znpAR_doper = {
   		}
   	]
 }
-Class.znpAR_honcho = {
+Class.znpHlnAR_honcho = {
   PARENT: "genericTank",
   LABEL: "Honcho",
   DANGER: 6,
@@ -775,12 +805,12 @@ Class.znpAR_honcho = {
       TYPE: "drone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true,
-      STAT_CALCULATOR: gunCalcNames.drone,
+      STAT_CALCULATOR: "drone",
       MAX_CHILDREN: 3
     }
   }]
 }
-Class.znpAR_machineTrapper = {
+Class.znpHlnAR_machineTrapper = {
     PARENT: "genericTank",
     LABEL: "Machine Trapper",
     DANGER: 6,
@@ -794,12 +824,12 @@ Class.znpAR_machineTrapper = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ],
 }
-Class.znpAR_mech = {
+Class.znpHlnAR_mech = {
     PARENT: "genericTank",
     LABEL: "Mech",
     DANGER: 6,
@@ -812,8 +842,8 @@ Class.znpAR_mech = {
             POSITION: [3, 8, 1.7, 15, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap]),
-                TYPE: "znpAR_autoTrap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                TYPE: "znpHlnAR_autoTrap",
+                STAT_CALCULATOR: "trap"
             }
         },
         {
@@ -821,7 +851,7 @@ Class.znpAR_mech = {
         }
     ]
 }
-Class.znpAR_pen = {
+Class.znpHlnAR_pen = {
     PARENT: "genericTank",
     LABEL: "Pen",
     DANGER: 6,
@@ -839,12 +869,12 @@ Class.znpAR_pen = {
         	PROPERTIES: {
             	SHOOT_SETTINGS: combineStats([g.trap]),
             	TYPE: "trap",
-            	STAT_CALCULATOR: gunCalcNames.trap,
+            	STAT_CALCULATOR: "trap",
         	},
     	}
     ]
 }
-Class.znpAR_wark = {
+Class.znpHlnAR_wark = {
     PARENT: "genericTank",
     LABEL: "Wark",
     STAT_NAMES: statnames.trap,
@@ -858,7 +888,7 @@ Class.znpAR_wark = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -869,14 +899,14 @@ Class.znpAR_wark = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ],
 }
 
 // Tier 3 tanks
-Class.znpAR_baltimore = {
+Class.znpHlnAR_baltimore = {
     PARENT: "genericTank",
     LABEL: "Baltimore",
     DANGER: 7,
@@ -891,7 +921,7 @@ Class.znpAR_baltimore = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm, { reload: 1.2, size: 1.35, health: 1.75, speed: 1.125 }]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -899,12 +929,12 @@ Class.znpAR_baltimore = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm, { reload: 1.2, size: 1.35, health: 1.75, speed: 1.125 }]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
     ], 
 }
-Class.znpAR_battery = {
+Class.znpHlnAR_battery = {
     PARENT: "genericTank",
     LABEL: "Battery",
     DANGER: 7,
@@ -946,7 +976,7 @@ Class.znpAR_battery = {
         },
     ]
 }
-Class.znpAR_bentGunner = {
+Class.znpHlnAR_bentGunner = {
     PARENT: "genericTank",
     LABEL: "Bent Gunner",
     DANGER: 7,
@@ -995,7 +1025,7 @@ Class.znpAR_bentGunner = {
         },
     ],
 }
-Class.znpAR_bentMinigun = {
+Class.znpHlnAR_bentMinigun = {
     PARENT: "genericTank",
     LABEL: "Bent Minigun",
     DANGER: 7,
@@ -1054,9 +1084,9 @@ Class.znpAR_bentMinigun = {
         },
     ],
 };
-Class.znpAR_buttbuttin = addBackGunner('assassin', "Buttbuttin")
-Class.znpAR_blower = addBackGunner('destroyer', "Blower")
-Class.znpAR_brisker = {
+Class.znpHlnAR_buttbuttin = addBackGunner('assassin', "Buttbuttin")
+Class.znpHlnAR_blower = addBackGunner('destroyer', "Blower")
+Class.znpHlnAR_brisker = {
 	PARENT: "genericTank",
 	LABEL: "Brisker",
 	DANGER: 7,
@@ -1069,10 +1099,10 @@ Class.znpAR_brisker = {
     		POSITION: [6, 11, 1.3, 7, 0, 0, 0],
     		PROPERTIES: {
       			SHOOT_SETTINGS: combineStats([g.drone]),
-      			TYPE: "znpAR_fasterDrone",
+      			TYPE: "znpHlnAR_fasterDrone",
       			AUTOFIRE: true,
       			SYNCS_SKILLS: true,
-      			STAT_CALCULATOR: gunCalcNames.drone,
+      			STAT_CALCULATOR: "drone",
       			MAX_CHILDREN: 6
     		}
   		},
@@ -1081,8 +1111,8 @@ Class.znpAR_brisker = {
   		}
   	]
 }
-Class.znpAR_captain = makeMulti('spawner', 2, "Captain", 90)
-Class.znpAR_charger = {
+Class.znpHlnAR_captain = makeMulti('spawner', 2, "Captain", 90)
+Class.znpHlnAR_charger = {
     PARENT: "genericTank",
     LABEL: "Charger",
     DANGER: 7,
@@ -1099,8 +1129,8 @@ Class.znpAR_charger = {
             POSITION: [2, 12, 1.1, 18, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.setTrap]),
-                TYPE: "znpAR_chargerSetTrap",
-                STAT_CALCULATOR: gunCalcNames.block
+                TYPE: "znpHlnAR_chargerSetTrap",
+                STAT_CALCULATOR: "block"
             }
         },
         {
@@ -1112,7 +1142,7 @@ Class.znpAR_charger = {
         }
     ]
 }
-Class.znpAR_cluster = {
+Class.znpHlnAR_cluster = {
     PARENT: "genericTank",
     LABEL: "Cluster",
     DANGER: 7,
@@ -1127,13 +1157,13 @@ Class.znpAR_cluster = {
             POSITION: [17, 13, 1.2, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery]),
-                TYPE: "znpAR_clusterMissile",
-                STAT_CALCULATOR: gunCalcNames.sustained,
+                TYPE: "znpHlnAR_clusterMissile",
+                STAT_CALCULATOR: "sustained",
             },
         },
     ],
 }
-Class.znpAR_cog = {
+Class.znpHlnAR_cog = {
     PARENT: "genericTank",
     LABEL: "Cog",
     DANGER: 7,
@@ -1146,8 +1176,8 @@ Class.znpAR_cog = {
             POSITION: [3, 8, 1.7, 15, 4.5, 10, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
-                TYPE: "znpAR_autoTrap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                TYPE: "znpHlnAR_autoTrap",
+                STAT_CALCULATOR: "trap"
             }
         },
         {
@@ -1160,8 +1190,8 @@ Class.znpAR_cog = {
             POSITION: [3, 8, 1.7, 15, -4.5, -10, 0.5],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
-                TYPE: "znpAR_autoTrap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                TYPE: "znpHlnAR_autoTrap",
+                STAT_CALCULATOR: "trap"
             }
         },
         {
@@ -1169,7 +1199,7 @@ Class.znpAR_cog = {
         }
     ]
 }
-Class.znpAR_combo = {
+Class.znpHlnAR_combo = {
   PARENT: "genericTank",
   LABEL: "Combo",
   DANGER: 7,
@@ -1214,7 +1244,7 @@ Class.znpAR_combo = {
     },
   ],
 }
-Class.znpAR_courser = {
+Class.znpHlnAR_courser = {
     PARENT: "genericTank",
     LABEL: "Courser",
     DANGER: 7,
@@ -1244,7 +1274,7 @@ Class.znpAR_courser = {
         }
     ]
 }
-Class.znpAR_crowbar = {
+Class.znpHlnAR_crowbar = {
     PARENT: "genericTank",
     LABEL: "Crowbar",
     DANGER: 7,
@@ -1262,19 +1292,19 @@ Class.znpAR_crowbar = {
     TURRETS: [
         {
             POSITION: [5.5, 20, 0, 0, 190, 1],
-            TYPE: "znpAR_crowbarGun"
+            TYPE: "znpHlnAR_crowbarGun"
         },
         {
             POSITION: [5.5, 30, 0, 0, 190, 1],
-            TYPE: "znpAR_crowbarGun"
+            TYPE: "znpHlnAR_crowbarGun"
         },
         {
             POSITION: [5.5, 40, 0, 0, 190, 1],
-            TYPE: "znpAR_crowbarGun"
+            TYPE: "znpHlnAR_crowbarGun"
         }
     ]
 }
-Class.znpAR_cruiserdrive = {
+Class.znpHlnAR_cruiserdrive = {
     PARENT: "genericTank",
     LABEL: "Cruiserdrive",
     DANGER: 7,
@@ -1286,7 +1316,7 @@ Class.znpAR_cruiserdrive = {
     TURRETS: [
         {
             POSITION: [8, 0, 0, 0, 360, 1],
-            TYPE: "znpAR_cruiserdriveDeco",
+            TYPE: "znpHlnAR_cruiserdriveDeco",
         },
     ],
     GUNS: [
@@ -1294,21 +1324,21 @@ Class.znpAR_cruiserdrive = {
             POSITION: [7, 7.5, 0.6, 7, 4, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
-                TYPE: "znpAR_turretedSwarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                TYPE: "znpHlnAR_turretedSwarm",
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
             POSITION: [7, 7.5, 0.6, 7, -4, 0, 0.5],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
-                TYPE: "znpAR_turretedSwarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                TYPE: "znpHlnAR_turretedSwarm",
+                STAT_CALCULATOR: "swarm",
             },
         },
     ],
 }
-Class.znpAR_recharger = {
+Class.znpHlnAR_recharger = {
     PARENT: "genericTank",
     LABEL: "Recharger",
     DANGER: 7,
@@ -1334,7 +1364,7 @@ Class.znpAR_recharger = {
             POSITION: [20, 13, 0.8, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.desmos, g.pounder]),
-                TYPE: ["bullet", {MOTION_TYPE: "desmos"}],
+                TYPE: ["bullet", {CONTROLLERS: ["snake"]}],
                 LABEL: "Heavy",
             },
         },
@@ -1346,7 +1376,7 @@ Class.znpAR_recharger = {
         },
     ],
 }
-Class.znpAR_deathStar = makeMulti({
+Class.znpHlnAR_deathStar = makeMulti({
     PARENT: "genericTank",
     GUNS: [
         {
@@ -1365,7 +1395,7 @@ Class.znpAR_deathStar = makeMulti({
         }
     ]
 }, 3, "Death Star")
-Class.znpAR_dieselTrapper = {
+Class.znpHlnAR_dieselTrapper = {
     PARENT: "genericTank",
     LABEL: "Diesel Trapper",
     DANGER: 7,
@@ -1379,12 +1409,12 @@ Class.znpAR_dieselTrapper = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, { reload: 0.375, recoil: 0.8, shudder: 1.2, size: 0.625, health: 0.95, damage: 0.9, maxSpeed: 0.8, spray: 1.3 }, {reload: 0.625, size: 0.625, spray: 0.75}]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ],
 }
-Class.znpAR_directorstorm = {
+Class.znpHlnAR_directorstorm = {
     PARENT: "genericTank",
     LABEL: "Directorstorm",
     DANGER: 6,
@@ -1395,7 +1425,7 @@ Class.znpAR_directorstorm = {
     TURRETS: [
         {
             POSITION: [9, 0, 0, 0, 360, 1],
-            TYPE: "znpAR_directorstormDeco",
+            TYPE: "znpHlnAR_directorstormDeco",
         },
     ],
     GUNS: [
@@ -1403,16 +1433,16 @@ Class.znpAR_directorstorm = {
             POSITION: [6, 11, 1.3, 7, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone]),
-                TYPE: "znpAR_swarmingDrone",
+                TYPE: "znpHlnAR_swarmingDrone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 MAX_CHILDREN: 6,
             },
         },
     ],
 }
-Class.znpAR_discharger = {
+Class.znpHlnAR_discharger = {
     PARENT: "genericTank",
     LABEL: "Discharger",
     DANGER: 7,
@@ -1449,7 +1479,7 @@ Class.znpAR_discharger = {
         },
     ],
 }
-Class.znpAR_doperdrive = {
+Class.znpHlnAR_doperdrive = {
   PARENT: "genericTank",
   LABEL: "Doperdrive",
   DANGER: 7,
@@ -1467,17 +1497,17 @@ Class.znpAR_doperdrive = {
     POSITION: [6, 11, 1.3, 7, 0, 0, 0],
     PROPERTIES: {
       SHOOT_SETTINGS: combineStats([g.drone]),
-      TYPE: "znpAR_turretedFastDrone",
+      TYPE: "znpHlnAR_turretedFastDrone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true,
-      STAT_CALCULATOR: gunCalcNames.drone,
+      STAT_CALCULATOR: "drone",
       MAX_CHILDREN: 6
     }
   }, {
     POSITION: [3, 3, 0.35, 11, 0, 0, 0]
   }]
 }
-Class.znpAR_dopeseer = makeMulti({
+Class.znpHlnAR_dopeseer = makeMulti({
   PARENT: "genericTank",
   DANGER: 7,
   STAT_NAMES: statnames.drone,
@@ -1489,16 +1519,16 @@ Class.znpAR_dopeseer = makeMulti({
     POSITION: [6, 12, 1.2, 8, 0, 0, 0],
     PROPERTIES: {
       SHOOT_SETTINGS: combineStats([g.drone, g.overseer]),
-      TYPE: "znpAR_fastDrone",
+      TYPE: "znpHlnAR_fastDrone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true,
-      STAT_CALCULATOR: gunCalcNames.drone,
+      STAT_CALCULATOR: "drone",
     }
   }, {
     POSITION: [4, 3, 0.35, 11, 0, 0, 0]
   }]
 }, 2, "Dopeseer", 90)
-Class.znpAR_doubleFlankTwin = makeMulti({
+Class.znpHlnAR_doubleFlankTwin = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     GUNS: [
@@ -1525,9 +1555,9 @@ Class.znpAR_doubleFlankTwin = makeMulti({
         },
     ],
 }, 2, "Double Flank Twin")
-Class.znpAR_doubleGunner = makeMulti('gunner', 2)
-Class.znpAR_doubleHelix = makeMulti('helix', 2)
-Class.znpAR_encircler = {
+Class.znpHlnAR_doubleGunner = makeMulti('gunner', 2)
+Class.znpHlnAR_doubleHelix = makeMulti('helix', 2)
+Class.znpHlnAR_encircler = {
     PARENT: "genericTank",
     LABEL: "Encircler",
     DANGER: 7,
@@ -1548,12 +1578,12 @@ Class.znpAR_encircler = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ],
 }
-Class.znpAR_enforcer = {
+Class.znpHlnAR_enforcer = {
     PARENT: "genericTank",
     LABEL: "Enforcer",
     DANGER: 7,
@@ -1577,7 +1607,7 @@ Class.znpAR_enforcer = {
         }
     ]
 }
-Class.znpAR_equalizer = {
+Class.znpHlnAR_equalizer = {
     PARENT: "genericTank",
     LABEL: "Equalizer",
     DANGER: 7,
@@ -1624,7 +1654,7 @@ Class.znpAR_equalizer = {
         }
     ]
 }
-Class.znpAR_expeller = {
+Class.znpHlnAR_expeller = {
     PARENT: "genericTank",
     LABEL: "Expeller",
     DANGER: 7,
@@ -1638,7 +1668,7 @@ Class.znpAR_expeller = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -1649,12 +1679,12 @@ Class.znpAR_expeller = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ]
 }
-Class.znpAR_faucet = {
+Class.znpHlnAR_faucet = {
     PARENT: "genericTank",
     LABEL: "Faucet",
     DANGER: 7,
@@ -1664,7 +1694,7 @@ Class.znpAR_faucet = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -1672,7 +1702,7 @@ Class.znpAR_faucet = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -1691,7 +1721,7 @@ Class.znpAR_faucet = {
         }
     ]
 }
-Class.znpAR_foamer = {
+Class.znpHlnAR_foamer = {
     PARENT: "genericTank",
     LABEL: "Foamer",
     DANGER: 7,
@@ -1712,7 +1742,7 @@ Class.znpAR_foamer = {
         }
     ]
 }
-Class.znpAR_foctillery = {
+Class.znpHlnAR_foctillery = {
     PARENT: "genericTank",
     LABEL: "Foctillery",
     DANGER: 7,
@@ -1743,7 +1773,7 @@ Class.znpAR_foctillery = {
         },
     ],
 }
-Class.znpAR_foreman = makeMulti({
+Class.znpHlnAR_foreman = makeMulti({
   PARENT: "genericTank",
   DANGER: 7,
   STAT_NAMES: statnames.drone,
@@ -1757,12 +1787,12 @@ Class.znpAR_foreman = makeMulti({
       TYPE: "drone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true,
-      STAT_CALCULATOR: gunCalcNames.drone,
+      STAT_CALCULATOR: "drone",
       MAX_CHILDREN: 3
     }
   }]
 }, 2, "Foreman", 90)
-Class.znpAR_forger = {
+Class.znpHlnAR_forger = {
     PARENT: "genericTank",
     LABEL: "Forger",
     DANGER: 7,
@@ -1792,12 +1822,12 @@ Class.znpAR_forger = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.setTrap]),
                 TYPE: "setTrap",
-                STAT_CALCULATOR: gunCalcNames.block,
+                STAT_CALCULATOR: "block",
             },
         },
     ],
 }
-Class.znpAR_foundry = {
+Class.znpHlnAR_foundry = {
     PARENT: "genericTank",
     LABEL: "Foundry",
     DANGER: 7,
@@ -1811,12 +1841,12 @@ Class.znpAR_foundry = {
             POSITION: [4.5, 15, 1, 10.5, 0, 0, 0],
         },
         {
-            POSITION: [1, 17, 1, 15, 0, 0, 0],
+            POSITION: [1, 17, 1, 15, 0, 0, 1],
             PROPERTIES: {
                 MAX_CHILDREN: 3,
-                SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory, { reload: 1.2, size: 1.35, health: 1.75, speed: 1.125 }]),
+                SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory, { reload: 3, size: 1.1, health: 1.75, speed: 0.825 }]),
                 TYPE: "minion",
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
             },
@@ -1826,7 +1856,7 @@ Class.znpAR_foundry = {
         },
     ],
 }
-Class.znpAR_frother = {
+Class.znpHlnAR_frother = {
     PARENT: "genericTank",
     LABEL: "Frother",
     DANGER: 7,
@@ -1847,12 +1877,12 @@ Class.znpAR_frother = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                STAT_CALCULATOR: "trap"
             }
         }
     ]
 }
-Class.znpAR_hangar = {
+Class.znpHlnAR_hangar = {
     PARENT: "genericTank",
     LABEL: "Hangar",
     DANGER: 7,
@@ -1867,7 +1897,7 @@ Class.znpAR_hangar = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -1875,7 +1905,7 @@ Class.znpAR_hangar = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -1887,7 +1917,7 @@ Class.znpAR_hangar = {
                 MAX_CHILDREN: 4,
                 SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
                 TYPE: "minion",
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
             },
@@ -1897,7 +1927,7 @@ Class.znpAR_hangar = {
         },
     ],
 }
-Class.znpAR_honchodrive = {
+Class.znpHlnAR_honchodrive = {
   PARENT: "genericTank",
   LABEL: "Honchodrive",
   DANGER: 7,
@@ -1918,12 +1948,12 @@ Class.znpAR_honchodrive = {
       TYPE: "turretedDrone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true,
-      STAT_CALCULATOR: gunCalcNames.drone,
+      STAT_CALCULATOR: "drone",
       MAX_CHILDREN: 3
     }
   }]
 }
-Class.znpAR_hurler = {
+Class.znpHlnAR_hurler = {
     PARENT: "genericTank",
     LABEL: "Hurler",
     DANGER: 6,
@@ -1939,12 +1969,12 @@ Class.znpAR_hurler = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.destroyer, g.artillery, g.artillery]),
                 TYPE: "minimissile",
-                STAT_CALCULATOR: gunCalcNames.sustained,
+                STAT_CALCULATOR: "sustained",
             },
         },
     ],
 }
-Class.znpAR_hutch = {
+Class.znpHlnAR_hutch = {
     PARENT: "genericTank",
     LABEL: "Hutch",
     STAT_NAMES: statnames.mixed,
@@ -1962,7 +1992,7 @@ Class.znpAR_hutch = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -1977,12 +2007,12 @@ Class.znpAR_hutch = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ],
 }
-Class.znpAR_incarcerator = makePenGuard({
+Class.znpHlnAR_incarcerator = makePenGuard({
     PARENT: "genericTank",
     STAT_NAMES: statnames.mixed,
     GUNS: [
@@ -1995,7 +2025,7 @@ Class.znpAR_incarcerator = makePenGuard({
         }
     ]
 }, "Incarcerator")
-Class.znpAR_inception = {
+Class.znpHlnAR_inception = {
     PARENT: "genericTank",
     LABEL: "Inception",
     DANGER: 7,
@@ -2010,8 +2040,8 @@ Class.znpAR_inception = {
             POSITION: [17, 13, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery]),
-                TYPE: "znpAR_autoMiniMissile",
-                STAT_CALCULATOR: gunCalcNames.sustained,
+                TYPE: "znpHlnAR_autoMiniMissile",
+                STAT_CALCULATOR: "sustained",
             },
         },
         {
@@ -2023,7 +2053,7 @@ Class.znpAR_inception = {
         }
     ]
 }
-Class.znpAR_issuer = {
+Class.znpHlnAR_issuer = {
   PARENT: "genericTank",
   LABEL: "Issuer",
   DANGER: 7,
@@ -2039,8 +2069,8 @@ Class.znpAR_issuer = {
     PROPERTIES: {
       MAX_CHILDREN: 4,
       SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
-      TYPE: "znpAR_fastMinion",
-      STAT_CALCULATOR: gunCalcNames.drone,
+      TYPE: "znpHlnAR_fastMinion",
+      STAT_CALCULATOR: "drone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true
     }
@@ -2050,7 +2080,7 @@ Class.znpAR_issuer = {
     POSITION: [3, 3, 0.35, 11, 0, 0, 0]
   }]
 }
-Class.znpAR_jalopy = {
+Class.znpHlnAR_jalopy = {
     PARENT: "genericTank",
     LABEL: "Jalopy",
     DANGER: 7,
@@ -2064,7 +2094,7 @@ Class.znpAR_jalopy = {
         },
     ],
 }
-Class.znpAR_junkie = {
+Class.znpHlnAR_junkie = {
   PARENT: "genericTank",
   LABEL: "Junkie",
   DANGER: 7,
@@ -2076,17 +2106,17 @@ Class.znpAR_junkie = {
     POSITION: [13, 13, 1.4, 0, 0, 0, 0],
     PROPERTIES: {
       SHOOT_SETTINGS: combineStats([g.drone, { size: 1.35, health: 1.75, speed: 1.125 }]),
-      TYPE: "znpAR_fastDrone",
+      TYPE: "znpHlnAR_fastDrone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true,
-      STAT_CALCULATOR: gunCalcNames.drone,
+      STAT_CALCULATOR: "drone",
       MAX_CHILDREN: 3
     }
   }, {
     POSITION: [3, 3, 0.35, 11, 0, 0, 0]
   }]
 }
-Class.znpAR_laborer = {
+Class.znpHlnAR_laborer = {
     PARENT: "genericTank",
     LABEL: "Laborer",
     DANGER: 7,
@@ -2105,7 +2135,7 @@ Class.znpAR_laborer = {
                 MAX_CHILDREN: 4,
                 SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
                 TYPE: ["minion", {INVISIBLE: [0.06, 0.03]}],
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
             },
@@ -2115,7 +2145,7 @@ Class.znpAR_laborer = {
         },
     ],
 }
-Class.znpAR_machineGuard = makeMachineGuard({
+Class.znpHlnAR_machineGuard = makeMachineGuard({
     PARENT: "genericTank",
     LABEL: "Machine",
     STAT_NAMES: statnames.mixed,
@@ -2129,7 +2159,7 @@ Class.znpAR_machineGuard = makeMachineGuard({
         }
     ]
 })
-Class.znpAR_machineMech = {
+Class.znpHlnAR_machineMech = {
     PARENT: "genericTank",
     LABEL: "Machine Mech",
     DANGER: 7,
@@ -2142,8 +2172,8 @@ Class.znpAR_machineMech = {
             POSITION: [3, 13, 1.3, 15, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}]),
-                TYPE: "znpAR_autoTrap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                TYPE: "znpHlnAR_autoTrap",
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -2151,7 +2181,7 @@ Class.znpAR_machineMech = {
         }
     ]
 }
-Class.znpAR_mechGuard = makeMechGuard({
+Class.znpHlnAR_mechGuard = makeMechGuard({
     PARENT: "genericTank",
     LABEL: "Mech",
     STAT_NAMES: statnames.mixed,
@@ -2165,7 +2195,7 @@ Class.znpAR_mechGuard = makeMechGuard({
         }
     ]
 })
-Class.znpAR_megaHunter = {
+Class.znpHlnAR_megaHunter = {
     PARENT: "genericTank",
     LABEL: "Mega Hunter",
     DANGER: 7,
@@ -2192,7 +2222,7 @@ Class.znpAR_megaHunter = {
         }
     ]
 }
-Class.znpAR_megaSpawner = {
+Class.znpHlnAR_megaSpawner = {
     PARENT: "genericTank",
     LABEL: "Mega Spawner",
     DANGER: 7,
@@ -2210,8 +2240,8 @@ Class.znpAR_megaSpawner = {
             PROPERTIES: {
                 MAX_CHILDREN: 4,
                 SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory, { size: 0.75 }]),
-                TYPE: "znpAR_pounderMinion",
-                STAT_CALCULATOR: gunCalcNames.drone,
+                TYPE: "znpHlnAR_pounderMinion",
+                STAT_CALCULATOR: "drone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
             },
@@ -2221,7 +2251,7 @@ Class.znpAR_megaSpawner = {
         },
     ],
 }
-Class.znpAR_megaTrapper = {
+Class.znpHlnAR_megaTrapper = {
     PARENT: "genericTank",
     LABEL: "Mega Trapper",
     DANGER: 7,
@@ -2235,12 +2265,12 @@ Class.znpAR_megaTrapper = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.pounder, g.destroyer]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                STAT_CALCULATOR: "trap"
             }
         }
     ]
 }
-Class.znpAR_mingler = makeMulti({
+Class.znpHlnAR_mingler = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     GUNS: [
@@ -2274,7 +2304,7 @@ Class.znpAR_mingler = makeMulti({
         }
     ]
 }, 3, "Mingler")
-Class.znpAR_mosey = {
+Class.znpHlnAR_mosey = {
     PARENT: "genericTank",
     LABEL: "Mosey",
     DANGER: 7,
@@ -2288,16 +2318,16 @@ Class.znpAR_mosey = {
             POSITION: [7, 7.5, 0.6, 7, 4, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
-                TYPE: "znpAR_fastSwarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                TYPE: "znpHlnAR_fastSwarm",
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
             POSITION: [7, 7.5, 0.6, 7, -4, 0, 0.5],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
-                TYPE: "znpAR_fastSwarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                TYPE: "znpHlnAR_fastSwarm",
+                STAT_CALCULATOR: "swarm",
             },
         },{
     POSITION: [8, 3, 0.35, 7, -4, 0, 0]
@@ -2306,7 +2336,7 @@ Class.znpAR_mosey = {
   },
     ], 
 }
-Class.znpAR_operator = {
+Class.znpHlnAR_operator = {
     PARENT: "genericTank",
     LABEL: "Operator",
     DANGER: 7,
@@ -2323,8 +2353,8 @@ Class.znpAR_operator = {
             POSITION: [3, 8, 1.7, 15, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap]),
-                TYPE: "znpAR_autoTrap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                TYPE: "znpHlnAR_autoTrap",
+                STAT_CALCULATOR: "trap"
             }
         },
         {
@@ -2332,8 +2362,8 @@ Class.znpAR_operator = {
         }
     ]
 }
-Class.znpAR_peashooter = makeSwarming('trapGuard', "Peashooter")
-Class.znpAR_pentaseer = {
+Class.znpHlnAR_peashooter = makeSwarming('trapGuard', "Peashooter")
+Class.znpHlnAR_pentaseer = {
     PARENT: "genericTank",
     LABEL: "Pentaseer",
     DANGER: 7,
@@ -2351,7 +2381,7 @@ Class.znpAR_pentaseer = {
                 TYPE: "demonchip",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.necro,
+                STAT_CALCULATOR: "necro",
             },
         },
         {
@@ -2361,12 +2391,12 @@ Class.znpAR_pentaseer = {
                 TYPE: "demonchip",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.necro,
+                STAT_CALCULATOR: "necro",
             },
         },
     ],
 }
-Class.znpAR_pitcher = {
+Class.znpHlnAR_pitcher = {
     PARENT: "genericTank",
     LABEL: "Pitcher",
     DANGER: 7,
@@ -2381,8 +2411,8 @@ Class.znpAR_pitcher = {
             POSITION: [17, 13, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery]),
-                TYPE: "znpAR_pitcherMissile",
-                STAT_CALCULATOR: gunCalcNames.sustained,
+                TYPE: "znpHlnAR_pitcherMissile",
+                STAT_CALCULATOR: "sustained",
             },
         },
         {
@@ -2393,7 +2423,7 @@ Class.znpAR_pitcher = {
         },
     ],
 }
-Class.znpAR_prober = {
+Class.znpHlnAR_prober = {
     PARENT: "genericTank",
     LABEL: "Prober",
     DANGER: 7,
@@ -2421,7 +2451,7 @@ Class.znpAR_prober = {
         }
     ]
 }
-Class.znpAR_productionist = {
+Class.znpHlnAR_productionist = {
     PARENT: "genericTank",
     LABEL: "Productionist",
     DANGER: 7,
@@ -2439,7 +2469,7 @@ Class.znpAR_productionist = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm, g.babyfactory, { size: 1.2, reload: 1.5 }]),
                 TYPE: "tinyMinion",
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 SYNCS_SKILLS: true,
             },
         },
@@ -2454,7 +2484,7 @@ Class.znpAR_productionist = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm, g.babyfactory, { size: 1.2, reload: 1.5 }]),
                 TYPE: "tinyMinion",
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 SYNCS_SKILLS: true,
             },
         },
@@ -2463,7 +2493,7 @@ Class.znpAR_productionist = {
         },
     ],
 }
-Class.znpAR_projector = {
+Class.znpHlnAR_projector = {
     PARENT: "genericTank",
     LABEL: "Projector",
     DANGER: 7,
@@ -2484,13 +2514,13 @@ Class.znpAR_projector = {
             POSITION: [17, 10, 1, 0, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.pounder, g.artillery, g.artillery, { size: 1.3 }]),
-                TYPE: "znpAR_projectorMissile",
-                STAT_CALCULATOR: gunCalcNames.sustained,
+                TYPE: "znpHlnAR_projectorMissile",
+                STAT_CALCULATOR: "sustained",
             },
         },
     ],
 }
-Class.znpAR_quadAngle = {
+Class.znpHlnAR_quadAngle = {
     PARENT: "genericTank",
     LABEL: "Quad-Angle",
     BODY: {
@@ -2515,7 +2545,7 @@ Class.znpAR_quadAngle = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
-                LABEL: gunCalcNames.thruster,
+                LABEL: "thruster",
             },
         },
         {
@@ -2523,12 +2553,12 @@ Class.znpAR_quadAngle = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
-                LABEL: gunCalcNames.thruster,
+                LABEL: "thruster",
             },
         },
     ],
 }
-Class.znpAR_queller = {
+Class.znpHlnAR_queller = {
     PARENT: "genericTank",
     LABEL: "Queller",
     DANGER: 7,
@@ -2559,7 +2589,7 @@ Class.znpAR_queller = {
         },
     ],
 }
-Class.znpAR_railgun = {
+Class.znpHlnAR_railgun = {
   PARENT: "genericTank",
   LABEL: "Railgun",
   DANGER: 7,
@@ -2583,7 +2613,7 @@ Class.znpAR_railgun = {
     }
   ]
 }
-Class.znpAR_rimfire = {
+Class.znpHlnAR_rimfire = {
     PARENT: "genericTank",
     LABEL: "Rimfire",
     DANGER: 7,
@@ -2621,7 +2651,7 @@ Class.znpAR_rimfire = {
         },
     ],
 }
-Class.znpAR_slinker = {
+Class.znpHlnAR_slinker = {
     PARENT: "genericTank",
     LABEL: "Slinker",
     DANGER: 7,
@@ -2637,7 +2667,7 @@ Class.znpAR_slinker = {
         },
     ],
 }
-Class.znpAR_sniper3 = {
+Class.znpHlnAR_sniper3 = {
   PARENT: "genericTank",
   LABEL: "Sniper-3",
   DANGER: 7,
@@ -2649,19 +2679,19 @@ Class.znpAR_sniper3 = {
   TURRETS: [
     {
       POSITION: [13, 8, 0, 0, 170, 0],
-      TYPE: "znpAR_sniper3Gun",
+      TYPE: "znpHlnAR_sniper3Gun",
     },
     {
       POSITION: [13, 8, 0, 120, 170, 0],
-      TYPE: "znpAR_sniper3Gun",
+      TYPE: "znpHlnAR_sniper3Gun",
     },
     {
       POSITION: [13, 8, 0, 240, 170, 0],
-      TYPE: "znpAR_sniper3Gun",
+      TYPE: "znpHlnAR_sniper3Gun",
     },
   ],
 }
-Class.znpAR_spawnerdrive = {
+Class.znpHlnAR_spawnerdrive = {
   PARENT: "genericTank",
   LABEL: "Spawnerdrive",
   DANGER: 7,
@@ -2683,8 +2713,8 @@ Class.znpAR_spawnerdrive = {
     PROPERTIES: {
       MAX_CHILDREN: 4,
       SHOOT_SETTINGS: combineStats([g.factory, g.babyfactory]),
-      TYPE: "znpAR_turretedMinion",
-      STAT_CALCULATOR: gunCalcNames.drone,
+      TYPE: "znpHlnAR_turretedMinion",
+      STAT_CALCULATOR: "drone",
       AUTOFIRE: true,
       SYNCS_SKILLS: true
     }
@@ -2692,7 +2722,7 @@ Class.znpAR_spawnerdrive = {
     POSITION: [11.5, 12, 1, 0, 0, 0, 0]
   }]
 }
-Class.znpAR_splitShot = {
+Class.znpHlnAR_splitShot = {
     PARENT: "genericTank",
     LABEL: "Split Shot",
     DANGER: 7,
@@ -2737,7 +2767,7 @@ Class.znpAR_splitShot = {
         }
     ]
 }
-Class.znpAR_stall = {
+Class.znpHlnAR_stall = {
     PARENT: "genericTank",
     LABEL: "Stall",
     DANGER: 7,
@@ -2762,12 +2792,12 @@ Class.znpAR_stall = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.setTrap]),
                 TYPE: "setTrap",
-                STAT_CALCULATOR: gunCalcNames.block
+                STAT_CALCULATOR: "block"
             }
         }
     ]
 }
-Class.znpAR_stormer = {
+Class.znpHlnAR_stormer = {
     PARENT: "genericTank",
     LABEL: "Stormer",
     DANGER: 7,
@@ -2798,7 +2828,7 @@ Class.znpAR_stormer = {
         }
     ],
 }
-Class.znpAR_subverter = {
+Class.znpHlnAR_subverter = {
     PARENT: "genericTank",
     LABEL: "Subverter",
     DANGER: 7,
@@ -2829,7 +2859,7 @@ Class.znpAR_subverter = {
         }
     ]
 }
-Class.znpAR_triHealer = makeMulti({
+Class.znpHlnAR_triHealer = makeMulti({
     PARENT: "genericTank",
     STAT_NAMES: statnames.heal,
     TURRETS: [
@@ -2851,10 +2881,10 @@ Class.znpAR_triHealer = makeMulti({
         }
     ]
 }, 3, "Tri-Healer")
-Class.znpAR_triMachine = makeMulti('znpAR_machineTrapper', 3, "Tri-Machine")
-Class.znpAR_triMech = makeMulti('znpAR_mech', 3, "Tri-Mech")
-Class.znpAR_triPen = makeMulti('znpAR_pen', 3, "Tri-Pen")
-Class.znpAR_triTrapGuard = makeTriGuard({
+Class.znpHlnAR_triMachine = makeMulti('znpHlnAR_machineTrapper', 3, "Tri-Machine")
+Class.znpHlnAR_triMech = makeMulti('znpHlnAR_mech', 3, "Tri-Mech")
+Class.znpHlnAR_triPen = makeMulti('znpHlnAR_pen', 3, "Tri-Pen")
+Class.znpHlnAR_triTrapGuard = makeTriGuard({
     PARENT: "genericTank",
     LABEL: "Trap",
     STAT_NAMES: statnames.mixed,
@@ -2868,7 +2898,7 @@ Class.znpAR_triTrapGuard = makeTriGuard({
         }
     ]
 })
-Class.znpAR_underdrive = makeMulti({
+Class.znpHlnAR_underdrive = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     STAT_NAMES: statnames.drone,
@@ -2888,15 +2918,15 @@ Class.znpAR_underdrive = makeMulti({
             POSITION: [5.25, 12, 1.2, 8, 0, 0, 0],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.drone, g.sunchip]),
-                TYPE: "znpAR_turretedSunchip",
+                TYPE: "znpHlnAR_turretedSunchip",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.necro,
+                STAT_CALCULATOR: "necro",
             }
         }
     ]
 }, 2, "Underdrive", 90)
-Class.znpAR_volley = {
+Class.znpHlnAR_volley = {
     PARENT: "genericTank",
     LABEL: "Volley",
     DANGER: 7,
@@ -2931,7 +2961,7 @@ Class.znpAR_volley = {
         }
     ]
 }
-Class.znpAR_waarrk = {
+Class.znpHlnAR_waarrk = {
     PARENT: "genericTank",
     LABEL: "Waarrk",
     DANGER: 7,
@@ -2944,7 +2974,7 @@ Class.znpAR_waarrk = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.tripleShot]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -2955,7 +2985,7 @@ Class.znpAR_waarrk = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.tripleShot]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -2966,12 +2996,12 @@ Class.znpAR_waarrk = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.tripleShot]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         }
     ]
 }
-Class.znpAR_warkwark = makeMulti({
+Class.znpHlnAR_warkwark = makeMulti({
     PARENT: "genericTank",
     STAT_NAMES: statnames.mixed,
     DANGER: 7,
@@ -2984,7 +3014,7 @@ Class.znpAR_warkwark = makeMulti({
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.doubleTwin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -2995,12 +3025,12 @@ Class.znpAR_warkwark = makeMulti({
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.doubleTwin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ],
 }, 2, "Warkwark")
-Class.znpAR_widget = {
+Class.znpHlnAR_widget = {
     PARENT: "genericTank",
     LABEL: "Widget",
     DANGER: 7,
@@ -3031,7 +3061,7 @@ Class.znpAR_widget = {
         }
     ]
 }
-Class.znpAR_zipper = {
+Class.znpHlnAR_zipper = {
     PARENT: "genericTank",
     LABEL: "Zipper",
     DANGER: 7,
@@ -3044,7 +3074,7 @@ Class.znpAR_zipper = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -3052,7 +3082,7 @@ Class.znpAR_zipper = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.swarm]),
                 TYPE: "swarm",
-                STAT_CALCULATOR: gunCalcNames.swarm,
+                STAT_CALCULATOR: "swarm",
             },
         },
         {
@@ -3080,30 +3110,30 @@ Class.znpAR_zipper = {
 }
 
 // Tier 3 bird tanks
-Class.znpAR_defect = makeBird('tripleShot', "Defect")
-Class.znpAR_cockatiel = makeBird('znpAR_pen', "Cockatiel")
+Class.znpHlnAR_defect = makeBird('tripleShot', "Defect")
+Class.znpHlnAR_cockatiel = makeBird('znpHlnAR_pen', "Cockatiel")
 
 // Tier 3 hybrid tanks
-Class.znpAR_coalesce = makeOver('znpAR_wark', "Coalesce", {count: 1, independent: true, cycle: false})
-Class.znpAR_cobbler = makeOver('znpAR_mech', "Cobbler", {count: 1, independent: true, cycle: false})
-Class.znpAR_current = makeOver('volute', "Current", {count: 1, independent: true, cycle: false})
-Class.znpAR_deviation = makeOver('znpAR_machineTrapper', "Deviation", {count: 1, independent: true, cycle: false})
-Class.znpAR_fashioner = makeOver('builder', "Fashioner", {count: 1, independent: true, cycle: false})
-Class.znpAR_force = makeOver('artillery', "Force", {count: 1, independent: true, cycle: false})
-Class.znpAR_heaver = makeOver('launcher', "Heaver", {count: 1, independent: true, cycle: false})
-Class.znpAR_hitman = makeOver('assassin', "Hitman", {count: 1, independent: true, cycle: false})
-Class.znpAR_integrator = makeOver('triAngle', "Integrator", {count: 1, independent: true, cycle: false})
-Class.znpAR_interner = makeOver('znpAR_pen', "Interner", {count: 1, independent: true, cycle: false})
-Class.znpAR_polluter = makeOver('znpAR_diesel', "Polluter", {count: 1, independent: true, cycle: false})
-Class.znpAR_shower = makeOver('sprayer', "Shower", {count: 1, independent: true, cycle: false})
-Class.znpAR_spiral = makeOver('helix', "Spiral", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_coalesce = makeOver('znpHlnAR_wark', "Coalesce", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_cobbler = makeOver('znpHlnAR_mech', "Cobbler", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_current = makeOver('volute', "Current", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_deviation = makeOver('znpHlnAR_machineTrapper', "Deviation", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_fashioner = makeOver('builder', "Fashioner", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_force = makeOver('artillery', "Force", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_heaver = makeOver('launcher', "Heaver", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_hitman = makeOver('assassin', "Hitman", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_integrator = makeOver('triAngle', "Integrator", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_interner = makeOver('znpHlnAR_pen', "Interner", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_polluter = makeOver('znpHlnAR_diesel', "Polluter", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_shower = makeOver('sprayer', "Shower", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_spiral = makeOver('helix', "Spiral", {count: 1, independent: true, cycle: false})
 
 // Tier 3 auto tanks
-Class.znpAR_autoAuto3 = makeAuto('auto3')
-Class.znpAR_autoArtillery = makeAuto('artillery')
-Class.znpAR_autoDestroyer = makeAuto('destroyer')
-Class.znpAR_autoDiesel = makeAuto('znpAR_diesel')
-Class.znpAR_autoDirectordrive = makeAuto({
+Class.znpHlnAR_autoAuto3 = makeAuto('auto3')
+Class.znpHlnAR_autoArtillery = makeAuto('artillery')
+Class.znpHlnAR_autoDestroyer = makeAuto('destroyer')
+Class.znpHlnAR_autoDiesel = makeAuto('znpHlnAR_diesel')
+Class.znpHlnAR_autoDirectordrive = makeAuto({
     PARENT: "genericTank",
     DANGER: 6,
     STAT_NAMES: statnames.drone,
@@ -3118,32 +3148,32 @@ Class.znpAR_autoDirectordrive = makeAuto({
                 TYPE: "turretedDrone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 MAX_CHILDREN: 6,
             },
         },
     ],
-}, "Auto-Directordrive", { type: "znpAR_driveAutoTurret", size: 9 });
-Class.znpAR_autoDoper = makeAuto('znpAR_doper')
-Class.znpAR_autoHelix = makeAuto('helix')
-Class.znpAR_autoHexaTank = makeAuto('hexaTank')
-Class.znpAR_autoHoncho = makeAuto('znpAR_honcho')
-Class.znpAR_autoHunter = makeAuto('hunter')
-Class.znpAR_autoLauncher = makeAuto('launcher')
-Class.znpAR_autoMachineTrapper = makeAuto('znpAR_machineTrapper')
-Class.znpAR_autoMech = makeAuto('znpAR_mech')
-Class.znpAR_autoMinigun = makeAuto('minigun')
-Class.znpAR_autoPen = makeAuto('znpAR_pen')
-Class.znpAR_autoRifle = makeAuto('rifle')
-Class.znpAR_autoSprayer = makeAuto('sprayer')
-Class.znpAR_autoTrapGuard = makeAuto('trapGuard')
-Class.znpAR_autoTripleShot = makeAuto('tripleShot')
-Class.znpAR_autoUnderseer = makeAuto('underseer')
-Class.znpAR_autoVolute = makeAuto('volute')
-Class.znpAR_autoWark = makeAuto('znpAR_wark')
+}, "Auto-Directordrive", { type: "znpHlnAR_driveAutoTurret", size: 9 });
+Class.znpHlnAR_autoDoper = makeAuto('znpHlnAR_doper')
+Class.znpHlnAR_autoHelix = makeAuto('helix')
+Class.znpHlnAR_autoHexaTank = makeAuto('hexaTank')
+Class.znpHlnAR_autoHoncho = makeAuto('znpHlnAR_honcho')
+Class.znpHlnAR_autoHunter = makeAuto('hunter')
+Class.znpHlnAR_autoLauncher = makeAuto('launcher')
+Class.znpHlnAR_autoMachineTrapper = makeAuto('znpHlnAR_machineTrapper')
+Class.znpHlnAR_autoMech = makeAuto('znpHlnAR_mech')
+Class.znpHlnAR_autoMinigun = makeAuto('minigun')
+Class.znpHlnAR_autoPen = makeAuto('znpHlnAR_pen')
+Class.znpHlnAR_autoRifle = makeAuto('rifle')
+Class.znpHlnAR_autoSprayer = makeAuto('sprayer')
+Class.znpHlnAR_autoTrapGuard = makeAuto('trapGuard')
+Class.znpHlnAR_autoTripleShot = makeAuto('tripleShot')
+Class.znpHlnAR_autoUnderseer = makeAuto('underseer')
+Class.znpHlnAR_autoVolute = makeAuto('volute')
+Class.znpHlnAR_autoWark = makeAuto('znpHlnAR_wark')
 
 // Tier 4 tanks
-Class.znpAR_bentTriple = makeMulti({
+Class.znpHlnAR_bentTriple = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     GUNS: [
@@ -3170,9 +3200,9 @@ Class.znpAR_bentTriple = makeMulti({
         }
     ]
 }, 3, "Bent Triple")
-Class.znpAR_birdOfPrey = makeFighter('phoenix', "Bird of Prey")
-Class.znpAR_blitz = makeFighter('bomber', "Blitz")
-Class.znpAR_boxer = {
+Class.znpHlnAR_birdOfPrey = makeFighter('phoenix', "Bird of Prey")
+Class.znpHlnAR_blitz = makeFighter('bomber', "Blitz")
+Class.znpHlnAR_boxer = {
     PARENT: "genericTank",
     LABEL: "Boxer",
     DANGER: 7,
@@ -3209,7 +3239,7 @@ Class.znpAR_boxer = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
-                LABEL: gunCalcNames.thruster,
+                LABEL: "thruster",
             },
         },
         {
@@ -3217,13 +3247,13 @@ Class.znpAR_boxer = {
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.flankGuard, g.triAngle, g.thruster]),
                 TYPE: "bullet",
-                LABEL: gunCalcNames.thruster,
+                LABEL: "thruster",
             },
         },
     ],
 }
-Class.znpAR_brawler = makeFighter('booster', "Brawler")
-Class.znpAR_cleft = makeMulti({
+Class.znpHlnAR_brawler = makeFighter('booster', "Brawler")
+Class.znpHlnAR_cleft = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     GUNS: [
@@ -3257,8 +3287,8 @@ Class.znpAR_cleft = makeMulti({
         }
     ]
 }, 2, "Cleft")
-Class.znpAR_cockatoo = makeFighter('znpAR_cockatiel', "Cockatoo")
-Class.znpAR_coordinator = {
+Class.znpHlnAR_cockatoo = makeFighter('znpHlnAR_cockatiel', "Cockatoo")
+Class.znpHlnAR_coordinator = {
     PARENT: "genericTank",
     LABEL: "Coordinator",
     DANGER: 7,
@@ -3274,7 +3304,7 @@ Class.znpAR_coordinator = {
                 TYPE: "drone",
                 AUTOFIRE: true,
                 SYNCS_SKILLS: true,
-                STAT_CALCULATOR: gunCalcNames.drone,
+                STAT_CALCULATOR: "drone",
                 MAX_CHILDREN: 6,
                 WAIT_TO_CYCLE: true
             }
@@ -3284,8 +3314,8 @@ Class.znpAR_coordinator = {
         }
     ]
 }
-Class.znpAR_griffin = makeFighter('eagle', "Griffin")
-Class.znpAR_hewnTriple = {
+Class.znpHlnAR_griffin = makeFighter('eagle', "Griffin")
+Class.znpHlnAR_hewnTriple = {
     PARENT: "genericTank",
     LABEL: "Hewn Triple",
     DANGER: 7,
@@ -3348,9 +3378,9 @@ Class.znpAR_hewnTriple = {
         }
     ]
 }
-Class.znpAR_mangle = makeFighter('znpAR_defect', "Mangle")
-Class.znpAR_pug = makeOver('fighter', "Pug", {count: 1, independent: true, cycle: false})
-Class.znpAR_quadTwin = makeMulti({
+Class.znpHlnAR_mangle = makeFighter('znpHlnAR_defect', "Mangle")
+Class.znpHlnAR_pug = makeOver('fighter', "Pug", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_quadTwin = makeMulti({
     PARENT: "genericTank",
     LABEL: "Twin",
     DANGER: 7,
@@ -3371,8 +3401,8 @@ Class.znpAR_quadTwin = makeMulti({
         }
     ]
 }, 4)
-Class.znpAR_shocker = makeFighter('vulture', "Shocker")
-Class.znpAR_skewnDouble = {
+Class.znpHlnAR_shocker = makeFighter('vulture', "Shocker")
+Class.znpHlnAR_skewnDouble = {
     PARENT: "genericTank",
     LABEL: "Skewn Double",
     DANGER: 7,
@@ -3435,9 +3465,9 @@ Class.znpAR_skewnDouble = {
         }
     ]
 }
-Class.znpAR_sparrow = makeFighter('falcon', "Sparrow")
-Class.znpAR_strider = makeSurfer('fighter', "Strider")
-Class.znpAR_ternion = makeMulti({
+Class.znpHlnAR_sparrow = makeFighter('falcon', "Sparrow")
+Class.znpHlnAR_strider = makeSurfer('fighter', "Strider")
+Class.znpHlnAR_ternion = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     GUNS: [
@@ -3453,7 +3483,7 @@ Class.znpAR_ternion = makeMulti({
         }
     ]
 }, 3, "Ternion")
-Class.znpAR_triFrother = makeMulti({
+Class.znpHlnAR_triFrother = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     STAT_NAMES: statnames.mixed,
@@ -3473,12 +3503,12 @@ Class.znpAR_triFrother = makeMulti({
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.machineGun, {reload: 0.625, size: 0.625, spray: 0.75}, g.flankGuard]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap
+                STAT_CALCULATOR: "trap"
             }
         }
     ]
 }, 3, "Tri-Frother")
-Class.znpAR_tripleFlankTwin = makeMulti({
+Class.znpHlnAR_tripleFlankTwin = makeMulti({
     PARENT: "genericTank",
     DANGER: 7,
     GUNS: [
@@ -3505,9 +3535,9 @@ Class.znpAR_tripleFlankTwin = makeMulti({
         },
     ],
 }, 3, "Triple Flank Twin")
-Class.znpAR_tripleGunner = makeMulti('gunner', 3)
-Class.znpAR_tripleHelix = makeMulti('helix', 3)
-Class.znpAR_warkwarkwark = makeMulti({
+Class.znpHlnAR_tripleGunner = makeMulti('gunner', 3)
+Class.znpHlnAR_tripleHelix = makeMulti('helix', 3)
+Class.znpHlnAR_warkwarkwark = makeMulti({
     PARENT: "genericTank",
     STAT_NAMES: statnames.mixed,
     DANGER: 7,
@@ -3520,7 +3550,7 @@ Class.znpAR_warkwarkwark = makeMulti({
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.doubleTwin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
         {
@@ -3531,290 +3561,345 @@ Class.znpAR_warkwarkwark = makeMulti({
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.trap, g.twin, g.doubleTwin]),
                 TYPE: "trap",
-                STAT_CALCULATOR: gunCalcNames.trap,
+                STAT_CALCULATOR: "trap",
             },
         },
     ],
 }, 2, "Warkwarkwark")
+Class.znpHlnAR_adderall = { 
+	PARENT: "genericTank",
+	LABEL: "Adderall",
+	DANGER: 7,
+	STAT_NAMES: statnames.drone,
+	BODY: {
+		FOV: base.FOV * 1.1
+	},
+	GUNS: [
+		{
+    		POSITION: [6, 11, 1.3, 7, 0, 0, 0],
+    		PROPERTIES: {
+      			SHOOT_SETTINGS: combineStats([g.drone]),
+      			TYPE: "znpHlnAR_fastestDrone",
+                AUTOFIRE: true,
+      			SYNCS_SKILLS: true,
+      			STAT_CALCULATOR: "drone",
+      			MAX_CHILDREN: 6
+    		}
+  		},
+  		{
+    		POSITION: [4, 2, 0.35, 11, 0, 0, 0]
+  		}
+  	]
+}
+Class.znpHlnAR_vortex = {
+    PARENT: "genericTank",
+    LABEL: "Vortex",
+    DANGER: 7,
+    STAT_NAMES: statnames.drone,
+    BODY: {
+        FOV: base.FOV * 1.1,
+    },
+    TURRETS: [
+        {
+            POSITION: [9, 0, 0, 0, 360, 1],
+            TYPE: "znpHlnAR_vortexDeco",
+        },
+    ],
+    GUNS: [
+        {
+            POSITION: [6, 11, 1.3, 7, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.drone]),
+                TYPE: "znpHlnAR_superSwarmingDrone",
+                AUTOFIRE: true,
+                SYNCS_SKILLS: true,
+                STAT_CALCULATOR: "drone",
+                MAX_CHILDREN: 6,
+            },
+        },
+    ],
+}
 
 // Tier 4 hybrid tanks
-Class.znpAR_abberation = makeOver('znpAR_frother', "Abberation", {count: 1, independent: true, cycle: false})
-Class.znpAR_gusher = makeOver('znpAR_foamer', "Gusher", {count: 1, independent: true, cycle: false})
-Class.znpAR_hose = makeOver('redistributor', "Hose", {count: 1, independent: true, cycle: false})
-Class.znpAR_pressureWasher = makeOver('focal', "Pressure Washer", {count: 1, independent: true, cycle: false})
-Class.znpAR_raincloud = makeOver('znpAR_faucet', "Raincloud", {count: 1, independent: true, cycle: false})
-Class.znpAR_sprinkler = makeOver('atomizer', "Sprinkler", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_abberation = makeOver('znpHlnAR_frother', "Abberation", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_gusher = makeOver('znpHlnAR_foamer', "Gusher", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_hose = makeOver('redistributor', "Hose", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_pressureWasher = makeOver('focal', "Pressure Washer", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_raincloud = makeOver('znpHlnAR_faucet', "Raincloud", {count: 1, independent: true, cycle: false})
+Class.znpHlnAR_sprinkler = makeOver('atomizer', "Sprinkler", {count: 1, independent: true, cycle: false})
 
 // Tier 4 over tanks
-Class.znpAR_oversprayer = makeOver('sprayer')
+Class.znpHlnAR_oversprayer = makeOver('sprayer')
 
 // Tier 4 bird tanks
-Class.znpAR_aethon = makeBird('znpAR_foamer', "Aethon")
-Class.znpAR_alicanto = makeBird('focal', "Alicanto")
-Class.znpAR_avian = makeBird('single', "Avian")
-Class.znpAR_erne = makeBird('artillery', "Erne")
-Class.znpAR_harrier = makeBird('destroyer', "Harrier")
-Class.znpAR_nymph = makeBird('redistributor', "Nymph")
-Class.znpAR_owl = makeBird('stalker', "Owl")
-Class.znpAR_pamola = makeBird('znpAR_frother', "Pamola")
-Class.znpAR_peregrine = makeBird('ranger', "Peregrine")
-Class.znpAR_seriemas = makeBird('launcher', "Seriemas")
-Class.znpAR_simurgh = makeBird('znpAR_faucet', "Simurgh")
-Class.znpAR_sirin = makeBird('znpAR_stormer', "Sirin")
-Class.znpAR_ziz = makeBird('atomizer', "Ziz")
+Class.znpHlnAR_aethon = makeBird('znpHlnAR_foamer', "Aethon")
+Class.znpHlnAR_alicanto = makeBird('focal', "Alicanto")
+Class.znpHlnAR_avian = makeBird('single', "Avian")
+Class.znpHlnAR_erne = makeBird('artillery', "Erne")
+Class.znpHlnAR_harrier = makeBird('destroyer', "Harrier")
+Class.znpHlnAR_nymph = makeBird('redistributor', "Nymph")
+Class.znpHlnAR_owl = makeBird('stalker', "Owl")
+Class.znpHlnAR_pamola = makeBird('znpHlnAR_frother', "Pamola")
+Class.znpHlnAR_peregrine = makeBird('ranger', "Peregrine")
+Class.znpHlnAR_seriemas = makeBird('launcher', "Seriemas")
+Class.znpHlnAR_simurgh = makeBird('znpHlnAR_faucet', "Simurgh")
+Class.znpHlnAR_sirin = makeBird('znpHlnAR_stormer', "Sirin")
+Class.znpHlnAR_ziz = makeBird('atomizer', "Ziz")
 
 // Tier 4 superbird tanks
-Class.znpAR_firebird = makeSuperbird('sprayer', "Firebird")
+Class.znpHlnAR_firebird = makeSuperbird('sprayer', "Firebird")
 
 // Tier 4 auto tanks
-Class.znpAR_auto = makeAuto('znpAR_placeholder')
-Class.znpAR_autoAtomizer = makeAuto('atomizer')
-Class.znpAR_autoBooster = makeAuto('booster')
-Class.znpAR_autoBentDouble = makeAuto('bentDouble')
-Class.znpAR_autoDoubleFlankTwin = makeAuto('znpAR_doubleFlankTwin')
-Class.znpAR_autoDoubleGunner = makeAuto('znpAR_doubleGunner')
-Class.znpAR_autoDoubleHelix = makeAuto('znpAR_doubleHelix')
-Class.znpAR_autoEagle = makeAuto('eagle')
-Class.znpAR_autoFaucet = makeAuto('znpAR_faucet')
-Class.znpAR_autoFighter = makeAuto('fighter')
-Class.znpAR_autoFoamer = makeAuto('znpAR_foamer')
-Class.znpAR_autoFocal = makeAuto('focal')
-Class.znpAR_autoFrother = makeAuto('znpAR_frother')
-Class.znpAR_autoHewnDouble = makeAuto('hewnDouble')
-Class.znpAR_autoPhoenix = makeAuto('phoenix')
-Class.znpAR_autoRedistributor = makeAuto('redistributor')
-Class.znpAR_autoShower = makeAuto('znpAR_shower')
-Class.znpAR_autoStormer = makeAuto('znpAR_stormer')
-Class.znpAR_autoTripleTwin = makeAuto('tripleTwin')
-Class.znpAR_autoWarkwark = makeAuto('znpAR_warkwark')
+Class.znpHlnAR_auto = makeAuto('znpHlnAR_placeholder')
+Class.znpHlnAR_autoAtomizer = makeAuto('atomizer')
+Class.znpHlnAR_autoBooster = makeAuto('booster')
+Class.znpHlnAR_autoBentDouble = makeAuto('bentDouble')
+Class.znpHlnAR_autoDoubleFlankTwin = makeAuto('znpHlnAR_doubleFlankTwin')
+Class.znpHlnAR_autoDoubleGunner = makeAuto('znpHlnAR_doubleGunner')
+Class.znpHlnAR_autoDoubleHelix = makeAuto('znpHlnAR_doubleHelix')
+Class.znpHlnAR_autoEagle = makeAuto('eagle')
+Class.znpHlnAR_autoFaucet = makeAuto('znpHlnAR_faucet')
+Class.znpHlnAR_autoFighter = makeAuto('fighter')
+Class.znpHlnAR_autoFoamer = makeAuto('znpHlnAR_foamer')
+Class.znpHlnAR_autoFocal = makeAuto('focal')
+Class.znpHlnAR_autoFrother = makeAuto('znpHlnAR_frother')
+Class.znpHlnAR_autoHewnDouble = makeAuto('hewnDouble')
+Class.znpHlnAR_autoPhoenix = makeAuto('phoenix')
+Class.znpHlnAR_autoRedistributor = makeAuto('redistributor')
+Class.znpHlnAR_autoShower = makeAuto('znpHlnAR_shower')
+Class.znpHlnAR_autoStormer = makeAuto('znpHlnAR_stormer')
+Class.znpHlnAR_autoTripleTwin = makeAuto('tripleTwin')
+Class.znpHlnAR_autoWarkwark = makeAuto('znpHlnAR_warkwark')
 
 // Tier 4 mega auto tanks
-Class.znpAR_megaAutoDouble = makeMegaAuto('doubleTwin', "Mega Auto-Double")
-Class.znpAR_megaAutoSprayer = makeMegaAuto('sprayer')
+Class.znpHlnAR_megaAutoDouble = makeMegaAuto('doubleTwin', "Mega Auto-Double")
+Class.znpHlnAR_megaAutoSprayer = makeMegaAuto('sprayer')
 
 // Tier 4 triple auto tanks
-Class.znpAR_tripleAutoDouble = makeTripleAuto('doubleTwin', "Triple Auto-Double")
-Class.znpAR_tripleAutoSprayer = makeTripleAuto('sprayer')
+Class.znpHlnAR_tripleAutoDouble = makeTripleAuto('doubleTwin', "Triple Auto-Double")
+Class.znpHlnAR_tripleAutoSprayer = makeTripleAuto('sprayer')
 
 
 // Upgrade paths
 Class.basic.UPGRADES_TIER_3 = ["single"]
-    Class.single.UPGRADES_TIER_3 = ["znpAR_placeholder", "znpAR_placeholder", "znpAR_placeholder", "znpAR_ternion", "znpAR_placeholder", "znpAR_coordinator", "znpAR_placeholder", "znpAR_placeholder", "znpAR_placeholder", "znpAR_placeholder", "znpAR_placeholder", "znpAR_placeholder"]
-    Class.twin.UPGRADES_TIER_2.push("znpAR_wark")
+    Class.single.UPGRADES_TIER_3 = ["znpHlnAR_placeholder", "znpHlnAR_placeholder", "znpHlnAR_placeholder", "znpHlnAR_ternion", "znpHlnAR_placeholder", "znpHlnAR_coordinator", "znpHlnAR_placeholder", "znpHlnAR_placeholder", "znpHlnAR_placeholder", "znpHlnAR_placeholder", "znpHlnAR_placeholder", "znpHlnAR_placeholder"]
+    Class.twin.UPGRADES_TIER_2.push("znpHlnAR_wark")
         Class.twin.UPGRADES_TIER_3.splice(1, 1) // remove bulwark
-        Class.doubleTwin.UPGRADES_TIER_3.push("znpAR_doubleFlankTwin", "znpAR_doubleGunner", "znpAR_doubleHelix", "znpAR_warkwark")
-            Class.tripleTwin.UPGRADES_TIER_3 = ["znpAR_quadTwin", "znpAR_autoTripleTwin", "znpAR_bentTriple", "znpAR_hewnTriple", "znpAR_tripleFlankTwin", "znpAR_tripleGunner", "znpAR_warkwarkwark", "znpAR_tripleHelix"]
-            Class.autoDouble.UPGRADES_TIER_3 = ["znpAR_megaAutoDouble", "znpAR_tripleAutoDouble", "znpAR_autoTripleTwin", "znpAR_autoHewnDouble", "znpAR_autoBentDouble", "znpAR_autoDoubleFlankTwin", "znpAR_autoDoubleGunner", "znpAR_autoWarkwark", "znpAR_autoDoubleHelix"]
-        Class.tripleShot.UPGRADES_TIER_3.push("znpAR_splitShot", "znpAR_autoTripleShot", "znpAR_bentGunner", "znpAR_bentMinigun", "znpAR_defect", "znpAR_waarrk")
-    Class.sniper.UPGRADES_TIER_3.push("znpAR_railgun")
+        Class.doubleTwin.UPGRADES_TIER_3.push("znpHlnAR_doubleFlankTwin", "znpHlnAR_doubleGunner", "znpHlnAR_doubleHelix", "znpHlnAR_warkwark")
+            Class.tripleTwin.UPGRADES_TIER_3 = ["znpHlnAR_quadTwin", "znpHlnAR_autoTripleTwin", "znpHlnAR_bentTriple", "znpHlnAR_hewnTriple", "znpHlnAR_tripleFlankTwin", "znpHlnAR_tripleGunner", "znpHlnAR_warkwarkwark", "znpHlnAR_tripleHelix"]
+            Class.autoDouble.UPGRADES_TIER_3 = ["znpHlnAR_megaAutoDouble", "znpHlnAR_tripleAutoDouble", "znpHlnAR_autoTripleTwin", "znpHlnAR_autoHewnDouble", "znpHlnAR_autoBentDouble", "znpHlnAR_autoDoubleFlankTwin", "znpHlnAR_autoDoubleGunner", "znpHlnAR_autoWarkwark", "znpHlnAR_autoDoubleHelix"]
+        Class.tripleShot.UPGRADES_TIER_3.push("znpHlnAR_splitShot", "znpHlnAR_autoTripleShot", "znpHlnAR_bentGunner", "znpHlnAR_bentMinigun", "znpHlnAR_defect", "znpHlnAR_waarrk")
+    Class.sniper.UPGRADES_TIER_3.push("znpHlnAR_railgun")
         Class.assassin.UPGRADES_TIER_3.splice(4, 1) // remove single
-        Class.assassin.UPGRADES_TIER_3.push("znpAR_buttbuttin", "znpAR_hitman", "znpAR_sniper3", "znpAR_enforcer", "znpAR_courser")
-        Class.hunter.UPGRADES_TIER_3.push("znpAR_autoHunter", "znpAR_megaHunter", "znpAR_prober", "znpAR_courser")
-        Class.rifle.UPGRADES_TIER_3.push("znpAR_autoRifle", "znpAR_enforcer", "znpAR_prober")
-    Class.machineGun.UPGRADES_TIER_2.push("znpAR_diesel", "znpAR_machineTrapper")
-        Class.minigun.UPGRADES_TIER_3.push("znpAR_subverter", "znpAR_zipper", "znpAR_bentMinigun", "znpAR_autoMinigun", "znpAR_widget")
-        Class.gunner.UPGRADES_TIER_3.push("znpAR_battery", "znpAR_buttbuttin", "znpAR_blower", "znpAR_rimfire", "znpAR_volley", "znpAR_doubleGunner", "znpAR_bentGunner", "znpAR_equalizer")
-        Class.sprayer.UPGRADES_TIER_3.push("znpAR_frother", "znpAR_foamer", "znpAR_faucet", "znpAR_shower", "znpAR_autoSprayer", "znpAR_stormer")
-            Class.znpAR_autoSprayer.UPGRADES_TIER_3 = ["znpAR_megaAutoSprayer", "znpAR_tripleAutoSprayer", "znpAR_autoRedistributor", "znpAR_autoPhoenix", "znpAR_autoAtomizer", "znpAR_autoFocal", "znpAR_autoFrother", "znpAR_autoFoamer", "znpAR_autoFaucet", "znpAR_autoShower", "znpAR_autoStormer"]
-        Class.znpAR_diesel.UPGRADES_TIER_3 = ["znpAR_jalopy", "machineGunner", "znpAR_dieselTrapper", "znpAR_polluter", "znpAR_autoDiesel", "znpAR_foamer"]
-    Class.flankGuard.UPGRADES_TIER_3 = ["znpAR_ternion"]
-        Class.hexaTank.UPGRADES_TIER_3.push("znpAR_deathStar", "znpAR_autoHexaTank", "znpAR_mingler", "znpAR_combo")
-        Class.triAngle.UPGRADES_TIER_3.push("znpAR_cockatiel", "znpAR_integrator", "znpAR_defect", "znpAR_quadAngle")
-        Class.auto3.UPGRADES_TIER_3.push("znpAR_sniper3", "znpAR_crowbar", "znpAR_autoAuto3", "znpAR_combo")
-    Class.director.UPGRADES_TIER_2.push("znpAR_directordrive", "znpAR_honcho", "znpAR_doper")
+        Class.assassin.UPGRADES_TIER_3.push("znpHlnAR_buttbuttin", "znpHlnAR_hitman", "znpHlnAR_sniper3", "znpHlnAR_enforcer", "znpHlnAR_courser")
+        Class.hunter.UPGRADES_TIER_3.push("znpHlnAR_autoHunter", "znpHlnAR_megaHunter", "znpHlnAR_prober", "znpHlnAR_courser")
+        Class.rifle.UPGRADES_TIER_3.push("znpHlnAR_autoRifle", "znpHlnAR_enforcer", "znpHlnAR_prober")
+    Class.machineGun.UPGRADES_TIER_2.push("znpHlnAR_diesel", "znpHlnAR_machineTrapper")
+        Class.minigun.UPGRADES_TIER_3.push("znpHlnAR_subverter", "znpHlnAR_zipper", "znpHlnAR_bentMinigun", "znpHlnAR_autoMinigun", "znpHlnAR_widget")
+        Class.gunner.UPGRADES_TIER_3.push("znpHlnAR_battery", "znpHlnAR_buttbuttin", "znpHlnAR_blower", "znpHlnAR_rimfire", "znpHlnAR_volley", "znpHlnAR_doubleGunner", "znpHlnAR_bentGunner", "znpHlnAR_equalizer")
+        Class.sprayer.UPGRADES_TIER_3.push("znpHlnAR_frother", "znpHlnAR_foamer", "znpHlnAR_faucet", "znpHlnAR_shower", "znpHlnAR_autoSprayer", "znpHlnAR_stormer")
+            Class.znpHlnAR_autoSprayer.UPGRADES_TIER_3 = ["znpHlnAR_megaAutoSprayer", "znpHlnAR_tripleAutoSprayer", "znpHlnAR_autoRedistributor", "znpHlnAR_autoPhoenix", "znpHlnAR_autoAtomizer", "znpHlnAR_autoFocal", "znpHlnAR_autoFrother", "znpHlnAR_autoFoamer", "znpHlnAR_autoFaucet", "znpHlnAR_autoShower", "znpHlnAR_autoStormer"]
+        Class.znpHlnAR_diesel.UPGRADES_TIER_3 = ["znpHlnAR_jalopy", "machineGunner", "znpHlnAR_dieselTrapper", "znpHlnAR_polluter", "znpHlnAR_autoDiesel", "znpHlnAR_foamer"]
+    Class.flankGuard.UPGRADES_TIER_3 = ["znpHlnAR_ternion"]
+        Class.hexaTank.UPGRADES_TIER_3.push("znpHlnAR_deathStar", "znpHlnAR_autoHexaTank", "znpHlnAR_mingler", "znpHlnAR_combo")
+        Class.triAngle.UPGRADES_TIER_3.push("znpHlnAR_cockatiel", "znpHlnAR_integrator", "znpHlnAR_defect", "znpHlnAR_quadAngle")
+        Class.auto3.UPGRADES_TIER_3.push("znpHlnAR_sniper3", "znpHlnAR_crowbar", "znpHlnAR_autoAuto3", "znpHlnAR_combo")
+    Class.director.UPGRADES_TIER_2.push("znpHlnAR_directordrive", "znpHlnAR_honcho", "znpHlnAR_doper")
         Class.director.UPGRADES_TIER_3.splice(1, 1) // remove big cheese
-            Class.director.UPGRADES_TIER_3.push("znpAR_coordinator")
+            Class.director.UPGRADES_TIER_3.push("znpHlnAR_coordinator")
         Class.overseer.UPGRADES_TIER_3.splice(2, 1) // remove overgunner
         Class.overseer.UPGRADES_TIER_3.splice(1, 1) // remove overtrapper
-        Class.overseer.UPGRADES_TIER_3.push("znpAR_captain", "znpAR_foreman", "znpAR_dopeseer")
-        Class.cruiser.UPGRADES_TIER_3.push("znpAR_productionist", "znpAR_cruiserdrive", "znpAR_hangar", "znpAR_zipper", "znpAR_baltimore", "znpAR_mosey")
-        Class.underseer.UPGRADES_TIER_3.push("znpAR_autoUnderseer", "znpAR_underdrive", "znpAR_pentaseer")
-        Class.spawner.UPGRADES_TIER_3.push("znpAR_megaSpawner", "znpAR_productionist", "znpAR_spawnerdrive", "znpAR_captain", "znpAR_hangar", "znpAR_laborer", "znpAR_foundry", "znpAR_issuer")
-        Class.znpAR_directordrive.UPGRADES_TIER_3 = ["znpAR_directorstorm", "overdrive", "znpAR_cruiserdrive", "znpAR_underdrive", "znpAR_spawnerdrive", "znpAR_autoDirectordrive", "znpAR_honchodrive", "znpAR_doperdrive"]
-        Class.znpAR_honcho.UPGRADES_TIER_3 = ["znpAR_foreman", "znpAR_baltimore", "znpAR_foundry", "bigCheese", "znpAR_autoHoncho", "znpAR_honchodrive", "znpAR_junkie"]
-        Class.znpAR_doper.UPGRADES_TIER_3 = ["znpAR_brisker", "znpAR_dopeseer", "znpAR_mosey", "znpAR_issuer", "znpAR_junkie", "znpAR_doperdrive", "znpAR_autoDoper"]
-    Class.pounder.UPGRADES_TIER_3.push("znpAR_subverter")
-        Class.destroyer.UPGRADES_TIER_3.push("znpAR_blower", "znpAR_megaTrapper", "znpAR_queller", "znpAR_autoDestroyer", "znpAR_hurler", "znpAR_slinker")
-        Class.artillery.UPGRADES_TIER_3.push("znpAR_queller", "znpAR_forger", "znpAR_force", "znpAR_autoArtillery", "znpAR_foctillery", "znpAR_discharger", "znpAR_recharger")
-        Class.launcher.UPGRADES_TIER_3.push("znpAR_pitcher", "znpAR_cluster", "znpAR_projector", "znpAR_heaver", "znpAR_autoLauncher", "znpAR_hurler", "znpAR_inception")
-    Class.trapper.UPGRADES_TIER_2.push("znpAR_pen", "znpAR_mech", "znpAR_machineTrapper", "znpAR_wark")
+        Class.overseer.UPGRADES_TIER_3.push("znpHlnAR_captain", "znpHlnAR_foreman", "znpHlnAR_dopeseer")
+        Class.cruiser.UPGRADES_TIER_3.push("znpHlnAR_productionist", "znpHlnAR_cruiserdrive", "znpHlnAR_hangar", "znpHlnAR_zipper", "znpHlnAR_baltimore", "znpHlnAR_mosey")
+        Class.underseer.UPGRADES_TIER_3.push("znpHlnAR_autoUnderseer", "znpHlnAR_underdrive", "znpHlnAR_pentaseer")
+        Class.spawner.UPGRADES_TIER_3.push("znpHlnAR_megaSpawner", "znpHlnAR_productionist", "znpHlnAR_spawnerdrive", "znpHlnAR_captain", "znpHlnAR_hangar", "znpHlnAR_laborer", "znpHlnAR_foundry", "znpHlnAR_issuer")
+        Class.znpHlnAR_directordrive.UPGRADES_TIER_3 = ["znpHlnAR_directorstorm", "overdrive", "znpHlnAR_cruiserdrive", "znpHlnAR_underdrive", "znpHlnAR_spawnerdrive", "znpHlnAR_autoDirectordrive", "znpHlnAR_honchodrive", "znpHlnAR_doperdrive"]
+        Class.znpHlnAR_honcho.UPGRADES_TIER_3 = ["znpHlnAR_foreman", "znpHlnAR_baltimore", "znpHlnAR_foundry", "bigCheese", "znpHlnAR_autoHoncho", "znpHlnAR_honchodrive", "znpHlnAR_junkie"]
+        Class.znpHlnAR_doper.UPGRADES_TIER_3 = ["znpHlnAR_brisker", "znpHlnAR_dopeseer", "znpHlnAR_mosey", "znpHlnAR_issuer", "znpHlnAR_junkie", "znpHlnAR_doperdrive", "znpHlnAR_autoDoper"]
+    Class.pounder.UPGRADES_TIER_3.push("znpHlnAR_subverter")
+        Class.destroyer.UPGRADES_TIER_3.push("znpHlnAR_blower", "znpHlnAR_megaTrapper", "znpHlnAR_queller", "znpHlnAR_autoDestroyer", "znpHlnAR_hurler", "znpHlnAR_slinker")
+        Class.artillery.UPGRADES_TIER_3.push("znpHlnAR_queller", "znpHlnAR_forger", "znpHlnAR_force", "znpHlnAR_autoArtillery", "znpHlnAR_foctillery", "znpHlnAR_discharger", "znpHlnAR_recharger")
+        Class.launcher.UPGRADES_TIER_3.push("znpHlnAR_pitcher", "znpHlnAR_cluster", "znpHlnAR_projector", "znpHlnAR_heaver", "znpHlnAR_autoLauncher", "znpHlnAR_hurler", "znpHlnAR_inception")
+    Class.trapper.UPGRADES_TIER_2.push("znpHlnAR_pen", "znpHlnAR_mech", "znpHlnAR_machineTrapper", "znpHlnAR_wark")
         Class.trapper.UPGRADES_TIER_3.splice(0, 1) // remove barricade
-        Class.trapper.UPGRADES_TIER_3.push("znpAR_megaTrapper")
-        Class.builder.UPGRADES_TIER_3.push("znpAR_forger", "znpAR_stall", "znpAR_fashioner", "znpAR_charger")
-        Class.triTrapper.UPGRADES_TIER_3.push("znpAR_triPen", "znpAR_triMech", "znpAR_triMachine", "znpAR_triTrapGuard")
-        Class.trapGuard.UPGRADES_TIER_3.push("znpAR_peashooter", "znpAR_incarcerator", "znpAR_mechGuard", "znpAR_autoTrapGuard", "znpAR_machineGuard", "znpAR_triTrapGuard")
-        Class.znpAR_pen.UPGRADES_TIER_3 = ["znpAR_stall", "znpAR_triPen", "znpAR_encircler", "znpAR_incarcerator", "znpAR_operator", "znpAR_cockatiel", "znpAR_hutch", "znpAR_interner", "znpAR_autoPen"]
-        Class.znpAR_mech.UPGRADES_TIER_3 = ["engineer", "znpAR_triMech", "znpAR_machineMech", "znpAR_mechGuard", "znpAR_operator", "znpAR_cog", "znpAR_cobbler", "znpAR_autoMech"]
-        Class.znpAR_machineTrapper.UPGRADES_TIER_3 = ["znpAR_dieselTrapper", "barricade", "znpAR_equalizer", "znpAR_machineGuard", "znpAR_encircler", "znpAR_machineMech", "znpAR_triMachine", "znpAR_expeller", "znpAR_autoMachineTrapper", "znpAR_deviation", "znpAR_frother"]
-        Class.znpAR_wark.UPGRADES_TIER_3 = ["znpAR_warkwark", "znpAR_waarrk", "znpAR_equalizer", "hexaTrapper", "znpAR_hutch", "znpAR_cog", "znpAR_expeller", "bulwark", "znpAR_coalesce", "znpAR_autoWark"]
+        Class.trapper.UPGRADES_TIER_3.push("znpHlnAR_megaTrapper")
+        Class.builder.UPGRADES_TIER_3.push("znpHlnAR_forger", "znpHlnAR_stall", "znpHlnAR_fashioner", "znpHlnAR_charger")
+        Class.triTrapper.UPGRADES_TIER_3.push("znpHlnAR_triPen", "znpHlnAR_triMech", "znpHlnAR_triMachine", "znpHlnAR_triTrapGuard")
+        Class.trapGuard.UPGRADES_TIER_3.push("znpHlnAR_peashooter", "znpHlnAR_incarcerator", "znpHlnAR_mechGuard", "znpHlnAR_autoTrapGuard", "znpHlnAR_machineGuard", "znpHlnAR_triTrapGuard")
+        Class.znpHlnAR_pen.UPGRADES_TIER_3 = ["znpHlnAR_stall", "znpHlnAR_triPen", "znpHlnAR_encircler", "znpHlnAR_incarcerator", "znpHlnAR_operator", "znpHlnAR_cockatiel", "znpHlnAR_hutch", "znpHlnAR_interner", "znpHlnAR_autoPen"]
+        Class.znpHlnAR_mech.UPGRADES_TIER_3 = ["engineer", "znpHlnAR_triMech", "znpHlnAR_machineMech", "znpHlnAR_mechGuard", "znpHlnAR_operator", "znpHlnAR_cog", "znpHlnAR_cobbler", "znpHlnAR_autoMech"]
+        Class.znpHlnAR_machineTrapper.UPGRADES_TIER_3 = ["znpHlnAR_dieselTrapper", "barricade", "znpHlnAR_equalizer", "znpHlnAR_machineGuard", "znpHlnAR_encircler", "znpHlnAR_machineMech", "znpHlnAR_triMachine", "znpHlnAR_expeller", "znpHlnAR_autoMachineTrapper", "znpHlnAR_deviation", "znpHlnAR_frother"]
+        Class.znpHlnAR_wark.UPGRADES_TIER_3 = ["znpHlnAR_warkwark", "znpHlnAR_waarrk", "znpHlnAR_equalizer", "hexaTrapper", "znpHlnAR_hutch", "znpHlnAR_cog", "znpHlnAR_expeller", "bulwark", "znpHlnAR_coalesce", "znpHlnAR_autoWark"]
     // desmos
-        Class.volute.UPGRADES_TIER_3.push("znpAR_recharger", "znpAR_current", "znpAR_autoVolute")
-        Class.helix.UPGRADES_TIER_3.push("znpAR_doubleHelix", "znpAR_spiral", "znpAR_autoHelix")
+        Class.volute.UPGRADES_TIER_3.push("znpHlnAR_recharger", "znpHlnAR_current", "znpHlnAR_autoVolute")
+        Class.helix.UPGRADES_TIER_3.push("znpHlnAR_doubleHelix", "znpHlnAR_spiral", "znpHlnAR_autoHelix")
 
 // WIP Upgrade paths
 Class.hewnDouble.UPGRADES_TIER_3 = [
-    "znpAR_hewnTriple",
-    "znpAR_autoHewnDouble",
-    "znpAR_cleft",
-    "znpAR_skewnDouble",
-    "znpAR_placeholder",//"znpAR_hewnFlankDouble",
-    "znpAR_placeholder",//"znpAR_hewnGunner",
-    "znpAR_placeholder",//"znpAR_warkwawarkrk",
+    "znpHlnAR_hewnTriple",
+    "znpHlnAR_autoHewnDouble",
+    "znpHlnAR_cleft",
+    "znpHlnAR_skewnDouble",
+    "znpHlnAR_placeholder",//"znpHlnAR_hewnFlankDouble",
+    "znpHlnAR_placeholder",//"znpHlnAR_hewnGunner",
+    "znpHlnAR_placeholder",//"znpHlnAR_warkwawarkrk",
 ]
-Class.znpAR_doubleHelix.UPGRADES_TIER_3 = [
-    "znpAR_tripleHelix",
-    "znpAR_autoDoubleHelix",
+Class.znpHlnAR_doubleHelix.UPGRADES_TIER_3 = [
+    "znpHlnAR_tripleHelix",
+    "znpHlnAR_autoDoubleHelix",
 ]
 
 
 Class.redistributor.UPGRADES_TIER_3 = [
-    "znpAR_placeholder",
-    "znpAR_nymph",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_hose",
-    "znpAR_placeholder",
-    "znpAR_autoRedistributor",
-    "znpAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_nymph",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_hose",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_autoRedistributor",
+    "znpHlnAR_placeholder",
 ]
 Class.phoenix.UPGRADES_TIER_3 = [
-    "znpAR_firebird",
-    "znpAR_birdOfPrey",
-    "znpAR_nymph",
-    "znpAR_ziz",
-    "znpAR_alicanto",
-    "znpAR_pamola",
-    "znpAR_aethon",
-    "znpAR_simurgh",
-    "znpAR_autoPhoenix",
-    "znpAR_sirin",
+    "znpHlnAR_firebird",
+    "znpHlnAR_birdOfPrey",
+    "znpHlnAR_nymph",
+    "znpHlnAR_ziz",
+    "znpHlnAR_alicanto",
+    "znpHlnAR_pamola",
+    "znpHlnAR_aethon",
+    "znpHlnAR_simurgh",
+    "znpHlnAR_autoPhoenix",
+    "znpHlnAR_sirin",
 ]
 Class.atomizer.UPGRADES_TIER_3 = [
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_ziz",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_sprinkler",
-    "znpAR_placeholder",
-    "znpAR_autoAtomizer",
-    "znpAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_ziz",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_sprinkler",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_autoAtomizer",
+    "znpHlnAR_placeholder",
 ]
 Class.focal.UPGRADES_TIER_3 = [
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_alicanto",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_pressureWasher",
-    "znpAR_placeholder",
-    "znpAR_autoFocal",
-    "znpAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_alicanto",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_pressureWasher",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_autoFocal",
+    "znpHlnAR_placeholder",
 ]
-Class.znpAR_frother.UPGRADES_TIER_3 = [
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_triFrother",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_pamola",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_abberation",
-    "znpAR_placeholder",
-    "znpAR_autoFrother",
-    "znpAR_placeholder",
+Class.znpHlnAR_frother.UPGRADES_TIER_3 = [
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_triFrother",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_pamola",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_abberation",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_autoFrother",
+    "znpHlnAR_placeholder",
 ]
-Class.znpAR_foamer.UPGRADES_TIER_3 = [
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_aethon",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_gusher",
-    "znpAR_autoFoamer",
-    "znpAR_placeholder",
+Class.znpHlnAR_foamer.UPGRADES_TIER_3 = [
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_aethon",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_gusher",
+    "znpHlnAR_autoFoamer",
+    "znpHlnAR_placeholder",
 ]
-Class.znpAR_faucet.UPGRADES_TIER_3 = [
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_simurgh",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_raincloud",
-    "znpAR_placeholder",
-    "znpAR_autoFaucet",
-    "znpAR_placeholder",
+Class.znpHlnAR_faucet.UPGRADES_TIER_3 = [
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_simurgh",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_raincloud",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_autoFaucet",
+    "znpHlnAR_placeholder",
 ]
-Class.znpAR_shower.UPGRADES_TIER_3 = [
-    "znpAR_oversprayer",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_hose",
-    "znpAR_sprinkler",
-    "znpAR_pressureWasher",
-    "znpAR_abberation",
-    "znpAR_gusher",
-    "znpAR_raincloud",
-    "znpAR_autoShower",
-    "znpAR_placeholder",
+Class.znpHlnAR_shower.UPGRADES_TIER_3 = [
+    "znpHlnAR_oversprayer",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_hose",
+    "znpHlnAR_sprinkler",
+    "znpHlnAR_pressureWasher",
+    "znpHlnAR_abberation",
+    "znpHlnAR_gusher",
+    "znpHlnAR_raincloud",
+    "znpHlnAR_autoShower",
+    "znpHlnAR_placeholder",
 ]
-Class.znpAR_stormer.UPGRADES_TIER_3 = [
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_sirin",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_placeholder",
-    "znpAR_autoStormer",
+Class.znpHlnAR_stormer.UPGRADES_TIER_3 = [
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_sirin",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_placeholder",
+    "znpHlnAR_autoStormer",
 ]
 
 Class.smasher.UPGRADES_TIER_3.push(
-    "znpAR_placeholder",//"znpAR_bonker",
-    "znpAR_placeholder",//"znpAR_banger",
-    "znpAR_placeholder",//"znpAR_drifter",
+    "znpHlnAR_placeholder",//"znpHlnAR_bonker",
+    "znpHlnAR_placeholder",//"znpHlnAR_banger",
+    "znpHlnAR_placeholder",//"znpHlnAR_drifter",
 )
 
 Class.healer.UPGRADES_TIER_3.splice(3, 1) // remove paramedic
 Class.healer.UPGRADES_TIER_3.splice(2, 1) // remove surgeon
 Class.healer.UPGRADES_TIER_3.splice(1, 1) // remove ambulance
 Class.healer.UPGRADES_TIER_3.push(
-    "znpAR_placeholder",//"znpAR_scientist",
-    "znpAR_placeholder",//"znpAR_nurse",
-    "znpAR_triHealer",
-    "znpAR_placeholder",//"znpAR_analyzer",
-    "znpAR_placeholder",//"znpAR_psychiatrist",
-    "znpAR_placeholder",//"znpAR_soother",
+    "znpHlnAR_placeholder",//"znpHlnAR_scientist",
+    "znpHlnAR_placeholder",//"znpHlnAR_nurse",
+    "znpHlnAR_triHealer",
+    "znpHlnAR_placeholder",//"znpHlnAR_analyzer",
+    "znpHlnAR_placeholder",//"znpHlnAR_psychiatrist",
+    "znpHlnAR_placeholder",//"znpHlnAR_soother",
 )
+Class.desmos.UPGRADES_TIER_2.splice(1, 1)
+Class.znpHlnAR_directorstorm.UPGRADES_TIER_3 = ["znpHlnAR_vortex"]
 
 // DEBUG
 const addHealerToMain = false
 if (addHealerToMain) {
 Class.basic.UPGRADES_TIER_2.push("healer")
-Class.twin.UPGRADES_TIER_3.push("znpAR_placeholder"/*"znpAR_nurse"*/)
+Class.twin.UPGRADES_TIER_3.push("znpHlnAR_placeholder"/*"znpHlnAR_nurse"*/)
 Class.sniper.UPGRADES_TIER_3.push("medic")
-Class.machineGun.UPGRADES_TIER_3 = ["znpAR_placeholder"/*"znpAR_psychiatrist"*/]
-Class.flankGuard.UPGRADES_TIER_3.push("znpAR_triHealer")
-Class.director.UPGRADES_TIER_3.push("znpAR_placeholder"/*"znpAR_soother"*/)
-Class.pounder.UPGRADES_TIER_3.push("znpAR_placeholder"/*"znpAR_analyzer"*/)
-Class.trapper.UPGRADES_TIER_3.push("znpAR_placeholder"/*"znpAR_scientist"*/)
-//Class.smasher.UPGRADES_TIER_3.push("znpAR_placeholder"/*"znpAR_physician"*/)
-//Class.single.UPGRADES_TIER_3.push("znpAR_placeholder"/*"znpAR_renovater"*/)
+Class.machineGun.UPGRADES_TIER_3 = ["znpHlnAR_placeholder"/*"znpHlnAR_psychiatrist"*/]
+Class.flankGuard.UPGRADES_TIER_3.push("znpHlnAR_triHealer")
+Class.director.UPGRADES_TIER_3.push("znpHlnAR_placeholder"/*"znpHlnAR_soother"*/)
+Class.pounder.UPGRADES_TIER_3.push("znpHlnAR_placeholder"/*"znpHlnAR_analyzer"*/)
+Class.trapper.UPGRADES_TIER_3.push("znpHlnAR_placeholder"/*"znpHlnAR_scientist"*/)
+//Class.smasher.UPGRADES_TIER_3.push("znpHlnAR_placeholder"/*"znpHlnAR_physician"*/)
+//Class.single.UPGRADES_TIER_3.push("znpHlnAR_placeholder"/*"znpHlnAR_renovater"*/)
 }
