@@ -12,7 +12,7 @@ const desmosAllowed = true;
 const noUndertow = true;
 
 // Cannon Functions
-const makeMulti = (type, count, name = -1, startRotation = 0) => {
+const makeMulti = (type, count, name = -1, startRotation = 0, parent = "genericTank") => {
     type = ensureIsClass(type);
     let greekNumbers = ',Double ,Triple ,Quad ,Penta ,Hexa ,Septa ,Octo ,Nona ,Deca ,Hendeca ,Dodeca ,Trideca ,Tetradeca ,Pentadeca ,Hexadeca ,Septadeca ,Octadeca ,Nonadeca ,Icosa ,Henicosa ,Doicosa ,Triaicosa ,Tetraicosa ,Pentaicosa ,Hexaicosa ,Septaicosa ,Octoicosa ,Nonaicosa ,Triaconta '.split(','),
         output = dereference(type),
@@ -30,6 +30,7 @@ const makeMulti = (type, count, name = -1, startRotation = 0) => {
             output.GUNS.push(newgun);
         };
     }
+    output.PARENT = parent;
     output.LABEL = name == -1 ? (greekNumbers[count - 1] || (count + ' ')) + type.LABEL : name;
     return output;
 }
@@ -3920,6 +3921,8 @@ Class.znpHlnAR_doubleSpreadshot = makeMulti("spreadshot", 2, "Double Spreadshot"
 Class.znpHlnAR_splitDouble = makeMulti("znpHlnAR_splitShot", 2, "Split Double")
 Class.znpHlnAR_bentFlankDouble = makeMulti(
     {
+        PARENT: "genericTank",
+        DANGER: 7,
         GUNS: [
             {
                 POSITION: [19, 8, 1, 0, -2, -17.5, 0.5],
@@ -3992,6 +3995,8 @@ Class.znpHlnAR_waarrkwaarrk = {
     ], 2)
 }
 Class.znpHlnAR_doubleFlankGunner = makeMulti({
+    PARENT: "genericTank",
+    DANGER: 7,
     GUNS: [
         ...gunnerGuns,
         {
@@ -4195,7 +4200,7 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
         "znpHlnAR_autoDoubleFlankTwin",
         "znpHlnAR_bentFlankDouble",
         "znpHlnAR_doubleFlankGunner",
-        "znpHlnAR_hipwatch", // hipwatch
+        "znpHlnAR_hipwatch",
         "znpHlnAR_placeholder", // scuffler
         "znpHlnAR_placeholder" // warkwawawark
     ]
