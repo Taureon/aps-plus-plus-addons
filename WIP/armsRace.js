@@ -12,7 +12,7 @@ const desmosAllowed = true;
 const noUndertow = true;
 
 // Cannon Functions
-const makeMulti = (type, count, name = -1, startRotation = 0, parent = "genericTank") => {
+const makeMulti = (type, count, name = -1, startRotation = 0) => {
     type = ensureIsClass(type);
     let greekNumbers = ',Double ,Triple ,Quad ,Penta ,Hexa ,Septa ,Octo ,Nona ,Deca ,Hendeca ,Dodeca ,Trideca ,Tetradeca ,Pentadeca ,Hexadeca ,Septadeca ,Octadeca ,Nonadeca ,Icosa ,Henicosa ,Doicosa ,Triaicosa ,Tetraicosa ,Pentaicosa ,Hexaicosa ,Septaicosa ,Octoicosa ,Nonaicosa ,Triaconta '.split(','),
         output = dereference(type),
@@ -30,7 +30,6 @@ const makeMulti = (type, count, name = -1, startRotation = 0, parent = "genericT
             output.GUNS.push(newgun);
         };
     }
-    output.PARENT = parent;
     output.LABEL = name == -1 ? (greekNumbers[count - 1] || (count + ' ')) + type.LABEL : name;
     return output;
 }
