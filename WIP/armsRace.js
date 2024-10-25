@@ -4360,7 +4360,7 @@ Class.znpHlnAR_directorstorm.UPGRADES_TIER_3 = ["znpHlnAR_vortex"]
 // DEBUG
 const addHealerToMain = false
 if (addHealerToMain) {
-Class.basic.UPGRADES_TIER_3.push("healer")
+Class.basic.UPGRADES_TIER_2.push("healer")
 Class.twin.UPGRADES_TIER_3.push("znpHlnAR_placeholder"/*"znpHlnAR_nurse"*/)
 Class.sniper.UPGRADES_TIER_3.push("medic")
 Class.machineGun.UPGRADES_TIER_3 = ["znpHlnAR_placeholder"/*"znpHlnAR_psychiatrist"*/]
