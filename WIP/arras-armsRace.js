@@ -4134,16 +4134,17 @@ Class.znpHlnAR_heptaShot = {
     BODY: {
         SPEED: 0.85 * base.SPEED
     },
+    HAS_NO_RECOIL: true,
     GUNS: [
         {
-            POSITION: [22, 8, 1, 0, -4, -45, 3/4],
+            POSITION: [13, 8, 1, 0, -4, -45, 3/4],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet"
             }
         },
         {
-            POSITION: [22, 8, 1, 0, 4, 45, 3/4],
+            POSITION: [13, 8, 1, 0, 4, 45, 3/4],
             PROPERTIES: {
                 SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
                 TYPE: "bullet"
@@ -4451,7 +4452,7 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
     ]
     //WIP
     Class.pentaShot.UPGRADES_TIER_3 = [
-        "znpHlnAR_heptaShot", // zpnHlnAR_heptaShot
+        "znpHlnAR_heptaShot",
         "znpHlnAR_pentaDouble",
         "znpHlnAR_placeholder", // zpnHlnAR_flexedHybrid
         "znpHlnAR_placeholder", // zpnHlnAR_quintuplet
@@ -4595,6 +4596,9 @@ Class.znpHlnAR_bonker.UPGRADES_TIER_3 = [
     "znpHlnAR_basher",
     "znpHlnAR_placeholder", // znpHlnAR_thwacker
     "znpHlnAR_placeholder" // znpHlnAR_bundler
+]
+Class.znpHlnAR_banger.UPGRADES_TIER_3 = [
+    "znpHlnAR_slammer"
 ]
 
 Class.healer.UPGRADES_TIER_3.splice(3, 1) // remove paramedic
