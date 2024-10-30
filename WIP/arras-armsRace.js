@@ -1,6 +1,6 @@
-const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeOver, addBackGunner, weaponArray } = require('../facilitators.js');
-const { base, gunCalcNames, statnames, dfltskl, smshskl } = require('../constants.js');
-const g = require('../gunvals.js');
+const { dereference, combineStats, makeDeco, makeAuto, makeBird, makeOver, addBackGunner, weaponArray } = require('../../facilitators.js');
+const { base, gunCalcNames, statnames, dfltskl, smshskl } = require('../../constants.js');
+const g = require('../../gunvals.js');
 Class.znpHlnAR_placeholder = { LABEL: "PLACEHOLDER", COLOR: "black", UPGRADE_COLOR: "black"}
 
 // YES I KNOW THE LINE COUNT IS RIDICULOUS I'LL IMPROVE IT LATER OK - zenphia
@@ -3200,7 +3200,7 @@ Class.znpHlnAR_shower = makeOver('sprayer', "Shower", {count: 1, independent: tr
 Class.znpHlnAR_spiral = makeOver('helix', "Spiral", {count: 1, independent: true, cycle: false})
 
 // Tier 3 auto tanks
-Class.znpHlnAR_autoAuto3 = makeAuto('auto3')
+Class.znpHlnAR_autoAuto3 = makeAuto('arras_auto3')
 Class.znpHlnAR_autoArtillery = makeAuto('artillery')
 Class.znpHlnAR_autoDestroyer = makeAuto('destroyer')
 Class.znpHlnAR_autoDiesel = makeAuto('znpHlnAR_diesel')
@@ -3226,7 +3226,9 @@ Class.znpHlnAR_autoDirectordrive = makeAuto({
     ],
 }, "Auto-Directordrive", { type: "znpHlnAR_driveAutoTurret", size: 9 });
 Class.znpHlnAR_autoDoper = makeAuto('znpHlnAR_doper')
-Class.znpHlnAR_autoHelix = makeAuto('helix')
+if (desmosAllowed) {
+    Class.znpHlnAR_autoHelix = makeAuto('helix')
+}
 Class.znpHlnAR_autoHexaTank = makeAuto('hexaTank')
 Class.znpHlnAR_autoHoncho = makeAuto('znpHlnAR_honcho')
 Class.znpHlnAR_autoHunter = makeAuto('hunter')
@@ -4125,6 +4127,66 @@ Class.znpHlnAR_sealer = makeMulti("znpHlnAR_cog", 2, "Sealer")
 Class.znpHlnAR_setup = makeMulti("znpHlnAR_expeller", 2, "Setup")
 Class.znpHlnAR_doubleDual = makeMulti("dual", 2, "Double Dual")
 Class.znpHlnAR_doubleMusket = makeMulti("musket", 2, "Double Musket")
+Class.znpHlnAR_heptaShot = {
+    PARENT: "genericTank",
+    LABEL: "Hepta Shot",
+    DANGER: 7,
+    BODY: {
+        SPEED: 0.85 * base.SPEED
+    },
+    GUNS: [
+        {
+            POSITION: [22, 8, 1, 0, -4, -45, 3/4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [22, 8, 1, 0, 4, 45, 3/4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 8, 1, 0, -3, -30, 2/4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [16, 8, 1, 0, 3, 30, 2/4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [19, 8, 1, 0, -2, -15, 1/4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [19, 8, 1, 0, 2, 15, 1/4],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        },
+        {
+            POSITION: [22, 8, 1, 0, 0, 0, 0],
+            PROPERTIES: {
+                SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.tripleShot]),
+                TYPE: "bullet"
+            }
+        }
+    ]
+}
+
 
 // Tier 4 hybrid/over tanks
 Class.znpHlnAR_abberation = makeOver('znpHlnAR_frother', "Abberation", {count: 1, independent: true, cycle: false})
@@ -4251,7 +4313,7 @@ Class.znpHlnAR_autoPhoenix = makeAuto('phoenix')
 Class.znpHlnAR_autoRedistributor = makeAuto('redistributor')
 Class.znpHlnAR_autoShower = makeAuto('znpHlnAR_shower')
 Class.znpHlnAR_autoStormer = makeAuto('znpHlnAR_stormer')
-Class.znpHlnAR_autoTripleTwin = makeAuto('tripleTwin')
+Class.znpHlnAR_autotripleTwin = makeAuto('tripleTwin')
 Class.znpHlnAR_autoWarkwark = makeAuto('znpHlnAR_warkwark')
 Class.znpHlnAR_autoPentaShot = makeAuto("pentaShot")
 
@@ -4270,8 +4332,8 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
     Class.twin.UPGRADES_TIER_2.push("znpHlnAR_wark")
         Class.twin.UPGRADES_TIER_3.splice(1, 1) // remove bulwark
         Class.doubleTwin.UPGRADES_TIER_3.push("znpHlnAR_doubleFlankTwin", "znpHlnAR_doubleGunner", "znpHlnAR_doubleHelix", "znpHlnAR_warkwark", "znpHlnAR_doubleDual", "znpHlnAR_doubleMusket", "znpHlnAR_overDoubleTwin")
-            Class.tripleTwin.UPGRADES_TIER_3 = ["znpHlnAR_quadTwin", "znpHlnAR_autoTripleTwin", "znpHlnAR_bentTriple", "znpHlnAR_hewnTriple", "znpHlnAR_tripleFlankTwin", "znpHlnAR_tripleGunner", "znpHlnAR_warkwarkwark", "znpHlnAR_tripleHelix"]
-            Class.autoDouble.UPGRADES_TIER_3 = ["znpHlnAR_megaAutoDouble", "znpHlnAR_tripleAutoDouble", "znpHlnAR_autoTripleTwin", "znpHlnAR_autoHewnDouble", "znpHlnAR_autoBentDouble", "znpHlnAR_autoDoubleFlankTwin", "znpHlnAR_autoDoubleGunner", "znpHlnAR_autoWarkwark", "znpHlnAR_autoDoubleHelix"]
+            Class.tripleTwin.UPGRADES_TIER_3 = ["znpHlnAR_quadTwin", "znpHlnAR_autotripleTwin", "znpHlnAR_bentTriple", "znpHlnAR_hewnTriple", "znpHlnAR_tripleFlankTwin", "znpHlnAR_tripleGunner", "znpHlnAR_warkwarkwark", "znpHlnAR_tripleHelix"]
+            Class.arras_autoDouble.UPGRADES_TIER_3 = ["znpHlnAR_megaAutoDouble", "znpHlnAR_tripleAutoDouble", "znpHlnAR_autotripleTwin", "znpHlnAR_autoHewnDouble", "znpHlnAR_autoBentDouble", "znpHlnAR_autoDoubleFlankTwin", "znpHlnAR_autoDoubleGunner", "znpHlnAR_autoWarkwark", "znpHlnAR_autoDoubleHelix"]
         Class.tripleShot.UPGRADES_TIER_3.push("znpHlnAR_splitShot", "znpHlnAR_autoTripleShot", "znpHlnAR_bentGunner", "znpHlnAR_bentMinigun", "znpHlnAR_defect", "znpHlnAR_waarrk")
     Class.sniper.UPGRADES_TIER_3.push("znpHlnAR_railgun")
         Class.assassin.UPGRADES_TIER_3.splice(4, 1) // remove single
@@ -4287,7 +4349,7 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
     Class.flankGuard.UPGRADES_TIER_3 = ["znpHlnAR_ternion"]
         Class.hexaTank.UPGRADES_TIER_3.push("znpHlnAR_deathStar", "znpHlnAR_autoHexaTank", "znpHlnAR_mingler", "znpHlnAR_combo")
         Class.triAngle.UPGRADES_TIER_3.push("znpHlnAR_cockatiel", "znpHlnAR_integrator", "znpHlnAR_defect", "znpHlnAR_quadAngle")
-        Class.auto3.UPGRADES_TIER_3.push("znpHlnAR_sniper3", "znpHlnAR_crowbar", "znpHlnAR_autoAuto3", "znpHlnAR_combo")
+        Class.arras_auto3.UPGRADES_TIER_3.push("znpHlnAR_sniper3", "znpHlnAR_crowbar", "znpHlnAR_autoAuto3", "znpHlnAR_combo")
     Class.director.UPGRADES_TIER_2.push("znpHlnAR_directordrive", "znpHlnAR_honcho", "znpHlnAR_doper")
         Class.director.UPGRADES_TIER_3.splice(1, 1) // remove big cheese
             Class.director.UPGRADES_TIER_3.push("znpHlnAR_coordinator")
@@ -4389,7 +4451,7 @@ Class.basic.UPGRADES_TIER_3 = ["single"]
     ]
     //WIP
     Class.pentaShot.UPGRADES_TIER_3 = [
-        "znpHlnAR_placeholder", // zpnHlnAR_heptaShot
+        "znpHlnAR_heptaShot", // zpnHlnAR_heptaShot
         "znpHlnAR_pentaDouble",
         "znpHlnAR_placeholder", // zpnHlnAR_flexedHybrid
         "znpHlnAR_placeholder", // zpnHlnAR_quintuplet
