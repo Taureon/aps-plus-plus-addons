@@ -1,24 +1,11 @@
-const { combineStats } = require('../../facilitators.js')
+const { combineStats, weaponArray, dereference } = require('../../facilitators.js')
 const { base, gunCalcNames, statnames } = require('../../constants.js')
-const makeMulti = (type, count, name = -1, startRotation = 0) => {
+const makeMulti = (type, count, name = -1, delayIncrement = 0) => {
     type = ensureIsClass(type);
     let greekNumbers = ',Double ,Triple ,Quad ,Penta ,Hexa ,Septa ,Octo ,Nona ,Deca ,Hendeca ,Dodeca ,Trideca ,Tetradeca ,Pentadeca ,Hexadeca ,Septadeca ,Octadeca ,Nonadeca ,Icosa ,Henicosa ,Doicosa ,Triaicosa ,Tetraicosa ,Pentaicosa ,Hexaicosa ,Septaicosa ,Octoicosa ,Nonaicosa ,Triaconta '.split(','),
-        output = dereference(type),
-        fraction = 360 / count;
-    output.GUNS = [];
-    for (let gun of type.GUNS) {
-        for (let i = 0; i < count; i++) {
-            let newgun = dereference(gun);
-            if (Array.isArray(newgun.POSITION)) {
-                newgun.POSITION[5] += startRotation + fraction * i;
-            } else {
-                newgun.POSITION.ANGLE = (newgun.POSITION.ANGLE ?? 0) + startRotation + fraction * i;
-            }
-            if (gun.PROPERTIES) newgun.PROPERTIES = gun.PROPERTIES;
-            output.GUNS.push(newgun);
-        };
-    }
-    output.LABEL = name == -1 ? (greekNumbers[count - 1] || (count + ' ')) + type.LABEL : name;
+        output = dereference(type);
+    output.GUNS = weaponArray(type.GUNS, count, delayIncrement)
+    output.LABEL = name === -1 ? (greekNumbers[count - 1] || (count + ' ')) + type.LABEL : name;
     return output;
 }
 Class.ringer = makeMulti("sniper", 3, "Ringer")
