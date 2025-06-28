@@ -486,9 +486,9 @@ module.exports = ({Config}) => {
         // trisonator frag =    
         // trisonator generator =
 
-        // clusterbomb = HERE COMES THE AIRPLANE
-        // clusterbomb frag = *airplane crashes*
-        // clusterbomb generator = two tower generator
+        // clusterbomb = 
+        // clusterbomb frag = 
+        // clusterbomb generator = 
     }
     //#endregion
 
